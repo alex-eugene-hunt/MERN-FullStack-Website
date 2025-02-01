@@ -7,6 +7,9 @@ const AsteroidsGame = () => {
   const [lives, setLives] = useState(3);
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [playerName, setPlayerName] = useState('');
+  const [highScores, setHighScores] = useState([]);
+  const [submitStatus, setSubmitStatus] = useState('');
   const keys = useRef({});
 
   // Game state
@@ -200,7 +203,7 @@ const AsteroidsGame = () => {
           const newLives = prevLives - 1;
           if (newLives <= 0) {
             setGameOver(true);
-            return 0;
+            setSubmitStatus('');
           }
           player.current.iFrames = 100;
           return newLives;
@@ -266,6 +269,59 @@ const AsteroidsGame = () => {
     animationFrameId.current = requestAnimationFrame(gameLoop);
   }, [gameOver]);  // Add gameOver to dependencies
 
+  // Fetch high scores
+  const fetchHighScores = useCallback(async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/highscores/Asteroids`);
+      const data = await response.json();
+      setHighScores(data);
+    } catch (error) {
+      console.error('Error fetching high scores:', error);
+    }
+  }, []);
+
+  // Submit high score
+  const submitHighScore = async () => {
+    if (!playerName.trim()) {
+      setSubmitStatus('Please enter your name');
+      return;
+    }
+  
+    try {
+      setSubmitStatus('Submitting...');
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/highscores`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          playerName: playerName.trim(),
+          score,
+          game: 'Asteroids'
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to submit score');
+      }
+
+      await fetchHighScores(); // Refresh the high scores
+      setSubmitStatus('Score submitted!');
+      setPlayerName(''); // Reset the name input
+      
+      // Reset the game after a short delay to show the success message
+      setTimeout(() => {
+        resetGame();
+        setSubmitStatus('');
+      }, 1500);
+
+    } catch (error) {
+      console.error('Error submitting score:', error);
+      setSubmitStatus('Failed to submit score. Please try again.');
+    }
+  };
+
   // Key handling
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -287,12 +343,13 @@ const AsteroidsGame = () => {
 
   // Start game & loop
   useEffect(() => {
+    fetchHighScores();
     if (gameStarted && !gameOver) {
       initGame();
       gameLoop();
     }
     return () => cancelAnimationFrame(animationFrameId.current);
-  }, [gameLoop, gameStarted, gameOver, initGame]);
+  }, [gameLoop, gameStarted, gameOver, initGame, fetchHighScores]);
 
   const startGame = () => {
     setGameStarted(true);
@@ -321,16 +378,63 @@ const AsteroidsGame = () => {
   return (
     <div ref={containerRef} style={styles.container}>
       {!gameStarted && !gameOver && (
-        <div style={styles.startButtonContainer}>
-          <button style={styles.startButton} onClick={startGame}>Start Game</button>
+        <div style={styles.startScreen}>
+          <div style={styles.standardBox}>
+            <button style={styles.startButton} onClick={startGame}>Start Game</button>
+            <div style={styles.highScores}>
+              <h3 style={styles.highScoresTitle}>High Scores</h3>
+              <ul style={styles.scoresList}>
+                {highScores.map((score, index) => (
+                  <li key={index} style={{
+                    ...styles.scoreItem,
+                    fontSize: '18px',
+                    padding: '8px 0',
+                    color: index === 0 ? '#FFD700' : // Gold
+                           index === 1 ? '#C0C0C0' : // Silver
+                           index === 2 ? '#CD7F32' : // Bronze
+                           'white'
+                  }}>
+                    {index + 1}. {score.playerName}: {score.score}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       )}
       {gameOver && (
-        <div style={styles.gameOverContainer}>
-          <div style={styles.gameOverBox}>
+        <div style={styles.modal}>
+          <div style={styles.standardBox}>
             <h2 style={styles.gameOverText}>Game Over!</h2>
             <p style={styles.gameOverScore}>Score: {score}</p>
-            <button style={styles.startButton} onClick={resetGame}>Play Again?</button>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              style={styles.input}
+            />
+            {submitStatus && (
+              <p style={{
+                ...styles.submitStatus,
+                color: submitStatus === 'Score submitted!' ? '#4CAF50' : 
+                       submitStatus === 'Submitting...' ? '#FFA500' : '#FF4444'
+              }}>
+                {submitStatus}
+              </p>
+            )}
+            <div style={styles.buttonContainer}>
+              <button 
+                onClick={submitHighScore} 
+                style={styles.gameButton}
+                disabled={submitStatus === 'Submitting...'}
+              >
+                Submit Score
+              </button>
+              <button style={styles.gameButton} onClick={resetGame}>
+                Play Again?
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -339,11 +443,13 @@ const AsteroidsGame = () => {
         <span style={styles.controlItem}>↑ Thrust</span>
         <span style={styles.controlItem}>Space Shoot</span>
       </div>
-      <canvas ref={canvasRef} style={styles.canvas} />
-      <div style={styles.status}>
-        <div>Score: {score}</div>
-        {/* Show as many hearts as the player has lives */}
-        <div>Lives: {'♥'.repeat(lives)}</div>
+      <canvas
+        ref={canvasRef}
+        style={styles.canvas}
+      />
+      <div style={styles.hud}>
+        <span>Score: {score}</span>
+        <span> Lives: {lives}</span>
       </div>
     </div>
   );
@@ -354,7 +460,8 @@ const styles = {
     width: '100%',
     height: '100%',
     position: 'relative',
-    overflow: 'hidden',
+    backgroundColor: 'black',
+    fontFamily: 'Consolas, monospace',
   },
   canvas: {
     width: '100%',
@@ -376,59 +483,135 @@ const styles = {
     borderRadius: '4px',
     border: '1px solid #666',
   },
-  status: {
+  hud: {
     position: 'absolute',
     top: '48px',
     left: '16px',
     color: 'white',
-    fontFamily: 'monospace',
+    fontFamily: 'Consolas, monospace',
     fontSize: '16px',
   },
-  gameOver: {
-    color: 'red',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    marginTop: '16px',
-  },
-  startButtonContainer: {
+  startScreen: {
     position: 'absolute',
-    top: '50%',
+    top: '55%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    zIndex: 10,
+    textAlign: 'center',
+    zIndex: 1,
+    color: 'white',
+  },
+  modal: {
+    position: 'absolute',
+    top: '55%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+    color: 'white',
+    zIndex: 1,
+  },
+  standardBox: {
+    background: 'rgba(0, 0, 0, 0.8)',
+    padding: '15px',
+    borderRadius: '10px',
+    border: '2px solid white',
+    width: '300px',
+    height: '200px',
+    display: 'flex',
+    flexDirection: 'column',
+    fontFamily: 'Consolas, monospace',
   },
   startButton: {
+    padding: '10px 30px',
+    fontSize: '18px',
+    backgroundColor: 'black',
+    color: 'white',
+    border: '2px solid white',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '2px',
+    marginBottom: '2px',
+    transition: 'background-color 0.2s',
+    fontFamily: 'Consolas, monospace',
+    '&:hover': {
+      backgroundColor: '#333',
+    },
+  },
+  highScores: {
+    marginTop: '0',
+    padding: '0',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  highScoresTitle: {
+    fontSize: '20px',
+    marginTop: '10px',
+    marginBottom: '2px',
+    color: 'white',
+    fontFamily: 'Consolas, monospace',
+  },
+  scoresList: {
+    listStyle: 'none',
+    padding: 0,
+    margin: '0',
+    textAlign: 'center',
+  },
+  scoreItem: {
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    fontFamily: 'Consolas, monospace',
+    padding: '4px 0',
+  },
+  input: {
+    margin: '10px 0',
+    padding: '8px',
+    width: '200px',
+    borderRadius: '5px',
+    border: '2px solid white',
+    background: 'black',
+    color: 'white',
+    fontSize: '16px',
+    fontFamily: 'Consolas, monospace',
+  },
+  buttonContainer: {
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'center',
+    marginTop: '10px',
+  },
+  gameButton: {
     padding: '10px 20px',
+    cursor: 'pointer',
     backgroundColor: 'black',
     color: 'white',
     border: '2px solid white',
     borderRadius: '5px',
     fontSize: '16px',
-    cursor: 'pointer',
-  },
-  gameOverContainer: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    zIndex: 10,
-  },
-  gameOverBox: {
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    border: '2px solid white',
-    padding: '20px 40px',
-    borderRadius: '10px',
-    textAlign: 'center',
+    fontFamily: 'Consolas, monospace',
+    transition: 'background-color 0.2s',
+    '&:hover': {
+      backgroundColor: '#333',
+    },
+    '&:disabled': {
+      opacity: 0.6,
+      cursor: 'not-allowed',
+    },
   },
   gameOverText: {
+    fontSize: '28px',
+    margin: '0 0 5px 0',
     color: 'white',
-    fontSize: '32px',
-    margin: '0 0 20px 0',
+    fontFamily: 'Consolas, monospace',
   },
   gameOverScore: {
+    fontSize: '20px',
+    margin: '0 0 10px 0',
     color: 'white',
-    fontSize: '24px',
-    margin: '0 0 20px 0',
+    fontFamily: 'Consolas, monospace',
+  },
+  submitStatus: {
+    margin: '10px 0',
+    fontSize: '14px',
+    fontFamily: 'Consolas, monospace',
   },
 };
 
