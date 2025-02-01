@@ -8,7 +8,7 @@ const app = express();
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://your-netlify-app.netlify.app'] // Replace with your Netlify domain
+    ? ['https://alex-eugene-hunt.rocks'] // Replace with your Netlify domain
     : 'http://localhost:3000',
   optionsSuccessStatus: 200
 };
