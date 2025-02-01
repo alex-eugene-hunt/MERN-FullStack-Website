@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Scores</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+      table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+      th {
+        background-color: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Scores Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>Score</th>
+          <th>Game</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (scores.length > 0) { %>
+          <% scores.forEach(function(score) { %>
+            <tr>
+              <td><%= score.playerName %></td>
+              <td><%= score.score %></td>
+              <td><%= score.game %></td>
+              <td><%= new Date(score.createdAt).toLocaleString() %></td>
+            </tr>
+          <% }); %>
+        <% } else { %>
+          <tr>
+            <td colspan="4">No scores found.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>

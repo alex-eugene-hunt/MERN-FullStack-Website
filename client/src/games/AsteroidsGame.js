@@ -9,7 +9,8 @@ const AsteroidsGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [playerName, setPlayerName] = useState('');
   const [highScores, setHighScores] = useState([]);
-  const [submitStatus, setSubmitStatus] = useState('');
+  // Removed submitStatus and instead use "submitted" to change the button text.
+  const [submitted, setSubmitted] = useState(false);
   const keys = useRef({});
 
   // Game state
@@ -203,7 +204,8 @@ const AsteroidsGame = () => {
           const newLives = prevLives - 1;
           if (newLives <= 0) {
             setGameOver(true);
-            setSubmitStatus('');
+            // Reset submission state in case the player plays again
+            setSubmitted(false);
           }
           player.current.iFrames = 100;
           return newLives;
@@ -216,7 +218,6 @@ const AsteroidsGame = () => {
 
     // Draw player
     ctx.strokeStyle = player.current.iFrames > 0 ? 'cyan' : 'white'; 
-    // show a different color if invincible
     ctx.lineWidth = 2;
     const [px, py] = drawPos(player.current.x, player.current.y);
     ctx.beginPath();
@@ -240,13 +241,9 @@ const AsteroidsGame = () => {
     ctx.lineWidth = 2;
     bullets.current.forEach((bullet) => {
       const [bx, by] = drawPos(bullet.x, bullet.y);
-
-      // We'll make a bigger tail
-      const laserLength = 25; // bigger tail
+      const laserLength = 25;
       const velX = bullet.velocity.x * width;
       const velY = bullet.velocity.y * height;
-
-      // multiply by (laserLength / 10) => bigger line
       const tailX = bx - velX * (laserLength / 10);
       const tailY = by - velY * (laserLength / 10);
 
@@ -267,7 +264,7 @@ const AsteroidsGame = () => {
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver]);  // Add gameOver to dependencies
+  }, [gameOver]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -283,12 +280,12 @@ const AsteroidsGame = () => {
   // Submit high score
   const submitHighScore = async () => {
     if (!playerName.trim()) {
-      setSubmitStatus('Please enter your name');
+      // You could show an alert or handle it however you prefer
+      alert('Please enter your name');
       return;
     }
   
     try {
-      setSubmitStatus('Submitting...');
       const response = await fetch(`${process.env.REACT_APP_API_URL}/api/highscores`, {
         method: 'POST',
         headers: {
@@ -307,18 +304,19 @@ const AsteroidsGame = () => {
       }
 
       await fetchHighScores(); // Refresh the high scores
-      setSubmitStatus('Score submitted!');
-      setPlayerName(''); // Reset the name input
+      // Instead of showing output text, change the button's content to a checkmark.
+      setSubmitted(true);
+      setPlayerName('');
       
-      // Reset the game after a short delay to show the success message
+      // Reset the game after a short delay to show the checkmark
       setTimeout(() => {
         resetGame();
-        setSubmitStatus('');
+        setSubmitted(false);
       }, 1500);
 
     } catch (error) {
       console.error('Error submitting score:', error);
-      setSubmitStatus('Failed to submit score. Please try again.');
+      alert('Failed to submit score. Please try again.');
     }
   };
 
@@ -385,15 +383,19 @@ const AsteroidsGame = () => {
               <h3 style={styles.highScoresTitle}>High Scores</h3>
               <ul style={styles.scoresList}>
                 {highScores.map((score, index) => (
-                  <li key={index} style={{
-                    ...styles.scoreItem,
-                    fontSize: '18px',
-                    padding: '8px 0',
-                    color: index === 0 ? '#FFD700' : // Gold
-                           index === 1 ? '#C0C0C0' : // Silver
-                           index === 2 ? '#CD7F32' : // Bronze
-                           'white'
-                  }}>
+                  <li
+                    key={index}
+                    style={{
+                      ...styles.scoreItem,
+                      fontSize: '18px',
+                      padding: '8px 0',
+                      color:
+                        index === 0 ? '#FFD700' : // Gold
+                        index === 1 ? '#C0C0C0' : // Silver
+                        index === 2 ? '#CD7F32' : // Bronze
+                        'white',
+                    }}
+                  >
                     {index + 1}. {score.playerName}: {score.score}
                   </li>
                 ))}
@@ -414,22 +416,13 @@ const AsteroidsGame = () => {
               onChange={(e) => setPlayerName(e.target.value)}
               style={styles.input}
             />
-            {submitStatus && (
-              <p style={{
-                ...styles.submitStatus,
-                color: submitStatus === 'Score submitted!' ? '#4CAF50' : 
-                       submitStatus === 'Submitting...' ? '#FFA500' : '#FF4444'
-              }}>
-                {submitStatus}
-              </p>
-            )}
             <div style={styles.buttonContainer}>
               <button 
                 onClick={submitHighScore} 
                 style={styles.gameButton}
-                disabled={submitStatus === 'Submitting...'}
+                disabled={submitted}
               >
-                Submit Score
+                {submitted ? <span style={{ color: 'white', fontSize: '20px' }}>✓</span> : 'Submit Score'}
               </button>
               <button style={styles.gameButton} onClick={resetGame}>
                 Play Again?
@@ -443,10 +436,7 @@ const AsteroidsGame = () => {
         <span style={styles.controlItem}>↑ Thrust</span>
         <span style={styles.controlItem}>Space Shoot</span>
       </div>
-      <canvas
-        ref={canvasRef}
-        style={styles.canvas}
-      />
+      <canvas ref={canvasRef} style={styles.canvas} />
       <div style={styles.hud}>
         <span>Score: {score}</span>
         <span> Lives: {lives}</span>
@@ -518,6 +508,7 @@ const styles = {
     height: '200px',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     fontFamily: 'Consolas, monospace',
   },
   startButton: {
@@ -532,9 +523,6 @@ const styles = {
     marginBottom: '2px',
     transition: 'background-color 0.2s',
     fontFamily: 'Consolas, monospace',
-    '&:hover': {
-      backgroundColor: '#333',
-    },
   },
   highScores: {
     marginTop: '0',
@@ -562,6 +550,8 @@ const styles = {
     padding: '4px 0',
   },
   input: {
+    textAlign: 'center',
+    justifyContent: 'center',
     margin: '10px 0',
     padding: '8px',
     width: '200px',
@@ -588,13 +578,6 @@ const styles = {
     fontSize: '16px',
     fontFamily: 'Consolas, monospace',
     transition: 'background-color 0.2s',
-    '&:hover': {
-      backgroundColor: '#333',
-    },
-    '&:disabled': {
-      opacity: 0.6,
-      cursor: 'not-allowed',
-    },
   },
   gameOverText: {
     fontSize: '28px',
@@ -608,11 +591,7 @@ const styles = {
     color: 'white',
     fontFamily: 'Consolas, monospace',
   },
-  submitStatus: {
-    margin: '10px 0',
-    fontSize: '14px',
-    fontFamily: 'Consolas, monospace',
-  },
 };
 
 export default AsteroidsGame;
+
