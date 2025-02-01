@@ -296,7 +296,7 @@ const AsteroidsGame = () => {
         },
         body: JSON.stringify({
           playerName: playerName.trim(),
-          score,
+          score: score,
           game: 'Asteroids'
         }),
       });
