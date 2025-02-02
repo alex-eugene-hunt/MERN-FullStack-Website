@@ -3,7 +3,7 @@ import Typewriter from 'typewriter-effect';
 import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
 
-// Updated SendEmailForm with smaller styling
+// SEND EMAIL FORM COMPONENT (with updated styling)
 function SendEmailForm() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -66,7 +66,7 @@ const sendStyles = {
     borderRadius: '10px',
     color: '#fff',
     position: 'relative',
-    height: '100%', // fills its parent container (460px)
+    height: '100%', // container fills its parent (the box)
     overflow: 'hidden',
   },
   sendEmailHeading: {
@@ -96,12 +96,12 @@ const sendStyles = {
     border: 'none',
     outline: 'none',
     padding: '0.3rem',
-    flex: 1,
-    minHeight: '70px',
+    height: '80px', // fixed height for the textarea
     borderRadius: '4px',
     fontSize: '0.9rem',
     color: '#000',
-    marginBottom: '2rem', // leaves room for the button
+    marginBottom: '1rem',
+    resize: 'none',
   },
   sendEmailButton: {
     position: 'absolute',
@@ -117,9 +117,7 @@ const sendStyles = {
   },
 };
 
-//
 // HERO SECTION COMPONENT
-//
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
@@ -142,7 +140,7 @@ function HeroSection() {
           backgroundColor: 0x2b2b2f,
           points: 20.0,
           maxDistance: 24.0,
-          spacing: 17.0
+          spacing: 17.0,
         })
       );
     }
@@ -159,16 +157,12 @@ function HeroSection() {
     <div style={styles.pageContainer}>
       {/* Vanta.js Background */}
       <div ref={vantaRef} style={styles.vantaContainer}></div>
-      
+
       {/* Content Wrapper */}
       <div style={styles.contentWrapper}>
         {/* Hero Section */}
         <div style={styles.heroSection}>
-          <img 
-            src={myPhoto} 
-            alt="Alex Eugene Hunt" 
-            style={styles.heroImage} 
-          />
+          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
           <div style={styles.typewriterText}>
             <Typewriter
               options={{
@@ -190,9 +184,9 @@ function HeroSection() {
           {/* Box 1: LLM */}
           <div style={styles.box}>
             <h3>Ask a question about me</h3>
-            <input 
+            <input
               type="text"
-              placeholder="What's on your mind?" 
+              placeholder="What's on your mind?"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               style={styles.input}
@@ -200,9 +194,7 @@ function HeroSection() {
             <button onClick={handleAskQuestion} style={styles.askButton}>
               Ask
             </button>
-            {answer && (
-              <p style={styles.answerBox}>{answer}</p>
-            )}
+            {answer && <p style={styles.answerBox}>{answer}</p>}
           </div>
 
           {/* Box 2: Send Email */}
