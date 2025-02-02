@@ -44,15 +44,25 @@ function SendEmailForm() {
           type="text"
           placeholder="Your name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            console.log('Name input value:', e.target.value);
+            setName(e.target.value);
+          }}
           style={formStyles.input}
+          pattern=".*"
+          title="Any text is allowed, including spaces"
           required
         />
         <textarea
           placeholder="Your message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            console.log('Message input value:', e.target.value);
+            setMessage(e.target.value);
+          }}
           style={formStyles.textarea}
+          pattern=".*"
+          title="Any text is allowed, including spaces"
           required
         />
         <button type="submit" style={formStyles.button}>
@@ -191,7 +201,7 @@ function HeroSection() {
               type="text"
               placeholder="What's on your mind?"
               value={question}
-              onChange={(e) => setQuestion(e.target.value)}
+              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
               style={styles.input}
             />
             <button onClick={handleAskQuestion} style={styles.askButton}>
