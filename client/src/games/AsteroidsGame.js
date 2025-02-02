@@ -104,39 +104,8 @@ const AsteroidsGame = () => {
     }
   }, []);
 
-  // Main game loop
-  const gameLoop = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || gameOver) return;  // Stop the loop if game is over
-    const ctx = canvas.getContext('2d');
-    const { width, height } = getDimensions();
-
-    canvas.width = width;
-    canvas.height = height;
-
-    // Clear
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, width, height);
-
-    // Controls
-    if (keys.current.ArrowLeft && controlsActive) player.current.rotation = -0.05;
-    if (keys.current.ArrowRight && controlsActive) player.current.rotation = 0.05;
-    if (keys.current.ArrowUp && controlsActive) player.current.thrust = true;
-
-    // Fire bullet if space pressed and cooldown <= 0
-    if (keys.current[' '] && player.current.cooldown <= 0 && controlsActive) {
-      bullets.current.push({
-        x: player.current.x + Math.cos(player.current.angle) * 0.05,
-        y: player.current.y + Math.sin(player.current.angle) * 0.05,
-        velocity: {
-          x: Math.cos(player.current.angle) * 0.007,
-          y: Math.sin(player.current.angle) * 0.007,
-        },
-        timer: 100,
-      });
-      player.current.cooldown = 10;
-    }
-
+  // Update game state
+  const updateGameState = (width, height) => {
     // Update player (angle, velocity, etc.)
     player.current.angle += player.current.rotation;
     if (player.current.thrust) {
@@ -160,10 +129,10 @@ const AsteroidsGame = () => {
 
     // Update bullets
     bullets.current = bullets.current.filter((bullet) => {
-      bullet.x += bullet.velocity.x;
-      bullet.y += bullet.velocity.y;
-      bullet.timer--;
-      return bullet.timer > 0; // remove if timer < 0
+      bullet.x += bullet.vx;
+      bullet.y += bullet.vy;
+      bullet.life--;
+      return bullet.life > 0; // remove if life < 0
     });
 
     // Update asteroids
@@ -213,14 +182,14 @@ const AsteroidsGame = () => {
         });
       }
     }
+  };
 
-    // Draw helpers
-    const drawPos = (x, y) => [x * width, y * height];
-
+  // Draw everything
+  const drawGame = (ctx) => {
     // Draw player
     ctx.strokeStyle = player.current.iFrames > 0 ? 'cyan' : 'white'; 
     ctx.lineWidth = 2;
-    const [px, py] = drawPos(player.current.x, player.current.y);
+    const [px, py] = [player.current.x * ctx.canvas.width, player.current.y * ctx.canvas.height];
     ctx.beginPath();
     ctx.moveTo(
       px + Math.cos(player.current.angle) * 20,
@@ -241,10 +210,10 @@ const AsteroidsGame = () => {
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
     bullets.current.forEach((bullet) => {
-      const [bx, by] = drawPos(bullet.x, bullet.y);
+      const [bx, by] = [bullet.x * ctx.canvas.width, bullet.y * ctx.canvas.height];
       const laserLength = 25;
-      const velX = bullet.velocity.x * width;
-      const velY = bullet.velocity.y * height;
+      const velX = bullet.vx * ctx.canvas.width;
+      const velY = bullet.vy * ctx.canvas.height;
       const tailX = bx - velX * (laserLength / 10);
       const tailY = by - velY * (laserLength / 10);
 
@@ -257,15 +226,56 @@ const AsteroidsGame = () => {
     // Draw asteroids
     ctx.strokeStyle = 'white';
     asteroids.current.forEach((asteroid) => {
-      const [ax, ay] = drawPos(asteroid.x, asteroid.y);
+      const [ax, ay] = [asteroid.x * ctx.canvas.width, asteroid.y * ctx.canvas.height];
       ctx.beginPath();
-      ctx.arc(ax, ay, asteroid.radius * width, 0, Math.PI * 2);
+      ctx.arc(ax, ay, asteroid.radius * ctx.canvas.width, 0, Math.PI * 2);
       ctx.stroke();
     });
+  };
+
+  // Main game loop
+  const gameLoop = useCallback(() => {
+    if (!canvasRef.current || gameOver) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const { width, height } = getDimensions();
+
+    canvas.width = width;
+    canvas.height = height;
+
+    // Clear canvas
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, width, height);
+
+    // Only process controls if controlsActive is true
+    if (controlsActive) {
+      if (keys.current.ArrowLeft) player.current.rotation = -0.05;
+      if (keys.current.ArrowRight) player.current.rotation = 0.05;
+      if (keys.current.ArrowUp) player.current.thrust = true;
+
+      // Fire bullet if space pressed and cooldown <= 0
+      if (keys.current[' '] && player.current.cooldown <= 0) {
+        bullets.current.push({
+          x: player.current.x + Math.cos(player.current.angle) * 0.05,
+          y: player.current.y + Math.sin(player.current.angle) * 0.05,
+          vx: Math.cos(player.current.angle) * 0.02,
+          vy: Math.sin(player.current.angle) * 0.02,
+          life: 50
+        });
+        player.current.cooldown = 10;
+      }
+    }
+
+    // Update game state
+    updateGameState(width, height);
+
+    // Draw everything
+    drawGame(ctx);
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver, controlsActive]);
+  }, [gameOver]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -276,7 +286,7 @@ const AsteroidsGame = () => {
     } catch (error) {
       console.error('Error fetching high scores:', error);
     }
-  }, [controlsActive]);
+  }, []);
 
   // Submit high score
   const submitHighScore = async () => {
@@ -414,6 +424,11 @@ const AsteroidsGame = () => {
     if (gameStarted && !gameOver) {
       gameLoop();
     }
+    return () => {
+      if (animationFrameId.current) {
+        cancelAnimationFrame(animationFrameId.current);
+      }
+    };
   }, [gameStarted, gameOver, gameLoop]);
 
   return (
