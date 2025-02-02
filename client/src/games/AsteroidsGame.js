@@ -366,7 +366,6 @@ const AsteroidsGame = () => {
     setGameOver(false);
     setScore(0);
     setLives(3);
-    resetGameState();
     // Focus the canvas immediately when game starts
     if (canvasRef.current) {
       canvasRef.current.focus();
