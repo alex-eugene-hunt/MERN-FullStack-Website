@@ -3,7 +3,6 @@ import Typewriter from 'typewriter-effect';
 import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
 
-// SEND EMAIL FORM COMPONENT (with updated styling)
 function SendEmailForm() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -31,25 +30,25 @@ function SendEmailForm() {
   };
 
   return (
-    <div style={sendStyles.sendEmailContainer}>
-      <h3 style={sendStyles.sendEmailHeading}>Send me a Message</h3>
-      <form onSubmit={handleSubmit} style={sendStyles.sendEmailForm}>
+    <div style={formStyles.container}>
+      <h3 style={formStyles.heading}>Send me a Message</h3>
+      <form onSubmit={handleSubmit} style={formStyles.form}>
         <input
           type="text"
           placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={sendStyles.sendEmailInput}
+          style={formStyles.input}
           required
         />
         <textarea
           placeholder="Your message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          style={sendStyles.sendEmailTextarea}
+          style={formStyles.textarea}
           required
         />
-        <button type="submit" style={sendStyles.sendEmailButton}>
+        <button type="submit" style={formStyles.button}>
           {sent ? '✔' : 'Send'}
         </button>
       </form>
@@ -57,61 +56,58 @@ function SendEmailForm() {
   );
 }
 
-const sendStyles = {
-  sendEmailContainer: {
+const formStyles = {
+  container: {
     backgroundColor: '#eb4034',
     fontFamily: '"Montserrat", sans-serif',
     fontWeight: 600,
     padding: '0.5rem',
     borderRadius: '10px',
     color: '#fff',
-    position: 'relative',
-    height: '100%', // container fills its parent (the box)
-    overflow: 'hidden',
-  },
-  sendEmailHeading: {
-    textAlign: 'center',
-    marginBottom: '0.5rem',
-    fontSize: '1.2rem',
-  },
-  sendEmailForm: {
+    height: '100%', // This container will fill its parent box (e.g. 460px)
+    boxSizing: 'border-box',
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative',
-    height: '100%',
-    fontSize: '0.9rem',
   },
-  sendEmailInput: {
+  heading: {
+    textAlign: 'center',
+    margin: '0.5rem 0',
+    fontSize: '1.2rem',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+  },
+  input: {
     backgroundColor: '#f2eeed',
     border: 'none',
     outline: 'none',
-    padding: '0.3rem',
+    padding: '0.4rem',
     marginBottom: '0.5rem',
     borderRadius: '4px',
     fontSize: '0.9rem',
     color: '#000',
   },
-  sendEmailTextarea: {
+  textarea: {
     backgroundColor: '#f2eeed',
     border: 'none',
     outline: 'none',
-    padding: '0.3rem',
-    height: '80px', // fixed height for the textarea
-    borderRadius: '4px',
+    padding: '0.4rem',
     fontSize: '0.9rem',
     color: '#000',
-    marginBottom: '1rem',
+    borderRadius: '4px',
+    flex: 1,          // Fills available vertical space
     resize: 'none',
+    marginBottom: '0.5rem',
   },
-  sendEmailButton: {
-    position: 'absolute',
-    bottom: '0.3rem',
-    right: '0.3rem',
+  button: {
+    alignSelf: 'flex-end', // Places the button at the bottom right of the form
     backgroundColor: '#78e3c3',
     color: '#000',
     border: 'none',
     borderRadius: '4px',
-    padding: '0.3rem 0.8rem',
+    padding: '0.4rem 0.8rem',
     cursor: 'pointer',
     fontSize: '0.9rem',
   },
