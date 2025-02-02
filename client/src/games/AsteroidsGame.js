@@ -104,54 +104,123 @@ const AsteroidsGame = () => {
     }
   }, []);
 
-  // Update game state
-  const updateGameState = useCallback((width, height) => {
+  // Main game loop
+  const gameLoop = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || gameOver) return;  // Stop the loop if game is over
+    const ctx = canvas.getContext('2d');
+    const { width, height } = getDimensions();
+
+    canvas.width = width;
+    canvas.height = height;
+
+    // Clear
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, width, height);
+
+    // Controls
+    if (keys.current.ArrowLeft && controlsActive) player.current.rotation = -0.05;
+    if (keys.current.ArrowRight && controlsActive) player.current.rotation = 0.05;
+    if (keys.current.ArrowUp && controlsActive) player.current.thrust = true;
+
+    // Fire bullet if space pressed and cooldown <= 0
+    if (keys.current[' '] && player.current.cooldown <= 0 && controlsActive) {
+      bullets.current.push({
+        x: player.current.x + Math.cos(player.current.angle) * 0.05,
+        y: player.current.y + Math.sin(player.current.angle) * 0.05,
+        velocity: {
+          x: Math.cos(player.current.angle) * 0.007,
+          y: Math.sin(player.current.angle) * 0.007,
+        },
+        timer: 100,
+      });
+      player.current.cooldown = 10;
+    }
+
     // Update player (angle, velocity, etc.)
     player.current.angle += player.current.rotation;
     if (player.current.thrust) {
-      player.current.velocity.x += Math.cos(player.current.angle) * 0.0007;
-      player.current.velocity.y += Math.sin(player.current.angle) * 0.0007;
+      player.current.velocity.x += Math.cos(player.current.angle) * 0.0002;
+      player.current.velocity.y += Math.sin(player.current.angle) * 0.0002;
     }
     player.current.x += player.current.velocity.x;
     player.current.y += player.current.velocity.y;
-    player.current.rotation = 0;
+    player.current.cooldown--;
     player.current.thrust = false;
-    if (player.current.cooldown > 0) player.current.cooldown--;
-    if (player.current.iFrames > 0) player.current.iFrames--;
+    player.current.rotation = 0;
 
-    // Wrap coordinates
-    if (player.current.x < 0) player.current.x = 1;
-    if (player.current.x > 1) player.current.x = 0;
-    if (player.current.y < 0) player.current.y = 1;
-    if (player.current.y > 1) player.current.y = 0;
+    // Decrement invincibility frames
+    if (player.current.iFrames > 0) {
+      player.current.iFrames--;
+    }
+
+    // Wrapping player
+    player.current.x = (player.current.x + 1) % 1;
+    player.current.y = (player.current.y + 1) % 1;
 
     // Update bullets
     bullets.current = bullets.current.filter((bullet) => {
-      bullet.x += bullet.vx;
-      bullet.y += bullet.vy;
-      bullet.life--;
-      return bullet.life > 0;
+      bullet.x += bullet.velocity.x;
+      bullet.y += bullet.velocity.y;
+      bullet.timer--;
+      return bullet.timer > 0; // remove if timer < 0
     });
 
     // Update asteroids
-    asteroids.current.forEach((asteroid) => {
+    asteroids.current = asteroids.current.filter((asteroid) => {
       asteroid.x += asteroid.velocity.x;
       asteroid.y += asteroid.velocity.y;
 
-      // Wrap coordinates
-      if (asteroid.x < 0) asteroid.x = 1;
-      if (asteroid.x > 1) asteroid.x = 0;
-      if (asteroid.y < 0) asteroid.y = 1;
-      if (asteroid.y > 1) asteroid.y = 0;
+      // bullet collision check
+      const hit = bullets.current.some((bullet) => {
+        const dx = bullet.x - asteroid.x;
+        const dy = bullet.y - asteroid.y;
+        return Math.sqrt(dx * dx + dy * dy) < asteroid.radius;
+      });
+      if (hit) {
+        setScore((prev) => prev + 100);
+      }
+      return !hit; // remove if hit
     });
-  }, []);
 
-  // Draw everything
-  const drawGame = (ctx) => {
+    // Random spawn chance
+    if (Math.random() < 0.01 && !gameOver) {
+      spawnAsteroid();
+    }
+
+    // Collision with asteroids (only if not invincible)
+    if (player.current.iFrames <= 0 && !gameOver) {
+      const collision = asteroids.current.some((asteroid) => {
+        const dx = player.current.x - asteroid.x;
+        const dy = player.current.y - asteroid.y;
+        return (
+          Math.sqrt(dx * dx + dy * dy) <
+          player.current.radius + asteroid.radius
+        );
+      });
+
+      // If collision, lose life, set invincibility
+      if (collision) {
+        setLives((prevLives) => {
+          const newLives = prevLives - 1;
+          if (newLives <= 0) {
+            setGameOver(true);
+            // Reset submission state in case the player plays again
+            setSubmitted(false);
+          }
+          player.current.iFrames = 100;
+          return newLives;
+        });
+      }
+    }
+
+    // Draw helpers
+    const drawPos = (x, y) => [x * width, y * height];
+
     // Draw player
     ctx.strokeStyle = player.current.iFrames > 0 ? 'cyan' : 'white'; 
     ctx.lineWidth = 2;
-    const [px, py] = [player.current.x * ctx.canvas.width, player.current.y * ctx.canvas.height];
+    const [px, py] = drawPos(player.current.x, player.current.y);
     ctx.beginPath();
     ctx.moveTo(
       px + Math.cos(player.current.angle) * 20,
@@ -172,10 +241,10 @@ const AsteroidsGame = () => {
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 2;
     bullets.current.forEach((bullet) => {
-      const [bx, by] = [bullet.x * ctx.canvas.width, bullet.y * ctx.canvas.height];
+      const [bx, by] = drawPos(bullet.x, bullet.y);
       const laserLength = 25;
-      const velX = bullet.vx * ctx.canvas.width;
-      const velY = bullet.vy * ctx.canvas.height;
+      const velX = bullet.velocity.x * width;
+      const velY = bullet.velocity.y * height;
       const tailX = bx - velX * (laserLength / 10);
       const tailY = by - velY * (laserLength / 10);
 
@@ -188,56 +257,15 @@ const AsteroidsGame = () => {
     // Draw asteroids
     ctx.strokeStyle = 'white';
     asteroids.current.forEach((asteroid) => {
-      const [ax, ay] = [asteroid.x * ctx.canvas.width, asteroid.y * ctx.canvas.height];
+      const [ax, ay] = drawPos(asteroid.x, asteroid.y);
       ctx.beginPath();
-      ctx.arc(ax, ay, asteroid.radius * ctx.canvas.width, 0, Math.PI * 2);
+      ctx.arc(ax, ay, asteroid.radius * width, 0, Math.PI * 2);
       ctx.stroke();
     });
-  };
-
-  // Main game loop
-  const gameLoop = useCallback(() => {
-    if (!canvasRef.current || gameOver) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const { width, height } = getDimensions();
-
-    canvas.width = width;
-    canvas.height = height;
-
-    // Clear canvas
-    ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, width, height);
-
-    // Only process controls if controlsActive is true
-    if (controlsActive) {
-      if (keys.current.ArrowLeft) player.current.rotation = -0.05;
-      if (keys.current.ArrowRight) player.current.rotation = 0.05;
-      if (keys.current.ArrowUp) player.current.thrust = true;
-
-      // Fire bullet if space pressed and cooldown <= 0
-      if (keys.current[' '] && player.current.cooldown <= 0) {
-        bullets.current.push({
-          x: player.current.x + Math.cos(player.current.angle) * 0.05,
-          y: player.current.y + Math.sin(player.current.angle) * 0.05,
-          vx: Math.cos(player.current.angle) * 0.02,
-          vy: Math.sin(player.current.angle) * 0.02,
-          life: 50
-        });
-        player.current.cooldown = 10;
-      }
-    }
-
-    // Update game state
-    updateGameState(width, height);
-
-    // Draw everything
-    drawGame(ctx);
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver, controlsActive, updateGameState]);
+  }, [gameOver, controlsActive]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -348,7 +376,9 @@ const AsteroidsGame = () => {
     fetchHighScores();
     if (gameStarted && !gameOver) {
       initGame();
+      gameLoop();
     }
+    return () => cancelAnimationFrame(animationFrameId.current);
   }, [gameLoop, gameStarted, gameOver, initGame, fetchHighScores]);
 
   const startGame = () => {
@@ -382,17 +412,6 @@ const AsteroidsGame = () => {
     asteroids.current = [];
   };
 
-  useEffect(() => {
-    if (gameStarted && !gameOver) {
-      gameLoop();
-    }
-    return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, [gameStarted, gameOver, gameLoop]);
-
   return (
     <div ref={containerRef} style={{
       width: '100%', 
@@ -411,7 +430,6 @@ const AsteroidsGame = () => {
           textAlign: 'center',
           zIndex: 1,
           color: 'white',
-          fontFamily: 'Consolas, monospace',
         }}>
           <div style={{
             background: 'rgba(0, 0, 0, 0.8)',
