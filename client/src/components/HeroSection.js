@@ -3,9 +3,7 @@ import Typewriter from 'typewriter-effect';
 import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
 
-//
-// SEND EMAIL FORM COMPONENT
-//
+// Updated SendEmailForm with smaller styling
 function SendEmailForm() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
@@ -17,7 +15,6 @@ function SendEmailForm() {
       const response = await fetch('https://mern-fullstack-website.onrender.com/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Only send name and message
         body: JSON.stringify({ name, message }),
       });
       if (response.ok) {
@@ -65,55 +62,58 @@ const sendStyles = {
     backgroundColor: '#eb4034',
     fontFamily: '"Montserrat", sans-serif',
     fontWeight: 600,
-    padding: '1rem',
+    padding: '0.5rem',
     borderRadius: '10px',
     color: '#fff',
     position: 'relative',
-    height: '100%', // fills its container
+    height: '100%', // fills its parent container (460px)
+    overflow: 'hidden',
   },
   sendEmailHeading: {
     textAlign: 'center',
-    marginBottom: '1rem',
+    marginBottom: '0.5rem',
+    fontSize: '1.2rem',
   },
   sendEmailForm: {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
     height: '100%',
+    fontSize: '0.9rem',
   },
   sendEmailInput: {
     backgroundColor: '#f2eeed',
     border: 'none',
     outline: 'none',
-    padding: '0.5rem',
-    marginBottom: '1rem',
+    padding: '0.3rem',
+    marginBottom: '0.5rem',
     borderRadius: '4px',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     color: '#000',
   },
   sendEmailTextarea: {
     backgroundColor: '#f2eeed',
     border: 'none',
     outline: 'none',
-    padding: '0.5rem',
+    padding: '0.3rem',
     flex: 1,
-    minHeight: '100px',
+    minHeight: '70px',
     borderRadius: '4px',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     color: '#000',
-    marginBottom: '2.5rem', // leaves room for the send button
+    marginBottom: '2rem', // leaves room for the button
   },
   sendEmailButton: {
     position: 'absolute',
-    bottom: '0.5rem',
-    right: '0.5rem',
+    bottom: '0.3rem',
+    right: '0.3rem',
     backgroundColor: '#78e3c3',
     color: '#000',
     border: 'none',
     borderRadius: '4px',
-    padding: '0.5rem 1rem',
+    padding: '0.3rem 0.8rem',
     cursor: 'pointer',
-    fontSize: '1rem',
+    fontSize: '0.9rem',
   },
 };
 
