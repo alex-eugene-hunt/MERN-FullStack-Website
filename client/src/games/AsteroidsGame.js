@@ -11,7 +11,13 @@ const AsteroidsGame = () => {
   const [highScores, setHighScores] = useState([]);
   // Removed submitStatus and instead use "submitted" to change the button text.
   const [submitted, setSubmitted] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const keys = useRef({});
+
+  const [hoverState, setHoverState] = useState({
+    game: false,
+    input: false
+  });
 
   // Game state
   const player = useRef({
@@ -323,15 +329,24 @@ const AsteroidsGame = () => {
   // Key handling
   useEffect(() => {
     const handleKeyDown = (e) => {
-      keys.current[e.key] = true;
-      // Prevent space scrolling when game is active
-      if (e.key === ' ' && gameStarted && !gameOver) {
-        e.preventDefault();
+      // Only set keys if hovering over game area
+      if (hoverState.game) {
+        keys.current[e.key] = true;
+        // Prevent space scrolling when game is active and mouse is over game area
+        if (e.key === ' ' && gameStarted && !gameOver) {
+          e.preventDefault();
+        }
+        // Prevent arrow key scrolling when over game area
+        if (e.key.startsWith('Arrow')) {
+          e.preventDefault();
+        }
       }
     };
 
     const handleKeyUp = (e) => {
-      keys.current[e.key] = false;
+      if (hoverState.game) {
+        keys.current[e.key] = false;
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -341,7 +356,7 @@ const AsteroidsGame = () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, hoverState]);
 
   // Make canvas focusable
   useEffect(() => {
@@ -393,14 +408,17 @@ const AsteroidsGame = () => {
   };
 
   return (
-    <div ref={containerRef} style={{
-      width: '100%', 
-      height: '100%',
-      overflow: 'hidden', // Prevent scrolling in game container
-      position: 'relative',
-      backgroundColor: 'black',
-      fontFamily: 'Consolas, monospace',
-    }}>
+    <div 
+      ref={containerRef} 
+      style={{ 
+        width: '100%', 
+        height: '100%',
+        overflow: 'hidden',
+        position: 'relative',
+        backgroundColor: 'black',
+        fontFamily: 'Consolas, monospace',
+      }}
+    >
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
@@ -519,7 +537,10 @@ const AsteroidsGame = () => {
                 color: 'white',
                 fontSize: '16px',
                 fontFamily: 'Consolas, monospace',
+                cursor: 'text'
               }}
+              onMouseEnter={() => setHoverState(prev => ({ ...prev, input: true }))}
+              onMouseLeave={() => setHoverState(prev => ({ ...prev, input: false }))}
             />
             <div style={{
               display: 'flex',
@@ -593,8 +614,11 @@ const AsteroidsGame = () => {
           width: '100%',
           height: 'calc(100% - 40px)',
           backgroundColor: 'black',
+          cursor: hoverState.game ? 'crosshair' : 'default'
         }}
-        tabIndex={0} // Make canvas focusable
+        tabIndex={0}
+        onMouseEnter={() => setHoverState(prev => ({ ...prev, game: true }))}
+        onMouseLeave={() => setHoverState(prev => ({ ...prev, game: false }))}
       />
       <div style={{
         position: 'absolute',
