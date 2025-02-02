@@ -11,6 +11,7 @@ const AsteroidsGame = () => {
   const [highScores, setHighScores] = useState([]);
   // Removed submitStatus and instead use "submitted" to change the button text.
   const [submitted, setSubmitted] = useState(false);
+  const [controlsActive, setControlsActive] = useState(false);
   const keys = useRef({});
 
   // Game state
@@ -118,12 +119,12 @@ const AsteroidsGame = () => {
     ctx.fillRect(0, 0, width, height);
 
     // Controls
-    if (keys.current.ArrowLeft) player.current.rotation = -0.05;
-    if (keys.current.ArrowRight) player.current.rotation = 0.05;
-    if (keys.current.ArrowUp) player.current.thrust = true;
+    if (keys.current.ArrowLeft && controlsActive) player.current.rotation = -0.05;
+    if (keys.current.ArrowRight && controlsActive) player.current.rotation = 0.05;
+    if (keys.current.ArrowUp && controlsActive) player.current.thrust = true;
 
     // Fire bullet if space pressed and cooldown <= 0
-    if (keys.current[' '] && player.current.cooldown <= 0) {
+    if (keys.current[' '] && player.current.cooldown <= 0 && controlsActive) {
       bullets.current.push({
         x: player.current.x + Math.cos(player.current.angle) * 0.05,
         y: player.current.y + Math.sin(player.current.angle) * 0.05,
@@ -264,7 +265,7 @@ const AsteroidsGame = () => {
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver]);
+  }, [gameOver, controlsActive]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -323,20 +324,19 @@ const AsteroidsGame = () => {
   // Key handling
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Only set keys if hovering over game area
-      keys.current[e.key] = true;
-      // Prevent space scrolling when game is active and mouse is over game area
-      if (e.key === ' ' && gameStarted && !gameOver) {
-        e.preventDefault();
-      }
-      // Prevent arrow key scrolling when over game area
-      if (e.key.startsWith('Arrow')) {
-        e.preventDefault();
+      if (controlsActive) {
+        keys.current[e.key] = true;
+        // Prevent space scrolling when game is active
+        if (e.key === ' ' && gameStarted && !gameOver) {
+          e.preventDefault();
+        }
       }
     };
 
     const handleKeyUp = (e) => {
-      keys.current[e.key] = false;
+      if (controlsActive) {
+        keys.current[e.key] = false;
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -346,7 +346,22 @@ const AsteroidsGame = () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, controlsActive]);
+
+  // Canvas hover handling
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const handleMouseEnter = () => setControlsActive(true);
+    const handleMouseLeave = () => setControlsActive(false);
+
+    canvas.addEventListener('mouseenter', handleMouseEnter);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      canvas.removeEventListener('mouseenter', handleMouseEnter);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
 
   // Make canvas focusable
   useEffect(() => {
@@ -398,17 +413,14 @@ const AsteroidsGame = () => {
   };
 
   return (
-    <div 
-      ref={containerRef} 
-      style={{ 
-        width: '100%', 
-        height: '100%',
-        overflow: 'hidden',
-        position: 'relative',
-        backgroundColor: 'black',
-        fontFamily: 'Consolas, monospace',
-      }}
-    >
+    <div ref={containerRef} style={{
+      width: '100%', 
+      height: '100%',
+      overflow: 'hidden', // Prevent scrolling in game container
+      position: 'relative',
+      backgroundColor: 'black',
+      fontFamily: 'Consolas, monospace',
+    }}>
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
@@ -527,7 +539,6 @@ const AsteroidsGame = () => {
                 color: 'white',
                 fontSize: '16px',
                 fontFamily: 'Consolas, monospace',
-                cursor: 'text'
               }}
             />
             <div style={{
@@ -602,9 +613,8 @@ const AsteroidsGame = () => {
           width: '100%',
           height: 'calc(100% - 40px)',
           backgroundColor: 'black',
-          cursor: 'crosshair'
         }}
-        tabIndex={0}
+        tabIndex={0} // Make canvas focusable
       />
       <div style={{
         position: 'absolute',
