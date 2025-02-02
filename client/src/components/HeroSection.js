@@ -44,14 +44,14 @@ function SendEmailForm() {
           type="text"
           placeholder="Your name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value.replace(/\s/g, ''))}
           style={formStyles.input}
           required
         />
         <textarea
           placeholder="Your message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value.replace(/\s/g, ''))}
           style={formStyles.textarea}
           required
         />
@@ -191,7 +191,7 @@ function HeroSection() {
               type="text"
               placeholder="What's on your mind?"
               value={question}
-              onChange={(e) => setQuestion(e.target.value)}
+              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
               style={styles.input}
             />
             <button onClick={handleAskQuestion} style={styles.askButton}>
