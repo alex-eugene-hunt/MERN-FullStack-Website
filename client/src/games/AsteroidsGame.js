@@ -324,22 +324,39 @@ const AsteroidsGame = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       keys.current[e.key] = true;
-      // Only prevent space default behavior if the game canvas is focused
-      if (e.key === ' ' && document.activeElement === canvasRef.current) {
-        e.preventDefault(); // prevent page scroll on space only when canvas is focused
+      // Prevent space scrolling when game canvas is focused or being played
+      if (e.key === ' ' && (document.activeElement === canvasRef.current || keys.current['ArrowUp'] || keys.current['ArrowDown'] || keys.current['ArrowLeft'] || keys.current['ArrowRight'])) {
+        e.preventDefault();
       }
     };
+
     const handleKeyUp = (e) => {
       keys.current[e.key] = false;
     };
 
+    // Add click handler to focus canvas
+    const canvas = canvasRef.current;
+    const handleCanvasClick = () => {
+      canvas.focus();
+    };
+
+    canvas.addEventListener('click', handleCanvasClick);
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
     return () => {
+      canvas.removeEventListener('click', handleCanvasClick);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
+  }, []);
+
+  // Make canvas focusable
+  useEffect(() => {
+    if (canvasRef.current) {
+      canvasRef.current.tabIndex = 0; // Make canvas focusable
+      canvasRef.current.style.outline = 'none'; // Remove focus outline
+    }
   }, []);
 
   // Start game & loop
@@ -377,223 +394,218 @@ const AsteroidsGame = () => {
   };
 
   return (
-    <div ref={containerRef} style={styles.container}>
+    <div ref={containerRef} style={{
+      width: '100%', 
+      height: '100%',
+      overflow: 'hidden', // Prevent scrolling in game container
+      position: 'relative',
+      backgroundColor: 'black',
+      fontFamily: 'Consolas, monospace',
+    }}>
       {!gameStarted && !gameOver && (
-        <div style={styles.startScreen}>
-          <div style={styles.standardBox}>
-            <button style={styles.startButton} onClick={startGame}>Start Game</button>
-            <div style={styles.highScores}>
-              <h3 style={styles.highScoresTitle}>High Scores</h3>
-              <ul style={styles.scoresList}>
-                {highScores.map((score, index) => (
-                  <li
-                    key={index}
-                    style={{
-                      ...styles.scoreItem,
-                      fontSize: '18px',
-                      padding: '8px 0',
-                      color:
-                        index === 0 ? '#FFD700' : // Gold
-                        index === 1 ? '#C0C0C0' : // Silver
-                        index === 2 ? '#CD7F32' : // Bronze
-                        'white',
-                    }}
-                  >
-                    {index + 1}. {score.playerName}: {score.score}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div style={{
+          position: 'absolute',
+          top: '55%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          zIndex: 1,
+          color: 'white',
+        }}>
+          <div style={{
+            background: 'rgba(0, 0, 0, 0.8)',
+            padding: '15px',
+            borderRadius: '10px',
+            border: '2px solid white',
+            width: '300px',
+            height: '200px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            fontFamily: 'Consolas, monospace',
+          }}>
+            <h2 style={{
+              fontSize: '28px',
+              margin: '0 0 5px 0',
+              color: 'white',
+              fontFamily: 'Consolas, monospace',
+            }}>High Scores</h2>
+            <ul style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: '0',
+              textAlign: 'center',
+            }}>
+              {highScores.map((score, index) => (
+                <li
+                  key={index}
+                  style={{
+                    fontSize: '18px',
+                    padding: '8px 0',
+                    color:
+                      index === 0 ? '#FFD700' : // Gold
+                      index === 1 ? '#C0C0C0' : // Silver
+                      index === 2 ? '#CD7F32' : // Bronze
+                      'white',
+                  }}
+                >
+                  {index + 1}. {score.playerName}: {score.score}
+                </li>
+              ))}
+            </ul>
+            <button style={{
+              padding: '10px 30px',
+              fontSize: '18px',
+              backgroundColor: 'black',
+              color: 'white',
+              border: '2px solid white',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              marginTop: '2px',
+              marginBottom: '2px',
+              transition: 'background-color 0.2s',
+              fontFamily: 'Consolas, monospace',
+            }} onClick={startGame}>Start Game</button>
           </div>
         </div>
       )}
       {gameOver && (
-        <div style={styles.modal}>
-          <div style={styles.standardBox}>
-            <h2 style={styles.gameOverText}>Game Over!</h2>
-            <p style={styles.gameOverScore}>Score: {score}</p>
+        <div style={{
+          position: 'absolute',
+          top: '55%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          color: 'white',
+          zIndex: 1,
+        }}>
+          <div style={{
+            background: 'rgba(0, 0, 0, 0.8)',
+            padding: '15px',
+            borderRadius: '10px',
+            border: '2px solid white',
+            width: '300px',
+            height: '200px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            fontFamily: 'Consolas, monospace',
+          }}>
+            <h2 style={{
+              fontSize: '28px',
+              margin: '0 0 5px 0',
+              color: 'white',
+              fontFamily: 'Consolas, monospace',
+            }}>Game Over!</h2>
+            <p style={{
+              fontSize: '20px',
+              margin: '0 0 10px 0',
+              color: 'white',
+              fontFamily: 'Consolas, monospace',
+            }}>Score: {score}</p>
             <input
               type="text"
               placeholder="Enter your name"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
-              style={styles.input}
+              style={{
+                textAlign: 'center',
+                justifyContent: 'center',
+                margin: '10px 0',
+                padding: '8px',
+                width: '200px',
+                borderRadius: '5px',
+                border: '2px solid white',
+                background: 'black',
+                color: 'white',
+                fontSize: '16px',
+                fontFamily: 'Consolas, monospace',
+              }}
             />
-            <div style={styles.buttonContainer}>
+            <div style={{
+              display: 'flex',
+              gap: '10px',
+              justifyContent: 'center',
+              marginTop: '10px',
+            }}>
               <button 
                 onClick={submitHighScore} 
-                style={styles.gameButton}
+                style={{
+                  padding: '10px 20px',
+                  cursor: 'pointer',
+                  backgroundColor: 'black',
+                  color: 'white',
+                  border: '2px solid white',
+                  borderRadius: '5px',
+                  fontSize: '16px',
+                  fontFamily: 'Consolas, monospace',
+                  transition: 'background-color 0.2s',
+                }}
                 disabled={submitted}
               >
                 {submitted ? <span style={{ color: 'white', fontSize: '20px' }}>✓</span> : 'Submit Score'}
               </button>
-              <button style={styles.gameButton} onClick={resetGame}>
+              <button style={{
+                padding: '10px 20px',
+                cursor: 'pointer',
+                backgroundColor: 'black',
+                color: 'white',
+                border: '2px solid white',
+                borderRadius: '5px',
+                fontSize: '16px',
+                fontFamily: 'Consolas, monospace',
+                transition: 'background-color 0.2s',
+              }} onClick={resetGame}>
                 Play Again?
               </button>
             </div>
           </div>
         </div>
       )}
-      <div style={styles.controls}>
-        <span style={styles.controlItem}>← → Rotate</span>
-        <span style={styles.controlItem}>↑ Thrust</span>
-        <span style={styles.controlItem}>Space Shoot</span>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '1rem',
+        padding: '8px',
+        backgroundColor: '#222',
+        color: 'white',
+        fontSize: '0.9rem',
+        width: '100%',
+      }}>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>← → Rotate</span>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>↑ Thrust</span>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>Space Shoot</span>
       </div>
-      <canvas ref={canvasRef} style={styles.canvas} />
-      <div style={styles.hud}>
+      <canvas ref={canvasRef} style={{
+        width: '100%',
+        height: 'calc(100% - 40px)',
+        backgroundColor: 'black',
+      }} />
+      <div style={{
+        position: 'absolute',
+        top: '48px',
+        left: '16px',
+        color: 'white',
+        fontFamily: 'Consolas, monospace',
+        fontSize: '16px',
+      }}>
         <span>Score: {score}</span>
         <span> Lives: {lives}</span>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-    backgroundColor: 'black',
-    fontFamily: 'Consolas, monospace',
-  },
-  canvas: {
-    width: '100%',
-    height: 'calc(100% - 40px)',
-    backgroundColor: 'black',
-  },
-  controls: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '1rem',
-    padding: '8px',
-    backgroundColor: '#222',
-    color: 'white',
-    fontSize: '0.9rem',
-    width: '100%',
-  },
-  controlItem: {
-    padding: '4px 8px',
-    borderRadius: '4px',
-    border: '1px solid #666',
-  },
-  hud: {
-    position: 'absolute',
-    top: '48px',
-    left: '16px',
-    color: 'white',
-    fontFamily: 'Consolas, monospace',
-    fontSize: '16px',
-  },
-  startScreen: {
-    position: 'absolute',
-    top: '55%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    textAlign: 'center',
-    zIndex: 1,
-    color: 'white',
-  },
-  modal: {
-    position: 'absolute',
-    top: '55%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    textAlign: 'center',
-    color: 'white',
-    zIndex: 1,
-  },
-  standardBox: {
-    background: 'rgba(0, 0, 0, 0.8)',
-    padding: '15px',
-    borderRadius: '10px',
-    border: '2px solid white',
-    width: '300px',
-    height: '200px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    fontFamily: 'Consolas, monospace',
-  },
-  startButton: {
-    padding: '10px 30px',
-    fontSize: '18px',
-    backgroundColor: 'black',
-    color: 'white',
-    border: '2px solid white',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    marginTop: '2px',
-    marginBottom: '2px',
-    transition: 'background-color 0.2s',
-    fontFamily: 'Consolas, monospace',
-  },
-  highScores: {
-    marginTop: '0',
-    padding: '0',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  highScoresTitle: {
-    fontSize: '20px',
-    marginTop: '10px',
-    marginBottom: '2px',
-    color: 'white',
-    fontFamily: 'Consolas, monospace',
-  },
-  scoresList: {
-    listStyle: 'none',
-    padding: 0,
-    margin: '0',
-    textAlign: 'center',
-  },
-  scoreItem: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-    fontFamily: 'Consolas, monospace',
-    padding: '4px 0',
-  },
-  input: {
-    textAlign: 'center',
-    justifyContent: 'center',
-    margin: '10px 0',
-    padding: '8px',
-    width: '200px',
-    borderRadius: '5px',
-    border: '2px solid white',
-    background: 'black',
-    color: 'white',
-    fontSize: '16px',
-    fontFamily: 'Consolas, monospace',
-  },
-  buttonContainer: {
-    display: 'flex',
-    gap: '10px',
-    justifyContent: 'center',
-    marginTop: '10px',
-  },
-  gameButton: {
-    padding: '10px 20px',
-    cursor: 'pointer',
-    backgroundColor: 'black',
-    color: 'white',
-    border: '2px solid white',
-    borderRadius: '5px',
-    fontSize: '16px',
-    fontFamily: 'Consolas, monospace',
-    transition: 'background-color 0.2s',
-  },
-  gameOverText: {
-    fontSize: '28px',
-    margin: '0 0 5px 0',
-    color: 'white',
-    fontFamily: 'Consolas, monospace',
-  },
-  gameOverScore: {
-    fontSize: '20px',
-    margin: '0 0 10px 0',
-    color: 'white',
-    fontFamily: 'Consolas, monospace',
-  },
 };
 
 export default AsteroidsGame;
