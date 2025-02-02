@@ -265,7 +265,7 @@ const AsteroidsGame = () => {
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver, controlsActive]);
+  }, [gameOver]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -376,9 +376,7 @@ const AsteroidsGame = () => {
     fetchHighScores();
     if (gameStarted && !gameOver) {
       initGame();
-      gameLoop();
     }
-    return () => cancelAnimationFrame(animationFrameId.current);
   }, [gameLoop, gameStarted, gameOver, initGame, fetchHighScores]);
 
   const startGame = () => {
@@ -411,6 +409,12 @@ const AsteroidsGame = () => {
     bullets.current = [];
     asteroids.current = [];
   };
+
+  useEffect(() => {
+    if (gameStarted && !gameOver) {
+      gameLoop();
+    }
+  }, [gameStarted, gameOver]);
 
   return (
     <div ref={containerRef} style={{
