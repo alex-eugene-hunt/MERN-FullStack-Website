@@ -3,6 +3,76 @@ import Typewriter from 'typewriter-effect';
 import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
 
+function SendEmailForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+    try {
+      const response = await fetch('https://mern-fullstack-website.com/api/send-email', {
+        // Replace with your actual Render URL
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setStatus('Email sent successfully!');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        setStatus(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setStatus('Error sending email.');
+    }
+  };
+
+  return (
+    <div style={{ textAlign: 'center', padding: '1rem' }}>
+      <h3>Send me an Email</h3>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={styles.input}
+          required
+        />
+        <br />
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={styles.input}
+          required
+        />
+        <br />
+        <textarea
+          placeholder="Your message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          style={{ ...styles.input, height: '100px', resize: 'none' }}
+          required
+        />
+        <br />
+        <button type="submit" style={styles.askButton}>
+          Send
+        </button>
+      </form>
+      {status && <p>{status}</p>}
+    </div>
+  );
+}
+
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
@@ -17,15 +87,15 @@ function HeroSection() {
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          scaleMobile: 1.0,
           color: 0x5c85dd,
           backgroundColor: 0x2b2b2f,
-          points: 20.00,
-          maxDistance: 24.00,
-          spacing: 17.00
+          points: 20.0,
+          maxDistance: 24.0,
+          spacing: 17.0
         })
       );
     }
@@ -90,15 +160,12 @@ function HeroSection() {
 
           {/* Box 2: Send Email */}
           <div style={styles.box}>
-            <h3>Send me an Email</h3>
-            <p>(Your email form code goes here.)</p>
+            <SendEmailForm />
           </div>
 
           {/* Box 3: Game Box */}
           <div style={styles.box}>
-            
-          <AsteroidsGame />
-
+            <AsteroidsGame />
           </div>
         </div>
       </div>

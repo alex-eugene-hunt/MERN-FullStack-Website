@@ -23,6 +23,9 @@ app.use(express.json()); // For parsing JSON request bodies
 // Routes
 app.use('/api/highscores', require('./routes/highScores'));
 
+// NEW: Add the email route
+app.use('/api/send-email', require('./routes/sendEmail'));
+
 // Basic route to test
 app.get('/', (req, res) => {
   res.send('Hello from the server!');
