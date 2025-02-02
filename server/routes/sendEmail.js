@@ -3,35 +3,33 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-// POST: /api/send-email
 router.post('/', async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, message } = req.body;
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required.' });
+  if (!name || !message) {
+    return res.status(400).json({ error: 'Name and message are required.' });
   }
 
   try {
-    // Configure the transporter. If using Gmail with 2FA, create an App Password.
+    // Configure the transporter using Gmail and your app password.
     let transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: 'alex.eugene.hunt@gmail.com',
-        pass: process.env.EMAIL_PASSWORD, // Store your email password or app password in an environment variable
+        pass: process.env.EMAIL_PASSWORD, // Use your Gmail app password here
       },
     });
 
-    // Set up mail options
+    // Set up mail options.
+    // Here, we use a fixed "from" (your Gmail) and send the message to your Gmail.
     let mailOptions = {
-      from: email, // The sender's email address from the form
+      from: 'alex.eugene.hunt@gmail.com',
       to: 'alex.eugene.hunt@gmail.com',
-      subject: `Message from ${name} (via portfolio)`,
+      subject: `Message from ${name} via Portfolio`,
       text: message,
     };
 
-    // Send the email
     await transporter.sendMail(mailOptions);
-
     return res.status(200).json({ success: true, message: 'Email sent successfully.' });
   } catch (error) {
     console.error('Error sending email:', error);

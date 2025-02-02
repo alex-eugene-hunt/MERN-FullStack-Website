@@ -5,7 +5,6 @@ import AsteroidsGame from '../games/AsteroidsGame';
 
 function SendEmailForm() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
 
@@ -13,45 +12,35 @@ function SendEmailForm() {
     e.preventDefault();
     setStatus('Sending...');
     try {
-      const response = await fetch('https://mern-fullstack-website.com/api/send-email', {
-        // Replace with your actual Render URL
+      const response = await fetch('https://mern-fullstack-website.onrender.com/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
+        // Only send name and message in the request body
+        body: JSON.stringify({ name, message }),
       });
       const data = await response.json();
       if (response.ok) {
-        setStatus('Email sent successfully!');
+        setStatus('Message sent successfully!');
         setName('');
-        setEmail('');
         setMessage('');
       } else {
         setStatus(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error('Error sending email:', error);
-      setStatus('Error sending email.');
+      console.error('Error sending message:', error);
+      setStatus('Error sending message.');
     }
   };
 
   return (
     <div style={{ textAlign: 'center', padding: '1rem' }}>
-      <h3>Send me an Email</h3>
+      <h3>Send me a Message</h3>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={styles.input}
-          required
-        />
-        <br />
-        <input
-          type="email"
-          placeholder="Your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
           required
         />
