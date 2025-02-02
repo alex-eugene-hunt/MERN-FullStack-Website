@@ -10,11 +10,18 @@ function SendEmailForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const trimmedName = name.trim();
+    const trimmedMessage = message.trim();
+    if (!trimmedName || !trimmedMessage) {
+      console.error('Name or message cannot be empty after trimming.');
+      setSent(false);
+      return;
+    }
     try {
       const response = await fetch('https://mern-fullstack-website.onrender.com/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message }),
+        body: JSON.stringify({ name: trimmedName, message: trimmedMessage }),
       });
       if (response.ok) {
         setSent(true);
