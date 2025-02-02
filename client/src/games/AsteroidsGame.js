@@ -324,8 +324,8 @@ const AsteroidsGame = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       keys.current[e.key] = true;
-      // Prevent space scrolling when game canvas is focused or being played
-      if (e.key === ' ' && (document.activeElement === canvasRef.current || keys.current['ArrowUp'] || keys.current['ArrowDown'] || keys.current['ArrowLeft'] || keys.current['ArrowRight'])) {
+      // Prevent space scrolling when game is active
+      if (e.key === ' ' && gameStarted && !gameOver) {
         e.preventDefault();
       }
     };
@@ -334,22 +334,14 @@ const AsteroidsGame = () => {
       keys.current[e.key] = false;
     };
 
-    // Add click handler to focus canvas
-    const canvas = canvasRef.current;
-    const handleCanvasClick = () => {
-      canvas.focus();
-    };
-
-    canvas.addEventListener('click', handleCanvasClick);
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
     return () => {
-      canvas.removeEventListener('click', handleCanvasClick);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
     };
-  }, []);
+  }, [gameStarted, gameOver]);
 
   // Make canvas focusable
   useEffect(() => {
@@ -371,6 +363,14 @@ const AsteroidsGame = () => {
 
   const startGame = () => {
     setGameStarted(true);
+    setGameOver(false);
+    setScore(0);
+    setLives(3);
+    resetGameState();
+    // Focus the canvas immediately when game starts
+    if (canvasRef.current) {
+      canvasRef.current.focus();
+    }
   };
 
   const resetGame = () => {
@@ -588,11 +588,15 @@ const AsteroidsGame = () => {
           border: '1px solid #666',
         }}>Space Shoot</span>
       </div>
-      <canvas ref={canvasRef} style={{
-        width: '100%',
-        height: 'calc(100% - 40px)',
-        backgroundColor: 'black',
-      }} />
+      <canvas 
+        ref={canvasRef} 
+        style={{
+          width: '100%',
+          height: 'calc(100% - 40px)',
+          backgroundColor: 'black',
+        }}
+        tabIndex={0} // Make canvas focusable
+      />
       <div style={{
         position: 'absolute',
         top: '48px',
