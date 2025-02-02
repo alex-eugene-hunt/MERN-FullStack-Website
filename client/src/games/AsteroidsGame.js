@@ -105,84 +105,46 @@ const AsteroidsGame = () => {
   }, []);
 
   // Update game state
-  const updateGameState = (width, height) => {
+  const updateGameState = useCallback((width, height) => {
     // Update player (angle, velocity, etc.)
     player.current.angle += player.current.rotation;
     if (player.current.thrust) {
-      player.current.velocity.x += Math.cos(player.current.angle) * 0.0002;
-      player.current.velocity.y += Math.sin(player.current.angle) * 0.0002;
+      player.current.velocity.x += Math.cos(player.current.angle) * 0.0007;
+      player.current.velocity.y += Math.sin(player.current.angle) * 0.0007;
     }
     player.current.x += player.current.velocity.x;
     player.current.y += player.current.velocity.y;
-    player.current.cooldown--;
-    player.current.thrust = false;
     player.current.rotation = 0;
+    player.current.thrust = false;
+    if (player.current.cooldown > 0) player.current.cooldown--;
+    if (player.current.iFrames > 0) player.current.iFrames--;
 
-    // Decrement invincibility frames
-    if (player.current.iFrames > 0) {
-      player.current.iFrames--;
-    }
-
-    // Wrapping player
-    player.current.x = (player.current.x + 1) % 1;
-    player.current.y = (player.current.y + 1) % 1;
+    // Wrap coordinates
+    if (player.current.x < 0) player.current.x = 1;
+    if (player.current.x > 1) player.current.x = 0;
+    if (player.current.y < 0) player.current.y = 1;
+    if (player.current.y > 1) player.current.y = 0;
 
     // Update bullets
     bullets.current = bullets.current.filter((bullet) => {
       bullet.x += bullet.vx;
       bullet.y += bullet.vy;
       bullet.life--;
-      return bullet.life > 0; // remove if life < 0
+      return bullet.life > 0;
     });
 
     // Update asteroids
-    asteroids.current = asteroids.current.filter((asteroid) => {
+    asteroids.current.forEach((asteroid) => {
       asteroid.x += asteroid.velocity.x;
       asteroid.y += asteroid.velocity.y;
 
-      // bullet collision check
-      const hit = bullets.current.some((bullet) => {
-        const dx = bullet.x - asteroid.x;
-        const dy = bullet.y - asteroid.y;
-        return Math.sqrt(dx * dx + dy * dy) < asteroid.radius;
-      });
-      if (hit) {
-        setScore((prev) => prev + 100);
-      }
-      return !hit; // remove if hit
+      // Wrap coordinates
+      if (asteroid.x < 0) asteroid.x = 1;
+      if (asteroid.x > 1) asteroid.x = 0;
+      if (asteroid.y < 0) asteroid.y = 1;
+      if (asteroid.y > 1) asteroid.y = 0;
     });
-
-    // Random spawn chance
-    if (Math.random() < 0.01 && !gameOver) {
-      spawnAsteroid();
-    }
-
-    // Collision with asteroids (only if not invincible)
-    if (player.current.iFrames <= 0 && !gameOver) {
-      const collision = asteroids.current.some((asteroid) => {
-        const dx = player.current.x - asteroid.x;
-        const dy = player.current.y - asteroid.y;
-        return (
-          Math.sqrt(dx * dx + dy * dy) <
-          player.current.radius + asteroid.radius
-        );
-      });
-
-      // If collision, lose life, set invincibility
-      if (collision) {
-        setLives((prevLives) => {
-          const newLives = prevLives - 1;
-          if (newLives <= 0) {
-            setGameOver(true);
-            // Reset submission state in case the player plays again
-            setSubmitted(false);
-          }
-          player.current.iFrames = 100;
-          return newLives;
-        });
-      }
-    }
-  };
+  }, []);
 
   // Draw everything
   const drawGame = (ctx) => {
@@ -275,7 +237,7 @@ const AsteroidsGame = () => {
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver]);
+  }, [gameOver, controlsActive, updateGameState]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -449,6 +411,7 @@ const AsteroidsGame = () => {
           textAlign: 'center',
           zIndex: 1,
           color: 'white',
+          fontFamily: 'Consolas, monospace',
         }}>
           <div style={{
             background: 'rgba(0, 0, 0, 0.8)',
