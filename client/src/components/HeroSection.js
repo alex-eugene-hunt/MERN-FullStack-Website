@@ -44,14 +44,14 @@ function SendEmailForm() {
           type="text"
           placeholder="Your name"
           value={name}
-          onChange={(e) => setName(e.target.value.replace(/\s/g, ''))}
+          onChange={(e) => setName(e.target.value)}
           style={formStyles.input}
           required
         />
         <textarea
           placeholder="Your message"
           value={message}
-          onChange={(e) => setMessage(e.target.value.replace(/\s/g, ''))}
+          onChange={(e) => setMessage(e.target.value)}
           style={formStyles.textarea}
           required
         />
