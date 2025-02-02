@@ -265,7 +265,7 @@ const AsteroidsGame = () => {
 
     // Continue the loop
     animationFrameId.current = requestAnimationFrame(gameLoop);
-  }, [gameOver]);
+  }, [gameOver, controlsActive]);
 
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
@@ -276,7 +276,7 @@ const AsteroidsGame = () => {
     } catch (error) {
       console.error('Error fetching high scores:', error);
     }
-  }, []);
+  }, [controlsActive]);
 
   // Submit high score
   const submitHighScore = async () => {
@@ -414,7 +414,7 @@ const AsteroidsGame = () => {
     if (gameStarted && !gameOver) {
       gameLoop();
     }
-  }, [gameStarted, gameOver]);
+  }, [gameStarted, gameOver, gameLoop]);
 
   return (
     <div ref={containerRef} style={{
