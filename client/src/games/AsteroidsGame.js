@@ -324,7 +324,10 @@ const AsteroidsGame = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       keys.current[e.key] = true;
-      if (e.key === ' ') e.preventDefault(); // prevent page scroll on space
+      // Only prevent space default behavior if the game canvas is focused
+      if (e.key === ' ' && document.activeElement === canvasRef.current) {
+        e.preventDefault(); // prevent page scroll on space only when canvas is focused
+      }
     };
     const handleKeyUp = (e) => {
       keys.current[e.key] = false;
@@ -594,4 +597,3 @@ const styles = {
 };
 
 export default AsteroidsGame;
-
