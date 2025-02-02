@@ -191,7 +191,7 @@ function HeroSection() {
               type="text"
               placeholder="What's on your mind?"
               value={question}
-              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+              onChange={(e) => setQuestion(e.target.value)}
               style={styles.input}
             />
             <button onClick={handleAskQuestion} style={styles.askButton}>
