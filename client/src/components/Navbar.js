@@ -35,6 +35,15 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const initializeActiveIndicator = () => {
+      setTimeout(() => {
+        updateActiveIndicator('hero');
+      }, 0);
+    };
+    initializeActiveIndicator();
+  }, []); 
+
   const updateActiveIndicator = (sectionId) => {
     const button = buttonsRef.current[sectionId];
     if (button && activeIndicatorRef.current) {
