@@ -1,9 +1,10 @@
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
-    background-color: transparent;
+    left: 0;
+    width: 100%;
     padding: 1rem;
-    z-index: 999;
+    z-index: 1000;
 }
 
 .navbar-links {

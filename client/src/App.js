@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ExperienceSection from './components/ExperienceSection';
@@ -9,8 +8,9 @@ import './styles.css';  // Where we have html { scroll-behavior: smooth; } etc.
 function App() {
   return (
     <div>
-      <Navbar />
-      <HeroSection />
+      <HeroSection>
+        <Navbar />
+      </HeroSection>
       <AboutSection />
       <ExperienceSection />
       <SocialSection />

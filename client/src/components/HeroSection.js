@@ -2,135 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Typewriter from 'typewriter-effect';
 import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
+import Navbar from './Navbar';
+import SendEmailForm from './SendEmailForm';
 
-function SendEmailForm() {
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const trimmedName = name.trim();
-    const trimmedMessage = message.trim();
-    if (!trimmedName || !trimmedMessage) {
-      console.error('Name or message cannot be empty after trimming.');
-      setSent(false);
-      return;
-    }
-    try {
-      const response = await fetch('https://mern-fullstack-website.onrender.com/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: trimmedName, message: trimmedMessage }),
-      });
-      if (response.ok) {
-        setSent(true);
-        setName('');
-        setMessage('');
-      } else {
-        setSent(false);
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      setSent(false);
-    }
-  };
-
-  return (
-    <div style={formStyles.container}>
-      <h3 style={formStyles.heading}>Send me a Message</h3>
-      <form onSubmit={handleSubmit} style={formStyles.form}>
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => {
-            console.log('Name input value:', e.target.value);
-            setName(e.target.value);
-          }}
-          style={formStyles.input}
-          pattern=".*"
-          title="Any text is allowed, including spaces"
-          required
-        />
-        <textarea
-          placeholder="Your message"
-          value={message}
-          onChange={(e) => {
-            console.log('Message input value:', e.target.value);
-            setMessage(e.target.value);
-          }}
-          style={formStyles.textarea}
-          pattern=".*"
-          title="Any text is allowed, including spaces"
-          required
-        />
-        <button type="submit" style={formStyles.button}>
-          {sent ? '✔' : 'Send'}
-        </button>
-      </form>
-    </div>
-  );
-}
-
-const formStyles = {
-  container: {
-    backgroundColor: '#eb4034',
-    fontFamily: '"Montserrat", sans-serif',
-    fontWeight: 600,
-    padding: '0.5rem',
-    borderRadius: '10px',
-    color: '#fff',
-    height: '100%', // This container will fill its parent box (e.g. 460px)
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  heading: {
-    textAlign: 'center',
-    margin: '0.5rem 0',
-    fontSize: '1.2rem',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-  },
-  input: {
-    backgroundColor: '#f2eeed',
-    border: 'none',
-    outline: 'none',
-    padding: '0.4rem',
-    marginBottom: '0.5rem',
-    borderRadius: '4px',
-    fontSize: '0.9rem',
-    color: '#000',
-  },
-  textarea: {
-    backgroundColor: '#f2eeed',
-    border: 'none',
-    outline: 'none',
-    padding: '0.4rem',
-    fontSize: '0.9rem',
-    color: '#000',
-    borderRadius: '4px',
-    flex: 1,          // Fills available vertical space
-    resize: 'none',
-    marginBottom: '0.5rem',
-  },
-  button: {
-    alignSelf: 'flex-end', // Places the button at the bottom right of the form
-    backgroundColor: '#78e3c3',
-    color: '#000',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '0.4rem 0.8rem',
-    cursor: 'pointer',
-    fontSize: '0.9rem',
-  },
-};
-
-// HERO SECTION COMPONENT
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
@@ -169,55 +43,54 @@ function HeroSection() {
   return (
     <div style={styles.pageContainer}>
       {/* Vanta.js Background */}
-      <div ref={vantaRef} style={styles.vantaContainer}></div>
-
-      {/* Content Wrapper */}
-      <div style={styles.contentWrapper}>
-        {/* Hero Section */}
-        <div style={styles.heroSection}>
-          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
-          <div style={styles.typewriterText}>
-            <Typewriter
-              options={{
-                strings: [
-                  'Hello! My name is Alex.',
-                  'I am a software engineer...',
-                  'Building full-stack apps with MERN!',
-                ],
-                autoStart: true,
-                loop: true,
-                pauseFor: 2000,
-              }}
-            />
-          </div>
-        </div>
-
-        {/* Three Boxes Section */}
-        <div style={styles.boxesContainer}>
-          {/* Box 1: LLM */}
-          <div style={styles.box}>
-            <h3>Ask a question about me</h3>
-            <input
-              type="text"
-              placeholder="What's on your mind?"
-              value={question}
-              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-              style={styles.input}
-            />
-            <button onClick={handleAskQuestion} style={styles.askButton}>
-              Ask
-            </button>
-            {answer && <p style={styles.answerBox}>{answer}</p>}
+      <div ref={vantaRef} style={styles.vantaContainer}>
+        {/* Navbar */}
+        <Navbar />
+        
+        {/* Content Wrapper */}
+        <div style={styles.contentWrapper}>
+          {/* Hero Section */}
+          <div style={styles.heroSection}>
+            <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
+            <div style={styles.typewriterText}>
+              <Typewriter
+                options={{
+                  strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
+                  autoStart: true,
+                  loop: true,
+                  deleteSpeed: 50,
+                }}
+              />
+            </div>
           </div>
 
-          {/* Box 2: Send Email */}
-          <div style={styles.box}>
-            <SendEmailForm />
-          </div>
+          {/* Three Boxes Section */}
+          <div style={styles.boxesContainer}>
+            {/* Box 1: LLM */}
+            <div style={styles.box}>
+              <h3>Ask a question about me</h3>
+              <input
+                type="text"
+                placeholder="What's on your mind?"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+                style={styles.input}
+              />
+              <button onClick={handleAskQuestion} style={styles.askButton}>
+                Ask
+              </button>
+              {answer && <p style={styles.answerBox}>{answer}</p>}
+            </div>
 
-          {/* Box 3: Game Box */}
-          <div style={styles.box}>
-            <AsteroidsGame />
+            {/* Box 2: Send Email */}
+            <div style={styles.box}>
+              <SendEmailForm />
+            </div>
+
+            {/* Box 3: Game Box */}
+            <div style={styles.box}>
+              <AsteroidsGame />
+            </div>
           </div>
         </div>
       </div>
@@ -227,7 +100,6 @@ function HeroSection() {
 
 const styles = {
   pageContainer: {
-    minHeight: '100vh',
     margin: 0,
     padding: 0,
     position: 'relative',
@@ -237,14 +109,18 @@ const styles = {
     top: 0,
     left: 0,
     width: '100%',
-    height: '100%',
+    height: '100vh',
     zIndex: 0,
   },
   contentWrapper: {
     position: 'relative',
     zIndex: 1,
+    paddingTop: '80px', // Add space below navbar
+    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   heroSection: {
     display: 'flex',
