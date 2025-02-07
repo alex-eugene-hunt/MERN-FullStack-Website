@@ -44,53 +44,54 @@ function HeroSection() {
     <div style={styles.pageContainer}>
       {/* Vanta.js Background */}
       <div ref={vantaRef} style={styles.vantaContainer}>
-        {/* Navbar */}
-        <Navbar />
+      </div>
         
-        {/* Content Wrapper */}
-        <div style={styles.contentWrapper}>
-          {/* Hero Section */}
-          <div style={styles.heroSection}>
-            <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
-            <div style={styles.typewriterText}>
-              <Typewriter
-                options={{
-                  strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
-                  autoStart: true,
-                  loop: true,
-                  deleteSpeed: 50,
-                }}
-              />
-            </div>
+      {/* Navbar */}
+      <Navbar />
+        
+      {/* Content Wrapper */}
+      <div style={styles.contentWrapper}>
+        {/* Hero Section */}
+        <div style={styles.heroSection}>
+          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
+          <div style={styles.typewriterText}>
+            <Typewriter
+              options={{
+                strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
+                autoStart: true,
+                loop: true,
+                deleteSpeed: 50,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Three Boxes Section */}
+        <div style={styles.boxesContainer}>
+          {/* Box 1: LLM */}
+          <div style={styles.box}>
+            <h3>Ask a question about me</h3>
+            <input
+              type="text"
+              placeholder="What's on your mind?"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+              style={styles.input}
+            />
+            <button onClick={handleAskQuestion} style={styles.askButton}>
+              Ask
+            </button>
+            {answer && <p style={styles.answerBox}>{answer}</p>}
           </div>
 
-          {/* Three Boxes Section */}
-          <div style={styles.boxesContainer}>
-            {/* Box 1: LLM */}
-            <div style={styles.box}>
-              <h3>Ask a question about me</h3>
-              <input
-                type="text"
-                placeholder="What's on your mind?"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-                style={styles.input}
-              />
-              <button onClick={handleAskQuestion} style={styles.askButton}>
-                Ask
-              </button>
-              {answer && <p style={styles.answerBox}>{answer}</p>}
-            </div>
+          {/* Box 2: Send Email */}
+          <div style={styles.box}>
+            <SendEmailForm />
+          </div>
 
-            {/* Box 2: Send Email */}
-            <div style={styles.box}>
-              <SendEmailForm />
-            </div>
-
-            {/* Box 3: Game Box */}
-            <div style={styles.box}>
-              <AsteroidsGame />
-            </div>
+          {/* Box 3: Game Box */}
+          <div style={styles.box}>
+            <AsteroidsGame />
           </div>
         </div>
       </div>
@@ -103,31 +104,33 @@ const styles = {
     margin: 0,
     padding: 0,
     position: 'relative',
+    height: '100vh', // Limit to viewport height
   },
   vantaContainer: {
-    position: 'absolute',
+    position: 'fixed', // Change to fixed for background effect
     top: 0,
     left: 0,
     width: '100%',
     height: '100vh',
-    zIndex: 0,
+    zIndex: -1, // Put it behind all content
   },
   contentWrapper: {
     position: 'relative',
     zIndex: 1,
-    paddingTop: '80px', // Add space below navbar
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center', // Center the hero content
+    paddingTop: '80px', // Space for navbar
   },
   heroSection: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '4rem',
-    paddingBottom: '2rem',
+    justifyContent: 'center',
+    textAlign: 'center',
+    padding: '2rem',
   },
   heroImage: {
     width: '200px',
