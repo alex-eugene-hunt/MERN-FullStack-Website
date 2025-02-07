@@ -1,3 +1,11 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -10,48 +18,80 @@
 }
 
 .navbar-links {
+    position: relative;
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     margin: 0;
-    padding: 0.5rem;
+    padding: 0.8rem;
     justify-content: center;
     align-items: center;
     background-color: #2b2b2f;
-    border-radius: 30px;
+    border-radius: 15px;
     border: 2px solid #5c85dd;
+    min-width: 600px;
+}
+
+.active-indicator {
+    position: absolute;
+    z-index: 1;
+    background: #5c85dd;
+    border-radius: 12px;
+    transition: all 300ms ease;
 }
 
 .nav-button {
+    position: relative;
     background: transparent;
     border: 2px solid #5c85dd;
     color: #fff;
     padding: 0.6rem 1.2rem;
-    border-radius: 25px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: 500;
-    transition: all 0.3s ease;
     font-size: 0.9rem;
     white-space: nowrap;
+    overflow: hidden;
+    z-index: 2;
 }
 
-.nav-button:hover {
-    background-color: #5c85dd;
-    color: #fff;
-    transform: translateY(-2px);
+.nav-button span {
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease;
 }
 
-.nav-button.active {
-    background-color: #5c85dd;
-    color: #fff;
-    box-shadow: 0 2px 10px rgba(92, 133, 221, 0.3);
+.nav-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 0;
+    height: 100%;
+    background: #5c85dd;
+    transform: skew(30deg);
+    transition: width 300ms ease;
+    z-index: 1;
+}
+
+.nav-button:hover::before {
+    width: 120%;
+}
+
+.nav-button:hover span {
+    color: #2b2b2f;
+}
+
+.nav-button.active span {
+    color: #2b2b2f;
 }
 
 @media (max-width: 768px) {
     .navbar-links {
+        min-width: unset;
+        width: 90%;
         flex-wrap: wrap;
         gap: 0.4rem;
         padding: 0.4rem;
-        max-width: 90%;
     }
     
     .nav-button {
