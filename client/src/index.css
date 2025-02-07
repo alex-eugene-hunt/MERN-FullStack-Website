@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: transparent;
 }
 
 code {
@@ -14,28 +13,21 @@ code {
 }
 
 /* Custom Scrollbar */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-}
-
-/* Chrome/Safari/Edge scrollbar */
-::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 20px;
-    background-color: inherit;
 }
 
-::-webkit-scrollbar-track {
-    background-color: inherit;
+*::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
 
-::-webkit-scrollbar-thumb:hover {
+*::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
