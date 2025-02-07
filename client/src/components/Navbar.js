@@ -49,7 +49,6 @@ function Navbar() {
     if (!button || !activeIndicatorRef.current || !navLinksRef.current) return;
 
     const buttonRect = button.getBoundingClientRect();
-    const navRect = navLinksRef.current.getBoundingClientRect();
 
     const left = button.offsetLeft;
     const top = button.offsetTop;
