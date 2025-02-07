@@ -5,6 +5,16 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const activeIndicatorRef = useRef(null);
   const buttonsRef = useRef({});
+  const navLinksRef = useRef(null);
+
+  useEffect(() => {
+    const initializeActiveIndicator = () => {
+      setTimeout(() => {
+        updateActiveIndicator('hero');
+      }, 100);
+    };
+    initializeActiveIndicator();
+  }, []); 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,23 +45,21 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const initializeActiveIndicator = () => {
-      setTimeout(() => {
-        updateActiveIndicator('hero');
-      }, 0);
-    };
-    initializeActiveIndicator();
-  }, []); 
-
   const updateActiveIndicator = (sectionId) => {
     const button = buttonsRef.current[sectionId];
-    if (button && activeIndicatorRef.current) {
-      const { offsetLeft, offsetTop, clientWidth, clientHeight } = button;
-      activeIndicatorRef.current.style.left = `${offsetLeft}px`;
-      activeIndicatorRef.current.style.top = `${offsetTop}px`;
-      activeIndicatorRef.current.style.width = `${clientWidth}px`;
-      activeIndicatorRef.current.style.height = `${clientHeight}px`;
+    const navLinks = navLinksRef.current;
+    
+    if (button && activeIndicatorRef.current && navLinks) {
+      const buttonRect = button.getBoundingClientRect();
+      const navLinksRect = navLinks.getBoundingClientRect();
+      
+      // Calculate position relative to the navbar-links container
+      const left = buttonRect.left - navLinksRect.left;
+      const top = buttonRect.top - navLinksRect.top;
+      
+      activeIndicatorRef.current.style.transform = `translate(${left}px, ${top}px)`;
+      activeIndicatorRef.current.style.width = `${buttonRect.width}px`;
+      activeIndicatorRef.current.style.height = `${buttonRect.height}px`;
     }
   };
 
@@ -66,8 +74,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="active-indicator" ref={activeIndicatorRef}></div>
-      <div className="navbar-links">
+      <div className="navbar-links" ref={navLinksRef}>
+        <div className="active-indicator" ref={activeIndicatorRef}></div>
         {[
           { id: 'hero', text: 'Home' },
           { id: 'about', text: 'About Me' },
