@@ -7,15 +7,15 @@ function Navbar() {
   const buttonsRef = useRef({});
   const navLinksRef = useRef(null);
 
+  // Initialize the active indicator
   useEffect(() => {
-    const initializeActiveIndicator = () => {
-      setTimeout(() => {
-        updateActiveIndicator('hero');
-      }, 100);
-    };
-    initializeActiveIndicator();
+    const timer = setTimeout(() => {
+      updateActiveIndicator('hero');
+    }, 0);
+    return () => clearTimeout(timer);
   }, []); 
 
+  // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'about', 'experience', 'social'];
@@ -41,26 +41,22 @@ function Navbar() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const updateActiveIndicator = (sectionId) => {
     const button = buttonsRef.current[sectionId];
-    const navLinks = navLinksRef.current;
-    
-    if (button && activeIndicatorRef.current && navLinks) {
-      const buttonRect = button.getBoundingClientRect();
-      const navLinksRect = navLinks.getBoundingClientRect();
-      
-      // Calculate position relative to the navbar-links container
-      const left = buttonRect.left - navLinksRect.left;
-      const top = buttonRect.top - navLinksRect.top;
-      
-      activeIndicatorRef.current.style.transform = `translate(${left}px, ${top}px)`;
-      activeIndicatorRef.current.style.width = `${buttonRect.width}px`;
-      activeIndicatorRef.current.style.height = `${buttonRect.height}px`;
-    }
+    if (!button || !activeIndicatorRef.current || !navLinksRef.current) return;
+
+    const buttonRect = button.getBoundingClientRect();
+    const navRect = navLinksRef.current.getBoundingClientRect();
+
+    const left = button.offsetLeft;
+    const top = button.offsetTop;
+
+    activeIndicatorRef.current.style.transform = `translate(${left}px, ${top}px)`;
+    activeIndicatorRef.current.style.width = `${buttonRect.width}px`;
+    activeIndicatorRef.current.style.height = `${buttonRect.height}px`;
   };
 
   const scrollToSection = (sectionId) => {

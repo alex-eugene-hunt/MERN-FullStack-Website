@@ -33,15 +33,13 @@
 
 .active-indicator {
     position: absolute;
-    left: 0;
-    top: 0;
     z-index: 1;
     background: #5c85dd;
     border-radius: 25px;
     transition: all 300ms ease;
     opacity: 0.3;
     pointer-events: none;
-    margin: 0.8rem;
+    will-change: transform, width, height;
 }
 
 .nav-button {
