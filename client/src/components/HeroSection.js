@@ -41,7 +41,7 @@ function HeroSection() {
   }
 
   return (
-    <div style={styles.pageContainer}>
+    <div id="hero" style={styles.pageContainer}>
       {/* Vanta.js Background */}
       <div ref={vantaRef} style={styles.vantaContainer}>
       </div>

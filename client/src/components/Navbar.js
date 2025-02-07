@@ -7,13 +7,19 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'about', 'experience', 'social'];
-      const scrollPosition = window.scrollY + 100; // offset for better detection
+      const scrollPosition = window.scrollY;
+      
+      // Special handling for hero section
+      if (scrollPosition < window.innerHeight / 2) {
+        setActiveSection('hero');
+        return;
+      }
 
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (scrollPosition >= offsetTop - 100 && scrollPosition < offsetTop + offsetHeight - 100) {
             setActiveSection(section);
             break;
           }
@@ -22,6 +28,8 @@ function Navbar() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
