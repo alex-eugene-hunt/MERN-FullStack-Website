@@ -8,9 +8,7 @@ import './styles.css';  // Where we have html { scroll-behavior: smooth; } etc.
 function App() {
   return (
     <div>
-      <HeroSection>
-        <Navbar />
-      </HeroSection>
+      <HeroSection />
       <AboutSection />
       <ExperienceSection />
       <SocialSection />
