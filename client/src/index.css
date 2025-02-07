@@ -15,7 +15,7 @@ code {
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 20px;
-    background-color: inherit;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
