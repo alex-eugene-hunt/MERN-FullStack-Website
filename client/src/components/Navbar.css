@@ -25,7 +25,7 @@
 .nav-button {
     font-family: 'Wallpoet', sans-serif;
     text-transform: uppercase;
-    background-color: #434a54;
+    background: linear-gradient(to bottom, #434a54, #dcccbd, #434a54);
     border: 2px solid #5c85dd;
     color: #dcccbd;
     padding: 0.6rem 1.2rem;
@@ -48,7 +48,7 @@
 }
 
 .nav-button.active {
-    background-color: #b14b32;
+    background: linear-gradient(to bottom, #dcccbd, #434a54, #dcccbd);
     color: #dcccbd;
 }
 
