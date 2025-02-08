@@ -23,6 +23,8 @@
 }
 
 .nav-button {
+    font-family: 'Monoton', cursive;
+    text-transform: uppercase;
     background-color: #434a54;
     border: 2px solid #5c85dd;
     color: #dcccbd;
