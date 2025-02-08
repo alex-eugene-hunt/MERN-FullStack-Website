@@ -32,7 +32,7 @@
     border-radius: 0;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 2s ease-in-out, color 0.5s ease-in-out;
+    transition: background-color 1s ease-in-out, color 0.5s ease-in-out;
     font-size: 0.9rem;
     white-space: nowrap;
     outline: none;
@@ -49,6 +49,10 @@
 .nav-button.active {
     background: linear-gradient(to bottom, #b14b32, #893a27, #b14b32);
     color: #dcccbd;
+}
+
+.nav-button.active:hover {
+    transition: background-color 0.5s ease-in-out;
 }
 
 .nav-button:first-child {
