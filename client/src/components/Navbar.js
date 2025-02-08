@@ -6,7 +6,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'social'];
+      const sections = ['hero', 'about', 'experience', 'social', 'resume', 'education', 'projects'];
       const scrollPosition = window.scrollY;
       
       // Special handling for hero section
@@ -60,6 +60,24 @@ function Navbar() {
           onClick={() => scrollToSection('experience')}
         >
           Experience & Education
+        </button>
+        <button 
+          className={`nav-button ${activeSection === 'resume' ? 'active' : ''}`}
+          onClick={() => scrollToSection('resume')}
+        >
+          Resume
+        </button>
+        <button 
+          className={`nav-button ${activeSection === 'education' ? 'active' : ''}`}
+          onClick={() => scrollToSection('education')}
+        >
+          Education
+        </button>
+        <button 
+          className={`nav-button ${activeSection === 'projects' ? 'active' : ''}`}
+          onClick={() => scrollToSection('projects')}
+        >
+          Projects
         </button>
         <button 
           className={`nav-button ${activeSection === 'social' ? 'active' : ''}`}
