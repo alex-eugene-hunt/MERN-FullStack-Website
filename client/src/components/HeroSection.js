@@ -46,7 +46,7 @@ function HeroSection() {
       <Navbar />
         
       {/* Content Wrapper */}
-      <div style={styles.contentWrapper}>
+      <div style={{ ...styles.contentWrapper, marginTop: '5rem' }}>
         {/* Hero Section */}
         <div style={styles.heroSection}>
           <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
