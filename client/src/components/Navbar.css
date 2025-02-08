@@ -23,9 +23,9 @@
 }
 
 .nav-button {
-    background: transparent;
+    background-color: #434a54;
     border: 2px solid #5c85dd;
-    color: #fff;
+    color: #dcccbd;
     padding: 0.6rem 1.2rem;
     border-radius: 0;
     cursor: pointer;
@@ -44,8 +44,8 @@
 }
 
 .nav-button.active {
-    background-color: #5c85dd;
-    color: #fff;
+    background-color: #b14b32;
+    color: #dcccbd;
     box-shadow: 0 2px 10px rgba(92, 133, 221, 0.3);
 }
 
