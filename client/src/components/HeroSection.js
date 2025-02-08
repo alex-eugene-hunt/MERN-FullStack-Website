@@ -14,20 +14,16 @@ function HeroSection() {
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
       setVantaEffect(
-        window.VANTA.NET({
-          el: vantaRef.current,
+        window.VANTA.WAVES({
+          el: "#your-element-selector",
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0x5c85dd,
-          backgroundColor: 0x2b2b2f,
-          points: 20.0,
-          maxDistance: 24.0,
-          spacing: 17.0,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x434a54
         })
       );
     }
