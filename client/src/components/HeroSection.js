@@ -15,7 +15,7 @@ function HeroSection() {
     if (!vantaEffect && window.VANTA) {
       setVantaEffect(
         window.VANTA.WAVES({
-          el: "#your-element-selector",
+          el: vantaRef.current,
           mouseControls: true,
           touchControls: true,
           gyroControls: false,
