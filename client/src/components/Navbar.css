@@ -32,7 +32,7 @@
     border-radius: 0;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: background 0.5s ease-in-out;
     font-size: 0.9rem;
     white-space: nowrap;
     outline: none;
@@ -42,7 +42,7 @@
 }
 
 .nav-button:hover {
-    background-color: #5c85dd;
+    background: radial-gradient(circle, #893a27, #b14b32);
     color: #fff;
     transform: translateY(-2px);
 }
