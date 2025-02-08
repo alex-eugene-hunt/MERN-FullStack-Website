@@ -32,7 +32,6 @@
     border-radius: 0;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 2s ease-in-out, color 1s ease-in-out;
     font-size: 0.9rem;
     white-space: nowrap;
     outline: none;
