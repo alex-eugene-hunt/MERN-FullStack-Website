@@ -38,7 +38,7 @@
     outline: none;
     border: none;
     border-right: 1px solid #021825;
-    box-shadow: 0 2px 10px rgba(67, 74, 84, 0.3);
+    box-shadow: 0 2px 10px rgba(212, 153, 111, 0.3);
 }
 
 .nav-button:hover {
@@ -50,7 +50,7 @@
 .nav-button.active {
     background-color: #b14b32;
     color: #dcccbd;
-    box-shadow: 0 2px 10px rgba(177, 75, 50, 0.3);
+    box-shadow: 0 2px 10px rgba(220, 204, 189, 0.3);
 }
 
 .nav-button:first-child {
