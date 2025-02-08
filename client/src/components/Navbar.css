@@ -50,10 +50,6 @@
     color: #dcccbd;
 }
 
-.nav-button.active:hover {
-    transition: background-color 0.5s ease-in-out;
-}
-
 .nav-button:first-child {
     border-radius: 30px 0 0 30px;
     box-shadow: -1px 0 3px rgba(0, 0, 0, 0.3), 0 -1px 3px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.3);
