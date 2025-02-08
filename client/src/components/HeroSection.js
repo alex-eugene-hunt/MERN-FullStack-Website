@@ -47,24 +47,23 @@ function HeroSection() {
         
       {/* Content Wrapper */}
       <div style={styles.contentWrapper}>
-        {/* Hero Section */}
-        <div style={styles.heroSection}>
-          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
-          <div style={styles.typewriterText}>
-            <Typewriter
-              options={{
-                strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
-                autoStart: true,
-                loop: true,
-                deleteSpeed: 50,
-              }}
-            />
+        <div style={styles.mainContent}>
+          {/* Hero Section with Photo and Typewriter */}
+          <div style={styles.heroSection}>
+            <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
+            <div style={styles.typewriterText}>
+              <Typewriter
+                options={{
+                  strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
+                  autoStart: true,
+                  loop: true,
+                  deleteSpeed: 50,
+                }}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Three Boxes Section */}
-        <div style={styles.boxesContainer}>
-          {/* Box 1: LLM */}
+          {/* Ask About Me Box */}
           <div style={styles.box}>
             <h3>Ask a question about me</h3>
             <input
@@ -79,7 +78,10 @@ function HeroSection() {
             </button>
             {answer && <p style={styles.answerBox}>{answer}</p>}
           </div>
+        </div>
 
+        {/* Other Boxes Section */}
+        <div style={styles.boxesContainer}>
           {/* Box 2: Send Email */}
           <div style={styles.box}>
             <SendEmailForm />
@@ -99,96 +101,89 @@ const styles = {
   pageContainer: {
     margin: 0,
     padding: 0,
+    minHeight: '100vh',
     position: 'relative',
-    height: '100vh', // Limit to viewport height
+    overflow: 'hidden',
   },
   vantaContainer: {
-    position: 'fixed', // Change to fixed for background effect
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100vh',
-    zIndex: -1, // Put it behind all content
+    zIndex: 0,
   },
   contentWrapper: {
     position: 'relative',
     zIndex: 1,
-    minHeight: '100vh',
+    padding: '20px',
     display: 'flex',
     flexDirection: 'column',
+    gap: '2rem',
+  },
+  mainContent: {
+    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center', // Center the hero content
-    paddingTop: '80px', // Space for navbar
+    justifyContent: 'center',
+    gap: '2rem',
+    flexWrap: 'wrap',
   },
   heroSection: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    textAlign: 'left',
-    padding: '2rem',
-    position: 'relative',
+    gap: '1rem',
   },
   heroImage: {
     width: '200px',
     height: '200px',
-    objectFit: 'cover',
     borderRadius: '50%',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    marginRight: '2rem',
-    position: 'relative',
-    left: '33%',
+    objectFit: 'cover',
+    border: '3px solid #fff',
+    boxShadow: '0 0 10px rgba(0,0,0,0.2)',
   },
   typewriterText: {
-    fontFamily: 'Consolas, monospace',
-    fontWeight: 'bold',
+    color: '#fff',
     fontSize: '1.5rem',
     textAlign: 'center',
-    color: '#fff',
-    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+    minHeight: '3rem',
   },
   boxesContainer: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'flex-start',
     gap: '2rem',
-    padding: '2rem',
-    width: '75%',
-    margin: '0 auto',
-    boxSizing: 'border-box',
+    flexWrap: 'wrap',
   },
   box: {
-    flex: 1,
-    minWidth: '200px',
-    height: '460px',
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: '2rem',
     borderRadius: '10px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    minWidth: '300px',
+    maxWidth: '400px',
   },
   input: {
-    width: '90%',
+    width: '100%',
     padding: '0.5rem',
-    marginBottom: '0.5rem',
-    borderRadius: '4px',
+    marginBottom: '1rem',
+    borderRadius: '5px',
     border: '1px solid #ccc',
   },
   askButton: {
-    padding: '0.5rem 1rem',
-    backgroundColor: '#007BFF',
-    color: '#fff',
-    borderRadius: '4px',
+    backgroundColor: '#007bff',
+    color: 'white',
     border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '5px',
     cursor: 'pointer',
-    transition: 'background-color 0.3s',
+    width: '100%',
   },
   answerBox: {
-    marginTop: '0.5rem',
-    backgroundColor: '#f9f9f9',
-    padding: '0.5rem',
-    borderRadius: '4px',
+    marginTop: '1rem',
+    padding: '1rem',
+    backgroundColor: '#f8f9fa',
+    borderRadius: '5px',
+    border: '1px solid #dee2e6',
   },
 };
 
