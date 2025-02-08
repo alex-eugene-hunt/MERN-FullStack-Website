@@ -23,7 +23,7 @@ function HeroSection() {
           minWidth: 200.00,
           scale: 1.00,
           scaleMobile: 1.00,
-          color: 0x434a54
+          color: 0x021825
         })
       );
     }
