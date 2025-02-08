@@ -123,13 +123,16 @@ const styles = {
   heroSection: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     textAlign: 'left',
     padding: '2rem',
     transform: 'translateY(-50px)',
+    position: 'relative',
   },
   heroImage: {
+    position: 'absolute',
+    left: '0',
     width: '150px', // Reduced size by 25%
     height: '150px',
     objectFit: 'cover',
