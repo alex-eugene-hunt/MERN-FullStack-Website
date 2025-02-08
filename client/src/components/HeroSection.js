@@ -122,19 +122,21 @@ const styles = {
   },
   heroSection: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
     padding: '2rem',
+    transform: 'translateY(-50px)',
   },
   heroImage: {
-    width: '200px',
-    height: '200px',
+    width: '150px', // Reduced size by 25%
+    height: '150px',
     objectFit: 'cover',
     borderRadius: '50%',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    marginBottom: '1rem',
+    marginRight: '1rem',
+    marginBottom: '0',
   },
   typewriterText: {
     fontFamily: 'Consolas, monospace',
