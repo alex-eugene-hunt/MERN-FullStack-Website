@@ -101,7 +101,7 @@ const styles = {
     padding: 0,
   },
   vantaContainer: {
-    position: 'fixed', // Change to fixed for background effect
+    position: 'absolute', // Change to fixed for background effect
     top: 0,
     left: 0,
     width: '100%',
