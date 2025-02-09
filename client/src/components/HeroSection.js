@@ -112,7 +112,9 @@ function HeroSection() {
                   paddingRight: '60px',
                   fontFamily: 'Montserrat, sans-serif',
                   fontWeight: '600',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                  border: 'none'
                 }}
               />
               <button onClick={handleAskQuestion} style={{
@@ -137,7 +139,7 @@ function HeroSection() {
               backgroundColor: '#dcccbd',
               padding: '0.5rem',
               borderRadius: '10px',
-              minHeight: '50px',
+              minHeight: '240px',
               fontFamily: 'Montserrat, sans-serif',
               fontWeight: '600',
               color: '#434a54',
