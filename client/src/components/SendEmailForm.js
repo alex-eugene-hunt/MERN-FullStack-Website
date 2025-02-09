@@ -72,7 +72,7 @@ function SendEmailForm() {
 
 const styles = {
   container: {
-    backgroundColor: '#eb4034',
+    backgroundColor: '#b14b32',
     fontFamily: '"Montserrat", sans-serif',
     fontWeight: 600,
     padding: '0.5rem',

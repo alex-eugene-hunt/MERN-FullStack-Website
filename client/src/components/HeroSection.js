@@ -68,7 +68,7 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
-          <div style={{...styles.box, backgroundColor: '#434a54'}}>
+          <div style={{...styles.box, backgroundColor: '#434a54', fontFamily: '"Montserrat", sans-serif', fontWeight: 600}}>
             <h3 style={{color: '#dcccbd', textAlign: 'center'}}>Ask AlexAI anything about me</h3>
             <input
               type="text"
@@ -81,13 +81,29 @@ function HeroSection() {
                 backgroundColor: '#dcccbd',
                 color: '#021825',
                 margin: '0 auto',
-                display: 'block'
+                display: 'block',
+                fontFamily: 'inherit'
               }}
             />
-            <button onClick={handleAskQuestion} style={styles.askButton}>
+            <button onClick={handleAskQuestion} style={{...styles.askButton, fontFamily: 'inherit'}}>
               Ask
             </button>
-            {answer && <p style={styles.answerBox}>{answer}</p>}
+            {answer && (
+              <div
+                style={{
+                  width: '80%',
+                  backgroundColor: '#dcccbd',
+                  color: '#021825',
+                  margin: '1rem auto',
+                  padding: '0.5rem',
+                  borderRadius: '4px',
+                  minHeight: '100px',
+                  fontFamily: 'inherit'
+                }}
+              >
+                {answer}
+              </div>
+            )}
           </div>
 
           {/* Box 2: Send Email */}
