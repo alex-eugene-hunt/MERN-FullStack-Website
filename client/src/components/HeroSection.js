@@ -126,7 +126,7 @@ const styles = {
     width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 20rem 1rem 0rem', // Move image farther to the right
+    margin: '0 0rem 1rem 20rem', // Move image farther to the right
   },
   typewriterText: {
     marginTop: '2rem', // Lower the text more
