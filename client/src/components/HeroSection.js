@@ -54,7 +54,9 @@ function HeroSection() {
           <div style={styles.typewriterText}>
             <Typewriter
               options={{
-                strings: ['Alex Hunt; UC Berkeley Grad, Software Engineer, Data Scientist.', 'This website was built using the MERN stack!'],
+                strings: ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
+                     'This website was built using the MERN stack!',
+                  ],
                 autoStart: true,
                 loop: true,
                 deleteSpeed: 50,
