@@ -13,7 +13,8 @@ function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('AI Response Appears Here');
+  const [answer, setAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
+  const [displayedAnswer, setDisplayedAnswer] = useState('');
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -37,7 +38,15 @@ function HeroSection() {
   }, [vantaEffect]);
 
   async function handleAskQuestion() {
-    setAnswer('AI says: That is a great question about you, Alex!');
+    const response = 'AI says: That is a great question about you, Alex!';
+    setAnswer(response);
+    // Start typing effect
+    let currentIndex = 0;
+    const intervalId = setInterval(() => {
+      setDisplayedAnswer(response.substring(0, currentIndex));
+      currentIndex++;
+      if (currentIndex > response.length) clearInterval(intervalId);
+    }, 50);
   }
 
   return (
@@ -110,7 +119,7 @@ function HeroSection() {
                 position: 'absolute',
                 right: '5px',
                 backgroundColor: '#b14b32',
-                color: 'white',
+                color: '#dcccbd',
                 border: 'none',
                 borderRadius: '10px',
                 padding: '4px 12px',
@@ -123,14 +132,17 @@ function HeroSection() {
               </button>
             </div>
             <div style={{
-              width: '80%',
+              width: '100%',
               margin: '10px auto',
               backgroundColor: '#dcccbd',
               padding: '0.5rem',
               borderRadius: '10px',
-              minHeight: '50px'
+              minHeight: '50px',
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: '600',
+              color: '#434a54'
             }}>
-              {answer}
+              {displayedAnswer}
             </div>
           </div>
 
