@@ -13,7 +13,7 @@ function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState('AI Response Appears Here');
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -122,18 +122,16 @@ function HeroSection() {
                 ASK
               </button>
             </div>
-            {answer && (
-              <div style={{
-                width: '80%',
-                margin: '10px auto',
-                backgroundColor: '#dcccbd',
-                padding: '0.5rem',
-                borderRadius: '10px',
-                minHeight: '50px'
-              }}>
-                {answer}
-              </div>
-            )}
+            <div style={{
+              width: '80%',
+              margin: '10px auto',
+              backgroundColor: '#dcccbd',
+              padding: '0.5rem',
+              borderRadius: '10px',
+              minHeight: '50px'
+            }}>
+              {answer}
+            </div>
           </div>
 
           {/* Box 2: Send Email */}
