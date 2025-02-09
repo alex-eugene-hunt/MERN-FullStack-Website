@@ -70,7 +70,15 @@ function HeroSection() {
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}}>
-            <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton', fontSize: '35px'}}>Ask AlexAI</h3>
+            <h3 style={{
+              color: '#dcccbd', 
+              textAlign: 'center', 
+              fontFamily: 'Monoton', 
+              fontSize: '35px',
+              fontWeight: 'normal'
+            }}>
+              Ask AlexAI
+            </h3>
             <div style={{
               position: 'relative',
               width: '80%',
