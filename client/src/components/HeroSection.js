@@ -71,36 +71,42 @@ function HeroSection() {
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}}>
             <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton', fontSize: '35px'}}>Ask AlexAI</h3>
-            <input
-              type="text"
-              placeholder="What's on your mind?"
-              value={question}
-              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-              style={{
-                ...styles.input,
-                width: '80%',
-                backgroundColor: '#dcccbd',
-                color: '#434a54',
-                margin: '0 auto',
-                display: 'block',
-                borderRadius: '10px',
-              }}
-            />
-            <button onClick={handleAskQuestion} style={{
-                ...styles.askButton,
-                width: '80%',
-                margin: '10px auto',
-                display: 'block',
-                backgroundColor: '#b14b32',
-                borderRadius: '10px',
-                padding: '0.5rem',
-                height: '35px',
-                border: 'none',
-                color: '#fff',
-                fontSize: '16px'
+            <div style={{
+              position: 'relative',
+              width: '80%',
+              margin: '0 auto',
+            }}>
+              <input
+                type="text"
+                placeholder="What's on your mind?"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+                style={{
+                  ...styles.input,
+                  width: '100%',
+                  backgroundColor: '#dcccbd',
+                  color: '#434a54',
+                  borderRadius: '10px',
+                  paddingRight: '60px',
+                }}
+              />
+              <button onClick={handleAskQuestion} style={{
+                  position: 'absolute',
+                  right: '5px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  backgroundColor: '#b14b32',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '5px 10px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  height: '28px',
               }}>
-              Ask
-            </button>
+                Ask
+              </button>
+            </div>
             {answer && <p style={styles.answerBox}>{answer}</p>}
           </div>
 
