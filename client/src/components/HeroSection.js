@@ -5,6 +5,7 @@ import AsteroidsGame from '../games/AsteroidsGame';
 import Navbar from './Navbar';
 import SendEmailForm from './SendEmailForm';
 import '@fontsource/lobster'; // Add Lobster font import
+import '@fontsource/monoton'; // Add Monoton font import
 
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -69,7 +70,7 @@ function HeroSection() {
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}}>
-            <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton'}}>Ask AlexAI</h3>
+            <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton', fontSize: '25px'}}>Ask AlexAI</h3>
             <input
               type="text"
               placeholder="What's on your mind?"
