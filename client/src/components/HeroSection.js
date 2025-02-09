@@ -94,7 +94,8 @@ function HeroSection() {
               display: 'flex', 
               gap: '0.5rem', 
               alignItems: 'center',
-              position: 'relative'
+              position: 'relative',
+              boxSizing: 'border-box'
             }}>
               <input
                 type="text"
@@ -110,7 +111,8 @@ function HeroSection() {
                   borderRadius: '10px',
                   paddingRight: '60px',
                   fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: '600'
+                  fontWeight: '600',
+                  boxSizing: 'border-box'
                 }}
               />
               <button onClick={handleAskQuestion} style={{
@@ -135,10 +137,11 @@ function HeroSection() {
               backgroundColor: '#dcccbd',
               padding: '0.5rem',
               borderRadius: '10px',
-              minHeight: '240px',
+              minHeight: '50px',
               fontFamily: 'Montserrat, sans-serif',
               fontWeight: '600',
-              color: '#434a54'
+              color: '#434a54',
+              boxSizing: 'border-box'
             }}>
               {displayedAnswer}
             </div>
