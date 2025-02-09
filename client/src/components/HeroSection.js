@@ -13,8 +13,7 @@ function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
-  const [displayedAnswer, setDisplayedAnswer] = useState('');
+  const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -39,7 +38,6 @@ function HeroSection() {
 
   async function handleAskQuestion() {
     const response = 'AI says: That is a great question about you, Alex!';
-    setAnswer(response);
     // Start typing effect
     let currentIndex = 0;
     const intervalId = setInterval(() => {
@@ -100,7 +98,7 @@ function HeroSection() {
             }}>
               <input
                 type="text"
-                placeholder="What's on your mind?"
+                placeholder="What do you want to know?"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 style={{
@@ -137,7 +135,7 @@ function HeroSection() {
               backgroundColor: '#dcccbd',
               padding: '0.5rem',
               borderRadius: '10px',
-              minHeight: '50px',
+              minHeight: '240px',
               fontFamily: 'Montserrat, sans-serif',
               fontWeight: '600',
               color: '#434a54'
