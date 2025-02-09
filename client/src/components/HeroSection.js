@@ -99,8 +99,6 @@ const styles = {
   pageContainer: {
     margin: 0,
     padding: 0,
-    position: 'relative',
-    height: '100vh', // Limit to viewport height
   },
   vantaContainer: {
     position: 'fixed', // Change to fixed for background effect
@@ -122,22 +120,15 @@ const styles = {
   },
   heroSection: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    textAlign: 'left',
-    padding: '2rem',
-    position: 'relative',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    paddingTop: '1rem',
   },
   heroImage: {
-    position: 'fixed',
-    top: '350px',
-    left: '350px',
-    width: '200px',
-    height: '200px',
-    objectFit: 'cover',
+    width: '150px', // Adjust the size as needed
+    height: 'auto',
     borderRadius: '50%',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+    margin: '0 0 1rem 1rem',
   },
   typewriterText: {
     fontFamily: 'Consolas, monospace',
