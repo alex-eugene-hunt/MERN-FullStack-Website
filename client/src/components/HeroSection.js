@@ -150,8 +150,8 @@ const styles = {
   },
   box: {
     flex: 1,
-    minWidth: '200px',
-    height: '460px',
+    width: '450px',
+    height: '450px',
     backgroundColor: '#fff',
     borderRadius: '10px',
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
