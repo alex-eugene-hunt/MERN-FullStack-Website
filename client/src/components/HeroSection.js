@@ -98,7 +98,7 @@ function HeroSection() {
                   backgroundColor: '#dcccbd',
                   color: '#434a54',
                   margin: 0,
-                  borderRadius: '10px',
+                  borderRadius: '8px',
                   paddingRight: '60px'
                 }}
               />
@@ -109,8 +109,8 @@ function HeroSection() {
                 color: 'white',
                 border: 'none',
                 borderRadius: '8px',
-                padding: '6px 12px',
-                height: '35px',
+                padding: '4px 12px',
+                height: '25px',
                 cursor: 'pointer'
               }}>
                 Ask
