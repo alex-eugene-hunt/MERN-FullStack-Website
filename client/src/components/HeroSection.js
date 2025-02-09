@@ -132,6 +132,8 @@ const styles = {
     margin: '0 0rem 1rem 20rem', // Move image farther to the right
     border: '3px solid #d4996f', // Add colored outline
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
+    boxSizing: 'border-box', // Make border overlap with image
+    padding: '0', // Remove any internal padding
   },
   typewriterText: {
     marginTop: '5rem', // Lower the text more
