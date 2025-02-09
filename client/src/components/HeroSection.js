@@ -109,20 +109,18 @@ const styles = {
     zIndex: -1, // Put it behind all content
   },
   contentWrapper: {
-    position: 'relative',
-    zIndex: 1,
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start', // Align the hero content to the top
-    paddingTop: '80px', // Space for navbar
-  },
-  heroSection: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    paddingTop: '1rem',
+    justifyContent: 'flex-start',
+    marginTop: '1rem',
+  },
+  heroSection: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    padding: '1rem',
   },
   heroImage: {
     width: '150px', // Adjust the size as needed
