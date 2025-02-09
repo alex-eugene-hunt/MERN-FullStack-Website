@@ -129,7 +129,7 @@ const styles = {
     margin: '0 0rem 1rem 20rem', // Move image farther to the right
   },
   typewriterText: {
-    marginTop: '2rem', // Lower the text more
+    marginTop: '10rem', // Lower the text more
     marginLeft: '1rem', // Keep text to the right of the photo
     fontFamily: 'Consolas, monospace',
     fontWeight: 'bold',
