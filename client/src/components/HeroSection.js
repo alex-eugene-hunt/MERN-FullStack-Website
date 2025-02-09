@@ -121,8 +121,6 @@ const styles = {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: '1rem',
-    height: '100vh', // Full viewport height
-    width: '100vw', // Full viewport width
   },
   heroImage: {
     width: '150px', // Adjust the size as needed
