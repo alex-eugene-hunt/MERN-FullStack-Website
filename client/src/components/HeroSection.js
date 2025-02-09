@@ -117,7 +117,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center', // Center the hero content
+    justifyContent: 'flex-start', // Align the hero content to the top
     paddingTop: '80px', // Space for navbar
   },
   heroSection: {
