@@ -70,61 +70,46 @@ function HeroSection() {
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}}>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-              padding: '20px'
-            }}>
-              <h3 style={{
+            <h3 style={{
                 color: '#dcccbd', 
                 textAlign: 'center', 
                 fontFamily: 'Monoton', 
                 fontSize: '35px',
-                fontWeight: 'normal',
-                marginBottom: '20px'
+                fontWeight: 'normal'
               }}>
-                Ask AlexAI
-              </h3>
-              <div style={{
-                position: 'relative',
-                width: '80%',
+              Ask AlexAI
+            </h3>
+            <div style={{ width: '80%', margin: '0 auto', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+              <input
+                type="text"
+                placeholder="What's on your mind?"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+                style={{
+                  ...styles.input,
+                  width: '100%',
+                  backgroundColor: '#dcccbd',
+                  color: '#434a54',
+                  margin: 0,
+                  borderRadius: '10px',
+                  paddingRight: '60px'
+                }}
+              />
+              <button onClick={handleAskQuestion} style={{
+                position: 'absolute',
+                right: '10px',
+                backgroundColor: '#b14b32',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '6px 12px',
+                height: '35px',
+                cursor: 'pointer'
               }}>
-                <input
-                  type="text"
-                  placeholder="What's on your mind?"
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-                  style={{
-                    ...styles.input,
-                    width: '100%',
-                    backgroundColor: '#dcccbd',
-                    color: '#434a54',
-                    borderRadius: '10px',
-                    paddingRight: '60px',
-                  }}
-                />
-                <button onClick={handleAskQuestion} style={{
-                    position: 'absolute',
-                    right: '5px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    backgroundColor: '#b14b32',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '8px',
-                    padding: '5px 10px',
-                    cursor: 'pointer',
-                    fontSize: '14px',
-                    height: '28px',
-                }}>
-                  Ask
-                </button>
-              </div>
-              {answer && <p style={styles.answerBox}>{answer}</p>}
+                Ask
+              </button>
             </div>
+            {answer && <p style={styles.answerBox}>{answer}</p>}
           </div>
 
           {/* Box 2: Send Email */}
