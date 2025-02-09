@@ -75,7 +75,14 @@ function HeroSection() {
               placeholder="What's on your mind?"
               value={question}
               onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-              style={styles.input}
+              style={{
+                ...styles.input,
+                width: '80%',
+                backgroundColor: '#dcccbd',
+                color: '#021825',
+                margin: '0 auto',
+                display: 'block'
+              }}
             />
             <button onClick={handleAskQuestion} style={styles.askButton}>
               Ask
@@ -84,12 +91,12 @@ function HeroSection() {
           </div>
 
           {/* Box 2: Send Email */}
-          <div style={styles.box}>
+          <div style={{...styles.box, backgroundColor: '#b14b32'}}>
             <SendEmailForm />
           </div>
 
           {/* Box 3: Game Box */}
-          <div style={styles.box}>
+          <div style={{...styles.box, backgroundColor: '#000000'}}>
             <AsteroidsGame />
           </div>
         </div>
