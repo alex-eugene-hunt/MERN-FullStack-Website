@@ -68,8 +68,8 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
-          <div style={styles.box}>
-            <h3 style={styles.boxHeading}>Ask AlexAI anything about me</h3>
+          <div style={{...styles.box, backgroundColor: '#434a54'}}>
+            <h3 style={{color: '#dcccbd', textAlign: 'center'}}>Ask AlexAI anything about me</h3>
             <input
               type="text"
               placeholder="What's on your mind?"
@@ -159,20 +159,12 @@ const styles = {
     flex: 1,
     width: '450px',
     height: '450px',
-    backgroundColor: '#434a54',
+    backgroundColor: '#fff',
     borderRadius: '2.25rem',
     boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    padding: '1rem',
-  },
-  boxHeading: {
-    color: '#dcccbd',
-    textAlign: 'center',
-    width: '100%',
-    margin: '1rem 0',
   },
   input: {
     width: '90%',
