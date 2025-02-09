@@ -131,7 +131,7 @@ const styles = {
     width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 0 16rem', // Move image farther to the right
+    margin: '0 0 0 15rem', // Move image farther to the right
     border: '3px solid #d4996f', // Add colored outline
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
     boxSizing: 'border-box', // Make border overlap with image
