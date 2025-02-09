@@ -138,7 +138,7 @@ const styles = {
     marginLeft: '1rem', // Keep text to the right of the photo
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
-    fontSize: '30px',
+    fontSize: '60px',
     color: '#dcccbd',
   },
   boxesContainer: {
