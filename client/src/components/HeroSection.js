@@ -6,6 +6,8 @@ import Navbar from './Navbar';
 import SendEmailForm from './SendEmailForm';
 import '@fontsource/lobster'; // Add Lobster font import
 import '@fontsource/monoton'; // Add Monoton font import
+import '@fontsource/montserrat'; // Add Montserrat font import
+import '@fontsource/montserrat/600.css'; // SemiBold weight
 
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -98,22 +100,26 @@ function HeroSection() {
                   backgroundColor: '#dcccbd',
                   color: '#434a54',
                   margin: 0,
-                  borderRadius: '8px',
-                  paddingRight: '60px'
+                  borderRadius: '10px',
+                  paddingRight: '60px',
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: '600'
                 }}
               />
               <button onClick={handleAskQuestion} style={{
                 position: 'absolute',
-                right: '10px',
+                right: '5px',
                 backgroundColor: '#b14b32',
                 color: 'white',
                 border: 'none',
-                borderRadius: '8px',
+                borderRadius: '10px',
                 padding: '4px 12px',
                 height: '25px',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: '600'
               }}>
-                Ask
+                ASK
               </button>
             </div>
             {answer && <p style={styles.answerBox}>{answer}</p>}
