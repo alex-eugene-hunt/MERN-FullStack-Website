@@ -83,7 +83,7 @@ function HeroSection() {
             </h3>
             <div style={{ 
               width: '80%', 
-              margin: '0 auto', 
+              margin: '-5px auto 0', 
               display: 'flex', 
               gap: '0.5rem', 
               alignItems: 'center',
@@ -93,7 +93,7 @@ function HeroSection() {
                 type="text"
                 placeholder="What's on your mind?"
                 value={question}
-                onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
+                onChange={(e) => setQuestion(e.target.value)}
                 style={{
                   ...styles.input,
                   width: '100%',
@@ -122,7 +122,18 @@ function HeroSection() {
                 ASK
               </button>
             </div>
-            {answer && <p style={styles.answerBox}>{answer}</p>}
+            {answer && (
+              <div style={{
+                width: '80%',
+                margin: '10px auto',
+                backgroundColor: '#dcccbd',
+                padding: '0.5rem',
+                borderRadius: '10px',
+                minHeight: '50px'
+              }}>
+                {answer}
+              </div>
+            )}
           </div>
 
           {/* Box 2: Send Email */}
