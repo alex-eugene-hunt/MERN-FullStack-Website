@@ -70,7 +70,7 @@ function HeroSection() {
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}}>
-            <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton', fontSize: '25px'}}>Ask AlexAI</h3>
+            <h3 style={{color: '#dcccbd', textAlign: 'center', fontFamily: 'Monoton', fontSize: '35px'}}>Ask AlexAI</h3>
             <input
               type="text"
               placeholder="What's on your mind?"
@@ -80,12 +80,20 @@ function HeroSection() {
                 ...styles.input,
                 width: '80%',
                 backgroundColor: '#dcccbd',
-                color: '#021825',
+                color: '#434a54',
                 margin: '0 auto',
-                display: 'block'
+                display: 'block',
+                borderRadius: '10px',
               }}
             />
-            <button onClick={handleAskQuestion} style={styles.askButton}>
+            <button onClick={handleAskQuestion} style={{
+                ...styles.askButton,
+                width: '80%',
+                margin: '0 auto',
+                display: 'block',
+                backgroundColor: '#b14b32',
+                borderRadius: '10px',
+              }}>
               Ask
             </button>
             {answer && <p style={styles.answerBox}>{answer}</p>}
