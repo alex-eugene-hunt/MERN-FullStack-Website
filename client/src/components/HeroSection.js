@@ -130,14 +130,14 @@ const styles = {
     position: 'relative',
   },
   heroImage: {
+    position: 'fixed',
+    top: '350px',
+    left: '350px',
     width: '200px',
     height: '200px',
     objectFit: 'cover',
     borderRadius: '50%',
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    marginRight: '2rem',
-    position: 'relative',
-    left: '33%',
   },
   typewriterText: {
     fontFamily: 'Consolas, monospace',
