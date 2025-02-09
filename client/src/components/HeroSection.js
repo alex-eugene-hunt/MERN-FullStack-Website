@@ -47,7 +47,7 @@ function HeroSection() {
       <Navbar />
         
       {/* Content Wrapper */}
-      <div style={{ ...styles.contentWrapper, marginTop: '5px' }}>
+      <div style={{ ...styles.contentWrapper, marginTop: '5rem' }}>
         {/* Hero Section */}
         <div style={styles.heroSection}>
           <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
@@ -118,28 +118,28 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    marginTop: '1px',
+    marginTop: '1rem',
   },
   heroSection: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    padding: '1px',
+    padding: '1rem',
   },
   heroImage: {
     width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 0 270px', // Move image 270px to the right
+    margin: '0 0 0 270px', // Move image farther to the right
     border: '3px solid #d4996f', // Add colored outline
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
     boxSizing: 'border-box', // Make border overlap with image
     padding: '0', // Remove any internal padding
   },
   typewriterText: {
-    marginTop: '5px', // Lower the text more
-    marginLeft: '1px', // Keep text to the right of the photo
+    marginTop: '5rem', // Lower the text more
+    marginLeft: '1rem', // Keep text to the right of the photo
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
     fontSize: '60px',
@@ -149,8 +149,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    gap: '2px',
-    padding: '2px',
+    gap: '2rem',
+    padding: '2rem',
     width: '75%',
     margin: '0 auto',
     boxSizing: 'border-box',
@@ -168,13 +168,13 @@ const styles = {
   },
   input: {
     width: '90%',
-    padding: '0.5px',
-    marginBottom: '0.5px',
+    padding: '0.5rem',
+    marginBottom: '0.5rem',
     borderRadius: '4px',
     border: '1px solid #ccc',
   },
   askButton: {
-    padding: '0.5px 1px',
+    padding: '0.5rem 1rem',
     backgroundColor: '#007BFF',
     color: '#fff',
     borderRadius: '4px',
@@ -183,9 +183,9 @@ const styles = {
     transition: 'background-color 0.3s',
   },
   answerBox: {
-    marginTop: '0.5px',
+    marginTop: '0.5rem',
     backgroundColor: '#f9f9f9',
-    padding: '0.5px',
+    padding: '0.5rem',
     borderRadius: '4px',
   },
 };
