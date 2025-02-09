@@ -4,6 +4,7 @@ import myPhoto from '../assets/Headshot6 - edited.jpg';
 import AsteroidsGame from '../games/AsteroidsGame';
 import Navbar from './Navbar';
 import SendEmailForm from './SendEmailForm';
+import '@fontsource/lobster'; // Add Lobster font import
 
 function HeroSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -53,7 +54,7 @@ function HeroSection() {
           <div style={styles.typewriterText}>
             <Typewriter
               options={{
-                strings: ['Full Stack Developer', 'UC Berkeley Graduate', 'Software Engineer'],
+                strings: ['Alex Hunt; UC Berkeley Grad, Software Engineer, Data Scientist.', 'This website was built using the MERN stack!'],
                 autoStart: true,
                 loop: true,
                 deleteSpeed: 50,
@@ -129,16 +130,16 @@ const styles = {
     height: 'auto',
     borderRadius: '50%',
     margin: '0 0rem 1rem 20rem', // Move image farther to the right
+    border: '3px solid #d4996f', // Add colored outline
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
   },
   typewriterText: {
     marginTop: '5rem', // Lower the text more
     marginLeft: '1rem', // Keep text to the right of the photo
-    fontFamily: 'Consolas, monospace',
-    fontWeight: 'bold',
-    fontSize: '1.5rem',
-    textAlign: 'center',
-    color: '#fff',
-    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+    fontFamily: 'Lobster, cursive',
+    fontWeight: 'normal',
+    fontSize: '30px',
+    color: '#dcccbd',
   },
   boxesContainer: {
     display: 'flex',
