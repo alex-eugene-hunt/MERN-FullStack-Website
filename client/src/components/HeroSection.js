@@ -79,7 +79,14 @@ function HeroSection() {
               }}>
               Ask AlexAI
             </h3>
-            <div style={{ width: '80%', margin: '0 auto', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <div style={{ 
+              width: '80%', 
+              margin: '0 auto', 
+              display: 'flex', 
+              gap: '0.5rem', 
+              alignItems: 'center',
+              position: 'relative'
+            }}>
               <input
                 type="text"
                 placeholder="What's on your mind?"
