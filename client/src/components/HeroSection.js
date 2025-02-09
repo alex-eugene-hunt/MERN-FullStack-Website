@@ -69,18 +69,20 @@ function HeroSection() {
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
           <div style={styles.box}>
-            <h3>Ask a question about me</h3>
-            <input
-              type="text"
-              placeholder="What's on your mind?"
-              value={question}
-              onChange={(e) => setQuestion(e.target.value.replace(/\s/g, ''))}
-              style={styles.input}
-            />
+            <h3 style={styles.questionTitle}>Ask AlexAI anything about me.</h3>
+            <div style={styles.inputContainer}>
+              <input
+                type="text"
+                placeholder="What's on your mind?"
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                style={styles.input}
+              />
+            </div>
             <button onClick={handleAskQuestion} style={styles.askButton}>
               Ask
             </button>
-            {answer && <p style={styles.answerBox}>{answer}</p>}
+            {answer && <div style={styles.answerBox}>{answer}</div>}
           </div>
 
           {/* Box 2: Send Email */}
@@ -159,34 +161,60 @@ const styles = {
     flex: 1,
     width: '450px',
     height: '450px',
-    backgroundColor: '#fff',
-    borderRadius: '10px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+    backgroundColor: '#434a54',
+    borderRadius: '2.25rem',
+    boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
+    padding: '2rem',
+  },
+  questionTitle: {
+    color: '#dcccbd',
+    textAlign: 'center',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: '600',
+    marginBottom: '2rem',
+  },
+  inputContainer: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   input: {
-    width: '90%',
-    padding: '0.5rem',
-    marginBottom: '0.5rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
+    width: '80%',
+    padding: '1rem',
+    marginBottom: '1rem',
+    borderRadius: '12px',
+    border: 'none',
+    backgroundColor: '#dcccbd',
+    color: '#021825',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: '600',
+    fontSize: '1rem',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   },
   askButton: {
     padding: '0.5rem 1rem',
     backgroundColor: '#007BFF',
     color: '#fff',
-    borderRadius: '4px',
+    borderRadius: '8px',
     border: 'none',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: '600',
   },
   answerBox: {
-    marginTop: '0.5rem',
-    backgroundColor: '#f9f9f9',
-    padding: '0.5rem',
-    borderRadius: '4px',
+    width: '80%',
+    margin: '1rem auto',
+    padding: '1rem',
+    borderRadius: '12px',
+    backgroundColor: '#dcccbd',
+    color: '#021825',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: '600',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   },
 };
 
