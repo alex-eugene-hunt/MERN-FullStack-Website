@@ -89,10 +89,15 @@ function HeroSection() {
             <button onClick={handleAskQuestion} style={{
                 ...styles.askButton,
                 width: '80%',
-                margin: '0 auto',
+                margin: '10px auto',
                 display: 'block',
                 backgroundColor: '#b14b32',
                 borderRadius: '10px',
+                padding: '0.5rem',
+                height: '35px',
+                border: 'none',
+                color: '#fff',
+                fontSize: '16px'
               }}>
               Ask
             </button>
