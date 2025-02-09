@@ -126,9 +126,11 @@ const styles = {
     width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 1rem 1rem',
+    margin: '0 2rem 1rem 2rem', // Move image farther to the right
   },
   typewriterText: {
+    marginTop: '1rem', // Lower the text
+    marginLeft: '1rem', // Move text to the right of the photo
     fontFamily: 'Consolas, monospace',
     fontWeight: 'bold',
     fontSize: '1.5rem',
