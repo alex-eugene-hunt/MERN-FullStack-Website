@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { pipeline, AutoTokenizer, AutoModelForCausalLM } = require('@xenova/transformers');
 const path = require('path');
-require('dotenv').config();
 
 // Initialize model and tokenizer
 let model = null;
@@ -13,16 +12,10 @@ async function loadModel() {
     const MODEL_ID = 'alexeugenehunt/autotrain-AlexAI-llama';
     console.log('Loading model from Hugging Face:', MODEL_ID);
 
-    // Set Hugging Face access token
-    process.env.HUGGING_FACE_HUB_TOKEN = process.env.HF_ACCESS_TOKEN;
-
     // Load tokenizer and model from Hugging Face
-    const tokenizer = await AutoTokenizer.from_pretrained(MODEL_ID, {
-      use_auth_token: process.env.HF_ACCESS_TOKEN
-    });
+    const tokenizer = await AutoTokenizer.from_pretrained(MODEL_ID);
     const baseModel = await AutoModelForCausalLM.from_pretrained(MODEL_ID, {
-      torch_dtype: 'float16',
-      use_auth_token: process.env.HF_ACCESS_TOKEN
+      torch_dtype: 'float16'
     });
 
     // Create the pipeline with the loaded model and tokenizer
