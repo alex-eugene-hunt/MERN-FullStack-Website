@@ -37,14 +37,28 @@ function HeroSection() {
   }, [vantaEffect]);
 
   async function handleAskQuestion() {
-    const response = 'AI says: That is a great question about you, Alex!';
-    // Start typing effect
-    let currentIndex = 0;
-    const intervalId = setInterval(() => {
-      setDisplayedAnswer(response.substring(0, currentIndex));
-      currentIndex++;
-      if (currentIndex > response.length) clearInterval(intervalId);
-    }, 50);
+    try {
+      const response = await fetch('/api/model/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question }),
+      });
+      const data = await response.json();
+      const answer = data.answer;
+
+      // Start typing effect
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        setDisplayedAnswer(answer.substring(0, currentIndex));
+        currentIndex++;
+        if (currentIndex > answer.length) clearInterval(intervalId);
+      }, 50);
+    } catch (error) {
+      console.error('Error fetching the model response:', error);
+      setDisplayedAnswer('Error: Unable to get a response from the model.');
+    }
   }
 
   return (
