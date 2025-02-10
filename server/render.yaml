@@ -12,3 +12,5 @@ services:
         sync: false
       - key: PORT
         value: 5000
+      - key: HF_ACCESS_TOKEN
+        sync: false
