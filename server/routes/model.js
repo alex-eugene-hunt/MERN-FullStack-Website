@@ -9,19 +9,26 @@ let model = null;
 // Function to load and process the model
 async function loadModel() {
   try {
-    const MODEL_ID = 'alexeugenehunt/autotrain-AlexAI-llama';
-    console.log('Loading model from Hugging Face:', MODEL_ID);
-
-    // Load tokenizer and model from Hugging Face
-    const tokenizer = await AutoTokenizer.from_pretrained(MODEL_ID);
-    const baseModel = await AutoModelForCausalLM.from_pretrained(MODEL_ID, {
-      torch_dtype: 'float16'
+    // Use the base LLaMA tokenizer since your model is LLaMA-based
+    const tokenizer = await AutoTokenizer.from_pretrained('meta-llama/Llama-2-7b-chat-hf', {
+      quantized: true,
+      cache_dir: './model_cache'
     });
 
-    // Create the pipeline with the loaded model and tokenizer
+    // Load your fine-tuned model
+    const baseModel = await AutoModelForCausalLM.from_pretrained('alexeugenehunt/autotrain-AlexAI-llama', {
+      torch_dtype: 'float16',
+      cache_dir: './model_cache'
+    });
+
+    // Create the pipeline
     model = await pipeline('text-generation', {
       model: baseModel,
-      tokenizer: tokenizer
+      tokenizer: tokenizer,
+      max_new_tokens: 150,
+      temperature: 0.2,
+      top_p: 0.85,
+      repetition_penalty: 1.2
     });
     
     console.log('Model loaded successfully');
@@ -49,11 +56,11 @@ router.post('/ask', async (req, res) => {
 
     // Generate response using the model with matching parameters
     const response = await model(prompt, {
-      max_length: 150,
+      max_new_tokens: 150,
       do_sample: true,
-      temperature: 0.2,          // Lower temperature for more deterministic output
+      temperature: 0.2,
       top_p: 0.85,
-      repetition_penalty: 1.2,   // Helps prevent loops
+      repetition_penalty: 1.2,
       truncation: true,
       return_full_text: false
     });
