@@ -422,6 +422,7 @@ const AsteroidsGame = () => {
       position: 'relative',
       backgroundColor: 'black',
       fontFamily: '"Press Start 2P", cursive',
+      fontWeight: 'normal',
     }}>
       {!gameStarted && !gameOver && (
         <div style={{
@@ -448,8 +449,8 @@ const AsteroidsGame = () => {
               }}
             />
             <button style={{
-              padding: '10px 30px',
-              fontSize: '16px',
+              padding: '8px 20px',
+              fontSize: '12px',
               backgroundColor: 'transparent',
               color: 'white',
               border: '2px solid white',
@@ -457,6 +458,7 @@ const AsteroidsGame = () => {
               cursor: 'pointer',
               transition: 'background-color 0.2s',
               fontFamily: '"Press Start 2P", cursive',
+              fontWeight: 'normal',
             }} onClick={startGame}>PLAY ASTEROIDS</button>
           </div>
         </div>
@@ -483,16 +485,18 @@ const AsteroidsGame = () => {
             alignItems: 'center',
           }}>
             <h2 style={{
-              fontSize: '24px',
+              fontSize: '16px',
               margin: '0 0 5px 0',
               color: 'white',
               fontFamily: '"Press Start 2P", cursive',
+              fontWeight: 'normal',
             }}>Game Over!</h2>
             <p style={{
-              fontSize: '16px',
+              fontSize: '12px',
               margin: '0 0 10px 0',
               color: 'white',
               fontFamily: '"Press Start 2P", cursive',
+              fontWeight: 'normal',
             }}>Score: {score}</p>
             <ul style={{
               listStyle: 'none',
@@ -504,13 +508,14 @@ const AsteroidsGame = () => {
                 <li
                   key={index}
                   style={{
-                    fontSize: '16px',
+                    fontSize: '10px',
                     padding: '4px 0',
                     color:
                       index === 0 ? '#FFD700' : // Gold
                       index === 1 ? '#C0C0C0' : // Silver
                       index === 2 ? '#CD7F32' : // Bronze
                       'white',
+                    fontWeight: 'normal',
                   }}
                 >
                   {index + 1}. {score.playerName}: {score.score}
@@ -532,8 +537,9 @@ const AsteroidsGame = () => {
                 border: '2px solid white',
                 background: 'black',
                 color: 'white',
-                fontSize: '14px',
+                fontSize: '10px',
                 fontFamily: '"Press Start 2P", cursive',
+                fontWeight: 'normal',
               }}
             />
             <div style={{
@@ -545,29 +551,31 @@ const AsteroidsGame = () => {
               <button 
                 onClick={submitHighScore} 
                 style={{
-                  padding: '10px 20px',
+                  padding: '8px 16px',
                   cursor: 'pointer',
                   backgroundColor: 'black',
                   color: 'white',
                   border: '2px solid white',
                   borderRadius: '5px',
-                  fontSize: '14px',
+                  fontSize: '10px',
                   fontFamily: '"Press Start 2P", cursive',
+                  fontWeight: 'normal',
                   transition: 'background-color 0.2s',
                 }}
                 disabled={submitted}
               >
-                {submitted ? <span style={{ color: 'white', fontSize: '20px' }}>✓</span> : 'Submit Score'}
+                {submitted ? <span style={{ color: 'white', fontSize: '14px', fontWeight: 'normal' }}>✓</span> : 'Submit Score'}
               </button>
               <button style={{
-                padding: '10px 20px',
+                padding: '8px 16px',
                 cursor: 'pointer',
                 backgroundColor: 'black',
                 color: 'white',
                 border: '2px solid white',
                 borderRadius: '5px',
-                fontSize: '14px',
+                fontSize: '10px',
                 fontFamily: '"Press Start 2P", cursive',
+                fontWeight: 'normal',
                 transition: 'background-color 0.2s',
               }} onClick={resetGame}>
                 Play Again?
@@ -583,8 +591,9 @@ const AsteroidsGame = () => {
         padding: '8px',
         backgroundColor: '#222',
         color: 'white',
-        fontSize: '0.8rem',
+        fontSize: '8px',
         fontFamily: '"Press Start 2P", cursive',
+        fontWeight: 'normal',
         width: '100%',
       }}>
         <span style={{
@@ -614,14 +623,29 @@ const AsteroidsGame = () => {
       />
       <div style={{
         position: 'absolute',
-        top: '48px',
+        top: '16px',
         left: '16px',
         color: 'white',
         fontFamily: '"Press Start 2P", cursive',
-        fontSize: '16px',
+        fontSize: '12px',
+        fontWeight: 'normal',
       }}>
-        <span>Score: {score}</span>
-        <span> Lives: {lives}</span>
+        Score: {score}
+      </div>
+      <div style={{
+        position: 'absolute',
+        top: '16px',
+        right: '16px',
+        color: 'white',
+        fontFamily: '"Press Start 2P", cursive',
+        fontSize: '12px',
+        fontWeight: 'normal',
+        display: 'flex',
+        gap: '4px',
+      }}>
+        {[...Array(lives)].map((_, i) => (
+          <span key={i} role="img" aria-label="heart">❤️</span>
+        ))}
       </div>
     </div>
   );
