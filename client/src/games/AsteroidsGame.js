@@ -444,6 +444,9 @@ const AsteroidsGame = () => {
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
+          display: 'flex',
+          alignItems: 'center',
+          height: '20px',
         }}>
           <span style={{ fontSize: '12px' }}>←</span>
           <span style={{ fontSize: '8px' }}> </span>
@@ -454,6 +457,9 @@ const AsteroidsGame = () => {
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
+          display: 'flex',
+          alignItems: 'center',
+          height: '20px',
         }}>
           <span style={{ fontSize: '8px' }}>↑</span>
           <span style={{ fontSize: '8px' }}>: Thrust</span>
@@ -462,6 +468,9 @@ const AsteroidsGame = () => {
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
+          display: 'flex',
+          alignItems: 'center',
+          height: '20px',
         }}>
           <span style={{ fontSize: '8px' }}>Space</span>
           <span style={{ fontSize: '8px' }}>: Fire</span>
