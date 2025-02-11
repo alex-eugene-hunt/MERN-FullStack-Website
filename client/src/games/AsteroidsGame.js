@@ -594,24 +594,35 @@ const AsteroidsGame = () => {
         fontSize: '8px',
         fontFamily: '"Press Start 2P", cursive',
         fontWeight: 'normal',
-        width: '100%',
         marginBottom: '24px',
+        width: '100%',
       }}>
         <span style={{
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>⬅️ ➡️: Rotate</span>
+        }}>
+          <span style={{ fontSize: '12px' }}>←</span>
+          <span style={{ fontSize: '8px' }}> </span>
+          <span style={{ fontSize: '12px' }}>→</span>
+          <span style={{ fontSize: '8px' }}> Rotate</span>
+        </span>
         <span style={{
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>⬆️: Thrust</span>
+        }}>
+          <span style={{ fontSize: '12px' }}>↑</span>
+          <span style={{ fontSize: '8px' }}> Thrust</span>
+        </span>
         <span style={{
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>Space: Shoot</span>
+        }}>
+          <span style={{ fontSize: '12px' }}>Space</span>
+          <span style={{ fontSize: '8px' }}> Fire</span>
+        </span>
       </div>
       <canvas 
         ref={canvasRef} 
@@ -624,7 +635,7 @@ const AsteroidsGame = () => {
       />
       <div style={{
         position: 'absolute',
-        top: '40px',
+        top: '45px',
         left: '16px',
         color: 'white',
         fontFamily: '"Press Start 2P", cursive',
@@ -635,7 +646,7 @@ const AsteroidsGame = () => {
       </div>
       <div style={{
         position: 'absolute',
-        top: '40px',
+        top: '45px',
         right: '16px',
         color: 'white',
         fontFamily: '"Press Start 2P", cursive',
