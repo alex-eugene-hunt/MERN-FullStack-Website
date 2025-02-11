@@ -26,8 +26,10 @@ app.use('/api/highscores', require('./routes/highScores'));
 // NEW: Add the email route
 app.use('/api/send-email', require('./routes/sendEmail'));
 
+import modelRouter from './routes/model.js';
+
 // Add the model route
-app.use('/api/model', require('./routes/model'));
+app.use('/api/model', modelRouter);
 
 // Basic route to test
 app.get('/', (req, res) => {
