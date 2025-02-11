@@ -36,7 +36,8 @@ router.post('/ask', async (req, res) => {
     const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
       },
       body: JSON.stringify(requestBody)
     });
@@ -65,6 +66,14 @@ router.post('/ask', async (req, res) => {
     // Check if the response is an error message
     if (data.error) {
       console.error('API returned error:', data.error);
+      
+      // Check for authentication errors
+      if (data.error.includes('Please log in') || data.error.includes('access token')) {
+        return res.status(401).json({ 
+          error: 'Server configuration error: Missing or invalid Hugging Face API token. Please check server configuration.'
+        });
+      }
+      
       return res.status(500).json({ error: data.error });
     }
 
