@@ -135,7 +135,7 @@ const styles = {
     right: '0.5rem',
     backgroundColor: '#d4996f',
     border: 'none',
-    borderRadius: '10px',
+    borderRadius: '50%',
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',
     fontSize: '0.9rem',
