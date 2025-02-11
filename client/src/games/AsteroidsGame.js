@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import rocketEmoji from '../assets/rocket-emoji.png';
+import '@fontsource/press-start-2p';
 
 const AsteroidsGame = () => {
   const canvasRef = useRef(null);
@@ -417,15 +418,15 @@ const AsteroidsGame = () => {
     <div ref={containerRef} style={{
       width: '100%', 
       height: '100%',
-      overflow: 'hidden', // Prevent scrolling in game container
+      overflow: 'hidden',
       position: 'relative',
       backgroundColor: 'black',
-      fontFamily: 'Consolas, monospace',
+      fontFamily: '"Press Start 2P", cursive',
     }}>
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
-          top: '60%',
+          top: '55%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           textAlign: 'center',
@@ -436,7 +437,6 @@ const AsteroidsGame = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            fontFamily: 'Consolas, monospace',
           }}>
             <img 
               src={rocketEmoji} 
@@ -449,14 +449,14 @@ const AsteroidsGame = () => {
             />
             <button style={{
               padding: '10px 30px',
-              fontSize: '18px',
+              fontSize: '16px',
               backgroundColor: 'transparent',
               color: 'white',
               border: '2px solid white',
               borderRadius: '5px',
               cursor: 'pointer',
               transition: 'background-color 0.2s',
-              fontFamily: 'Consolas, monospace',
+              fontFamily: '"Press Start 2P", cursive',
             }} onClick={startGame}>PLAY ASTEROIDS</button>
           </div>
         </div>
@@ -481,19 +481,18 @@ const AsteroidsGame = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            fontFamily: 'Consolas, monospace',
           }}>
             <h2 style={{
-              fontSize: '28px',
+              fontSize: '24px',
               margin: '0 0 5px 0',
               color: 'white',
-              fontFamily: 'Consolas, monospace',
+              fontFamily: '"Press Start 2P", cursive',
             }}>Game Over!</h2>
             <p style={{
-              fontSize: '20px',
+              fontSize: '16px',
               margin: '0 0 10px 0',
               color: 'white',
-              fontFamily: 'Consolas, monospace',
+              fontFamily: '"Press Start 2P", cursive',
             }}>Score: {score}</p>
             <ul style={{
               listStyle: 'none',
@@ -533,8 +532,8 @@ const AsteroidsGame = () => {
                 border: '2px solid white',
                 background: 'black',
                 color: 'white',
-                fontSize: '16px',
-                fontFamily: 'Consolas, monospace',
+                fontSize: '14px',
+                fontFamily: '"Press Start 2P", cursive',
               }}
             />
             <div style={{
@@ -552,8 +551,8 @@ const AsteroidsGame = () => {
                   color: 'white',
                   border: '2px solid white',
                   borderRadius: '5px',
-                  fontSize: '16px',
-                  fontFamily: 'Consolas, monospace',
+                  fontSize: '14px',
+                  fontFamily: '"Press Start 2P", cursive',
                   transition: 'background-color 0.2s',
                 }}
                 disabled={submitted}
@@ -567,8 +566,8 @@ const AsteroidsGame = () => {
                 color: 'white',
                 border: '2px solid white',
                 borderRadius: '5px',
-                fontSize: '16px',
-                fontFamily: 'Consolas, monospace',
+                fontSize: '14px',
+                fontFamily: '"Press Start 2P", cursive',
                 transition: 'background-color 0.2s',
               }} onClick={resetGame}>
                 Play Again?
@@ -584,7 +583,8 @@ const AsteroidsGame = () => {
         padding: '8px',
         backgroundColor: '#222',
         color: 'white',
-        fontSize: '0.9rem',
+        fontSize: '0.8rem',
+        fontFamily: '"Press Start 2P", cursive',
         width: '100%',
       }}>
         <span style={{
@@ -617,7 +617,7 @@ const AsteroidsGame = () => {
         top: '48px',
         left: '16px',
         color: 'white',
-        fontFamily: 'Consolas, monospace',
+        fontFamily: '"Press Start 2P", cursive',
         fontSize: '16px',
       }}>
         <span>Score: {score}</span>
