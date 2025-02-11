@@ -425,7 +425,7 @@ const AsteroidsGame = () => {
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
-          top: '50%',
+          top: '60%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           textAlign: 'center',
@@ -433,11 +433,6 @@ const AsteroidsGame = () => {
           color: 'white',
         }}>
           <div style={{
-            background: 'rgba(0, 0, 0, 0.8)',
-            padding: '15px',
-            borderRadius: '10px',
-            border: '2px solid white',
-            width: '300px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -455,13 +450,11 @@ const AsteroidsGame = () => {
             <button style={{
               padding: '10px 30px',
               fontSize: '18px',
-              backgroundColor: 'black',
+              backgroundColor: 'transparent',
               color: 'white',
               border: '2px solid white',
               borderRadius: '5px',
               cursor: 'pointer',
-              marginTop: '2px',
-              marginBottom: '2px',
               transition: 'background-color 0.2s',
               fontFamily: 'Consolas, monospace',
             }} onClick={startGame}>PLAY ASTEROIDS</button>
