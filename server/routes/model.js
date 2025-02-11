@@ -11,30 +11,35 @@ async function querySpace(message) {
   try {
     console.log('Making request to Space API...');
     
-    // Replace with your actual Space URL
+    // Use the correct Gradio API endpoint
     const spaceUrl = process.env.HF_SPACE_URL || 'https://alexeugenehunt-alexai-host.hf.space';
-    const response = await fetch(`${spaceUrl}/run/predict`, {
+    const response = await fetch(`${spaceUrl}/api/predict`, {  
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: [message]  // Gradio expects an array of inputs
+        data: [message],
+        event_data: null,
+        fn_index: 0  
       })
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Space API error details:', errorText);
       throw new Error(`Space API error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
     console.log('Space API response:', data);
 
-    if (!data.data || !data.data[0]) {
+    // Handle Gradio response format
+    if (!data.data || !Array.isArray(data.data) || data.data.length === 0) {
       throw new Error('Invalid response format from Space API');
     }
 
-    return data.data[0];  // Gradio returns array of outputs
+    return data.data[0];  
   } catch (error) {
     console.error('Error querying Space:', error);
     throw error;
