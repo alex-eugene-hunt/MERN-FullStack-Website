@@ -423,7 +423,91 @@ const AsteroidsGame = () => {
       backgroundColor: 'black',
       fontFamily: '"Press Start 2P", cursive',
       fontWeight: 'normal',
+      display: 'flex',
+      flexDirection: 'column',
     }}>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '1rem',
+        padding: '8px',
+        backgroundColor: '#222',
+        color: 'white',
+        fontSize: '8px',
+        fontFamily: '"Press Start 2P", cursive',
+        fontWeight: 'normal',
+        width: '100%',
+        minHeight: '35px',
+        zIndex: 2,
+      }}>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>
+          <span style={{ fontSize: '12px' }}>←</span>
+          <span style={{ fontSize: '8px' }}> </span>
+          <span style={{ fontSize: '12px' }}>→</span>
+          <span style={{ fontSize: '8px' }}>: Rotate</span>
+        </span>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>
+          <span style={{ fontSize: '8px' }}>↑</span>
+          <span style={{ fontSize: '8px' }}>: Thrust</span>
+        </span>
+        <span style={{
+          padding: '4px 8px',
+          borderRadius: '4px',
+          border: '1px solid #666',
+        }}>
+          <span style={{ fontSize: '8px' }}>Space</span>
+          <span style={{ fontSize: '8px' }}>: Fire</span>
+        </span>
+      </div>
+      <div style={{
+        position: 'relative',
+        flex: 1,
+        width: '100%',
+      }}>
+        <canvas 
+          ref={canvasRef} 
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '100%',
+          }}
+          tabIndex={0}
+        />
+        <div style={{
+          position: 'absolute',
+          top: '10px',
+          left: '16px',
+          color: 'white',
+          fontFamily: '"Press Start 2P", cursive',
+          fontSize: '12px',
+          fontWeight: 'normal',
+        }}>
+          Score: {score}
+        </div>
+        <div style={{
+          position: 'absolute',
+          top: '10px',
+          right: '16px',
+          color: 'white',
+          fontFamily: '"Press Start 2P", cursive',
+          fontSize: '12px',
+          fontWeight: 'normal',
+          display: 'flex',
+          gap: '4px',
+        }}>
+          {[...Array(lives)].map((_, i) => (
+            <span key={i} role="img" aria-label="heart">❤️</span>
+          ))}
+        </div>
+      </div>
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
@@ -584,81 +668,6 @@ const AsteroidsGame = () => {
           </div>
         </div>
       )}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        gap: '1rem',
-        padding: '8px',
-        backgroundColor: '#222',
-        color: 'white',
-        fontSize: '8px',
-        fontFamily: '"Press Start 2P", cursive',
-        fontWeight: 'normal',
-        marginBottom: '24px',
-        width: '100%',
-      }}>
-        <span style={{
-          padding: '4px 8px',
-          borderRadius: '4px',
-          border: '1px solid #666',
-        }}>
-          <span style={{ fontSize: '12px' }}>←</span>
-          <span style={{ fontSize: '8px' }}> </span>
-          <span style={{ fontSize: '12px' }}>→</span>
-          <span style={{ fontSize: '8px' }}> Rotate</span>
-        </span>
-        <span style={{
-          padding: '4px 8px',
-          borderRadius: '4px',
-          border: '1px solid #666',
-        }}>
-          <span style={{ fontSize: '12px' }}>↑</span>
-          <span style={{ fontSize: '8px' }}> Thrust</span>
-        </span>
-        <span style={{
-          padding: '4px 8px',
-          borderRadius: '4px',
-          border: '1px solid #666',
-        }}>
-          <span style={{ fontSize: '12px' }}>Space</span>
-          <span style={{ fontSize: '8px' }}> Fire</span>
-        </span>
-      </div>
-      <canvas 
-        ref={canvasRef} 
-        style={{
-          width: '100%',
-          height: 'calc(100% - 40px)',
-          backgroundColor: 'black',
-        }}
-        tabIndex={0} // Make canvas focusable
-      />
-      <div style={{
-        position: 'absolute',
-        top: '45px',
-        left: '16px',
-        color: 'white',
-        fontFamily: '"Press Start 2P", cursive',
-        fontSize: '12px',
-        fontWeight: 'normal',
-      }}>
-        Score: {score}
-      </div>
-      <div style={{
-        position: 'absolute',
-        top: '45px',
-        right: '16px',
-        color: 'white',
-        fontFamily: '"Press Start 2P", cursive',
-        fontSize: '12px',
-        fontWeight: 'normal',
-        display: 'flex',
-        gap: '4px',
-      }}>
-        {[...Array(lives)].map((_, i) => (
-          <span key={i} role="img" aria-label="heart">❤️</span>
-        ))}
-      </div>
     </div>
   );
 };
