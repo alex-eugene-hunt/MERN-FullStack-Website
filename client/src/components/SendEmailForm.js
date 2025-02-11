@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '@fontsource/faster-one';
 
 function SendEmailForm() {
   const [name, setName] = useState('');
@@ -35,7 +36,7 @@ function SendEmailForm() {
 
   return (
     <div style={styles.container}>
-      <h3 style={styles.heading}>Send me a Message</h3>
+      <h3 style={styles.heading}>CONTACT ME</h3>
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
           type="text"
@@ -89,6 +90,8 @@ const styles = {
     textAlign: 'center',
     margin: '0.5rem 0',
     fontSize: '1.2rem',
+    color: '#dcccbd',
+    fontFamily: '"Faster One", cursive',
   },
   form: {
     display: 'flex',
@@ -120,7 +123,7 @@ const styles = {
     paddingBottom: '2.5rem',
     fontSize: '0.9rem',
     color: '#434a54',
-    borderRadius: '10px',
+    borderRadius: '10px 10px 20px 20px',
     flex: 1,
     resize: 'none',
     fontFamily: '"Montserrat", sans-serif',
