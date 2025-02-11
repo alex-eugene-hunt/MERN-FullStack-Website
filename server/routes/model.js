@@ -31,14 +31,29 @@ loadModel().catch(console.error);
 router.post('/ask', async (req, res) => {
   try {
     const { question } = req.body;
+    if (!question) {
+      return res.status(400).json({ error: 'Question is required' });
+    }
     console.log('Received question:', question);
 
     // Format the prompt
     const prompt = `Q: ${question}\nA:`;
     console.log('Formatted prompt:', prompt);
 
-    // Log the request configuration
-    console.log('Making request to Hugging Face API with token:', process.env.HF_ACCESS_TOKEN ? 'Token present' : 'Token missing');
+    const requestBody = {
+      inputs: prompt,
+      parameters: {
+        max_new_tokens: 256,
+        temperature: 0.7,
+        top_p: 0.95,
+        top_k: 50,
+        repetition_penalty: 1.1,
+        do_sample: true,
+        return_full_text: false
+      }
+    };
+
+    console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
     // Make a POST request to the Hugging Face Inference API
     const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrain-AlexAI-llama', {
@@ -47,63 +62,60 @@ router.post('/ask', async (req, res) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
       },
-      body: JSON.stringify({
-        inputs: prompt,
-        parameters: {
-          max_new_tokens: 256,
-          temperature: 0.7,
-          top_p: 0.95,
-          top_k: 50,
-          repetition_penalty: 1.1,
-          do_sample: true,
-          return_full_text: false
-        }
-      })
+      body: JSON.stringify(requestBody)
     });
 
     console.log('Response status:', response.status);
     console.log('Response headers:', Object.fromEntries(response.headers.entries()));
 
     const responseText = await response.text();
-    console.log('Raw response:', responseText);
+    console.log('Raw response text:', responseText);
 
+    // If response is empty, return an error
+    if (!responseText) {
+      console.error('Empty response from API');
+      return res.status(500).json({ error: 'Empty response from model' });
+    }
+
+    // Try to parse the response as JSON
     let data;
     try {
       data = JSON.parse(responseText);
     } catch (parseError) {
       console.error('Failed to parse response as JSON:', parseError);
-      throw new Error('Invalid JSON response from the model');
+      return res.status(500).json({ error: 'Invalid response format from model' });
     }
 
-    if (!response.ok) {
-      console.error('Error response from API:', data);
-      throw new Error(data.error || 'Failed to get model response');
+    // Check if the response is an error message
+    if (data.error) {
+      console.error('API returned error:', data.error);
+      return res.status(500).json({ error: data.error });
     }
 
-    if (!data || !Array.isArray(data) || data.length === 0) {
-      console.error('Unexpected API response format:', data);
-      throw new Error('Invalid response format from the model');
+    // Validate the response format
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error('Unexpected response format:', data);
+      return res.status(500).json({ error: 'Invalid response format from model' });
     }
 
-    if (!data[0].generated_text) {
+    // Extract and clean up the generated text
+    const generatedText = data[0].generated_text?.trim() || '';
+    if (!generatedText) {
       console.error('No generated text in response:', data[0]);
-      throw new Error('No generated text in model response');
+      return res.status(500).json({ error: 'No response generated from model' });
     }
 
-    // Clean up the response text
-    let generatedText = data[0].generated_text.trim();
-    console.log('Generated text before cleanup:', generatedText);
+    // Remove the prompt from the beginning if it's included
+    const finalResponse = generatedText.startsWith(prompt)
+      ? generatedText.slice(prompt.length).trim()
+      : generatedText;
 
-    // Remove the question from the response if it's included
-    if (generatedText.startsWith(prompt)) {
-      generatedText = generatedText.slice(prompt.length).trim();
-    }
+    console.log('Final response:', finalResponse);
+    return res.json({ response: finalResponse });
 
-    console.log('Final response text:', generatedText);
-    res.json({ response: generatedText });
   } catch (error) {
     console.error('Error in /ask endpoint:', error);
-    res.status(500).json({ error: error.message || 'Failed to generate response' });
+    return res.status(500).json({ error: error.message || 'Failed to generate response' });
   }
 });
 
