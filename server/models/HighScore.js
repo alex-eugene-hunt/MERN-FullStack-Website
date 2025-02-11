@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const highScoreSchema = new mongoose.Schema({
     playerName: {
@@ -24,4 +24,4 @@ const highScoreSchema = new mongoose.Schema({
 // Index for efficient querying of high scores
 highScoreSchema.index({ game: 1, score: -1 });
 
-module.exports = mongoose.model('HighScore', highScoreSchema);
+export default mongoose.model('HighScore', highScoreSchema);
