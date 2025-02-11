@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { pipeline, AutoTokenizer, AutoModelForCausalLM } = require('@xenova/transformers');
+const { pipeline } = require('transformers');
 const path = require('path');
 
 // Initialize model and tokenizer
@@ -12,40 +12,13 @@ async function loadModel() {
     const MODEL_ID = 'alexeugenehunt/autotrain-AlexAI-llama';
     console.log('Loading model from Hugging Face:', MODEL_ID);
 
-    // Load the model's specific tokenizer configuration
-    const tokenizer = await AutoTokenizer.from_pretrained(MODEL_ID, {
-      local: false,
-      revision: 'main',
-      cache_dir: './model_cache',
-      config: {
-        use_fast: true
-      }
+    // Use the Hugging Face transformers library to load the model and tokenizer
+    model = await pipeline('text-generation', MODEL_ID, {
+      device: 0, // Use GPU if available
+      torch_dtype: 'auto',
+      use_auth_token: process.env.HUGGINGFACE_TOKEN // Ensure you have a token set in your environment variables
     });
 
-    // Load the model with adapter configuration
-    const baseModel = await AutoModelForCausalLM.from_pretrained(MODEL_ID, {
-      local: false,
-      revision: 'main',
-      cache_dir: './model_cache',
-      load_in_8bit: true, // Use 8-bit quantization for memory efficiency
-      torch_dtype: 'float16',
-      device_map: 'auto'
-    });
-
-    // Create the pipeline with specific configurations from training_params.json
-    model = await pipeline('text-generation', {
-      model: baseModel,
-      tokenizer: tokenizer,
-      max_new_tokens: 256,
-      temperature: 0.7,
-      top_p: 0.95,
-      top_k: 50,
-      repetition_penalty: 1.1,
-      num_return_sequences: 1,
-      pad_token_id: tokenizer.pad_token_id,
-      eos_token_id: tokenizer.eos_token_id
-    });
-    
     console.log('Model loaded successfully');
   } catch (error) {
     console.error('Error loading model:', error);
