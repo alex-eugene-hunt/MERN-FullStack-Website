@@ -36,7 +36,8 @@ router.post('/ask', async (req, res) => {
     const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrainAlexAI-openai-gpt', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
       },
       body: JSON.stringify(requestBody)
     });
