@@ -48,25 +48,45 @@ function HeroSection() {
         body: JSON.stringify({ question }),
       });
 
-      const data = await response.json();
-      
+      // Check if the response is empty
+      const responseText = await response.text();
+      if (!responseText) {
+        throw new Error('Empty response from server');
+      }
+
+      // Try to parse the JSON
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('Failed to parse response:', responseText);
+        throw new Error('Invalid response format from server');
+      }
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to get response from the model');
       }
 
       const answer = data.response;
-
       if (!answer) {
         throw new Error('No response received from the model');
       }
 
       // Start typing effect
       let currentIndex = 0;
+      const typingSpeed = 50; // milliseconds per character
+      const prefix = 'AlexAI says: ';
+      setDisplayedAnswer(prefix); // Start with just the prefix
+
       const intervalId = setInterval(() => {
-        setDisplayedAnswer('AlexAI says: ' + answer.substring(0, currentIndex));
-        currentIndex++;
-        if (currentIndex > answer.length) clearInterval(intervalId);
-      }, 50);
+        if (currentIndex <= answer.length) {
+          setDisplayedAnswer(prefix + answer.substring(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+        }
+      }, typingSpeed);
+
     } catch (error) {
       console.error('Error fetching the model response:', error);
       setDisplayedAnswer('Error: ' + (error.message || 'Unable to get a response from the model.'));
