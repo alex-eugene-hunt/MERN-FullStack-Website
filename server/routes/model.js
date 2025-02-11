@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import fetch from 'node-fetch';
+
 const router = express.Router();
-const fetch = require('node-fetch');
 
 // Initialize model and tokenizer
 let model = null;
@@ -11,12 +12,7 @@ async function loadModel() {
     const MODEL_ID = 'alexeugenehunt/autotrain-AlexAI-llama';
     console.log('Loading model from Hugging Face:', MODEL_ID);
 
-    // Use the Hugging Face transformers library to load the model and tokenizer
-    model = await pipeline('text-generation', MODEL_ID, {
-      device: 0, // Use GPU if available
-      torch_dtype: 'auto',
-      use_auth_token: process.env.HUGGINGFACE_TOKEN // Ensure you have a token set in your environment variables
-    });
+    // Removed pipeline reference
 
     console.log('Model loaded successfully');
   } catch (error) {
@@ -57,4 +53,4 @@ router.post('/ask', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
