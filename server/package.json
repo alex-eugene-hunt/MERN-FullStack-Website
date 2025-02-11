@@ -18,6 +18,7 @@
     "express": "^4.21.2",
     "mongoose": "^8.9.5",
     "nodemailer": "^6.10.0",
-    "transformers": "^1.8.3"
+    "transformers": "^3.1.0",
+    "node-fetch": "^3.0.0"
   }
 }
