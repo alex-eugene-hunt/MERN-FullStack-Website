@@ -1,7 +1,13 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import highScoresRouter from './routes/highScores.js';
+import sendEmailRouter from './routes/sendEmail.js';
+import modelRouter from './routes/model.js';
+import HighScore from './models/HighScore.js';
+
+dotenv.config();
 
 const app = express();
 
@@ -21,23 +27,14 @@ app.use(cors(corsOptions));
 app.use(express.json()); // For parsing JSON request bodies
 
 // Routes
-app.use('/api/highscores', require('./routes/highScores'));
-
-// NEW: Add the email route
-app.use('/api/send-email', require('./routes/sendEmail'));
-
-import modelRouter from './routes/model.js';
-
-// Add the model route
+app.use('/api/highscores', highScoresRouter);
+app.use('/api/send-email', sendEmailRouter);
 app.use('/api/model', modelRouter);
 
 // Basic route to test
 app.get('/', (req, res) => {
   res.send('Hello from the server!');
 });
-
-// Import your HighScore model (adjust the path and model name as needed)
-const HighScore = require('./models/HighScore');
 
 // Admin route to view database stats / table of all inputted scores
 app.get('/admin', async (req, res) => {
@@ -50,8 +47,6 @@ app.get('/admin', async (req, res) => {
     res.status(500).send("Error retrieving scores: " + error.message);
   }
 });
-
-const PORT = process.env.PORT || 5000;
 
 // MongoDB connection options
 const mongooseOptions = {
@@ -67,6 +62,7 @@ const mongooseOptions = {
 mongoose.connect(process.env.DB_URI, mongooseOptions)
   .then(() => {
     console.log('Connected to MongoDB');
+    const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
