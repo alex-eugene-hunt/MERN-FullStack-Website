@@ -40,7 +40,7 @@ function HeroSection() {
     try {
       setDisplayedAnswer('AlexAI is thinking...');
       
-      const response = await fetch('/api/model/ask', {
+      const response = await fetch('https://mern-fullstack-website.onrender.com/api/model/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
