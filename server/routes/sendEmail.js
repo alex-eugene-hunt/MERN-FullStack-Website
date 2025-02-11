@@ -1,7 +1,8 @@
 // routes/sendEmail.js
-const express = require('express');
+import express from 'express';
+import nodemailer from 'nodemailer';
+
 const router = express.Router();
-const nodemailer = require('nodemailer');
 
 router.post('/', async (req, res) => {
   const { name, message } = req.body;
@@ -29,12 +30,13 @@ router.post('/', async (req, res) => {
       text: message,
     };
 
+    // Send the email
     await transporter.sendMail(mailOptions);
-    return res.status(200).json({ success: true, message: 'Email sent successfully.' });
+    res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    return res.status(500).json({ error: 'Failed to send email.' });
+    res.status(500).json({ error: 'Failed to send email' });
   }
 });
 
-module.exports = router;
+export default router;
