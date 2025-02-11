@@ -10,42 +10,61 @@ const router = express.Router();
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Helper function to make model request with retries
-async function queryModel(requestBody) {
-  try {
-    console.log('Making request to model...');
-    
-    // Use the pipeline API instead
-    const response = await fetch('https://api-inference.huggingface.co/pipeline/text-generation/alexeugenehunt/autotrainAlexAI-openai-gpt', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
-      },
-      body: JSON.stringify(requestBody)
-    });
+async function queryModel(messages) {
+  const maxRetries = 5;
+  const retryDelay = 3000;
 
-    const responseText = await response.text();
-    console.log('Raw response:', responseText);
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      console.log('Making request to model...');
+      console.log('Messages:', JSON.stringify(messages, null, 2));
+      
+      const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrainAlexAI-openai-gpt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
+        },
+        body: JSON.stringify({ inputs: messages })
+      });
 
-    if (!responseText) {
-      throw new Error('Empty response from API');
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+
+      if (!responseText) {
+        console.log('Empty response, retrying...');
+        await sleep(retryDelay);
+        continue;
+      }
+
+      const data = JSON.parse(responseText);
+
+      if (data.error) {
+        if (data.error.toLowerCase().includes('loading')) {
+          console.log('Model is loading, waiting before retry...');
+          await sleep(retryDelay);
+          continue;
+        }
+        throw new Error(data.error);
+      }
+
+      if (!Array.isArray(data) || data.length === 0) {
+        console.log('Unexpected response format, retrying...');
+        await sleep(retryDelay);
+        continue;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('Error querying model:', error);
+      if (attempt === maxRetries - 1) {
+        throw error;
+      }
+      await sleep(retryDelay);
     }
-
-    const data = JSON.parse(responseText);
-
-    if (data.error) {
-      throw new Error(data.error);
-    }
-
-    if (!Array.isArray(data) || data.length === 0 || !data[0].generated_text) {
-      throw new Error('Invalid response format from model');
-    }
-
-    return data;
-  } catch (error) {
-    console.error('Error querying model:', error);
-    throw error;
   }
+
+  throw new Error('Max retries reached');
 }
 
 // Route to handle requests to the model
@@ -57,28 +76,16 @@ router.post('/ask', async (req, res) => {
     }
     console.log('Received question:', question);
 
-    // Format the prompt for the fine-tuned model
-    const prompt = `Human: ${question}\nAssistant:`;
-    console.log('Formatted prompt:', prompt);
-
-    const requestBody = {
-      inputs: prompt,
-      parameters: {
-        max_new_tokens: 150,     // Increased for more complete responses
-        temperature: 0.7,        // Controls randomness (0.7 is a good balance)
-        top_p: 0.9,             // Nucleus sampling parameter
-        do_sample: true,        // Enable sampling
-        return_full_text: false  // Only return the generated text
-      }
-    };
-
-    console.log('Request body:', JSON.stringify(requestBody, null, 2));
+    // Format messages for the model
+    const messages = [
+      { role: "user", content: question }
+    ];
 
     // Query model
-    const data = await queryModel(requestBody);
+    const data = await queryModel(messages);
 
-    // Extract and clean up the generated text
-    const generatedText = data[0].generated_text?.trim() || '';
+    // Extract the generated text
+    const generatedText = data[0]?.generated_text?.trim() || '';
     if (!generatedText) {
       console.error('No generated text in response:', data[0]);
       return res.status(500).json({ error: 'No response generated from model' });
@@ -87,11 +94,6 @@ router.post('/ask', async (req, res) => {
     // Clean up the response text
     let finalResponse = generatedText;
     
-    // Remove the prompt if it's included in the response
-    if (finalResponse.includes(prompt)) {
-      finalResponse = finalResponse.split(prompt)[1].trim();
-    }
-
     // Clean up any "Assistant:" prefix if present
     if (finalResponse.startsWith('Assistant:')) {
       finalResponse = finalResponse.slice('Assistant:'.length).trim();
