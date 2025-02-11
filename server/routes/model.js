@@ -6,27 +6,6 @@ dotenv.config();
 
 const router = express.Router();
 
-// Initialize model and tokenizer
-let model = null;
-
-// Function to load and process the model
-async function loadModel() {
-  try {
-    const MODEL_ID = 'alexeugenehunt/autotrain-AlexAI-llama';
-    console.log('Loading model from Hugging Face:', MODEL_ID);
-
-    // Removed pipeline reference
-
-    console.log('Model loaded successfully');
-  } catch (error) {
-    console.error('Error loading model:', error);
-    throw error;
-  }
-}
-
-// Load the model when the server starts
-loadModel().catch(console.error);
-
 // Route to handle requests to the model
 router.post('/ask', async (req, res) => {
   try {
@@ -36,31 +15,28 @@ router.post('/ask', async (req, res) => {
     }
     console.log('Received question:', question);
 
-    // Format the prompt
-    const prompt = `Q: ${question}\nA:`;
+    // Format the prompt for GPT2
+    const prompt = `Human: ${question}\nAssistant:`;
     console.log('Formatted prompt:', prompt);
 
     const requestBody = {
       inputs: prompt,
       parameters: {
-        max_new_tokens: 256,
-        temperature: 0.7,
-        top_p: 0.95,
-        top_k: 50,
-        repetition_penalty: 1.1,
-        do_sample: true,
-        return_full_text: false
+        max_new_tokens: 100,     // Reduced for faster responses
+        temperature: 0.7,        // Controls randomness (0.7 is a good balance)
+        top_p: 0.9,             // Nucleus sampling parameter
+        do_sample: true,        // Enable sampling
+        return_full_text: false  // Only return the generated text
       }
     };
 
     console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
-    // Make a POST request to the Hugging Face Inference API
-    const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrain-AlexAI-llama', {
+    // Make a POST request to the GPT2 model
+    const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     });
@@ -105,10 +81,19 @@ router.post('/ask', async (req, res) => {
       return res.status(500).json({ error: 'No response generated from model' });
     }
 
-    // Remove the prompt from the beginning if it's included
-    const finalResponse = generatedText.startsWith(prompt)
-      ? generatedText.slice(prompt.length).trim()
-      : generatedText;
+    // Clean up the response text
+    let finalResponse = generatedText;
+    
+    // Remove the prompt if it's included in the response
+    if (finalResponse.includes(prompt)) {
+      finalResponse = finalResponse.split(prompt)[1].trim();
+    }
+
+    // Remove any incomplete sentences at the end
+    const sentences = finalResponse.match(/[^.!?]+[.!?]+/g) || [];
+    if (sentences.length > 0) {
+      finalResponse = sentences.join(' ').trim();
+    }
 
     console.log('Final response:', finalResponse);
     return res.json({ response: finalResponse });
