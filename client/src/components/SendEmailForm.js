@@ -50,21 +50,23 @@ function SendEmailForm() {
           title="Any text is allowed, including spaces"
           required
         />
-        <textarea
-          placeholder="Your message"
-          value={message}
-          onChange={(e) => {
-            console.log('Message input value:', e.target.value);
-            setMessage(e.target.value);
-          }}
-          style={styles.textarea}
-          pattern=".*"
-          title="Any text is allowed, including spaces"
-          required
-        />
-        <button type="submit" style={styles.button}>
-          {sent ? '✔' : 'Send'}
-        </button>
+        <div style={styles.messageContainer}>
+          <textarea
+            placeholder="Your message"
+            value={message}
+            onChange={(e) => {
+              console.log('Message input value:', e.target.value);
+              setMessage(e.target.value);
+            }}
+            style={styles.textarea}
+            pattern=".*"
+            title="Any text is allowed, including spaces"
+            required
+          />
+          <button type="submit" style={styles.button}>
+            {sent ? '  ✔  ' : 'SEND?'}
+          </button>
+        </div>
       </form>
     </div>
   );
@@ -94,36 +96,47 @@ const styles = {
     flex: 1,
   },
   input: {
-    backgroundColor: '#f2eeed',
+    backgroundColor: '#dcccbd',
     border: 'none',
     outline: 'none',
     padding: '0.4rem',
     marginBottom: '0.5rem',
-    borderRadius: '4px',
+    borderRadius: '10px',
     fontSize: '0.9rem',
-    color: '#000',
+    color: '#434a54',
+    fontFamily: '"Montserrat", sans-serif',
+  },
+  messageContainer: {
+    position: 'relative',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   textarea: {
-    backgroundColor: '#f2eeed',
+    backgroundColor: '#dcccbd',
     border: 'none',
     outline: 'none',
     padding: '0.4rem',
+    paddingBottom: '2.5rem',
     fontSize: '0.9rem',
-    color: '#000',
-    borderRadius: '4px',
+    color: '#434a54',
+    borderRadius: '10px',
     flex: 1,
     resize: 'none',
-    marginBottom: '0.5rem',
+    fontFamily: '"Montserrat", sans-serif',
   },
   button: {
-    alignSelf: 'flex-end',
-    backgroundColor: '#78e3c3',
+    position: 'absolute',
+    bottom: '0.5rem',
+    right: '0.5rem',
+    backgroundColor: '#d4996f',
     color: '#000',
     border: 'none',
-    borderRadius: '4px',
+    borderRadius: '10px',
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',
     fontSize: '0.9rem',
+    fontFamily: '"Montserrat", sans-serif',
   },
 };
 
