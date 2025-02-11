@@ -220,7 +220,7 @@ const AsteroidsGame = () => {
     const drawPos = (x, y) => [x * width, y * height];
 
     // Draw player
-    ctx.strokeStyle = player.current.iFrames > 0 ? 'cyan' : 'white'; 
+    ctx.strokeStyle = player.current.iFrames > 0 ? 'red' : 'white'; 
     ctx.lineWidth = 2;
     const [px, py] = drawPos(player.current.x, player.current.y);
     ctx.beginPath();
@@ -601,17 +601,17 @@ const AsteroidsGame = () => {
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>← → Rotate</span>
+        }}>⬅️ ➡️: Rotate</span>
         <span style={{
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>↑ Thrust</span>
+        }}>⬆️: Thrust</span>
         <span style={{
           padding: '4px 8px',
           borderRadius: '4px',
           border: '1px solid #666',
-        }}>Space Shoot</span>
+        }}>Space: Shoot</span>
       </div>
       <canvas 
         ref={canvasRef} 
