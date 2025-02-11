@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { pipeline } = require('transformers');
-const path = require('path');
+const fetch = require('node-fetch');
 
 // Initialize model and tokenizer
 let model = null;
@@ -33,25 +32,25 @@ loadModel().catch(console.error);
 router.post('/ask', async (req, res) => {
   try {
     const { question } = req.body;
-    
-    if (!model) {
-      return res.status(503).json({ error: 'Model is still loading. Please try again in a moment.' });
-    }
 
     // Format the prompt
     const prompt = `Q: ${question}\nA:`;
 
-    const response = await model(prompt, {
-      max_new_tokens: 256,
-      do_sample: true,
-      temperature: 0.7,
-      top_p: 0.95,
-      top_k: 50,
-      repetition_penalty: 1.1,
-      return_full_text: false
+    // Make a POST request to the Hugging Face Inference API
+    const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrain-AlexAI-llama', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ inputs: prompt })
     });
 
-    res.json({ response: response[0].generated_text });
+    // Parse the response
+    const data = await response.json();
+
+    if (response.ok) {
+      res.json({ response: data[0].generated_text });
+    } else {
+      res.status(500).json({ error: data.error || 'Failed to generate response' });
+    }
   } catch (error) {
     console.error('Error generating response:', error);
     res.status(500).json({ error: 'Failed to generate response' });
