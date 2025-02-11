@@ -595,6 +595,7 @@ const AsteroidsGame = () => {
         fontFamily: '"Press Start 2P", cursive',
         fontWeight: 'normal',
         width: '100%',
+        marginBottom: '24px',
       }}>
         <span style={{
           padding: '4px 8px',
@@ -623,7 +624,7 @@ const AsteroidsGame = () => {
       />
       <div style={{
         position: 'absolute',
-        top: '16px',
+        top: '40px',
         left: '16px',
         color: 'white',
         fontFamily: '"Press Start 2P", cursive',
@@ -634,7 +635,7 @@ const AsteroidsGame = () => {
       </div>
       <div style={{
         position: 'absolute',
-        top: '16px',
+        top: '40px',
         right: '16px',
         color: 'white',
         fontFamily: '"Press Start 2P", cursive',
