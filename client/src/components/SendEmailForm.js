@@ -134,7 +134,6 @@ const styles = {
     bottom: '0.5rem',
     right: '0.5rem',
     backgroundColor: '#d4996f',
-    color: '#000',
     border: 'none',
     borderRadius: '10px',
     padding: '0.4rem 0.8rem',
