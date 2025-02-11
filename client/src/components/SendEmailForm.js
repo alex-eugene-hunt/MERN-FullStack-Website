@@ -92,6 +92,7 @@ const styles = {
     fontSize: '1.2rem',
     color: '#dcccbd',
     fontFamily: '"Faster One", cursive',
+    fontWeight: 'normal',
   },
   form: {
     display: 'flex',
@@ -123,7 +124,7 @@ const styles = {
     paddingBottom: '2.5rem',
     fontSize: '0.9rem',
     color: '#434a54',
-    borderRadius: '10px 10px 20px 20px',
+    borderRadius: '10px 10px 50px 50px',
     flex: 1,
     resize: 'none',
     fontFamily: '"Montserrat", sans-serif',
@@ -139,6 +140,7 @@ const styles = {
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',
     fontSize: '0.9rem',
+    color: '#434a54',
     fontFamily: '"Montserrat", sans-serif',
   },
 };
