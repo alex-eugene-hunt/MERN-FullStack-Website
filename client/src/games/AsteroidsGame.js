@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import rocketEmoji from '../assets/rocket-emoji.png';
 
 const AsteroidsGame = () => {
   const canvasRef = useRef(null);
@@ -424,7 +425,7 @@ const AsteroidsGame = () => {
       {!gameStarted && !gameOver && (
         <div style={{
           position: 'absolute',
-          top: '55%',
+          top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
           textAlign: 'center',
@@ -437,41 +438,20 @@ const AsteroidsGame = () => {
             borderRadius: '10px',
             border: '2px solid white',
             width: '300px',
-            height: '200px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             fontFamily: 'Consolas, monospace',
           }}>
-            <h2 style={{
-              fontSize: '28px',
-              margin: '0 0 5px 0',
-              color: 'white',
-              fontFamily: 'Consolas, monospace',
-            }}>High Scores</h2>
-            <ul style={{
-              listStyle: 'none',
-              padding: 0,
-              margin: '0',
-              textAlign: 'center',
-            }}>
-              {highScores.map((score, index) => (
-                <li
-                  key={index}
-                  style={{
-                    fontSize: '18px',
-                    padding: '8px 0',
-                    color:
-                      index === 0 ? '#FFD700' : // Gold
-                      index === 1 ? '#C0C0C0' : // Silver
-                      index === 2 ? '#CD7F32' : // Bronze
-                      'white',
-                  }}
-                >
-                  {index + 1}. {score.playerName}: {score.score}
-                </li>
-              ))}
-            </ul>
+            <img 
+              src={rocketEmoji} 
+              alt="Rocket" 
+              style={{
+                width: '100px',
+                height: '100px',
+                marginBottom: '20px'
+              }}
+            />
             <button style={{
               padding: '10px 30px',
               fontSize: '18px',
@@ -484,7 +464,7 @@ const AsteroidsGame = () => {
               marginBottom: '2px',
               transition: 'background-color 0.2s',
               fontFamily: 'Consolas, monospace',
-            }} onClick={startGame}>Start Game</button>
+            }} onClick={startGame}>PLAY ASTEROIDS</button>
           </div>
         </div>
       )}
@@ -522,6 +502,29 @@ const AsteroidsGame = () => {
               color: 'white',
               fontFamily: 'Consolas, monospace',
             }}>Score: {score}</p>
+            <ul style={{
+              listStyle: 'none',
+              padding: 0,
+              margin: '0 0 10px 0',
+              textAlign: 'center',
+            }}>
+              {highScores.map((score, index) => (
+                <li
+                  key={index}
+                  style={{
+                    fontSize: '16px',
+                    padding: '4px 0',
+                    color:
+                      index === 0 ? '#FFD700' : // Gold
+                      index === 1 ? '#C0C0C0' : // Silver
+                      index === 2 ? '#CD7F32' : // Bronze
+                      'white',
+                  }}
+                >
+                  {index + 1}. {score.playerName}: {score.score}
+                </li>
+              ))}
+            </ul>
             <input
               type="text"
               placeholder="Enter your name"

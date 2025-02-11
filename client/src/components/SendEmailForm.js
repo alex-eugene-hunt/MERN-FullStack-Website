@@ -25,6 +25,10 @@ function SendEmailForm() {
         setSent(true);
         setName('');
         setMessage('');
+        // Reset sent state after 3 seconds
+        setTimeout(() => {
+          setSent(false);
+        }, 3000);
       } else {
         setSent(false);
       }
