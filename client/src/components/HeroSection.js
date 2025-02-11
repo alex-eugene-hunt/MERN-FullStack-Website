@@ -38,6 +38,8 @@ function HeroSection() {
 
   async function handleAskQuestion() {
     try {
+      setDisplayedAnswer('AlexAI is thinking...');
+      
       const response = await fetch('/api/model/ask', {
         method: 'POST',
         headers: {
@@ -45,19 +47,29 @@ function HeroSection() {
         },
         body: JSON.stringify({ question }),
       });
+
       const data = await response.json();
-      const answer = data.answer;
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to get response from the model');
+      }
+
+      const answer = data.response;
+
+      if (!answer) {
+        throw new Error('No response received from the model');
+      }
 
       // Start typing effect
       let currentIndex = 0;
       const intervalId = setInterval(() => {
-        setDisplayedAnswer(answer.substring(0, currentIndex));
+        setDisplayedAnswer('AlexAI says: ' + answer.substring(0, currentIndex));
         currentIndex++;
         if (currentIndex > answer.length) clearInterval(intervalId);
       }, 50);
     } catch (error) {
       console.error('Error fetching the model response:', error);
-      setDisplayedAnswer('Error: Unable to get a response from the model.');
+      setDisplayedAnswer('Error: ' + (error.message || 'Unable to get a response from the model.'));
     }
   }
 
