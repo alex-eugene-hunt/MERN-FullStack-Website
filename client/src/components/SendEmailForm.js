@@ -124,7 +124,7 @@ const styles = {
     paddingBottom: '2.5rem',
     fontSize: '0.9rem',
     color: '#434a54',
-    borderRadius: '10px 10px 50px 50px',
+    borderRadius: '10px 10px 40px 40px',
     flex: 1,
     resize: 'none',
     fontFamily: '"Montserrat", sans-serif',
