@@ -15,14 +15,14 @@ router.post('/ask', async (req, res) => {
     }
     console.log('Received question:', question);
 
-    // Format the prompt for GPT2
+    // Format the prompt for the fine-tuned model
     const prompt = `Human: ${question}\nAssistant:`;
     console.log('Formatted prompt:', prompt);
 
     const requestBody = {
       inputs: prompt,
       parameters: {
-        max_new_tokens: 100,     // Reduced for faster responses
+        max_new_tokens: 150,     // Increased for more complete responses
         temperature: 0.7,        // Controls randomness (0.7 is a good balance)
         top_p: 0.9,             // Nucleus sampling parameter
         do_sample: true,        // Enable sampling
@@ -32,8 +32,8 @@ router.post('/ask', async (req, res) => {
 
     console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
-    // Make a POST request to the GPT2 model
-    const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
+    // Make a POST request to your fine-tuned model
+    const response = await fetch('https://api-inference.huggingface.co/models/alexeugenehunt/autotrainAlexAI-openai-gpt', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -87,6 +87,11 @@ router.post('/ask', async (req, res) => {
     // Remove the prompt if it's included in the response
     if (finalResponse.includes(prompt)) {
       finalResponse = finalResponse.split(prompt)[1].trim();
+    }
+
+    // Clean up any "Assistant:" prefix if present
+    if (finalResponse.startsWith('Assistant:')) {
+      finalResponse = finalResponse.slice('Assistant:'.length).trim();
     }
 
     // Remove any incomplete sentences at the end
