@@ -1,7 +1,9 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
-import ResumeSection from './components/ResumeSection';
+import ExperienceSection from './components/ExperienceSection';
+import EducationSection from './components/EducationSection';
+import ProjectsSection from './components/ProjectsSection';
 import SocialSection from './components/SocialSection';
 import './styles.css';
 
@@ -11,7 +13,9 @@ function App() {
       <HeroSection />
       <div style={styles.contentContainer}>
         <AboutSection />
-        <ResumeSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ProjectsSection />
         <SocialSection />
       </div>
     </div>

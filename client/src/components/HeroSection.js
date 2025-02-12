@@ -111,7 +111,7 @@ function HeroSection() {
                 fontSize: '35px',
                 fontWeight: 'normal',
                 marginTop: '2rem',
-                marginBottom: '2.5rem'
+                marginBottom: '2rem'
               }}>
               Ask AlexAI
             </h3>
