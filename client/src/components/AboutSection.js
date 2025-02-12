@@ -17,7 +17,7 @@ function AboutSection() {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, []);
+  }, [photos.length]);
 
   const interests = [
     { icon: <FaGuitar />, label: 'Music' },
