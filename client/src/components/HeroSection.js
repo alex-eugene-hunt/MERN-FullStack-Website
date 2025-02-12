@@ -195,22 +195,27 @@ const styles = {
     margin: 0,
     padding: 0,
     width: '100%',
-    height: '100vh',
+    minHeight: '100vh',
+    position: 'relative',
+    overflow: 'hidden'
   },
   vantaContainer: {
-    position: 'absolute', // Change to fixed for background effect
+    position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     height: '100vh',
-    zIndex: -1, // Put it behind all content
+    zIndex: -1,
   },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    marginTop: '1rem',
+    minHeight: '100vh',
+    width: '100%',
+    position: 'relative',
+    zIndex: 1
   },
   heroSection: {
     display: 'flex',

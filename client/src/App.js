@@ -1,19 +1,29 @@
 import React from 'react';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
-import ExperienceSection from './components/ExperienceSection';
+import ResumeSection from './components/ResumeSection';
 import SocialSection from './components/SocialSection';
-import './styles.css';  // Where we have html { scroll-behavior: smooth; } etc.
+import './styles.css';
 
 function App() {
   return (
-    <div>
+    <div style={styles.container}>
       <HeroSection />
       <AboutSection />
-      <ExperienceSection />
+      <ResumeSection />
       <SocialSection />
     </div>
   );
 }
+
+const styles = {
+  container: {
+    margin: 0,
+    padding: 0,
+    width: '100%',
+    minHeight: '100vh',
+    backgroundColor: '#f8f9fa',
+  }
+};
 
 export default App;
