@@ -55,7 +55,7 @@ function AboutSection() {
                     key={index}
                     style={{
                       ...styles.slideDot,
-                      backgroundColor: currentSlide === index ? '#b14b32' : '#ccc',
+                      backgroundColor: currentSlide === index ? '#007bff' : '#ccc',
                     }}
                     onClick={() => setCurrentSlide(index)}
                   />
@@ -96,7 +96,7 @@ function AboutSection() {
 const styles = {
   section: {
     padding: '6rem 2rem',
-    backgroundColor: '#021825',
+    backgroundColor: '#ffffff',
   },
   container: {
     maxWidth: '1200px',
@@ -106,7 +106,7 @@ const styles = {
     fontSize: '2.5rem',
     marginBottom: '3rem',
     textAlign: 'center',
-    color: '#021825',
+    color: '#2d3436',
   },
   content: {
     display: 'flex',
@@ -186,12 +186,11 @@ const styles = {
   },
   interestIcon: {
     fontSize: '2rem',
-    color: '#b14b32',
-    backgroundColor: '#434a54',
+    color: '#007bff',
   },
   interestLabel: {
     fontSize: '0.9rem',
-    color: '#dcccbd',
+    color: '#2d3436',
     textAlign: 'center',
   },
 };
