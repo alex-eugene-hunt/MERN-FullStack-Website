@@ -109,13 +109,15 @@ function HeroSection() {
                 textAlign: 'center', 
                 fontFamily: 'Monoton', 
                 fontSize: '35px',
-                fontWeight: 'normal'
+                fontWeight: 'normal',
+                marginTop: '2rem',
+                marginBottom: '2.5rem'
               }}>
               Ask AlexAI
             </h3>
             <div style={{ 
               width: '80%', 
-              margin: '-5px auto 0', 
+              margin: '0 auto', 
               display: 'flex', 
               gap: '0.5rem', 
               alignItems: 'center',
