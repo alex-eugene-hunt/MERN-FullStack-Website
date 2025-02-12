@@ -36,42 +36,22 @@ function HeroSection() {
     };
   }, [vantaEffect]);
 
+  async function askLLM(prompt) {
+    const response = await fetch("http://localhost:8000/inference", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: prompt })
+    });
+    const data = await response.json();
+    return data.response;
+  }
+
   async function handleAskQuestion() {
     try {
       setDisplayedAnswer('AlexAI is thinking...');
       
-      const response = await fetch('https://mern-fullstack-website.onrender.com/api/model/ask', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question }),
-      });
-
-      // Check if the response is empty
-      const responseText = await response.text();
-      if (!responseText) {
-        throw new Error('Empty response from server');
-      }
-
-      // Try to parse the JSON
-      let data;
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error('Failed to parse response:', responseText);
-        throw new Error('Invalid response format from server');
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to get response from the model');
-      }
-
-      const answer = data.response;
-      if (!answer) {
-        throw new Error('No response received from the model');
-      }
-
+      const answer = await askLLM(question);
+      
       // Start typing effect
       let currentIndex = 0;
       const typingSpeed = 50; // milliseconds per character

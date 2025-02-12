@@ -1,40 +1,124 @@
 import React from 'react';
+import { FaLinkedin, FaGithub, FaTwitter, FaEnvelope, FaMedium } from 'react-icons/fa';
 
 function SocialSection() {
+  const socialLinks = [
+    {
+      name: 'LinkedIn',
+      url: 'https://linkedin.com/in/your-profile',
+      icon: <FaLinkedin />,
+      color: '#0077B5'
+    },
+    {
+      name: 'GitHub',
+      url: 'https://github.com/your-username',
+      icon: <FaGithub />,
+      color: '#333'
+    },
+    {
+      name: 'Twitter',
+      url: 'https://twitter.com/your-username',
+      icon: <FaTwitter />,
+      color: '#1DA1F2'
+    },
+    {
+      name: 'Email',
+      url: 'mailto:your.email@example.com',
+      icon: <FaEnvelope />,
+      color: '#EA4335'
+    },
+    {
+      name: 'Medium',
+      url: 'https://medium.com/@your-username',
+      icon: <FaMedium />,
+      color: '#000000'
+    }
+  ];
+
   return (
     <section id="social" style={styles.section}>
-      <h2>Connect With Me</h2>
-      <ul style={styles.socialList}>
-        <li>
-          <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noreferrer">
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/your-username" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-        </li>
-        <li>
-          <a href="https://twitter.com/your-username" target="_blank" rel="noreferrer">
-            Twitter
-          </a>
-        </li>
-        {/* Add more socials as needed */}
-      </ul>
+      <div style={styles.container}>
+        <h2 style={styles.heading}>Let's Connect</h2>
+        <p style={styles.description}>
+          Feel free to reach out for collaborations or just a friendly hello
+        </p>
+        <div style={styles.socialGrid}>
+          {socialLinks.map((social, index) => (
+            <a
+              key={index}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.socialLink}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = social.color;
+                e.currentTarget.style.transform = 'translateY(-5px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '#fff';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              <span style={{ ...styles.icon, color: social.color }}>{social.icon}</span>
+              <span style={styles.socialName}>{social.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
 
 const styles = {
   section: {
-    padding: '4rem 2rem',
-    backgroundColor: '#fff',
-    textAlign: 'center',
+    padding: '6rem 2rem',
+    backgroundColor: '#ffffff',
   },
-  socialList: {
-    listStyle: 'none',
-    padding: 0,
+  container: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+  },
+  heading: {
+    fontSize: '2.5rem',
+    marginBottom: '1rem',
+    textAlign: 'center',
+    color: '#2d3436',
+  },
+  description: {
+    textAlign: 'center',
+    color: '#636e72',
+    marginBottom: '3rem',
+    fontSize: '1.1rem',
+  },
+  socialGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gap: '2rem',
+    justifyContent: 'center',
+    maxWidth: '1000px',
+    margin: '0 auto',
+  },
+  socialLink: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '2rem',
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s ease',
+    textDecoration: 'none',
+    cursor: 'pointer',
+  },
+  icon: {
+    fontSize: '2rem',
+    marginBottom: '1rem',
+    transition: 'all 0.3s ease',
+  },
+  socialName: {
+    color: '#2d3436',
+    fontSize: '1.1rem',
+    fontWeight: '500',
   },
 };
 
