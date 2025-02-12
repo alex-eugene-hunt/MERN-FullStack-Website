@@ -75,7 +75,6 @@ function HeroSection() {
 
   return (
     <div id="hero" style={styles.pageContainer}>
-      {/* Vanta.js Background */}
       <div ref={vantaRef} style={styles.vantaContainer}>
       </div>
         
@@ -83,7 +82,7 @@ function HeroSection() {
       <Navbar />
         
       {/* Content Wrapper */}
-      <div style={{ ...styles.contentWrapper, marginTop: '5rem' }}>
+      <div style={styles.contentWrapper}>
         {/* Hero Section */}
         <div style={styles.heroSection}>
           <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
@@ -195,27 +194,28 @@ const styles = {
     margin: 0,
     padding: 0,
     width: '100%',
-    minHeight: '100vh',
+    height: '100vh',
     position: 'relative',
-    overflow: 'hidden'
+    backgroundColor: '#021825',
   },
   vantaContainer: {
-    position: 'fixed',
+    position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
-    height: '100vh',
-    zIndex: -1,
+    height: '100%',
+    zIndex: 0,
   },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    minHeight: '100vh',
+    height: '100%',
     width: '100%',
     position: 'relative',
-    zIndex: 1
+    zIndex: 1,
+    paddingTop: '5rem',
   },
   heroSection: {
     display: 'flex',

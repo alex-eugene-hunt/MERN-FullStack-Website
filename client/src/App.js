@@ -9,9 +9,11 @@ function App() {
   return (
     <div style={styles.container}>
       <HeroSection />
-      <AboutSection />
-      <ResumeSection />
-      <SocialSection />
+      <div style={styles.contentContainer}>
+        <AboutSection />
+        <ResumeSection />
+        <SocialSection />
+      </div>
     </div>
   );
 }
@@ -22,6 +24,8 @@ const styles = {
     padding: 0,
     width: '100%',
     minHeight: '100vh',
+  },
+  contentContainer: {
     backgroundColor: '#f8f9fa',
   }
 };
