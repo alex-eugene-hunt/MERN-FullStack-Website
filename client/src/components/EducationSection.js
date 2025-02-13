@@ -26,6 +26,7 @@ function EducationSection() {
 
   return (
     <div>
+      <div className="section-header">Education</div>
       <section id="education" style={styles.section}>
         <div style={styles.container}>
           <div style={styles.timeline}>

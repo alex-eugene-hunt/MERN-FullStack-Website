@@ -28,9 +28,9 @@ function ResumeSection() {
 
   return (
     <div>
+      <div className="section-header">Resume</div>
       <section id="resume" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.heading}>Resume</h2>
           <div style={styles.downloadSection}>
             <a
               href="/path-to-your-resume.pdf"
