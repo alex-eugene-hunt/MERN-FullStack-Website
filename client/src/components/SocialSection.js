@@ -75,12 +75,13 @@ function SocialSection() {
 const styles = {
   section: {
     backgroundColor: '#d4996f',
-    padding: '2rem 0',
+    padding: 0,
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '2rem',
   },
   heading: {
     fontSize: '2.5rem',

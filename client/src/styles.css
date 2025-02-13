@@ -31,7 +31,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin: 0;
   border-top: 10px solid #b14b32;
   border-bottom: 10px solid #b14b32;
 }

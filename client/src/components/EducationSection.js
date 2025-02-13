@@ -71,12 +71,13 @@ function EducationSection() {
 const styles = {
   section: {
     backgroundColor: '#d4996f',
-    padding: '2rem 0',
+    padding: 0,
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '2rem',
   },
   timeline: {
     display: 'flex',
@@ -167,6 +168,12 @@ const styles = {
     padding: '0.5rem 1rem',
     borderRadius: '2rem',
     fontSize: '0.9rem',
+  },
+  achievementsContainer: {
+    marginBottom: '1.5rem',
+  },
+  coursesContainer: {
+    marginBottom: '1.5rem',
   },
 };
 

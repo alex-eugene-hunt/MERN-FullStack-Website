@@ -38,7 +38,6 @@ function ExperienceSection() {
       <div className="section-header">Experience</div>
       <section id="experience" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.heading}>Professional Experience</h2>
           <div style={styles.timeline}>
             {experiences.map((exp, index) => (
               <div key={index} style={styles.experienceCard}>
@@ -81,12 +80,13 @@ function ExperienceSection() {
 const styles = {
   section: {
     backgroundColor: '#d4996f',
-    padding: '2rem 0',
+    padding: 0,
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '2rem',
   },
   heading: {
     fontSize: '2.5rem',
