@@ -56,7 +56,7 @@ function AboutSection() {
                       key={index}
                       style={{
                         ...styles.slideDot,
-                        backgroundColor: currentSlide === index ? '#007bff' : '#ccc',
+                        backgroundColor: currentSlide === index ? '#b14b32' : '#d4996f',
                       }}
                       onClick={() => setCurrentSlide(index)}
                     />
@@ -110,26 +110,28 @@ const styles = {
     display: 'flex',
     gap: '4rem',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   leftColumn: {
-    flex: '0 0 500px',
+    flex: '1',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    maxWidth: '50%',
   },
   rightColumn: {
-    flex: 1,
+    flex: '1',
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem',
+    maxWidth: '50%',
   },
   slideshowContainer: {
     width: '500px',
     height: '500px',
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: '10px',
+    borderRadius: '2.25rem',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   },
   slideImage: {
