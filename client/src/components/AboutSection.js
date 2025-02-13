@@ -132,21 +132,22 @@ const styles = {
     minHeight: '100vh',
   },
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1000px',
     margin: '0 auto',
     padding: '2rem',
   },
   gridContainer: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateColumns: 'repeat(2, 450px)',
     gap: '2rem',
     width: '100%',
+    justifyContent: 'center',
   },
   gridItem: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '400px',
+    height: '450px',
   },
   gridBox: {
     backgroundColor: '#434a54',
