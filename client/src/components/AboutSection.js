@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaGuitar, FaBeer, FaGamepad, FaCamera, FaHiking, FaPlane, FaCode, FaBook, FaMusic } from 'react-icons/fa';
+import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish } from 'react-icons/fa';
 import AboutMe1 from '../assets/AboutMe_1.jpg';
 import AboutMe2 from '../assets/AboutMe_2.jpeg';
 import AboutMe3 from '../assets/AboutMe_3.jpeg';
@@ -20,15 +20,15 @@ function AboutSection() {
   }, [photos.length]);
 
   const interests = [
-    { icon: <FaGuitar />, label: 'Music' },
+    { icon: <FaGuitar />, label: 'Guitar' },
     { icon: <FaBeer />, label: 'Craft Beer' },
-    { icon: <FaGamepad />, label: 'Gaming' },
-    { icon: <FaCamera />, label: 'Photography' },
     { icon: <FaHiking />, label: 'Hiking' },
+    { icon: <FaGamepad />, label: 'Gaming' },
     { icon: <FaPlane />, label: 'Travel' },
+    { icon: <FaUtensils />, label: 'Cooking' },
     { icon: <FaCode />, label: 'Coding' },
-    { icon: <FaBook />, label: 'Reading' },
-    { icon: <FaMusic />, label: 'Concerts' },
+    { icon: <FaSkiing />, label: 'Skiing' },
+    { icon: <FaFish />, label: 'Fishing' },
   ];
 
   return (
@@ -106,12 +106,6 @@ const styles = {
     margin: '0 auto',
     padding: '2rem',
   },
-  heading: {
-    fontSize: '2.5rem',
-    marginBottom: '3rem',
-    textAlign: 'center',
-    color: '#2d3436',
-  },
   content: {
     display: 'flex',
     gap: '4rem',
@@ -170,8 +164,10 @@ const styles = {
   paragraph: {
     fontSize: '1.1rem',
     lineHeight: '1.8',
-    color: '#2d3436',
+    color: '#dcccbd',
     marginBottom: '1.5rem',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
   },
   interestsGrid: {
     display: 'grid',
@@ -184,7 +180,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.5rem',
     padding: '1rem',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#434a54',
     borderRadius: '10px',
     transition: 'transform 0.3s ease',
     cursor: 'pointer',
@@ -194,12 +190,14 @@ const styles = {
   },
   interestIcon: {
     fontSize: '2rem',
-    color: '#007bff',
+    color: '#b14b32',
   },
   interestLabel: {
     fontSize: '0.9rem',
-    color: '#2d3436',
+    color: '#b14b32',
     textAlign: 'center',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
   },
 };
 
