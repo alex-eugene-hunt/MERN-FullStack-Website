@@ -10,26 +10,36 @@ function Navbar() {
     const handleScroll = () => {
       const sections = ['hero', 'about', 'resume', 'experience', 'education', 'projects', 'social'];
       const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
       
       // Check if we're at the top
       setIsAtTop(scrollPosition < 50);
 
-      // Special handling for hero section
-      if (scrollPosition < window.innerHeight / 2) {
+      // Special handling for hero section at the top
+      if (scrollPosition < windowHeight / 3) {
         setActiveSection('hero');
         return;
       }
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
+      // Calculate visibility percentage for each section
+      let maxVisibility = 0;
+      let mostVisibleSection = 'hero';
+
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop - 100 && scrollPosition < offsetTop + offsetHeight - 100) {
-            setActiveSection(section);
-            break;
+          const rect = element.getBoundingClientRect();
+          const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+          const visibilityPercentage = visibleHeight / windowHeight;
+
+          if (visibilityPercentage > maxVisibility) {
+            maxVisibility = visibilityPercentage;
+            mostVisibleSection = sectionId;
           }
         }
-      }
+      });
+
+      setActiveSection(mostVisibleSection);
     };
 
     window.addEventListener('scroll', handleScroll);
