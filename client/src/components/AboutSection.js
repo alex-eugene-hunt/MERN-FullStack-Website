@@ -115,10 +115,14 @@ const styles = {
   content: {
     display: 'flex',
     gap: '4rem',
-    alignItems: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   leftColumn: {
     flex: '0 0 500px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rightColumn: {
     flex: 1,
