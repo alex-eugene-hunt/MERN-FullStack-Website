@@ -39,9 +39,17 @@ function Navbar() {
   }, []);
 
   const scrollToSection = (sectionId) => {
+    if (sectionId === 'hero') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
-      const offsetTop = element.offsetTop - 78;
+      const offsetTop = element.offsetTop + 78;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
