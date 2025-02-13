@@ -72,44 +72,50 @@ function AboutSection() {
 
             {/* Top Right - Bio */}
             <div style={styles.gridItem}>
-              <div style={styles.bioContent}>
-                <p style={styles.paragraph}>
-                  I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
-                  through code. My journey in software development has led me to specialize in full-stack 
-                  development using the MERN (MongoDB, Express.js, React, Node.js) stack.
-                </p>
-                <p style={styles.paragraph}>
-                  What drives me is the opportunity to solve complex problems and create meaningful user 
-                  experiences. When I'm not coding, you can find me exploring new technologies, contributing 
-                  to open-source projects, or working on personal projects that challenge my skills.
-                </p>
+              <div style={styles.gridBox}>
+                <div style={styles.bioContent}>
+                  <p style={styles.paragraph}>
+                    I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
+                    through code. My journey in software development has led me to specialize in full-stack 
+                    development using the MERN (MongoDB, Express.js, React, Node.js) stack.
+                  </p>
+                  <p style={styles.paragraph}>
+                    What drives me is the opportunity to solve complex problems and create meaningful user 
+                    experiences. When I'm not coding, you can find me exploring new technologies, contributing 
+                    to open-source projects, or working on personal projects that challenge my skills.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Bottom Left - Quick Facts */}
             <div style={styles.gridItem}>
-              <div style={styles.quickFactsContainer}>
-                {quickFacts.map((fact, index) => (
-                  <div key={index} style={styles.quickFactItem}>
-                    <div style={styles.quickFactIcon}>{fact.icon}</div>
-                    <div style={styles.quickFactContent}>
-                      <div style={styles.quickFactLabel}>{fact.label}</div>
-                      <div style={styles.quickFactValue}>{fact.value}</div>
+              <div style={styles.gridBox}>
+                <div style={styles.quickFactsContainer}>
+                  {quickFacts.map((fact, index) => (
+                    <div key={index} style={styles.quickFactItem}>
+                      <div style={styles.quickFactIcon}>{fact.icon}</div>
+                      <div style={styles.quickFactContent}>
+                        <div style={styles.quickFactLabel}>{fact.label}</div>
+                        <div style={styles.quickFactValue}>{fact.value}</div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* Bottom Right - Interest Icons */}
             <div style={styles.gridItem}>
-              <div style={styles.interestsGrid}>
-                {interests.map((interest, index) => (
-                  <div key={index} style={styles.interestItem}>
-                    <div style={styles.interestIcon}>{interest.icon}</div>
-                    <span style={styles.interestLabel}>{interest.label}</span>
-                  </div>
-                ))}
+              <div style={styles.gridBox}>
+                <div style={styles.interestsGrid}>
+                  {interests.map((interest, index) => (
+                    <div key={index} style={styles.interestItem}>
+                      <div style={styles.interestIcon}>{interest.icon}</div>
+                      <span style={styles.interestLabel}>{interest.label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -140,14 +146,27 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '400px',
+  },
+  gridBox: {
+    backgroundColor: '#434a54',
+    borderRadius: '2.25rem',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+    width: '100%',
+    height: '100%',
+    padding: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'auto',
   },
   slideshowContainer: {
-    width: '500px',
-    height: '500px',
+    width: '100%',
+    height: '100%',
     position: 'relative',
     overflow: 'hidden',
     borderRadius: '2.25rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
   },
   slideImage: {
     position: 'absolute',
