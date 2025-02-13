@@ -139,6 +139,10 @@ const styles = {
     right: '0.5rem',
     backgroundColor: '#d4996f',
     border: 'none',
+    /**
+     * The border radius of the button, given as a string representing the desired
+     * radius in pixels (e.g. '20px').
+     */
     borderRadius: '20px',
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',

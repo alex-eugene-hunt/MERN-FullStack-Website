@@ -53,7 +53,7 @@ function ProjectsSection() {
 
 const styles = {
   section: {
-    backgroundColor: '#dcccbd',
+    backgroundColor: '#d4996f',
     padding: 0,
     minHeight: '100vh',
   },

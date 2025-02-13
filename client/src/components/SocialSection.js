@@ -74,7 +74,7 @@ function SocialSection() {
 
 const styles = {
   section: {
-    backgroundColor: '#d4996f',
+    backgroundColor: '#dcccbd',
     padding: 0,
     minHeight: '100vh',
   },
