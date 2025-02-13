@@ -40,10 +40,6 @@ function SocialSection() {
       <div className="section-header">Connect</div>
       <section id="social" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.heading}>Let's Connect</h2>
-          <p style={styles.description}>
-            Feel free to reach out for collaborations or just a friendly hello
-          </p>
           <div style={styles.socialGrid}>
             {socialLinks.map((social, index) => (
               <a

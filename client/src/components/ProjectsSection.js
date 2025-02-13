@@ -16,7 +16,6 @@ function ProjectsSection() {
 
   return (
     <div>
-      <div className="section-header">Projects</div>
       <section id="projects" style={styles.section}>
         <div style={styles.container}>
           <div style={styles.projectsGrid}>

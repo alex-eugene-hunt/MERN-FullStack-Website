@@ -36,7 +36,6 @@ function AboutSection() {
       <div className="section-header">About</div>
       <section id="about" style={styles.section}>
         <div style={styles.container}>
-          <h2 style={styles.heading}>About Me</h2>
           <div style={styles.content}>
             <div style={styles.leftColumn}>
               <div style={styles.slideshowContainer}>
