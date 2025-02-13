@@ -107,15 +107,13 @@ function AboutSection() {
 
             {/* Bottom Right - Interest Icons */}
             <div style={styles.gridItem}>
-              <div style={styles.gridBox}>
-                <div style={styles.interestsGrid}>
-                  {interests.map((interest, index) => (
-                    <div key={index} style={styles.interestItem}>
-                      <div style={styles.interestIcon}>{interest.icon}</div>
-                      <span style={styles.interestLabel}>{interest.label}</span>
-                    </div>
-                  ))}
-                </div>
+              <div style={styles.interestsGrid}>
+                {interests.map((interest, index) => (
+                  <div key={index} style={styles.interestItem}>
+                    <div style={styles.interestIcon}>{interest.icon}</div>
+                    <span style={styles.interestLabel}>{interest.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -246,25 +244,27 @@ const styles = {
   interestsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '0.75rem',
-    width: '100%',
+    gap: '1.5rem',
+    width: '450px',
+    height: '450px',
+    padding: '2rem',
+    borderRadius: '2.25rem',
   },
   interestItem: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: '0.75rem',
     padding: '0.75rem',
-    borderRadius: '10px',
     transition: 'transform 0.3s ease',
     cursor: 'pointer',
   },
   interestIcon: {
-    fontSize: '1.5rem',
+    fontSize: '2.5rem',
     color: '#b14b32',
   },
   interestLabel: {
-    fontSize: '0.8rem',
+    fontSize: '1rem',
     color: '#b14b32',
     textAlign: 'center',
     fontFamily: 'Montserrat, sans-serif',
