@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish } from 'react-icons/fa';
+import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import AboutMe1 from '../assets/AboutMe_1.jpg';
 import AboutMe2 from '../assets/AboutMe_2.jpeg';
 import AboutMe3 from '../assets/AboutMe_3.jpeg';
@@ -10,12 +10,10 @@ function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
-  // Auto-advance slideshow
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % photos.length);
-    }, 5000); // Change slide every 5 seconds
-
+    }, 5000);
     return () => clearInterval(timer);
   }, [photos.length]);
 
@@ -31,13 +29,20 @@ function AboutSection() {
     { icon: <FaFish />, label: 'Fishing' },
   ];
 
+  const quickFacts = [
+    { icon: <FaMapMarkerAlt />, label: 'Address', value: 'Seattle, WA 98101' },
+    { icon: <FaPhone />, label: 'Phone', value: '(206) 555-0123' },
+    { icon: <FaEnvelope />, label: 'Email', value: 'alex.hunt@example.com' },
+  ];
+
   return (
     <div>
       <div className="section-header">About</div>
       <section id="about" style={styles.section}>
         <div style={styles.container}>
-          <div style={styles.content}>
-            <div style={styles.leftColumn}>
+          <div style={styles.gridContainer}>
+            {/* Top Left - Slideshow */}
+            <div style={styles.gridItem}>
               <div style={styles.slideshowContainer}>
                 {photos.map((photo, index) => (
                   <img
@@ -64,9 +69,10 @@ function AboutSection() {
                 </div>
               </div>
             </div>
-            
-            <div style={styles.rightColumn}>
-              <div style={styles.textContent}>
+
+            {/* Top Right - Bio */}
+            <div style={styles.gridItem}>
+              <div style={styles.bioContent}>
                 <p style={styles.paragraph}>
                   I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
                   through code. My journey in software development has led me to specialize in full-stack 
@@ -78,7 +84,25 @@ function AboutSection() {
                   to open-source projects, or working on personal projects that challenge my skills.
                 </p>
               </div>
+            </div>
 
+            {/* Bottom Left - Quick Facts */}
+            <div style={styles.gridItem}>
+              <div style={styles.quickFactsContainer}>
+                {quickFacts.map((fact, index) => (
+                  <div key={index} style={styles.quickFactItem}>
+                    <div style={styles.quickFactIcon}>{fact.icon}</div>
+                    <div style={styles.quickFactContent}>
+                      <div style={styles.quickFactLabel}>{fact.label}</div>
+                      <div style={styles.quickFactValue}>{fact.value}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Right - Interest Icons */}
+            <div style={styles.gridItem}>
               <div style={styles.interestsGrid}>
                 {interests.map((interest, index) => (
                   <div key={index} style={styles.interestItem}>
@@ -106,25 +130,16 @@ const styles = {
     margin: '0 auto',
     padding: '2rem',
   },
-  content: {
-    display: 'flex',
-    gap: '4rem',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  gridContainer: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: '2rem',
+    width: '100%',
   },
-  leftColumn: {
-    flex: '1',
+  gridItem: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    maxWidth: '50%',
-  },
-  rightColumn: {
-    flex: '1',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '2rem',
-    maxWidth: '50%',
   },
   slideshowContainer: {
     width: '500px',
@@ -160,8 +175,9 @@ const styles = {
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
   },
-  textContent: {
-    marginBottom: '2rem',
+  bioContent: {
+    padding: '2rem',
+    width: '100%',
   },
   paragraph: {
     fontSize: '1.1rem',
@@ -171,10 +187,48 @@ const styles = {
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
   },
+  quickFactsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
+    width: '100%',
+    padding: '2rem',
+  },
+  quickFactItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    backgroundColor: '#434a54',
+    padding: '1rem',
+    borderRadius: '10px',
+  },
+  quickFactIcon: {
+    fontSize: '1.5rem',
+    color: '#b14b32',
+  },
+  quickFactContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.25rem',
+  },
+  quickFactLabel: {
+    fontSize: '0.9rem',
+    color: '#b14b32',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+  },
+  quickFactValue: {
+    fontSize: '0.9rem',
+    color: '#dcccbd',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+  },
   interestsGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '1.5rem',
+    gap: '1rem',
+    width: '100%',
+    padding: '2rem',
   },
   interestItem: {
     display: 'flex',
