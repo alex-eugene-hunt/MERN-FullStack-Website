@@ -15,37 +15,39 @@ function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Projects</h2>
-        <div style={styles.projectsGrid}>
-          {projects.map((project, index) => (
-            <div key={index} style={styles.projectCard}>
-              <div style={styles.imageContainer}>
-                <img src={project.image} alt={project.title} style={styles.projectImage} />
-                <div style={styles.overlay}>
-                  <a href={project.github} target="_blank" rel="noreferrer" style={styles.iconLink}>
-                    <FaGithub style={styles.icon} />
-                  </a>
-                  <a href={project.liveDemo} target="_blank" rel="noreferrer" style={styles.iconLink}>
-                    <FaExternalLinkAlt style={styles.icon} />
-                  </a>
+    <div>
+      <div className="section-header">Projects</div>
+      <section id="projects" style={styles.section}>
+        <div style={styles.container}>
+          <div style={styles.projectsGrid}>
+            {projects.map((project, index) => (
+              <div key={index} style={styles.projectCard}>
+                <div style={styles.imageContainer}>
+                  <img src={project.image} alt={project.title} style={styles.projectImage} />
+                  <div style={styles.overlay}>
+                    <a href={project.github} target="_blank" rel="noreferrer" style={styles.iconLink}>
+                      <FaGithub style={styles.icon} />
+                    </a>
+                    <a href={project.liveDemo} target="_blank" rel="noreferrer" style={styles.iconLink}>
+                      <FaExternalLinkAlt style={styles.icon} />
+                    </a>
+                  </div>
+                </div>
+                <div style={styles.projectContent}>
+                  <h3 style={styles.projectTitle}>{project.title}</h3>
+                  <p style={styles.projectDescription}>{project.description}</p>
+                  <div style={styles.techStack}>
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} style={styles.techTag}>{tech}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div style={styles.projectContent}>
-                <h3 style={styles.projectTitle}>{project.title}</h3>
-                <p style={styles.projectDescription}>{project.description}</p>
-                <div style={styles.techStack}>
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} style={styles.techTag}>{tech}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 

@@ -19,3 +19,19 @@ body {
 #root {
   min-height: 100vh;
 }
+
+.section-header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #434a54;
+  color: #dcccbd;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  border-top: 10px solid #b14b32;
+  border-bottom: 10px solid #b14b32;
+}

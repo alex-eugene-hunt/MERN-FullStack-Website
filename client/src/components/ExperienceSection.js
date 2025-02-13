@@ -34,44 +34,47 @@ function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Professional Experience</h2>
-        <div style={styles.timeline}>
-          {experiences.map((exp, index) => (
-            <div key={index} style={styles.experienceCard}>
-              <div style={styles.iconContainer}>
-                <FaBriefcase style={styles.icon} />
-              </div>
-              <div style={styles.content}>
-                <div style={styles.header}>
-                  <h3 style={styles.title}>{exp.title}</h3>
-                  <p style={styles.company}>{exp.company} - {exp.location}</p>
-                  <p style={styles.period}>{exp.period}</p>
+    <div>
+      <div className="section-header">Experience</div>
+      <section id="experience" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Professional Experience</h2>
+          <div style={styles.timeline}>
+            {experiences.map((exp, index) => (
+              <div key={index} style={styles.experienceCard}>
+                <div style={styles.iconContainer}>
+                  <FaBriefcase style={styles.icon} />
                 </div>
-                <p style={styles.description}>{exp.description}</p>
-                <div style={styles.responsibilitiesContainer}>
-                  <h4 style={styles.subheading}>Key Responsibilities</h4>
-                  <ul style={styles.list}>
-                    {exp.responsibilities.map((responsibility, i) => (
-                      <li key={i} style={styles.listItem}>{responsibility}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div style={styles.technologiesContainer}>
-                  <h4 style={styles.subheading}>Technologies Used</h4>
-                  <div style={styles.techStack}>
-                    {exp.technologies.map((tech, i) => (
-                      <span key={i} style={styles.techTag}>{tech}</span>
-                    ))}
+                <div style={styles.content}>
+                  <div style={styles.header}>
+                    <h3 style={styles.title}>{exp.title}</h3>
+                    <p style={styles.company}>{exp.company} - {exp.location}</p>
+                    <p style={styles.period}>{exp.period}</p>
+                  </div>
+                  <p style={styles.description}>{exp.description}</p>
+                  <div style={styles.responsibilitiesContainer}>
+                    <h4 style={styles.subheading}>Key Responsibilities</h4>
+                    <ul style={styles.list}>
+                      {exp.responsibilities.map((responsibility, i) => (
+                        <li key={i} style={styles.listItem}>{responsibility}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div style={styles.technologiesContainer}>
+                    <h4 style={styles.subheading}>Technologies Used</h4>
+                    <div style={styles.techStack}>
+                      {exp.technologies.map((tech, i) => (
+                        <span key={i} style={styles.techTag}>{tech}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 

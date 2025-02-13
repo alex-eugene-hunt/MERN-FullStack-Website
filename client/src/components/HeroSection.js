@@ -74,7 +74,7 @@ function HeroSection() {
   }
 
   return (
-    <div id="hero" style={styles.pageContainer}>
+    <div style={styles.pageContainer}>
       <div ref={vantaRef} style={styles.vantaContainer}>
       </div>
         
