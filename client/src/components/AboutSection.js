@@ -262,6 +262,8 @@ const styles = {
   interestIcon: {
     fontSize: '2.5rem',
     color: '#b14b32',
+    backgroundColor: '#434a54',
+    borderRadius: '10px',
   },
   interestLabel: {
     fontSize: '1rem',
