@@ -572,7 +572,7 @@ const AsteroidsGame = () => {
             borderRadius: '10px',
             border: '2px solid white',
             width: '300px',
-            height: '200px',
+            height: '245px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
