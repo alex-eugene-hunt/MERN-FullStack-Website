@@ -27,45 +27,49 @@ function ResumeSection() {
   ];
 
   return (
-    <section id="resume" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Resume</h2>
-        <div style={styles.downloadSection}>
-          <a
-            href="/path-to-your-resume.pdf"
-            target="_blank"
-            rel="noreferrer"
-            style={styles.downloadButton}
-          >
-            <FaDownload style={styles.downloadIcon} />
-            Download Resume
-          </a>
-        </div>
+    <div>
+      <div className="section-header">Resume</div>
+      <section id="resume" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Resume</h2>
+          <div style={styles.downloadSection}>
+            <a
+              href="/path-to-your-resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              style={styles.downloadButton}
+            >
+              <FaDownload style={styles.downloadIcon} />
+              Download Resume
+            </a>
+          </div>
 
-        <div style={styles.timeline}>
-          {experiences.map((exp, index) => (
-            <div key={index} style={styles.timelineItem}>
-              <div style={styles.timelineIcon}>
-                {exp.type === 'work' ? <FaBriefcase /> : <FaGraduationCap />}
+          <div style={styles.timeline}>
+            {experiences.map((exp, index) => (
+              <div key={index} style={styles.timelineItem}>
+                <div style={styles.timelineIcon}>
+                  {exp.type === 'work' ? <FaBriefcase /> : <FaGraduationCap />}
+                </div>
+                <div style={styles.timelineContent}>
+                  <h3 style={styles.timelineTitle}>{exp.title}</h3>
+                  <h4 style={styles.timelineCompany}>{exp.company}</h4>
+                  <p style={styles.timelinePeriod}>{exp.period}</p>
+                  <p style={styles.timelineDescription}>{exp.description}</p>
+                </div>
               </div>
-              <div style={styles.timelineContent}>
-                <h3 style={styles.timelineTitle}>{exp.title}</h3>
-                <h4 style={styles.timelineCompany}>{exp.company}</h4>
-                <p style={styles.timelinePeriod}>{exp.period}</p>
-                <p style={styles.timelineDescription}>{exp.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#dcccbd',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

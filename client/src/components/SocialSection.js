@@ -36,43 +36,47 @@ function SocialSection() {
   ];
 
   return (
-    <section id="social" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Let's Connect</h2>
-        <p style={styles.description}>
-          Feel free to reach out for collaborations or just a friendly hello
-        </p>
-        <div style={styles.socialGrid}>
-          {socialLinks.map((social, index) => (
-            <a
-              key={index}
-              href={social.url}
-              target="_blank"
-              rel="noreferrer"
-              style={styles.socialLink}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = social.color;
-                e.currentTarget.style.transform = 'translateY(-5px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#fff';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              <span style={{ ...styles.icon, color: social.color }}>{social.icon}</span>
-              <span style={styles.socialName}>{social.name}</span>
-            </a>
-          ))}
+    <div>
+      <div className="section-header">Connect</div>
+      <section id="social" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>Let's Connect</h2>
+          <p style={styles.description}>
+            Feel free to reach out for collaborations or just a friendly hello
+          </p>
+          <div style={styles.socialGrid}>
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.url}
+                target="_blank"
+                rel="noreferrer"
+                style={styles.socialLink}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = social.color;
+                  e.currentTarget.style.transform = 'translateY(-5px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#fff';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <span style={{ ...styles.icon, color: social.color }}>{social.icon}</span>
+                <span style={styles.socialName}>{social.name}</span>
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#d4996f',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

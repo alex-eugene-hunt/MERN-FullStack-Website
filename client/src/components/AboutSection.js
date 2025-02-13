@@ -32,71 +32,75 @@ function AboutSection() {
   ];
 
   return (
-    <section id="about" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>About Me</h2>
-        <div style={styles.content}>
-          <div style={styles.leftColumn}>
-            <div style={styles.slideshowContainer}>
-              {photos.map((photo, index) => (
-                <img
-                  key={index}
-                  src={photo}
-                  alt={`About Me ${index + 1}`}
-                  style={{
-                    ...styles.slideImage,
-                    opacity: currentSlide === index ? 1 : 0,
-                  }}
-                />
-              ))}
-              <div style={styles.slideDots}>
-                {photos.map((_, index) => (
-                  <button
+    <div>
+      <div className="section-header">About</div>
+      <section id="about" style={styles.section}>
+        <div style={styles.container}>
+          <h2 style={styles.heading}>About Me</h2>
+          <div style={styles.content}>
+            <div style={styles.leftColumn}>
+              <div style={styles.slideshowContainer}>
+                {photos.map((photo, index) => (
+                  <img
                     key={index}
+                    src={photo}
+                    alt={`About Me ${index + 1}`}
                     style={{
-                      ...styles.slideDot,
-                      backgroundColor: currentSlide === index ? '#007bff' : '#ccc',
+                      ...styles.slideImage,
+                      opacity: currentSlide === index ? 1 : 0,
                     }}
-                    onClick={() => setCurrentSlide(index)}
                   />
+                ))}
+                <div style={styles.slideDots}>
+                  {photos.map((_, index) => (
+                    <button
+                      key={index}
+                      style={{
+                        ...styles.slideDot,
+                        backgroundColor: currentSlide === index ? '#007bff' : '#ccc',
+                      }}
+                      onClick={() => setCurrentSlide(index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div style={styles.rightColumn}>
+              <div style={styles.textContent}>
+                <p style={styles.paragraph}>
+                  I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
+                  through code. My journey in software development has led me to specialize in full-stack 
+                  development using the MERN (MongoDB, Express.js, React, Node.js) stack.
+                </p>
+                <p style={styles.paragraph}>
+                  What drives me is the opportunity to solve complex problems and create meaningful user 
+                  experiences. When I'm not coding, you can find me exploring new technologies, contributing 
+                  to open-source projects, or working on personal projects that challenge my skills.
+                </p>
+              </div>
+
+              <div style={styles.interestsGrid}>
+                {interests.map((interest, index) => (
+                  <div key={index} style={styles.interestItem}>
+                    <div style={styles.interestIcon}>{interest.icon}</div>
+                    <span style={styles.interestLabel}>{interest.label}</span>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
-          
-          <div style={styles.rightColumn}>
-            <div style={styles.textContent}>
-              <p style={styles.paragraph}>
-                I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
-                through code. My journey in software development has led me to specialize in full-stack 
-                development using the MERN (MongoDB, Express.js, React, Node.js) stack.
-              </p>
-              <p style={styles.paragraph}>
-                What drives me is the opportunity to solve complex problems and create meaningful user 
-                experiences. When I'm not coding, you can find me exploring new technologies, contributing 
-                to open-source projects, or working on personal projects that challenge my skills.
-              </p>
-            </div>
-
-            <div style={styles.interestsGrid}>
-              {interests.map((interest, index) => (
-                <div key={index} style={styles.interestItem}>
-                  <div style={styles.interestIcon}>{interest.icon}</div>
-                  <span style={styles.interestLabel}>{interest.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#dcccbd',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

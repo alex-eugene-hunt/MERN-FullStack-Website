@@ -25,61 +25,58 @@ function EducationSection() {
   ];
 
   return (
-    <section id="education" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.heading}>Education</h2>
-        <div style={styles.timeline}>
-          {education.map((edu, index) => (
-            <div key={index} style={styles.educationCard}>
-              <div style={styles.iconContainer}>
-                <FaGraduationCap style={styles.icon} />
-              </div>
-              <div style={styles.content}>
-                <h3 style={styles.school}>{edu.school}</h3>
-                <h4 style={styles.degree}>{edu.degree}</h4>
-                <p style={styles.period}>{edu.period}</p>
-                <p style={styles.description}>{edu.description}</p>
-                
-                <div style={styles.achievementsContainer}>
-                  <h5 style={styles.subheading}>Achievements</h5>
-                  <ul style={styles.list}>
-                    {edu.achievements.map((achievement, i) => (
-                      <li key={i} style={styles.listItem}>{achievement}</li>
-                    ))}
-                  </ul>
+    <div>
+      <div className="section-header">Education</div>
+      <section id="education" style={styles.section}>
+        <div style={styles.container}>
+          <div style={styles.timeline}>
+            {education.map((edu, index) => (
+              <div key={index} style={styles.educationCard}>
+                <div style={styles.iconContainer}>
+                  <FaGraduationCap style={styles.icon} />
                 </div>
+                <div style={styles.content}>
+                  <h3 style={styles.school}>{edu.school}</h3>
+                  <h4 style={styles.degree}>{edu.degree}</h4>
+                  <p style={styles.period}>{edu.period}</p>
+                  <p style={styles.description}>{edu.description}</p>
+                  
+                  <div style={styles.achievementsContainer}>
+                    <h5 style={styles.subheading}>Achievements</h5>
+                    <ul style={styles.list}>
+                      {edu.achievements.map((achievement, i) => (
+                        <li key={i} style={styles.listItem}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
 
-                <div style={styles.coursesContainer}>
-                  <h5 style={styles.subheading}>Key Courses</h5>
-                  <div style={styles.coursesList}>
-                    {edu.courses.map((course, i) => (
-                      <span key={i} style={styles.courseTag}>{course}</span>
-                    ))}
+                  <div style={styles.coursesContainer}>
+                    <h5 style={styles.subheading}>Key Courses</h5>
+                    <div style={styles.coursesList}>
+                      {edu.courses.map((course, i) => (
+                        <span key={i} style={styles.courseTag}>{course}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#d4996f',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
-  },
-  heading: {
-    fontSize: '2.5rem',
-    marginBottom: '3rem',
-    textAlign: 'center',
-    color: '#2d3436',
   },
   timeline: {
     display: 'flex',

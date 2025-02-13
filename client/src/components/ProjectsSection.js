@@ -53,8 +53,9 @@ function ProjectsSection() {
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#dcccbd',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

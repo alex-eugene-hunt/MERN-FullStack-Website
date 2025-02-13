@@ -80,8 +80,9 @@ function ExperienceSection() {
 
 const styles = {
   section: {
-    padding: '6rem 2rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#d4996f',
+    padding: '2rem 0',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
