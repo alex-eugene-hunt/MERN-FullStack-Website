@@ -265,7 +265,7 @@ const styles = {
   },
   interestIcon: {
     fontSize: '2.5rem',
-    color: '#dcccbd',
+    color: '#b14b32',
   },
   interestLabel: {
     fontSize: '0.9rem',
