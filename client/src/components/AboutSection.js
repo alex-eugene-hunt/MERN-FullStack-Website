@@ -10,6 +10,7 @@ function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [vantaEffect, setVantaEffect] = useState(null);
   const [flippedCards, setFlippedCards] = useState({});
+  const [hoveredCard, setHoveredCard] = useState(null);
   const vantaRef = useRef(null);
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
@@ -181,9 +182,12 @@ function AboutSection() {
                       key={index} 
                       style={{
                         ...styles.interestItem,
-                        transform: flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0)',
+                        transform: `${flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0)'} ${hoveredCard === index ? 'translateY(-5px) scale(1.05)' : ''}`,
+                        boxShadow: hoveredCard === index ? '0 8px 16px rgba(0,0,0,0.2)' : 'none'
                       }}
                       onClick={() => handleCardClick(index)}
+                      onMouseEnter={() => setHoveredCard(index)}
+                      onMouseLeave={() => setHoveredCard(null)}
                     >
                       <div style={styles.cardFront}>
                         <div style={styles.interestIcon}>{interest.icon}</div>
@@ -336,12 +340,8 @@ const styles = {
     width: '100%',
     aspectRatio: '1',
     cursor: 'pointer',
-    transition: 'transform 0.6s',
+    transition: 'all 0.3s ease',
     transformStyle: 'preserve-3d',
-    ':hover': {
-      transform: 'scale(1.05)',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
-    },
   },
   cardFront: {
     position: 'absolute',
@@ -356,11 +356,6 @@ const styles = {
     justifyContent: 'center',
     gap: '0.5rem',
     padding: '1rem',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    ':hover': {
-      transform: 'translateY(-5px)',
-      boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
-    },
   },
   cardBack: {
     position: 'absolute',
