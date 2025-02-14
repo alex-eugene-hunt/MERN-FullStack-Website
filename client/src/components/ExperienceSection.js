@@ -198,7 +198,7 @@ const styles = {
   },
   tech: {
     backgroundColor: '#b14b32',
-    color: '#fff',
+    color: '#dcccbd',
     padding: '0.3rem 0.8rem',
     borderRadius: '1rem',
     fontSize: '0.9rem',

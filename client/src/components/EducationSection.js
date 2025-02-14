@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
+import MSDegreeOU from '../assets/MS - Degree - OU.jpg';
+import BSDegreeOU from '../assets/BS Degree - OU.jpg';
 
 function EducationSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -82,6 +84,15 @@ function EducationSection() {
                       )}
                     </div>
                   </div>
+                  {(edu.school === 'University of Oklahoma') && (
+                    <div style={styles.degreeImageContainer}>
+                      <img 
+                        src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
+                        alt={`${edu.degree} from ${edu.school}`}
+                        style={styles.degreeImage}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -143,6 +154,18 @@ const styles = {
   },
   icon: {
     fontSize: '1.2rem',
+  },
+  degreeImageContainer: {
+    marginTop: '1.5rem',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  degreeImage: {
+    width: '100%',
+    maxWidth: '800px',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
   }
 };
 
