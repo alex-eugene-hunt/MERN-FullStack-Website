@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGraduationCap } from 'react-icons/fa';
+import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 
 function EducationSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -28,24 +28,26 @@ function EducationSection() {
 
   const education = [
     {
+      degree: 'Master of Information and Data Science',
       school: 'University of California, Berkeley',
-      degree: 'Bachelor of Science in Computer Science',
-      period: '2019 - 2023',
-      description: 'Focused on software engineering, artificial intelligence, and data science.',
-      achievements: [
-        'GPA: 3.8/4.0',
-        'Dean\'s List: All semesters',
-        'Senior Thesis: Machine Learning Applications in Portfolio Management'
-      ],
-      courses: [
-        'Advanced Algorithms',
-        'Machine Learning',
-        'Database Systems',
-        'Computer Networks',
-        'Software Engineering'
-      ]
+      location: 'Berkeley, CA',
+      period: 'Jan 2025 - (Dec 2025)',
+      gpa: null
     },
-    // Add more education entries as needed
+    {
+      degree: 'Master of Computer Science',
+      school: 'University of Oklahoma',
+      location: 'Norman, OK',
+      period: 'Jan 2024 - Dec 2024',
+      gpa: '3.9 / 4.0'
+    },
+    {
+      degree: 'Bachelor of Computer Science',
+      school: 'University of Oklahoma',
+      location: 'Norman, OK',
+      period: 'Oct 2020 - Dec 2023',
+      gpa: '3.83 / 4.0'
+    }
   ];
 
   return (
@@ -55,31 +57,29 @@ function EducationSection() {
         <div style={styles.container}>
           <div style={styles.timeline}>
             {education.map((edu, index) => (
-              <div key={index} style={styles.educationCard}>
-                <div style={styles.iconContainer}>
-                  <FaGraduationCap style={styles.icon} />
-                </div>
-                <div style={styles.content}>
-                  <h3 style={styles.school}>{edu.school}</h3>
-                  <h4 style={styles.degree}>{edu.degree}</h4>
-                  <p style={styles.period}>{edu.period}</p>
-                  <p style={styles.description}>{edu.description}</p>
-                  
-                  <div style={styles.achievementsContainer}>
-                    <h5 style={styles.subheading}>Achievements</h5>
-                    <ul style={styles.list}>
-                      {edu.achievements.map((achievement, i) => (
-                        <li key={i} style={styles.listItem}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div style={styles.coursesContainer}>
-                    <h5 style={styles.subheading}>Key Courses</h5>
-                    <div style={styles.coursesList}>
-                      {edu.courses.map((course, i) => (
-                        <span key={i} style={styles.courseTag}>{course}</span>
-                      ))}
+              <div key={index} style={styles.timelineItem}>
+                <div style={styles.timelineContent}>
+                  <div style={styles.header}>
+                    <h3 style={styles.title}>{edu.degree}</h3>
+                    <div style={styles.schoolInfo}>
+                      <div style={styles.infoItem}>
+                        <FaGraduationCap style={styles.icon} />
+                        <span>{edu.school}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaMapMarkerAlt style={styles.icon} />
+                        <span>{edu.location}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaCalendar style={styles.icon} />
+                        <span>{edu.period}</span>
+                      </div>
+                      {edu.gpa && (
+                        <div style={styles.infoItem}>
+                          <FaStar style={styles.icon} />
+                          <span>GPA: {edu.gpa}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -94,110 +94,55 @@ function EducationSection() {
 
 const styles = {
   section: {
-    padding: 0,
+    padding: '2rem 0',
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '2rem',
+    padding: '0 2rem',
   },
   timeline: {
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem',
   },
-  educationCard: {
+  timelineItem: {
     display: 'flex',
-    gap: '2rem',
-    backgroundColor: '#f8f9fa',
+    position: 'relative',
+    backgroundColor: '#434a54',
     borderRadius: '1rem',
-    padding: '2rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '2px solid #dcccbd',
   },
-  iconContainer: {
-    backgroundColor: '#007bff',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  icon: {
-    color: '#ffffff',
-    fontSize: '1.5rem',
-  },
-  content: {
+  timelineContent: {
     flex: 1,
+    padding: '2rem',
   },
-  school: {
-    fontSize: '1.5rem',
-    color: '#2d3436',
-    marginBottom: '0.5rem',
-  },
-  degree: {
-    fontSize: '1.25rem',
-    color: '#007bff',
-    marginBottom: '0.5rem',
-  },
-  period: {
-    fontSize: '1rem',
-    color: '#636e72',
+  header: {
     marginBottom: '1rem',
   },
-  description: {
-    fontSize: '1rem',
-    color: '#2d3436',
-    marginBottom: '1.5rem',
-    lineHeight: '1.6',
+  title: {
+    fontSize: '1.5rem',
+    color: '#dcccbd',
+    marginBottom: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
-  subheading: {
-    fontSize: '1.1rem',
-    color: '#2d3436',
-    marginBottom: '0.75rem',
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-    marginBottom: '1.5rem',
-  },
-  listItem: {
-    fontSize: '1rem',
-    color: '#2d3436',
-    marginBottom: '0.5rem',
-    paddingLeft: '1.5rem',
-    position: 'relative',
-    '&::before': {
-      content: '""',
-      position: 'absolute',
-      left: 0,
-      top: '0.5rem',
-      width: '6px',
-      height: '6px',
-      backgroundColor: '#007bff',
-      borderRadius: '50%',
-    },
-  },
-  coursesList: {
+  schoolInfo: {
     display: 'flex',
     flexWrap: 'wrap',
+    gap: '1.5rem',
+  },
+  infoItem: {
+    display: 'flex',
+    alignItems: 'center',
     gap: '0.5rem',
+    color: '#b14b32',
+    fontSize: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
-  courseTag: {
-    backgroundColor: '#e9ecef',
-    color: '#2d3436',
-    padding: '0.5rem 1rem',
-    borderRadius: '2rem',
-    fontSize: '0.9rem',
-  },
-  achievementsContainer: {
-    marginBottom: '1.5rem',
-  },
-  coursesContainer: {
-    marginBottom: '1.5rem',
-  },
+  icon: {
+    fontSize: '1.2rem',
+  }
 };
 
 export default EducationSection;

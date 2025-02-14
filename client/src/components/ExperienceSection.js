@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaBriefcase } from 'react-icons/fa';
+import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 
 function ExperienceSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -28,32 +28,19 @@ function ExperienceSection() {
 
   const experiences = [
     {
-      title: 'Senior Software Engineer',
-      company: 'Tech Company',
-      location: 'San Francisco, CA',
-      period: 'Jan 2022 - Present',
-      description: 'Led development of full-stack applications using modern technologies.',
-      responsibilities: [
-        'Architected and implemented scalable web applications using React and Node.js',
-        'Led a team of 5 developers and mentored junior engineers',
-        'Improved application performance by 40% through optimization techniques',
-        'Implemented CI/CD pipelines and automated testing procedures'
+      title: 'Software Engineer Intern',
+      company: 'CymSTAR LLC',
+      location: 'Broken Arrow, OK',
+      period: 'Feb 2024 - Dec 2024',
+      description: [
+        'Designed Docker and Podman containers to streamline the deployment process, reducing 70% of deployment overhead by eliminating configuration conflicts.',
+        'Addressed existing CI/CD bugs and developed GitLab Pipelines to improve automation, decreasing build times by 80% and significantly enhanced code reliability.',
+        'Configured and managed GitLab Runners to enable parallel and efficient builds.',
+        'Shortened feedback loops by 50%, allowing quicker iteration and continuous integration.',
+        'Implemented integration and unit testing frameworks in Python and C++ to ensure reliability in large codebases.',
+        'Created an automatic Redmine ticket updater using GitLab\'s merge request API using C# and dotnet.'
       ],
-      technologies: ['React', 'Node.js', 'MongoDB', 'AWS', 'Docker']
-    },
-    {
-      title: 'Software Engineer',
-      company: 'Innovation Labs',
-      location: 'Seattle, WA',
-      period: 'Jun 2020 - Dec 2021',
-      description: 'Developed and maintained enterprise-level web applications.',
-      responsibilities: [
-        'Built RESTful APIs using Node.js and Express',
-        'Developed responsive front-end interfaces using React',
-        'Implemented authentication and authorization systems',
-        'Collaborated with UX designers to improve user experience'
-      ],
-      technologies: ['JavaScript', 'React', 'Node.js', 'PostgreSQL', 'Redis']
+      technologies: ['Docker', 'Podman', 'GitLab CI/CD', 'Python', 'C++', 'C#', '.NET', 'Unit Testing']
     }
   ];
 
@@ -64,32 +51,34 @@ function ExperienceSection() {
         <div style={styles.container}>
           <div style={styles.timeline}>
             {experiences.map((exp, index) => (
-              <div key={index} style={styles.experienceCard}>
-                <div style={styles.iconContainer}>
-                  <FaBriefcase style={styles.icon} />
-                </div>
-                <div style={styles.content}>
+              <div key={index} style={styles.timelineItem}>
+                <div style={styles.timelineContent}>
                   <div style={styles.header}>
                     <h3 style={styles.title}>{exp.title}</h3>
-                    <p style={styles.company}>{exp.company} - {exp.location}</p>
-                    <p style={styles.period}>{exp.period}</p>
-                  </div>
-                  <p style={styles.description}>{exp.description}</p>
-                  <div style={styles.responsibilitiesContainer}>
-                    <h4 style={styles.subheading}>Key Responsibilities</h4>
-                    <ul style={styles.list}>
-                      {exp.responsibilities.map((responsibility, i) => (
-                        <li key={i} style={styles.listItem}>{responsibility}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div style={styles.technologiesContainer}>
-                    <h4 style={styles.subheading}>Technologies Used</h4>
-                    <div style={styles.techStack}>
-                      {exp.technologies.map((tech, i) => (
-                        <span key={i} style={styles.techTag}>{tech}</span>
-                      ))}
+                    <div style={styles.companyInfo}>
+                      <div style={styles.infoItem}>
+                        <FaBriefcase style={styles.icon} />
+                        <span>{exp.company}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaMapMarkerAlt style={styles.icon} />
+                        <span>{exp.location}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaCalendar style={styles.icon} />
+                        <span>{exp.period}</span>
+                      </div>
                     </div>
+                  </div>
+                  <ul style={styles.descriptionList}>
+                    {exp.description.map((item, i) => (
+                      <li key={i} style={styles.descriptionItem}>{item}</li>
+                    ))}
+                  </ul>
+                  <div style={styles.technologies}>
+                    {exp.technologies.map((tech, i) => (
+                      <span key={i} style={styles.tech}>{tech}</span>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -103,117 +92,91 @@ function ExperienceSection() {
 
 const styles = {
   section: {
-    padding: 0,
+    padding: '2rem 0',
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '2rem',
-  },
-  heading: {
-    fontSize: '2.5rem',
-    marginBottom: '3rem',
-    textAlign: 'center',
-    color: '#2d3436',
+    padding: '0 2rem',
   },
   timeline: {
     display: 'flex',
     flexDirection: 'column',
     gap: '2rem',
   },
-  experienceCard: {
+  timelineItem: {
     display: 'flex',
-    gap: '2rem',
-    backgroundColor: '#f8f9fa',
+    position: 'relative',
+    backgroundColor: '#434a54',
     borderRadius: '1rem',
-    padding: '2rem',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '2px solid #dcccbd',
   },
-  iconContainer: {
-    backgroundColor: '#007bff',
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  icon: {
-    color: '#ffffff',
-    fontSize: '1.5rem',
-  },
-  content: {
+  timelineContent: {
     flex: 1,
+    padding: '2rem',
   },
   header: {
     marginBottom: '1.5rem',
   },
   title: {
     fontSize: '1.5rem',
-    color: '#2d3436',
-    marginBottom: '0.5rem',
+    color: '#dcccbd',
+    marginBottom: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
-  company: {
-    fontSize: '1.25rem',
-    color: '#007bff',
-    marginBottom: '0.5rem',
+  companyInfo: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '1.5rem',
+    marginBottom: '1rem',
   },
-  period: {
+  infoItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    color: '#b14b32',
     fontSize: '1rem',
-    color: '#636e72',
+    fontFamily: 'Montserrat, sans-serif',
   },
-  description: {
-    fontSize: '1rem',
-    color: '#2d3436',
-    marginBottom: '1.5rem',
-    lineHeight: '1.6',
+  icon: {
+    fontSize: '1.2rem',
   },
-  subheading: {
-    fontSize: '1.1rem',
-    color: '#2d3436',
-    marginBottom: '0.75rem',
-  },
-  list: {
+  descriptionList: {
     listStyle: 'none',
     padding: 0,
-    marginBottom: '1.5rem',
+    margin: '0 0 1.5rem 0',
   },
-  listItem: {
-    fontSize: '1rem',
-    color: '#2d3436',
-    marginBottom: '0.5rem',
+  descriptionItem: {
+    color: '#dcccbd',
+    marginBottom: '0.75rem',
     paddingLeft: '1.5rem',
     position: 'relative',
-    '&::before': {
+    fontFamily: 'Montserrat, sans-serif',
+    lineHeight: '1.6',
+    '&:before': {
       content: '""',
       position: 'absolute',
       left: 0,
-      top: '0.5rem',
+      top: '0.6em',
       width: '6px',
       height: '6px',
-      backgroundColor: '#007bff',
+      backgroundColor: '#b14b32',
       borderRadius: '50%',
     },
   },
-  techStack: {
+  technologies: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '0.5rem',
+    gap: '0.75rem',
   },
-  techTag: {
-    backgroundColor: '#e9ecef',
-    color: '#2d3436',
-    padding: '0.5rem 1rem',
-    borderRadius: '2rem',
+  tech: {
+    padding: '0.4rem 0.8rem',
+    backgroundColor: '#b14b32',
+    color: '#dcccbd',
+    borderRadius: '1rem',
     fontSize: '0.9rem',
-  },
-  responsibilitiesContainer: {
-    marginBottom: '1.5rem',
-  },
-  technologiesContainer: {
-    marginBottom: '1.5rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
 };
 

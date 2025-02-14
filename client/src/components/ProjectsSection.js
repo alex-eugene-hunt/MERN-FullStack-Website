@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaCalendar, FaLink, FaCode } from 'react-icons/fa';
 
 function ProjectsSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -28,14 +28,31 @@ function ProjectsSection() {
 
   const projects = [
     {
-      title: 'Personal Portfolio Website',
-      description: 'A full-stack MERN portfolio website showcasing my projects and skills. Features include interactive components, email functionality, and responsive design.',
-      technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS3'],
-      github: 'https://github.com/yourusername/portfolio',
-      liveDemo: 'https://your-portfolio-url.com',
-      image: '/path-to-project-image.jpg',
+      title: 'Full-Stack (MERN) Personal Website',
+      period: 'Jan 2025 - Present',
+      website: 'www.alex-eugene-hunt.rocks',
+      github: 'https://github.com/alex-eugene-hunt/MERN-FullStack-Website',
+      description: [
+        'Personal website created from scratch using Mongo, Express, React, and Node.js.',
+        'Fine-tuned local LLM to answer personal questions about myself that users may want to know.',
+        'Implemented nodemailer to create an email sending form to allow users to easily send me an email.',
+        'Utilized MongoDB to include a playable Asteroids game that keeps a global leaderboard.'
+      ],
+      technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'LLM', 'Nodemailer']
     },
-    // Add more projects as needed
+    {
+      title: 'Meteorite Landings Data Mining Application',
+      period: 'Aug 2024 - Dec 2024',
+      organization: 'University of Oklahoma',
+      github: 'https://github.com/alex-eugene-hunt/SoftwareProject-College-OU-CS5593',
+      description: [
+        'Developed a Python-based data mining application with advanced machine learning algorithms.',
+        'Enabled accurate classification, discovering geographical hotspots for further scientific research.',
+        'Needed to visualize and interpret meteorite distribution for non-technical stakeholders.',
+        'Created clustering models leveraging coordinates and built a GUI for easy data exploration.'
+      ],
+      technologies: ['Python', 'Machine Learning', 'Data Mining', 'GUI Development', 'Data Visualization']
+    }
   ];
 
   return (
@@ -46,23 +63,44 @@ function ProjectsSection() {
           <div style={styles.projectsGrid}>
             {projects.map((project, index) => (
               <div key={index} style={styles.projectCard}>
-                <div style={styles.imageContainer}>
-                  <img src={project.image} alt={project.title} style={styles.projectImage} />
-                  <div style={styles.overlay}>
-                    <a href={project.github} target="_blank" rel="noreferrer" style={styles.iconLink}>
-                      <FaGithub style={styles.icon} />
-                    </a>
-                    <a href={project.liveDemo} target="_blank" rel="noreferrer" style={styles.iconLink}>
-                      <FaExternalLinkAlt style={styles.icon} />
-                    </a>
-                  </div>
-                </div>
                 <div style={styles.projectContent}>
-                  <h3 style={styles.projectTitle}>{project.title}</h3>
-                  <p style={styles.projectDescription}>{project.description}</p>
-                  <div style={styles.techStack}>
+                  <div style={styles.header}>
+                    <h3 style={styles.title}>{project.title}</h3>
+                    <div style={styles.projectInfo}>
+                      <div style={styles.infoItem}>
+                        <FaCalendar style={styles.icon} />
+                        <span>{project.period}</span>
+                      </div>
+                      {project.organization && (
+                        <div style={styles.infoItem}>
+                          <FaCode style={styles.icon} />
+                          <span>{project.organization}</span>
+                        </div>
+                      )}
+                      {project.website && (
+                        <div style={styles.infoItem}>
+                          <FaLink style={styles.icon} />
+                          <a href={`https://${project.website}`} target="_blank" rel="noopener noreferrer" style={styles.link}>
+                            {project.website}
+                          </a>
+                        </div>
+                      )}
+                      <div style={styles.infoItem}>
+                        <FaGithub style={styles.icon} />
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" style={styles.link}>
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <ul style={styles.descriptionList}>
+                    {project.description.map((item, i) => (
+                      <li key={i} style={styles.descriptionItem}>{item}</li>
+                    ))}
+                  </ul>
+                  <div style={styles.technologies}>
                     {project.technologies.map((tech, i) => (
-                      <span key={i} style={styles.techTag}>{tech}</span>
+                      <span key={i} style={styles.tech}>{tech}</span>
                     ))}
                   </div>
                 </div>
@@ -77,102 +115,95 @@ function ProjectsSection() {
 
 const styles = {
   section: {
-    padding: 0,
+    padding: '2rem 0',
     minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '2rem',
-  },
-  heading: {
-    fontSize: '2.5rem',
-    marginBottom: '3rem',
-    textAlign: 'center',
-    color: '#2d3436',
+    padding: '0 2rem',
   },
   projectsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    display: 'flex',
+    flexDirection: 'column',
     gap: '2rem',
-    padding: '1rem',
   },
   projectCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#434a54',
     borderRadius: '1rem',
-    overflow: 'hidden',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'translateY(-5px)',
-    },
-  },
-  imageContainer: {
-    position: 'relative',
-    paddingTop: '56.25%', // 16:9 aspect ratio
-    backgroundColor: '#e9ecef',
-  },
-  projectImage: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '2rem',
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
-    '&:hover': {
-      opacity: 1,
-    },
-  },
-  iconLink: {
-    color: '#ffffff',
-    fontSize: '1.5rem',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'scale(1.1)',
-    },
-  },
-  icon: {
-    fontSize: '2rem',
+    border: '2px solid #dcccbd',
   },
   projectContent: {
-    padding: '1.5rem',
+    padding: '2rem',
   },
-  projectTitle: {
-    fontSize: '1.25rem',
-    color: '#2d3436',
-    marginBottom: '1rem',
-  },
-  projectDescription: {
-    fontSize: '1rem',
-    color: '#636e72',
+  header: {
     marginBottom: '1.5rem',
-    lineHeight: '1.6',
   },
-  techStack: {
+  title: {
+    fontSize: '1.5rem',
+    color: '#dcccbd',
+    marginBottom: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
+  },
+  projectInfo: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '0.5rem',
+    gap: '1.5rem',
+    marginBottom: '1rem',
   },
-  techTag: {
-    backgroundColor: '#e9ecef',
-    color: '#2d3436',
-    padding: '0.5rem 1rem',
-    borderRadius: '2rem',
+  infoItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    color: '#b14b32',
+    fontSize: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
+  },
+  icon: {
+    fontSize: '1.2rem',
+  },
+  link: {
+    color: '#b14b32',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  descriptionList: {
+    listStyle: 'none',
+    padding: 0,
+    margin: '0 0 1.5rem 0',
+  },
+  descriptionItem: {
+    color: '#dcccbd',
+    marginBottom: '0.75rem',
+    paddingLeft: '1.5rem',
+    position: 'relative',
+    fontFamily: 'Montserrat, sans-serif',
+    lineHeight: '1.6',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: '0.6em',
+      width: '6px',
+      height: '6px',
+      backgroundColor: '#b14b32',
+      borderRadius: '50%',
+    },
+  },
+  technologies: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.75rem',
+  },
+  tech: {
+    padding: '0.4rem 0.8rem',
+    backgroundColor: '#b14b32',
+    color: '#dcccbd',
+    borderRadius: '1rem',
     fontSize: '0.9rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
 };
 
