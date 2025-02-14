@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake, FaUser } from 'react-icons/fa';
 import AboutMe1 from '../assets/AboutMe_1.jpg';
 import AboutMe2 from '../assets/AboutMe_2.jpeg';
 import AboutMe3 from '../assets/AboutMe_3.jpeg';
@@ -98,9 +98,11 @@ function AboutSection() {
   };
 
   const quickFacts = [
-    { icon: <FaMapMarkerAlt />, label: 'Address', value: 'Seattle, WA 98101' },
-    { icon: <FaPhone />, label: 'Phone', value: '(206) 555-0123' },
-    { icon: <FaEnvelope />, label: 'Email', value: 'alex.hunt@example.com' },
+    { icon: <FaMapMarkerAlt />, label: 'Location', value: 'San Francisco, CA 94127' },
+    { icon: <FaPhone />, label: 'Phone', value: '(405) 885-3808' },
+    { icon: <FaEnvelope />, label: 'Email', value: 'alex.eugene.hunt@gmail.com' },
+    { icon: <FaBirthdayCake />, label: 'Birthday', value: 'September 14th, 2000' },
+    { icon: <FaUser />, label: 'Full Name', value: 'Alex Eugene Hunt' },
   ];
 
   return (
@@ -140,7 +142,7 @@ function AboutSection() {
 
             {/* Top Right - Bio */}
             <div style={styles.gridItem}>
-              <div style={styles.gridBox}>
+              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
                 <div style={styles.bioContent}>
                   <p style={styles.paragraph}>
                     I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
@@ -158,7 +160,7 @@ function AboutSection() {
 
             {/* Bottom Left - Quick Facts */}
             <div style={styles.gridItem}>
-              <div style={styles.gridBox}>
+              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
                 <div style={styles.quickFactsContainer}>
                   {quickFacts.map((fact, index) => (
                     <div key={index} style={styles.quickFactItem}>
@@ -175,7 +177,7 @@ function AboutSection() {
 
             {/* Bottom Right - Interest Icons */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#b14b32'}}>
                 <div style={styles.interestsGrid}>
                   {interests.map((interest, index) => (
                     <div key={index} style={styles.interestItemContainer}>
@@ -192,8 +194,10 @@ function AboutSection() {
                         onMouseLeave={() => setHoveredCard(null)}
                       >
                         <div style={styles.cardFront}>
-                          <div style={styles.interestIcon}>{interest.icon}</div>
-                          <span style={styles.interestLabel}>{interest.label}</span>
+                          <div style={styles.contentWrapper}>
+                            <div style={styles.interestIcon}>{interest.icon}</div>
+                            <span style={styles.interestLabel}>{interest.label}</span>
+                          </div>
                         </div>
                         <div style={styles.cardBack}>
                           <p style={styles.description}>{interest.description}</p>
@@ -299,34 +303,32 @@ const styles = {
     flexDirection: 'column',
     gap: '1rem',
     width: '100%',
+    padding: '1rem',
   },
   quickFactItem: {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    padding: '0.75rem',
-    borderRadius: '10px',
+    color: '#dcccbd',
   },
   quickFactIcon: {
-    fontSize: '1.25rem',
-    color: '#b14b32',
+    fontSize: '1.5rem',
+    color: '#434a54',
+    width: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
   },
   quickFactContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.25rem',
+    gap: '0.2rem',
   },
   quickFactLabel: {
     fontSize: '0.8rem',
-    color: '#b14b32',
-    fontFamily: 'Montserrat, sans-serif',
-    fontWeight: 'bold',
+    opacity: 0.8,
   },
   quickFactValue: {
-    fontSize: '0.8rem',
-    color: '#dcccbd',
-    fontFamily: 'Montserrat, sans-serif',
-    fontWeight: 'bold',
+    fontSize: '1rem',
   },
   interestsGrid: {
     display: 'grid',
@@ -361,14 +363,17 @@ const styles = {
     height: '100%',
     backfaceVisibility: 'hidden',
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem',
+  },
+  contentWrapper: {
+    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
-    padding: '1rem',
-    transform: 'translateZ(0)',
-    WebkitFontSmoothing: 'subpixel-antialiased',
-    MozOsxFontSmoothing: 'grayscale',
+    transform: 'translateZ(1px)',
   },
   cardBack: {
     position: 'absolute',
@@ -386,20 +391,16 @@ const styles = {
   interestIcon: {
     fontSize: '2rem',
     color: '#dcccbd',
-    transform: 'translateZ(0)',
-    WebkitFontSmoothing: 'subpixel-antialiased',
-    MozOsxFontSmoothing: 'grayscale',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    transform: 'translateZ(1px)',
   },
   interestLabel: {
     fontSize: '0.9rem',
     color: '#dcccbd',
     textAlign: 'center',
-    transform: 'translateZ(0)',
-    WebkitFontSmoothing: 'subpixel-antialiased',
-    MozOsxFontSmoothing: 'grayscale',
+    transform: 'translateZ(1px)',
   },
   description: {
     color: '#dcccbd',
