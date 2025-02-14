@@ -51,12 +51,12 @@ function AboutSection() {
     { 
       icon: <FaBeer />, 
       label: 'Craft Beer',
-      description: 'I enjoy exploring local breweries, IPAs and stouts are my favorites.'
+      description: 'I enjoy exploring local breweries. IPAs and stouts!'
     },
     { 
       icon: <FaHiking />, 
       label: 'Hiking',
-      description: 'I frequently go hiking in California. My favorite place is Mount Davidson.'
+      description: 'I frequently go hiking in California.'
     },
     { 
       icon: <FaGamepad />, 
@@ -66,7 +66,7 @@ function AboutSection() {
     { 
       icon: <FaPlane />, 
       label: 'Travel',
-      description: 'I love exploring new cultures and places. I want to visit Norway.'
+      description: 'I love exploring new cultures. I want to visit Norway.'
     },
     { 
       icon: <FaUtensils />, 
@@ -81,7 +81,7 @@ function AboutSection() {
     { 
       icon: <FaSkiing />, 
       label: 'Skiing',
-      description: 'I\'m an avid skier and try to hit the slopes at least 10 times each season.'
+      description: 'I\'m an avid California skier.'
     },
     { 
       icon: <FaFish />, 
