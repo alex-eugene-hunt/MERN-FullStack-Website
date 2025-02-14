@@ -61,7 +61,9 @@ function ExperienceSection() {
                     <div style={styles.companyInfo}>
                       <div style={styles.infoItem}>
                         <FaBriefcase style={styles.icon} />
-                        <span>{exp.company}</span>
+                        <a href="https://www.cymstar.com/" target="_blank" rel="noopener noreferrer" style={styles.companyLink}>
+                          {exp.company}
+                        </a>
                       </div>
                       <div style={styles.infoItem}>
                         <FaMapMarkerAlt style={styles.icon} />
@@ -157,6 +159,15 @@ const styles = {
   icon: {
     fontSize: '1.2rem',
   },
+  companyLink: {
+    color: '#b14b32',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    transition: 'color 0.3s ease',
+    ':hover': {
+      color: '#dcccbd',
+    },
+  },
   descriptionList: {
     listStyle: 'none',
     padding: 0,
@@ -215,15 +226,16 @@ const styles = {
   imageGallery: {
     display: 'flex',
     gap: '2rem',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     marginTop: '2rem',
+    width: '100%',
   },
   galleryImage: {
     width: 'calc(50% - 1rem)',
-    maxWidth: '500px',
     height: 'auto',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
+    objectFit: 'cover',
   },
 };
 
