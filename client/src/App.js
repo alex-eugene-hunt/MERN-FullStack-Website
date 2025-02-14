@@ -6,7 +6,9 @@ import ExperienceSection from './components/ExperienceSection';
 import EducationSection from './components/EducationSection';
 import ProjectsSection from './components/ProjectsSection';
 import SocialSection from './components/SocialSection';
+import '@fontsource/lobster';
 import './styles.css';
+import './App.css';
 
 function App() {
   return (
