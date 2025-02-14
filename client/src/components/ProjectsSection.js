@@ -56,7 +56,7 @@ function ProjectsSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="projects">
+    <div ref={vantaRef} style={{ minHeight: 'fit-content' }} id="projects">
       <div className="section-header">Projects</div>
       <section style={styles.section}>
         <div style={styles.container}>
