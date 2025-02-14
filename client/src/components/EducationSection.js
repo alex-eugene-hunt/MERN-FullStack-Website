@@ -59,41 +59,43 @@ function EducationSection() {
         <div style={styles.container}>
           <div style={styles.timeline}>
             {education.map((edu, index) => (
-              <div key={index} style={styles.timelineItem}>
-                <div style={styles.timelineContent}>
-                  <div style={styles.header}>
-                    <h3 style={styles.title}>{edu.degree}</h3>
-                    <div style={styles.schoolInfo}>
-                      <div style={styles.infoItem}>
-                        <FaGraduationCap style={styles.icon} />
-                        <span>{edu.school}</span>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaMapMarkerAlt style={styles.icon} />
-                        <span>{edu.location}</span>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaCalendar style={styles.icon} />
-                        <span>{edu.period}</span>
-                      </div>
-                      {edu.gpa && (
+              <div key={index}>
+                <div style={styles.timelineItem}>
+                  <div style={styles.timelineContent}>
+                    <div style={styles.header}>
+                      <h3 style={styles.title}>{edu.degree}</h3>
+                      <div style={styles.schoolInfo}>
                         <div style={styles.infoItem}>
-                          <FaStar style={styles.icon} />
-                          <span>GPA: {edu.gpa}</span>
+                          <FaGraduationCap style={styles.icon} />
+                          <span>{edu.school}</span>
                         </div>
-                      )}
+                        <div style={styles.infoItem}>
+                          <FaMapMarkerAlt style={styles.icon} />
+                          <span>{edu.location}</span>
+                        </div>
+                        <div style={styles.infoItem}>
+                          <FaCalendar style={styles.icon} />
+                          <span>{edu.period}</span>
+                        </div>
+                        {edu.gpa && (
+                          <div style={styles.infoItem}>
+                            <FaStar style={styles.icon} />
+                            <span>GPA: {edu.gpa}</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  {(edu.school === 'University of Oklahoma') && (
-                    <div style={styles.degreeImageContainer}>
-                      <img 
-                        src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
-                        alt={`${edu.degree} from ${edu.school}`}
-                        style={styles.degreeImage}
-                      />
-                    </div>
-                  )}
                 </div>
+                {(edu.school === 'University of Oklahoma') && (
+                  <div style={styles.degreeImageContainer}>
+                    <img 
+                      src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
+                      alt={`${edu.degree} from ${edu.school}`}
+                      style={styles.degreeImage}
+                    />
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -156,7 +158,8 @@ const styles = {
     fontSize: '1.2rem',
   },
   degreeImageContainer: {
-    marginTop: '1.5rem',
+    marginTop: '1rem',
+    marginBottom: '1rem',
     display: 'flex',
     justifyContent: 'center',
   },
