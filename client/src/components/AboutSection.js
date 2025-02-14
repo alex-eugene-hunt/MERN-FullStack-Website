@@ -9,6 +9,7 @@ import AboutMe5 from '../assets/AboutMe_5.jpg';
 function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [vantaEffect, setVantaEffect] = useState(null);
+  const [flippedCards, setFlippedCards] = useState({});
   const vantaRef = useRef(null);
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
@@ -41,16 +42,59 @@ function AboutSection() {
   }, [vantaEffect]);
 
   const interests = [
-    { icon: <FaGuitar />, label: 'Guitar' },
-    { icon: <FaBeer />, label: 'Craft Beer' },
-    { icon: <FaHiking />, label: 'Hiking' },
-    { icon: <FaGamepad />, label: 'Gaming' },
-    { icon: <FaPlane />, label: 'Travel' },
-    { icon: <FaUtensils />, label: 'Cooking' },
-    { icon: <FaCode />, label: 'Coding' },
-    { icon: <FaSkiing />, label: 'Skiing' },
-    { icon: <FaFish />, label: 'Fishing' },
+    { 
+      icon: <FaGuitar />, 
+      label: 'Guitar',
+      description: 'I love playing folk and blues acoustic guitar. I have been playing for 15 years and enjoy both performing and composing.'
+    },
+    { 
+      icon: <FaBeer />, 
+      label: 'Craft Beer',
+      description: 'I enjoy exploring local breweries and trying unique craft beers. IPAs and stouts are my favorites.'
+    },
+    { 
+      icon: <FaHiking />, 
+      label: 'Hiking',
+      description: 'I frequently go hiking in the Pacific Northwest. My favorite trails are in the Olympic National Park.'
+    },
+    { 
+      icon: <FaGamepad />, 
+      label: 'Gaming',
+      description: 'I\'m an avid gamer who enjoys both classic RPGs and modern indie games. Currently playing Baldur\'s Gate 3!'
+    },
+    { 
+      icon: <FaPlane />, 
+      label: 'Travel',
+      description: 'I love exploring new cultures and places. I\'ve visited 25 countries and counting, with Japan being my favorite so far.'
+    },
+    { 
+      icon: <FaUtensils />, 
+      label: 'Cooking',
+      description: 'I enjoy experimenting with different cuisines. Italian and Thai dishes are my specialty.'
+    },
+    { 
+      icon: <FaCode />, 
+      label: 'Coding',
+      description: 'Beyond my day job, I love working on personal coding projects and contributing to open source.'
+    },
+    { 
+      icon: <FaSkiing />, 
+      label: 'Skiing',
+      description: 'I\'m an avid skier and try to hit the slopes at least 10 times each season. Crystal Mountain is my home resort.'
+    },
+    { 
+      icon: <FaFish />, 
+      label: 'Fishing',
+      description: 'I enjoy both freshwater and saltwater fishing. Nothing beats catching salmon in the Puget Sound!'
+    },
   ];
+
+  const handleCardClick = (index) => {
+    setFlippedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   const quickFacts = [
     { icon: <FaMapMarkerAlt />, label: 'Address', value: 'Seattle, WA 98101' },
@@ -130,13 +174,27 @@ function AboutSection() {
 
             {/* Bottom Right - Interest Icons */}
             <div style={styles.gridItem}>
-              <div style={styles.interestsGrid}>
-                {interests.map((interest, index) => (
-                  <div key={index} style={styles.interestItem}>
-                    <div style={styles.interestIcon}>{interest.icon}</div>
-                    <span style={styles.interestLabel}>{interest.label}</span>
-                  </div>
-                ))}
+              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
+                <div style={styles.interestsGrid}>
+                  {interests.map((interest, index) => (
+                    <div 
+                      key={index} 
+                      style={{
+                        ...styles.interestItem,
+                        transform: flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0)',
+                      }}
+                      onClick={() => handleCardClick(index)}
+                    >
+                      <div style={styles.cardFront}>
+                        <div style={styles.interestIcon}>{interest.icon}</div>
+                        <span style={styles.interestLabel}>{interest.label}</span>
+                      </div>
+                      <div style={styles.cardBack}>
+                        <p style={styles.description}>{interest.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -170,7 +228,7 @@ const styles = {
     height: '450px',
   },
   gridBox: {
-    backgroundColor: '#d4996f',
+    backgroundColor: '#434a54',
     borderRadius: '2.25rem',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
     width: '100%',
@@ -243,8 +301,7 @@ const styles = {
     borderRadius: '10px',
   },
   quickFactIcon: {
-    fontSize: '1.5rem',
-    marginRight: '1rem',
+    fontSize: '1.25rem',
     color: '#b14b32',
   },
   quickFactContent: {
@@ -257,11 +314,10 @@ const styles = {
     color: '#b14b32',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
-    marginBottom: '0.25rem',
   },
   quickFactValue: {
     fontSize: '0.8rem',
-    color: '#434a54',
+    color: '#dcccbd',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
   },
@@ -269,35 +325,70 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gap: '1.5rem',
-    width: '450px',
-    height: '450px',
-    padding: '2rem',
-    borderRadius: '2.25rem',
+    padding: '1rem',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   interestItem: {
+    position: 'relative',
+    width: '100%',
+    aspectRatio: '1',
+    cursor: 'pointer',
+    transition: 'transform 0.6s',
+    transformStyle: 'preserve-3d',
+    ':hover': {
+      transform: 'scale(1.05)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+    },
+  },
+  cardFront: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    backgroundColor: '#434a54',
+    borderRadius: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '0.75rem',
+    gap: '0.5rem',
+    padding: '1rem',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+    ':hover': {
+      transform: 'translateY(-5px)',
+      boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+    },
+  },
+  cardBack: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
     borderRadius: '1rem',
-    aspectRatio: '1',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: '1rem',
-    transition: 'transform 0.3s ease',
-    cursor: 'pointer',
+    transform: 'rotateY(180deg)',
   },
   interestIcon: {
     fontSize: '2rem',
-    marginBottom: '0.5rem',
-    color: '#b14b32',
+    color: '#dcccbd',
   },
   interestLabel: {
     fontSize: '0.9rem',
-    color: '#b14b32',
+    color: '#dcccbd',
     textAlign: 'center',
-    fontFamily: 'Montserrat, sans-serif',
-    fontWeight: 'bold',
+  },
+  description: {
+    color: '#dcccbd',
+    fontSize: '0.9rem',
+    textAlign: 'center',
+    lineHeight: '1.4',
   },
 };
 
