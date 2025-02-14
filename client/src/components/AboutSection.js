@@ -111,38 +111,40 @@ function AboutSection() {
       <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.gridContainer}>
-            {/* Top Left - Slideshow */}
+            {/* Top Left - Image Slideshow */}
             <div style={styles.gridItem}>
-              <div style={styles.slideshowContainer}>
-                {photos.map((photo, index) => (
-                  <img
-                    key={index}
-                    src={photo}
-                    alt={`About Me ${index + 1}`}
-                    style={{
-                      ...styles.slideImage,
-                      opacity: currentSlide === index ? 1 : 0,
-                    }}
-                  />
-                ))}
-                <div style={styles.slideDots}>
-                  {photos.map((_, index) => (
-                    <button
+              <div style={{...styles.gridBox, border: '2px solid #dcccbd'}}>
+                <div style={styles.slideshowContainer}>
+                  {photos.map((photo, index) => (
+                    <img
                       key={index}
+                      src={photo}
+                      alt={`About Me ${index + 1}`}
                       style={{
-                        ...styles.slideDot,
-                        backgroundColor: currentSlide === index ? '#b14b32' : '#d4996f',
+                        ...styles.slideImage,
+                        opacity: currentSlide === index ? 1 : 0,
                       }}
-                      onClick={() => setCurrentSlide(index)}
                     />
                   ))}
+                  <div style={styles.slideDots}>
+                    {photos.map((_, index) => (
+                      <button
+                        key={index}
+                        style={{
+                          ...styles.slideDot,
+                          backgroundColor: currentSlide === index ? '#b14b32' : '#d4996f',
+                        }}
+                        onClick={() => setCurrentSlide(index)}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Top Right - Bio */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#434a54'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#434a54', border: '2px solid #dcccbd'}}>
                 <div style={styles.bioContent}>
                   <p style={styles.paragraph}>
                     I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
@@ -160,7 +162,7 @@ function AboutSection() {
 
             {/* Bottom Left - Quick Facts */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#434a54'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#434a54', border: '2px solid #dcccbd'}}>
                 <div style={styles.quickFactsContainer}>
                   {quickFacts.map((fact, index) => (
                     <div key={index} style={styles.quickFactItem}>
@@ -313,7 +315,7 @@ const styles = {
   },
   quickFactIcon: {
     fontSize: '1.5rem',
-    color: '#434a54',
+    color: '#b14b32',
     width: '2rem',
     display: 'flex',
     justifyContent: 'center',
@@ -326,9 +328,12 @@ const styles = {
   quickFactLabel: {
     fontSize: '0.8rem',
     opacity: 0.8,
+    color: '#b14b32',
+    fontFamily: 'Montserrat, sans-serif',
   },
   quickFactValue: {
     fontSize: '1rem',
+    fontFamily: 'Montserrat, sans-serif',
   },
   interestsGrid: {
     display: 'grid',
@@ -402,12 +407,14 @@ const styles = {
     color: '#dcccbd',
     textAlign: 'center',
     transform: 'translateZ(1px)',
+    fontFamily: 'Montserrat, sans-serif',
   },
   description: {
     color: '#dcccbd',
-    fontSize: '0.9rem',
+    fontSize: '0.75rem',
     textAlign: 'center',
-    lineHeight: '1.4',
+    fontFamily: 'Montserrat, sans-serif',
+    lineHeight: '1.2',
   },
 };
 
