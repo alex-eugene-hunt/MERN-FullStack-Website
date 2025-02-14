@@ -98,11 +98,11 @@ function AboutSection() {
   };
 
   const quickFacts = [
+    { icon: <FaUser />, label: 'Full Name', value: 'Alex Eugene Hunt' },
+    { icon: <FaBirthdayCake />, label: 'Birthday', value: 'September 14th, 2000' },
     { icon: <FaMapMarkerAlt />, label: 'Location', value: 'San Francisco, CA 94127' },
     { icon: <FaPhone />, label: 'Phone', value: '(405) 885-3808' },
     { icon: <FaEnvelope />, label: 'Email', value: 'alex.eugene.hunt@gmail.com' },
-    { icon: <FaBirthdayCake />, label: 'Birthday', value: 'September 14th, 2000' },
-    { icon: <FaUser />, label: 'Full Name', value: 'Alex Eugene Hunt' },
   ];
 
   return (
@@ -142,7 +142,7 @@ function AboutSection() {
 
             {/* Top Right - Bio */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#434a54'}}>
                 <div style={styles.bioContent}>
                   <p style={styles.paragraph}>
                     I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
@@ -160,7 +160,7 @@ function AboutSection() {
 
             {/* Bottom Left - Quick Facts */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#434a54'}}>
                 <div style={styles.quickFactsContainer}>
                   {quickFacts.map((fact, index) => (
                     <div key={index} style={styles.quickFactItem}>
@@ -177,7 +177,7 @@ function AboutSection() {
 
             {/* Bottom Right - Interest Icons */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, backgroundColor: '#b14b32'}}>
+              <div style={{...styles.gridBox, backgroundColor: '#b14b32', border: '2px solid #dcccbd'}}>
                 <div style={styles.interestsGrid}>
                   {interests.map((interest, index) => (
                     <div key={index} style={styles.interestItemContainer}>
@@ -356,6 +356,7 @@ const styles = {
     perspective: '1000px',
     backgroundColor: '#434a54',
     borderRadius: '1rem',
+    border: '2px solid #dcccbd',
   },
   cardFront: {
     position: 'absolute',
