@@ -265,11 +265,11 @@ const styles = {
   },
   interestIcon: {
     fontSize: '2.5rem',
-    color: '#b14b32',
+    color: '#dcccbd',
   },
   interestLabel: {
     fontSize: '0.9rem',
-    color: '#b14b32',
+    color: '#dcccbd',
     textAlign: 'center',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
