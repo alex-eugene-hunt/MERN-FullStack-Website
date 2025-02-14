@@ -178,25 +178,26 @@ function AboutSection() {
               <div style={{...styles.gridBox, backgroundColor: '#d4996f'}}>
                 <div style={styles.interestsGrid}>
                   {interests.map((interest, index) => (
-                    <div 
-                      key={index} 
-                      style={{
-                        ...styles.interestItem,
-                        transform: hoveredCard === index 
-                          ? `translate3d(0, -5px, 0) scale3d(1.05, 1.05, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
-                          : flippedCards[index] ? 'rotateY(180deg)' : 'translate3d(0, 0, 0)',
-                        boxShadow: hoveredCard === index ? '0 8px 16px rgba(0,0,0,0.2)' : 'none'
-                      }}
-                      onClick={() => handleCardClick(index)}
-                      onMouseEnter={() => setHoveredCard(index)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                    >
-                      <div style={styles.cardFront}>
-                        <div style={styles.interestIcon}>{interest.icon}</div>
-                        <span style={styles.interestLabel}>{interest.label}</span>
-                      </div>
-                      <div style={styles.cardBack}>
-                        <p style={styles.description}>{interest.description}</p>
+                    <div key={index} style={styles.interestItemContainer}>
+                      <div 
+                        style={{
+                          ...styles.interestItem,
+                          transform: hoveredCard === index 
+                            ? `translate3d(0, -5px, 0) scale3d(1.05, 1.05, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
+                            : flippedCards[index] ? 'rotateY(180deg)' : 'translate3d(0, 0, 0)',
+                          boxShadow: hoveredCard === index ? '0 8px 16px rgba(0,0,0,0.2)' : 'none'
+                        }}
+                        onClick={() => handleCardClick(index)}
+                        onMouseEnter={() => setHoveredCard(index)}
+                        onMouseLeave={() => setHoveredCard(null)}
+                      >
+                        <div style={styles.cardFront}>
+                          <div style={styles.interestIcon}>{interest.icon}</div>
+                          <span style={styles.interestLabel}>{interest.label}</span>
+                        </div>
+                        <div style={styles.cardBack}>
+                          <p style={styles.description}>{interest.description}</p>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -334,47 +335,50 @@ const styles = {
     padding: '1rem',
     width: '100%',
     height: '100%',
+  },
+  interestItemContainer: {
+    position: 'relative',
+    width: '100%',
+    aspectRatio: '1',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   interestItem: {
-    position: 'relative',
+    position: 'absolute',
     width: '100%',
-    aspectRatio: '1',
+    height: '100%',
     cursor: 'pointer',
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     transformStyle: 'preserve-3d',
-    willChange: 'transform',
     perspective: '1000px',
+    backgroundColor: '#434a54',
+    borderRadius: '1rem',
   },
   cardFront: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#434a54',
-    borderRadius: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     gap: '0.5rem',
     padding: '1rem',
-    willChange: 'transform',
   },
   cardBack: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#434a54',
-    borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1rem',
     transform: 'rotateY(180deg)',
-    willChange: 'transform',
+    backgroundColor: '#434a54',
+    borderRadius: '1rem',
   },
   interestIcon: {
     fontSize: '2rem',
