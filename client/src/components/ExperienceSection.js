@@ -31,14 +31,19 @@ function ExperienceSection() {
         })
       );
     }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 3000);
     return () => {
-      if (vantaEffect) vantaEffect.destroy();
       clearInterval(interval);
     };
-  }, [vantaEffect]);
+  }, [slides.length]);
 
   const experiences = [
     {
