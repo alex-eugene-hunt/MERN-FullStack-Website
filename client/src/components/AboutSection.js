@@ -170,7 +170,7 @@ const styles = {
     height: '450px',
   },
   gridBox: {
-    backgroundColor: '#434a54',
+    backgroundColor: '#d4996f',
     borderRadius: '2.25rem',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
     width: '100%',
@@ -243,7 +243,8 @@ const styles = {
     borderRadius: '10px',
   },
   quickFactIcon: {
-    fontSize: '1.25rem',
+    fontSize: '1.5rem',
+    marginRight: '1rem',
     color: '#b14b32',
   },
   quickFactContent: {
@@ -256,10 +257,11 @@ const styles = {
     color: '#b14b32',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
+    marginBottom: '0.25rem',
   },
   quickFactValue: {
     fontSize: '0.8rem',
-    color: '#dcccbd',
+    color: '#434a54',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
   },
@@ -286,12 +288,13 @@ const styles = {
     cursor: 'pointer',
   },
   interestIcon: {
-    fontSize: '2.5rem',
+    fontSize: '2rem',
+    marginBottom: '0.5rem',
     color: '#b14b32',
   },
   interestLabel: {
     fontSize: '0.9rem',
-    color: '#dcccbd',
+    color: '#b14b32',
     textAlign: 'center',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',

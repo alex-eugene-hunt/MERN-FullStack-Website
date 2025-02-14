@@ -59,7 +59,7 @@ function Navbar() {
 
     const element = document.getElementById(sectionId);
     if (element) {
-      const offsetTop = element.offsetTop - 178;
+      const offsetTop = element.offsetTop - 78;
       window.scrollTo({
         top: offsetTop,
         behavior: 'smooth'
