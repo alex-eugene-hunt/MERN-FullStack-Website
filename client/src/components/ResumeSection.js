@@ -75,7 +75,7 @@ const styles = {
     gap: '2rem',
   },
   downloadSection: {
-    marginBottom: '2rem',
+    //marginBottom: '2rem',
     display: 'flex',
     justifyContent: 'center',
   },
