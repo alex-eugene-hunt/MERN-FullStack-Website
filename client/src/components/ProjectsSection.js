@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 function ProjectsSection() {
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const vantaRef = useRef(null);
+
+  useEffect(() => {
+    if (!vantaEffect && window.VANTA) {
+      setVantaEffect(
+        window.VANTA.WAVES({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x021825
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
+
   const projects = [
     {
       title: 'Personal Portfolio Website',
@@ -15,7 +39,7 @@ function ProjectsSection() {
   ];
 
   return (
-    <div>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
       <div className="section-header">Projects</div>
       <section id="projects" style={styles.section}>
         <div style={styles.container}>

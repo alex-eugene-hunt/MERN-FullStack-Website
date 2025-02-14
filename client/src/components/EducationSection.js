@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap } from 'react-icons/fa';
 
 function EducationSection() {
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const vantaRef = useRef(null);
+
+  useEffect(() => {
+    if (!vantaEffect && window.VANTA) {
+      setVantaEffect(
+        window.VANTA.WAVES({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x021825
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
+
   const education = [
     {
       school: 'University of California, Berkeley',
@@ -25,7 +49,7 @@ function EducationSection() {
   ];
 
   return (
-    <div>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
       <div className="section-header">Education</div>
       <section id="education" style={styles.section}>
         <div style={styles.container}>
@@ -72,7 +96,6 @@ const styles = {
   section: {
     backgroundColor: '#dcccbd',
     padding: 0,
-    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

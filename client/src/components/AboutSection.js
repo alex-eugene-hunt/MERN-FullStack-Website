@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGuitar, FaBeer, FaHiking, FaGamepad, FaPlane, FaUtensils, FaCode, FaSkiing, FaFish, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import AboutMe1 from '../assets/AboutMe_1.jpg';
 import AboutMe2 from '../assets/AboutMe_2.jpeg';
@@ -8,6 +8,8 @@ import AboutMe5 from '../assets/AboutMe_5.jpg';
 
 function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const vantaRef = useRef(null);
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
   useEffect(() => {
@@ -16,6 +18,27 @@ function AboutSection() {
     }, 5000);
     return () => clearInterval(timer);
   }, [photos.length]);
+
+  useEffect(() => {
+    if (!vantaEffect && window.VANTA) {
+      setVantaEffect(
+        window.VANTA.WAVES({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x021825
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
 
   const interests = [
     { icon: <FaGuitar />, label: 'Guitar' },
@@ -36,7 +59,7 @@ function AboutSection() {
   ];
 
   return (
-    <div>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
       <div className="section-header">About</div>
       <section id="about" style={styles.section}>
         <div style={styles.container}>

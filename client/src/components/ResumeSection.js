@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaDownload, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 
 function ResumeSection() {
+  const [vantaEffect, setVantaEffect] = useState(null);
+  const vantaRef = useRef(null);
+
+  useEffect(() => {
+    if (!vantaEffect && window.VANTA) {
+      setVantaEffect(
+        window.VANTA.WAVES({
+          el: vantaRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          color: 0x021825
+        })
+      );
+    }
+    return () => {
+      if (vantaEffect) vantaEffect.destroy();
+    };
+  }, [vantaEffect]);
+
   const experiences = [
     {
       title: 'Senior Software Engineer',
@@ -27,7 +51,7 @@ function ResumeSection() {
   ];
 
   return (
-    <div>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
       <div className="section-header">Resume</div>
       <section id="resume" style={styles.section}>
         <div style={styles.container}>
