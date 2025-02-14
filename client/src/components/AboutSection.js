@@ -113,31 +113,29 @@ function AboutSection() {
           <div style={styles.gridContainer}>
             {/* Top Left - Image Slideshow */}
             <div style={styles.gridItem}>
-              <div style={{...styles.gridBox, border: '2px solid #dcccbd'}}>
-                <div style={styles.slideshowContainer}>
-                  {photos.map((photo, index) => (
-                    <img
+              <div style={{...styles.slideshowContainer, border: '2px solid #dcccbd'}}>
+                {photos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={photo}
+                    alt={`About Me ${index + 1}`}
+                    style={{
+                      ...styles.slideImage,
+                      opacity: currentSlide === index ? 1 : 0,
+                    }}
+                  />
+                ))}
+                <div style={styles.slideDots}>
+                  {photos.map((_, index) => (
+                    <button
                       key={index}
-                      src={photo}
-                      alt={`About Me ${index + 1}`}
                       style={{
-                        ...styles.slideImage,
-                        opacity: currentSlide === index ? 1 : 0,
+                        ...styles.slideDot,
+                        backgroundColor: currentSlide === index ? '#b14b32' : '#d4996f',
                       }}
+                      onClick={() => setCurrentSlide(index)}
                     />
                   ))}
-                  <div style={styles.slideDots}>
-                    {photos.map((_, index) => (
-                      <button
-                        key={index}
-                        style={{
-                          ...styles.slideDot,
-                          backgroundColor: currentSlide === index ? '#b14b32' : '#d4996f',
-                        }}
-                        onClick={() => setCurrentSlide(index)}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
@@ -187,9 +185,9 @@ function AboutSection() {
                         style={{
                           ...styles.interestItem,
                           transform: hoveredCard === index 
-                            ? `translate3d(0, -5px, 0) scale3d(1.05, 1.05, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
+                            ? `translate3d(0, -8px, 0) scale3d(1.15, 1.15, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
                             : flippedCards[index] ? 'rotateY(180deg)' : 'translate3d(0, 0, 0)',
-                          boxShadow: hoveredCard === index ? '0 8px 16px rgba(0,0,0,0.2)' : 'none'
+                          boxShadow: hoveredCard === index ? '0 12px 24px rgba(0,0,0,0.3)' : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
                         onMouseEnter={() => setHoveredCard(index)}
@@ -303,33 +301,34 @@ const styles = {
   quickFactsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem',
+    gap: '1.75rem',
     width: '100%',
-    padding: '1rem',
+    padding: '1.5rem',
   },
   quickFactItem: {
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '1.25rem',
     color: '#dcccbd',
   },
   quickFactIcon: {
-    fontSize: '1.5rem',
+    fontSize: '1.75rem',
     color: '#b14b32',
-    width: '2rem',
+    width: '2.5rem',
     display: 'flex',
     justifyContent: 'center',
   },
   quickFactContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.2rem',
+    gap: '0.3rem',
   },
   quickFactLabel: {
-    fontSize: '0.8rem',
-    opacity: 0.8,
+    fontSize: '0.95rem',
+    fontWeight: 'bold',
     color: '#b14b32',
     fontFamily: 'Montserrat, sans-serif',
+    letterSpacing: '0.5px',
   },
   quickFactValue: {
     fontSize: '1rem',
