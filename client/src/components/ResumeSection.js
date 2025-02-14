@@ -11,7 +11,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 function ResumeSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
-  const [numPages, setNumPages] = useState(null);
+  const [setNumPages] = useState(null);
   const [pageWidth, setPageWidth] = useState(850);
 
   useEffect(() => {
