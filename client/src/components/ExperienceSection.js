@@ -140,15 +140,15 @@ const styles = {
     display: 'flex',
     gap: '2rem',
     alignItems: 'flex-start',
+    flexDirection: 'row',
+    marginBottom: '2rem',
   },
   timeline: {
-    flex: '1',
+    flex: '2',
   },
   slideshow: {
     flex: '1',
-    maxWidth: '500px',
-    position: 'sticky',
-    top: '2rem',
+    maxWidth: '400px',
   },
   slideshowContainer: {
     position: 'relative',
