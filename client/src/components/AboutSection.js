@@ -46,47 +46,47 @@ function AboutSection() {
     { 
       icon: <FaGuitar />, 
       label: 'Guitar',
-      description: 'I love playing folk and blues acoustic guitar. I have been playing for 15 years and enjoy both performing and composing.'
+      description: 'I love playing folk and blues acoustic guitar.'
     },
     { 
       icon: <FaBeer />, 
       label: 'Craft Beer',
-      description: 'I enjoy exploring local breweries and trying unique craft beers. IPAs and stouts are my favorites.'
+      description: 'I enjoy exploring local breweries, IPAs and stouts are my favorites.'
     },
     { 
       icon: <FaHiking />, 
       label: 'Hiking',
-      description: 'I frequently go hiking in the Pacific Northwest. My favorite trails are in the Olympic National Park.'
+      description: 'I frequently go hiking in California. My favorite place is Mount Davidson.'
     },
     { 
       icon: <FaGamepad />, 
       label: 'Gaming',
-      description: 'I\'m an avid gamer who enjoys both classic RPGs and modern indie games. Currently playing Baldur\'s Gate 3!'
+      description: 'Currently playing Marvel Rivals and Madden!'
     },
     { 
       icon: <FaPlane />, 
       label: 'Travel',
-      description: 'I love exploring new cultures and places. I\'ve visited 25 countries and counting, with Japan being my favorite so far.'
+      description: 'I love exploring new cultures and places. I want to visit Norway.'
     },
     { 
       icon: <FaUtensils />, 
       label: 'Cooking',
-      description: 'I enjoy experimenting with different cuisines. Italian and Thai dishes are my specialty.'
+      description: 'I love cooking and experimenting with different cuisines.'
     },
     { 
       icon: <FaCode />, 
       label: 'Coding',
-      description: 'Beyond my day job, I love working on personal coding projects and contributing to open source.'
+      description: 'I love working on personal coding projects.'
     },
     { 
       icon: <FaSkiing />, 
       label: 'Skiing',
-      description: 'I\'m an avid skier and try to hit the slopes at least 10 times each season. Crystal Mountain is my home resort.'
+      description: 'I\'m an avid skier and try to hit the slopes at least 10 times each season.'
     },
     { 
       icon: <FaFish />, 
       label: 'Fishing',
-      description: 'I enjoy both freshwater and saltwater fishing. Nothing beats catching salmon in the Puget Sound!'
+      description: 'I enjoy both freshwater and saltwater fishing.'
     },
   ];
 
