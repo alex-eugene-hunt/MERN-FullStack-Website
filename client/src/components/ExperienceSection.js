@@ -1,9 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
+import CymstarBadge from '../assets/CymSTAR_Badge.jpg';
+import CymstarEmployees from '../assets/CymSTAR_Employees_HQ.jpg';
+import FairchildA10 from '../assets/Fairchild_Republic_A-10.jpg';
 
 function ExperienceSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    { image: CymstarBadge, alt: 'CymSTAR Badge' },
+    { image: CymstarEmployees, alt: 'CymSTAR Employees at HQ' },
+    { image: FairchildA10, alt: 'Fairchild Republic A-10' }
+  ];
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -21,8 +31,12 @@ function ExperienceSection() {
         })
       );
     }
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
     return () => {
       if (vantaEffect) vantaEffect.destroy();
+      clearInterval(interval);
     };
   }, [vantaEffect]);
 
@@ -49,40 +63,57 @@ function ExperienceSection() {
       <div className="section-header">Experience</div>
       <section style={styles.section}>
         <div style={styles.container}>
-          <div style={styles.timeline}>
-            {experiences.map((exp, index) => (
-              <div key={index} style={styles.timelineItem}>
-                <div style={styles.timelineContent}>
-                  <div style={styles.header}>
-                    <h3 style={styles.title}>{exp.title}</h3>
-                    <div style={styles.companyInfo}>
-                      <div style={styles.infoItem}>
-                        <FaBriefcase style={styles.icon} />
-                        <span>{exp.company}</span>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaMapMarkerAlt style={styles.icon} />
-                        <span>{exp.location}</span>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaCalendar style={styles.icon} />
-                        <span>{exp.period}</span>
+          <div style={styles.experienceLayout}>
+            <div style={styles.timeline}>
+              {experiences.map((exp, index) => (
+                <div key={index} style={styles.timelineItem}>
+                  <div style={styles.timelineContent}>
+                    <div style={styles.header}>
+                      <h3 style={styles.title}>{exp.title}</h3>
+                      <div style={styles.companyInfo}>
+                        <div style={styles.infoItem}>
+                          <FaBriefcase style={styles.icon} />
+                          <span>{exp.company}</span>
+                        </div>
+                        <div style={styles.infoItem}>
+                          <FaMapMarkerAlt style={styles.icon} />
+                          <span>{exp.location}</span>
+                        </div>
+                        <div style={styles.infoItem}>
+                          <FaCalendar style={styles.icon} />
+                          <span>{exp.period}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <ul style={styles.descriptionList}>
-                    {exp.description.map((item, i) => (
-                      <li key={i} style={styles.descriptionItem}>{item}</li>
-                    ))}
-                  </ul>
-                  <div style={styles.technologies}>
-                    {exp.technologies.map((tech, i) => (
-                      <span key={i} style={styles.tech}>{tech}</span>
-                    ))}
+                    <ul style={styles.descriptionList}>
+                      {exp.description.map((item, i) => (
+                        <li key={i} style={styles.descriptionItem}>{item}</li>
+                      ))}
+                    </ul>
+                    <div style={styles.technologies}>
+                      {exp.technologies.map((tech, i) => (
+                        <span key={i} style={styles.tech}>{tech}</span>
+                      ))}
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+            <div style={styles.slideshow}>
+              <div style={styles.slideshowContainer}>
+                {slides.map((slide, index) => (
+                  <img
+                    key={index}
+                    src={slide.image}
+                    alt={slide.alt}
+                    style={{
+                      ...styles.slide,
+                      opacity: currentSlide === index ? 1 : 0,
+                    }}
+                  />
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -100,10 +131,38 @@ const styles = {
     margin: '0 auto',
     padding: '0 2rem',
   },
-  timeline: {
+  experienceLayout: {
     display: 'flex',
-    flexDirection: 'column',
     gap: '2rem',
+    alignItems: 'flex-start',
+  },
+  timeline: {
+    flex: '1',
+  },
+  slideshow: {
+    flex: '1',
+    maxWidth: '500px',
+    position: 'sticky',
+    top: '2rem',
+  },
+  slideshowContainer: {
+    position: 'relative',
+    width: '100%',
+    paddingTop: '75%', // 4:3 aspect ratio
+    borderRadius: '1rem',
+    overflow: 'hidden',
+    backgroundColor: '#434a54',
+    border: '2px solid #dcccbd',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  },
+  slide: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transition: 'opacity 0.5s ease-in-out',
   },
   timelineItem: {
     display: 'flex',

@@ -139,6 +139,7 @@ const styles = {
     color: '#b14b32',
     fontSize: '1rem',
     fontFamily: 'Montserrat, sans-serif',
+    fontWeight: "bold",
   },
   icon: {
     fontSize: '1.2rem',
