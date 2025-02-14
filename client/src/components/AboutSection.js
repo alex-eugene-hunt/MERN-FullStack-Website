@@ -56,7 +56,7 @@ function AboutSection() {
     { 
       icon: <FaHiking />, 
       label: 'Hiking',
-      description: 'I frequently go hiking in California.'
+      description: 'Frequently go hiking in California.'
     },
     { 
       icon: <FaGamepad />, 
@@ -66,7 +66,7 @@ function AboutSection() {
     { 
       icon: <FaPlane />, 
       label: 'Travel',
-      description: 'I love exploring new cultures. I want to visit Norway.'
+      description: 'I love traveling. I want to visit Norway.'
     },
     { 
       icon: <FaUtensils />, 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaDownload, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
+import Resume from '../assets/AlexHunt_Resume.pdf';
 
 function ResumeSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -26,30 +27,6 @@ function ResumeSection() {
     };
   }, [vantaEffect]);
 
-  const experiences = [
-    {
-      title: 'Senior Software Engineer',
-      company: 'Tech Company',
-      period: '2022 - Present',
-      description: 'Led development of full-stack applications using MERN stack. Implemented CI/CD pipelines and mentored junior developers.',
-      type: 'work'
-    },
-    {
-      title: 'Full Stack Developer',
-      company: 'Digital Agency',
-      period: '2020 - 2022',
-      description: 'Developed and maintained multiple client websites. Worked with React, Node.js, and MongoDB.',
-      type: 'work'
-    },
-    {
-      title: "Bachelor's in Computer Science",
-      company: 'University Name',
-      period: '2016 - 2020',
-      description: 'Focused on software engineering and web development. Graduated with honors.',
-      type: 'education'
-    }
-  ];
-
   return (
     <div ref={vantaRef} style={{ minHeight: '100vh' }} id="resume">
       <div className="section-header">Resume</div>
@@ -57,9 +34,8 @@ function ResumeSection() {
         <div style={styles.container}>
           <div style={styles.downloadSection}>
             <a
-              href="/path-to-your-resume.pdf"
-              target="_blank"
-              rel="noreferrer"
+              href={Resume}
+              download="AlexHunt_Resume.pdf"
               style={styles.downloadButton}
             >
               <FaDownload style={styles.downloadIcon} />
@@ -67,20 +43,12 @@ function ResumeSection() {
             </a>
           </div>
 
-          <div style={styles.timeline}>
-            {experiences.map((exp, index) => (
-              <div key={index} style={styles.timelineItem}>
-                <div style={styles.timelineIcon}>
-                  {exp.type === 'work' ? <FaBriefcase /> : <FaGraduationCap />}
-                </div>
-                <div style={styles.timelineContent}>
-                  <h3 style={styles.timelineTitle}>{exp.title}</h3>
-                  <h4 style={styles.timelineCompany}>{exp.company}</h4>
-                  <p style={styles.timelinePeriod}>{exp.period}</p>
-                  <p style={styles.timelineDescription}>{exp.description}</p>
-                </div>
-              </div>
-            ))}
+          <div style={styles.pdfContainer}>
+            <iframe
+              src={Resume}
+              style={styles.pdfViewer}
+              title="Resume PDF"
+            />
           </div>
         </div>
       </section>
@@ -92,84 +60,60 @@ const styles = {
   section: {
     padding: 0,
     minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '2rem',
-  },
-  heading: {
-    fontSize: '2.5rem',
-    marginBottom: '3rem',
-    textAlign: 'center',
-    color: '#2d3436',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '2rem',
   },
   downloadSection: {
-    textAlign: 'center',
-    marginBottom: '4rem',
+    marginBottom: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
   },
   downloadButton: {
-    display: 'inline-flex',
+    display: 'flex',
     alignItems: 'center',
-    padding: '1rem 2rem',
-    backgroundColor: '#007bff',
-    color: '#fff',
+    gap: '0.5rem',
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#b14b32',
+    color: '#dcccbd',
+    borderRadius: '0.5rem',
     textDecoration: 'none',
-    borderRadius: '5px',
+    fontSize: '1.1rem',
+    fontFamily: 'Montserrat, sans-serif',
     transition: 'all 0.3s ease',
-    fontWeight: '500',
+    border: '2px solid #dcccbd',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#434a54',
+      transform: 'translateY(-2px)',
+    },
   },
   downloadIcon: {
-    marginRight: '0.5rem',
+    fontSize: '1.2rem',
   },
-  timeline: {
-    position: 'relative',
-    maxWidth: '800px',
-    margin: '0 auto',
+  pdfContainer: {
+    width: '100%',
+    maxWidth: '850px',
+    height: '1100px',
+    border: '2px solid #dcccbd',
+    borderRadius: '0.5rem',
+    overflow: 'hidden',
+    backgroundColor: '#434a54',
   },
-  timelineItem: {
-    display: 'flex',
-    marginBottom: '3rem',
-    position: 'relative',
-  },
-  timelineIcon: {
-    width: '40px',
-    height: '40px',
-    backgroundColor: '#007bff',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    flexShrink: 0,
-    marginRight: '2rem',
-  },
-  timelineContent: {
-    flex: 1,
-    backgroundColor: '#fff',
-    padding: '1.5rem',
-    borderRadius: '5px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  timelineTitle: {
-    fontSize: '1.25rem',
-    color: '#2d3436',
-    marginBottom: '0.5rem',
-  },
-  timelineCompany: {
-    fontSize: '1.1rem',
-    color: '#007bff',
-    marginBottom: '0.5rem',
-  },
-  timelinePeriod: {
-    fontSize: '0.9rem',
-    color: '#636e72',
-    marginBottom: '1rem',
-  },
-  timelineDescription: {
-    fontSize: '1rem',
-    color: '#2d3436',
-    lineHeight: '1.6',
+  pdfViewer: {
+    width: '100%',
+    height: '100%',
+    border: 'none',
   },
 };
 
