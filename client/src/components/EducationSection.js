@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-import MSDegreeOU from '../assets/MS - Degree - OU.jpg';
+import MSDegreeOU from '../assets/MS Degree - OU.jpg';
 import BSDegreeOU from '../assets/BS Degree - OU.jpg';
 
 function EducationSection() {
