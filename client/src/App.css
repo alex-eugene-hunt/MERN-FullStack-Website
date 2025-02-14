@@ -36,32 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.section-header {
-  position: relative;
-  font-family: 'Lobster', cursive;
-  font-size: 3rem;
-  text-align: center;
-  padding: 2rem 0;
-  color: #b14b32;
-}
-
-.section-header::before,
-.section-header::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 60px;
-  height: 2px;
-  background-color: #dcccbd;
-}
-
-.section-header::before {
-  left: 50%;
-  margin-left: -120px;
-}
-
-.section-header::after {
-  right: 50%;
-  margin-right: -120px;
-}

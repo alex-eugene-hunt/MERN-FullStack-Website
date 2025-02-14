@@ -21,36 +21,16 @@ body {
 }
 
 .section-header {
-  position: relative;
   width: 100%;
-  padding: 2rem 0;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #b14b32;
+  color: #dcccbd;
   font-family: 'Lobster', cursive;
-  font-size: 3rem;
-  color: #b14b32;
-  background: none;
-  border: none;
+  font-size: 2.5rem;
   margin: 0;
-}
-
-.section-header::before,
-.section-header::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 60px;
-  height: 2px;
-  background-color: #dcccbd;
-}
-
-.section-header::before {
-  left: 50%;
-  margin-left: -120px;
-}
-
-.section-header::after {
-  right: 50%;
-  margin-right: -120px;
+  border-top: 10px solid #dcccbd;
+  border-bottom: 10px solid #dcccbd;
 }
