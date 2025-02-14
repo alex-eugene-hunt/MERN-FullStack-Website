@@ -182,7 +182,9 @@ function AboutSection() {
                       key={index} 
                       style={{
                         ...styles.interestItem,
-                        transform: `${flippedCards[index] ? 'rotateY(180deg)' : 'rotateY(0)'} ${hoveredCard === index ? 'translateY(-5px) scale(1.05)' : ''}`,
+                        transform: hoveredCard === index 
+                          ? `translate3d(0, -5px, 0) scale3d(1.05, 1.05, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
+                          : flippedCards[index] ? 'rotateY(180deg)' : 'translate3d(0, 0, 0)',
                         boxShadow: hoveredCard === index ? '0 8px 16px rgba(0,0,0,0.2)' : 'none'
                       }}
                       onClick={() => handleCardClick(index)}
@@ -340,8 +342,10 @@ const styles = {
     width: '100%',
     aspectRatio: '1',
     cursor: 'pointer',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     transformStyle: 'preserve-3d',
+    willChange: 'transform',
+    perspective: '1000px',
   },
   cardFront: {
     position: 'absolute',
@@ -356,6 +360,7 @@ const styles = {
     justifyContent: 'center',
     gap: '0.5rem',
     padding: '1rem',
+    willChange: 'transform',
   },
   cardBack: {
     position: 'absolute',
@@ -369,6 +374,7 @@ const styles = {
     justifyContent: 'center',
     padding: '1rem',
     transform: 'rotateY(180deg)',
+    willChange: 'transform',
   },
   interestIcon: {
     fontSize: '2rem',
