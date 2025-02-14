@@ -1,29 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaDownload } from 'react-icons/fa';
 import Resume from '../assets/AlexHunt_Resume.pdf';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function ResumeSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
-  const [setNumPages] = useState(null);
-  const [pageWidth, setPageWidth] = useState(850);
-
-  useEffect(() => {
-    function handleResize() {
-      const width = Math.min(850, window.innerWidth - 40);
-      setPageWidth(width);
-    }
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -46,10 +27,6 @@ function ResumeSection() {
     };
   }, [vantaEffect]);
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
   return (
     <div ref={vantaRef} style={{ minHeight: '100vh' }} id="resume">
       <div className="section-header">Resume</div>
@@ -66,19 +43,12 @@ function ResumeSection() {
             </a>
           </div>
 
-          <div style={styles.pdfContainer}>
-            <Document
-              file={Resume}
-              onLoadSuccess={onDocumentLoadSuccess}
-              loading={<div style={styles.loading}>Loading Resume...</div>}
-            >
-              <Page 
-                pageNumber={1} 
-                width={pageWidth}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-              />
-            </Document>
+          <div style={styles.resumeContainer}>
+            <img 
+              src={require('../assets/AlexHunt_Resume.jpg')} 
+              alt="Resume"
+              style={styles.resumeImage}
+            />
           </div>
         </div>
       </section>
@@ -131,18 +101,20 @@ const styles = {
   downloadIcon: {
     fontSize: '1.2rem',
   },
-  pdfContainer: {
+  resumeContainer: {
     width: '100%',
     maxWidth: '850px',
     display: 'flex',
     justifyContent: 'center',
-    padding: '1rem',
+    border: '2px solid #dcccbd',
+    borderRadius: '0.5rem',
+    overflow: 'hidden',
+    backgroundColor: '#434a54',
   },
-  loading: {
-    color: '#dcccbd',
-    fontSize: '1.2rem',
-    fontFamily: 'Montserrat, sans-serif',
-    padding: '2rem',
+  resumeImage: {
+    width: '100%',
+    height: 'auto',
+    display: 'block',
   },
 };
 
