@@ -33,12 +33,12 @@ function ExperienceSection() {
       location: 'Broken Arrow, OK',
       period: 'Feb 2024 - Dec 2024',
       description: [
-        'Designed Docker and Podman containers to streamline the deployment process, reducing 70% of deployment overhead by eliminating configuration conflicts.',
-        'Addressed existing CI/CD bugs and developed GitLab Pipelines to improve automation, decreasing build times by 80% and significantly enhanced code reliability.',
-        'Configured and managed GitLab Runners to enable parallel and efficient builds.',
-        'Shortened feedback loops by 50%, allowing quicker iteration and continuous integration.',
-        'Implemented integration and unit testing frameworks in Python and C++ to ensure reliability in large codebases.',
-        'Created an automatic Redmine ticket updater using GitLab\'s merge request API using C# and dotnet.'
+        '⦿ Designed Docker and Podman containers to streamline the deployment process, reducing 70% of deployment overhead by eliminating configuration conflicts.',
+        '⦿ Addressed existing CI/CD bugs and developed GitLab Pipelines to improve automation, decreasing build times by 80% and significantly enhanced code reliability.',
+        '⦿ Configured and managed GitLab Runners to enable parallel and efficient builds.',
+        '⦿ Shortened feedback loops by 50%, allowing quicker iteration and continuous integration.',
+        '⦿ Implemented integration and unit testing frameworks in Python and C++ to ensure reliability in large codebases.',
+        '⦿ Created an automatic Redmine ticket updater using GitLab\'s merge request API using C# and dotnet.'
       ],
       technologies: ['Docker', 'Podman', 'GitLab CI/CD', 'Python', 'C++', 'C#', '.NET', 'Unit Testing']
     }
@@ -138,6 +138,7 @@ const styles = {
     color: '#b14b32',
     fontSize: '1rem',
     fontFamily: 'Montserrat, sans-serif',
+    fontWeight: "bold",
   },
   icon: {
     fontSize: '1.2rem',
