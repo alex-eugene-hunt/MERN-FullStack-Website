@@ -94,8 +94,8 @@ function EducationSection() {
 
 const styles = {
   section: {
-    backgroundColor: '#dcccbd',
     padding: 0,
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',

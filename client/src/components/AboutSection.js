@@ -148,7 +148,6 @@ function AboutSection() {
 
 const styles = {
   section: {
-    backgroundColor: '#d4996f',
     padding: 0,
     minHeight: '100vh',
   },
