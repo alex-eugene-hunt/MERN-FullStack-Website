@@ -366,6 +366,9 @@ const styles = {
     justifyContent: 'center',
     gap: '0.5rem',
     padding: '1rem',
+    transform: 'translateZ(0)',
+    WebkitFontSmoothing: 'subpixel-antialiased',
+    MozOsxFontSmoothing: 'grayscale',
   },
   cardBack: {
     position: 'absolute',
@@ -383,11 +386,20 @@ const styles = {
   interestIcon: {
     fontSize: '2rem',
     color: '#dcccbd',
+    transform: 'translateZ(0)',
+    WebkitFontSmoothing: 'subpixel-antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   interestLabel: {
     fontSize: '0.9rem',
     color: '#dcccbd',
     textAlign: 'center',
+    transform: 'translateZ(0)',
+    WebkitFontSmoothing: 'subpixel-antialiased',
+    MozOsxFontSmoothing: 'grayscale',
   },
   description: {
     color: '#dcccbd',
