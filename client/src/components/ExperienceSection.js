@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
-import CymstarBadge from '../assets/CymSTAR_Badge.jpg';
-import CymstarEmployees from '../assets/CymSTAR_Employees_HQ.jpg';
-import FairchildA10 from '../assets/Fairchild_Republic_A-10.jpg';
+import CymSTARHQ from '../assets/CymSTAR_Employees_HQ.jpg';
+import CymSTARBadge from '../assets/CymSTAR_Badge.jpg';
+import A10Aircraft from '../assets/Fairchild_Republic_A-10.jpg';
 
 function ExperienceSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slides = [
-    { image: CymstarBadge, alt: 'CymSTAR Badge' },
-    { image: CymstarEmployees, alt: 'CymSTAR Employees at HQ' },
-    { image: FairchildA10, alt: 'Fairchild Republic A-10' }
-  ];
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -35,15 +28,6 @@ function ExperienceSection() {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [slides.length]);
 
   const experiences = [
     {
@@ -68,57 +52,51 @@ function ExperienceSection() {
       <div className="section-header">Experience</div>
       <section style={styles.section}>
         <div style={styles.container}>
-          <div style={styles.experienceLayout}>
-            <div style={styles.timeline}>
-              {experiences.map((exp, index) => (
-                <div key={index} style={styles.timelineItem}>
-                  <div style={styles.timelineContent}>
-                    <div style={styles.header}>
-                      <h3 style={styles.title}>{exp.title}</h3>
-                      <div style={styles.companyInfo}>
-                        <div style={styles.infoItem}>
-                          <FaBriefcase style={styles.icon} />
-                          <span>{exp.company}</span>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaMapMarkerAlt style={styles.icon} />
-                          <span>{exp.location}</span>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaCalendar style={styles.icon} />
-                          <span>{exp.period}</span>
-                        </div>
+          <div style={styles.timeline}>
+            {experiences.map((exp, index) => (
+              <div key={index} style={styles.timelineItem}>
+                <div style={styles.timelineContent}>
+                  <div style={styles.header}>
+                    <h3 style={styles.title}>{exp.title}</h3>
+                    <div style={styles.companyInfo}>
+                      <div style={styles.infoItem}>
+                        <FaBriefcase style={styles.icon} />
+                        <span>{exp.company}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaMapMarkerAlt style={styles.icon} />
+                        <span>{exp.location}</span>
+                      </div>
+                      <div style={styles.infoItem}>
+                        <FaCalendar style={styles.icon} />
+                        <span>{exp.period}</span>
                       </div>
                     </div>
-                    <ul style={styles.descriptionList}>
-                      {exp.description.map((item, i) => (
-                        <li key={i} style={styles.descriptionItem}>{item}</li>
-                      ))}
-                    </ul>
-                    <div style={styles.technologies}>
-                      {exp.technologies.map((tech, i) => (
-                        <span key={i} style={styles.tech}>{tech}</span>
-                      ))}
+                  </div>
+                  <div style={styles.contentWrapper}>
+                    <div style={styles.mainContent}>
+                      <ul style={styles.descriptionList}>
+                        {exp.description.map((item, i) => (
+                          <li key={i} style={styles.descriptionItem}>{item}</li>
+                        ))}
+                      </ul>
+                      <div style={styles.technologies}>
+                        {exp.technologies.map((tech, i) => (
+                          <span key={i} style={styles.tech}>{tech}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={styles.badgeContainer}>
+                      <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div style={styles.slideshow}>
-              <div style={styles.slideshowContainer}>
-                {slides.map((slide, index) => (
-                  <img
-                    key={index}
-                    src={slide.image}
-                    alt={slide.alt}
-                    style={{
-                      ...styles.slide,
-                      opacity: currentSlide === index ? 1 : 0,
-                    }}
-                  />
-                ))}
               </div>
-            </div>
+            ))}
+          </div>
+          <div style={styles.imageGallery}>
+            <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
+            <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
           </div>
         </div>
       </section>
@@ -136,38 +114,10 @@ const styles = {
     margin: '0 auto',
     padding: '0 2rem',
   },
-  experienceLayout: {
-    display: 'flex',
-    gap: '2rem',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    marginBottom: '2rem',
-  },
   timeline: {
-    flex: '2',
-  },
-  slideshow: {
-    flex: '1',
-    maxWidth: '400px',
-  },
-  slideshowContainer: {
-    position: 'relative',
-    width: '100%',
-    paddingTop: '75%', // 4:3 aspect ratio
-    borderRadius: '1rem',
-    overflow: 'hidden',
-    backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-  },
-  slide: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    transition: 'opacity 0.5s ease-in-out',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2rem',
   },
   timelineItem: {
     display: 'flex',
@@ -236,12 +186,44 @@ const styles = {
     gap: '0.75rem',
   },
   tech: {
-    padding: '0.4rem 0.8rem',
     backgroundColor: '#b14b32',
-    color: '#dcccbd',
+    color: '#fff',
+    padding: '0.3rem 0.8rem',
     borderRadius: '1rem',
     fontSize: '0.9rem',
+    margin: '0.3rem',
+    display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
+  },
+  contentWrapper: {
+    display: 'flex',
+    gap: '2rem',
+    alignItems: 'flex-start',
+  },
+  mainContent: {
+    flex: 1,
+  },
+  badgeContainer: {
+    flexShrink: 0,
+  },
+  badgeImage: {
+    width: '150px',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
+  },
+  imageGallery: {
+    display: 'flex',
+    gap: '2rem',
+    justifyContent: 'center',
+    marginTop: '2rem',
+  },
+  galleryImage: {
+    width: 'calc(50% - 1rem)',
+    maxWidth: '500px',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
   },
 };
 
