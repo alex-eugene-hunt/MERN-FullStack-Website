@@ -60,9 +60,9 @@ function SocialSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="social">
       <div className="section-header">Connect</div>
-      <section id="social" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <h2 style={styles.heading}>Let's Connect</h2>
           <p style={styles.description}>

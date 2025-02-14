@@ -51,9 +51,9 @@ function ResumeSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="resume">
       <div className="section-header">Resume</div>
-      <section id="resume" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.downloadSection}>
             <a

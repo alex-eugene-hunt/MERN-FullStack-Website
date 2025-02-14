@@ -59,9 +59,9 @@ function AboutSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="about">
       <div className="section-header">About</div>
-      <section id="about" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.gridContainer}>
             {/* Top Left - Slideshow */}

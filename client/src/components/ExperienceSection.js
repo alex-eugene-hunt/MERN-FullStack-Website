@@ -58,9 +58,9 @@ function ExperienceSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="experience">
       <div className="section-header">Experience</div>
-      <section id="experience" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.timeline}>
             {experiences.map((exp, index) => (

@@ -39,9 +39,9 @@ function ProjectsSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="projects">
       <div className="section-header">Projects</div>
-      <section id="projects" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.projectsGrid}>
             {projects.map((project, index) => (

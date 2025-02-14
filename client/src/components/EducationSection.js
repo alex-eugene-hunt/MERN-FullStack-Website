@@ -49,9 +49,9 @@ function EducationSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }}>
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="education">
       <div className="section-header">Education</div>
-      <section id="education" style={styles.section}>
+      <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.timeline}>
             {education.map((edu, index) => (
