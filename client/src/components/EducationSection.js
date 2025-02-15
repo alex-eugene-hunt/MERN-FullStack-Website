@@ -6,6 +6,7 @@ import CalSeal from '../assets/cal-seal.png';
 import CalLogo from '../assets/cal-logo.png';
 import OUSeal from '../assets/oklahoma-sooners-seal.png';
 import OULogo from '../assets/oklahoma-sooners-logo.png';
+import SeedSowerOU from '../assets/SeedSower-OU.jpg';
 
 function EducationSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -127,11 +128,16 @@ function EducationSection() {
                   </div>
                 </div>
                 {(edu.school === 'University of Oklahoma') && (
-                  <div style={styles.degreeImageContainer}>
+                  <div style={styles.imageGallery}>
                     <img 
                       src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
                       alt={`${edu.degree} from ${edu.school}`}
                       style={styles.degreeImage}
+                    />
+                    <img 
+                      src={SeedSowerOU}
+                      alt="OU Seed Sower"
+                      style={styles.sowerImage}
                     />
                   </div>
                 )}
@@ -198,15 +204,20 @@ const styles = {
   icon: {
     fontSize: '1.2rem',
   },
-  degreeImageContainer: {
-    marginTop: '1rem',
-    marginBottom: '1rem',
+  imageGallery: {
     display: 'flex',
-    justifyContent: 'center',
+    gap: '1rem',
+    marginTop: '2rem',
+    width: '100%',
   },
   degreeImage: {
-    width: '100%',
-    maxWidth: '800px',
+    width: 'calc(50% - 0.5rem)',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
+  },
+  sowerImage: {
+    width: 'calc(50% - 0.5rem)',
     height: 'auto',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
