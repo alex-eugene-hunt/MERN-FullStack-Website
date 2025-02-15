@@ -34,21 +34,24 @@ function EducationSection() {
       school: 'University of California, Berkeley',
       location: 'Berkeley, CA',
       period: 'Jan 2025 - (Dec 2025)',
-      gpa: null
+      gpa: null,
+      description: 'My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n- Introduction to Data Science Programming\n- Research Design and Applications for Data and Analysis\n- Statistics for Data Science\n\nI am still studying here and will update as needed. Skills: Data Science · Data Analysis · Statistical Data Analysis'
     },
     {
       degree: 'Master of Computer Science',
       school: 'University of Oklahoma',
       location: 'Norman, OK',
       period: 'Jan 2024 - Dec 2024',
-      gpa: '3.9 / 4.0'
+      gpa: '3.9 / 4.0',
+      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\nSummer Project: Improving Drone Flight Trajectories with Machine Learning.\n\nPaper Defense: "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n- Algorithm Analysis\n- Database Management Systems\n- Computer Security \n- PDN Programming \n- Computer Architecture \n- Machine Learning\n- Cyber Attacks and Defenses\n- Data Mining\n- Computational Learning Theory\n- Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
     },
     {
       degree: 'Bachelor of Computer Science',
       school: 'University of Oklahoma',
       location: 'Norman, OK',
       period: 'Oct 2020 - Dec 2023',
-      gpa: '3.83 / 4.0'
+      gpa: '3.83 / 4.0',
+      description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n- Programming Struc/Abstractions\n- Data Structures\n- Computer Organization\n- Discrete Structures\n- Intro to Operating Systems\n- Software Engineering\n- Princ-Programming Languages\n- Artificial Intelligence\n- Distributed Operating Systems\n- Data Networks\n- Capstone Design Project\n- Algorithm Analysis\n- Database Management Systems\n- Computer Security\n- PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Algorithms · Programming'
     }
   ];
 
@@ -83,6 +86,13 @@ function EducationSection() {
                             <span>GPA: {edu.gpa}</span>
                           </div>
                         )}
+                      </div>
+                    </div>
+                    <div style={styles.contentWrapper}>
+                      <div style={styles.mainContent}>
+                        <div style={styles.description}>
+                          <pre style={styles.descriptionText}>{edu.description}</pre>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -169,7 +179,28 @@ const styles = {
     height: 'auto',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
-  }
+  },
+  contentWrapper: {
+    display: 'flex',
+    marginTop: '1rem',
+    gap: '2rem',
+    alignItems: 'flex-start',
+  },
+  mainContent: {
+    flex: 1,
+  },
+  description: {
+    marginTop: '1rem',
+  },
+  descriptionText: {
+    whiteSpace: 'pre-wrap',
+    fontFamily: 'inherit',
+    margin: 0,
+    fontWeight: 'bold',
+    color: '#666',
+    fontSize: '0.9rem',
+    lineHeight: '1.6',
+  },
 };
 
 export default EducationSection;
