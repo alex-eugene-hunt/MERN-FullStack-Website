@@ -35,7 +35,7 @@ function EducationSection() {
       location: 'Berkeley, CA',
       period: 'Jan 2025 - (Dec 2025)',
       gpa: null,
-      description: 'My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n- Introduction to Data Science Programming\n- Research Design and Applications for Data and Analysis\n- Statistics for Data Science\n\nI am still studying here and will update as needed. Skills: Data Science · Data Analysis · Statistical Data Analysis'
+      description: 'My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n⦿ Introduction to Data Science Programming\n⦿ Research Design and Applications for Data and Analysis\n⦿ Statistics for Data Science\n\nI am still studying here and will update as needed. Skills: Data Science · Data Analysis · Statistical Data Analysis'
     },
     {
       degree: 'Master of Computer Science',
@@ -43,7 +43,7 @@ function EducationSection() {
       location: 'Norman, OK',
       period: 'Jan 2024 - Dec 2024',
       gpa: '3.9 / 4.0',
-      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\nSummer Project: Improving Drone Flight Trajectories with Machine Learning.\n\nPaper Defense: "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n- Algorithm Analysis\n- Database Management Systems\n- Computer Security \n- PDN Programming \n- Computer Architecture \n- Machine Learning\n- Cyber Attacks and Defenses\n- Data Mining\n- Computational Learning Theory\n- Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
+      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\nSummer Project: Improving Drone Flight Trajectories with Machine Learning.\n\nPaper Defense: "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security \n⦿ PDN Programming \n⦿ Computer Architecture \n⦿ Machine Learning\n⦿ Cyber Attacks and Defenses\n⦿ Data Mining\n⦿ Computational Learning Theory\n⦿ Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
     },
     {
       degree: 'Bachelor of Computer Science',
@@ -51,7 +51,7 @@ function EducationSection() {
       location: 'Norman, OK',
       period: 'Oct 2020 - Dec 2023',
       gpa: '3.83 / 4.0',
-      description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n- Programming Struc/Abstractions\n- Data Structures\n- Computer Organization\n- Discrete Structures\n- Intro to Operating Systems\n- Software Engineering\n- Princ-Programming Languages\n- Artificial Intelligence\n- Distributed Operating Systems\n- Data Networks\n- Capstone Design Project\n- Algorithm Analysis\n- Database Management Systems\n- Computer Security\n- PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Algorithms · Programming'
+      description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n⦿ Programming Struc/Abstractions\n⦿ Data Structures\n⦿ Computer Organization\n⦿ Discrete Structures\n⦿ Intro to Operating Systems\n⦿ Software Engineering\n⦿ Princ-Programming Languages\n⦿ Artificial Intelligence\n⦿ Distributed Operating Systems\n⦿ Data Networks\n⦿ Capstone Design Project\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security\n⦿ PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Algorithms · Programming'
     }
   ];
 
@@ -90,8 +90,21 @@ function EducationSection() {
                     </div>
                     <div style={styles.contentWrapper}>
                       <div style={styles.mainContent}>
-                        <div style={styles.description}>
-                          <pre style={styles.descriptionText}>{edu.description}</pre>
+                        <ul style={styles.descriptionList}>
+                          {edu.description.split('\n').filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => (
+                            <li key={i} style={styles.descriptionItem}>{line}</li>
+                          ))}
+                        </ul>
+                        <div style={styles.technologies}>
+                          {edu.description.split('\n')
+                            .find(line => line.includes('Skills:'))
+                            ?.split('Skills:')[1]
+                            .split('·')
+                            .map(skill => skill.trim())
+                            .filter(skill => skill)
+                            .map((skill, i) => (
+                              <span key={i} style={styles.tech}>{skill}</span>
+                            ))}
                         </div>
                       </div>
                     </div>
@@ -182,24 +195,49 @@ const styles = {
   },
   contentWrapper: {
     display: 'flex',
-    marginTop: '1rem',
     gap: '2rem',
     alignItems: 'flex-start',
   },
   mainContent: {
     flex: 1,
   },
-  description: {
-    marginTop: '1rem',
+  descriptionList: {
+    listStyle: 'none',
+    padding: 0,
+    margin: '0 0 1.5rem 0',
   },
-  descriptionText: {
-    whiteSpace: 'pre-wrap',
-    fontFamily: 'inherit',
-    margin: 0,
-    fontWeight: 'bold',
-    color: '#666',
-    fontSize: '0.9rem',
+  descriptionItem: {
+    color: '#dcccbd',
+    marginBottom: '0.75rem',
+    paddingLeft: '1.5rem',
+    position: 'relative',
+    fontFamily: 'Montserrat, sans-serif',
     lineHeight: '1.6',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: '0.6em',
+      width: '6px',
+      height: '6px',
+      backgroundColor: '#b14b32',
+      borderRadius: '50%',
+    },
+  },
+  technologies: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '0.75rem',
+  },
+  tech: {
+    backgroundColor: '#b14b32',
+    color: '#dcccbd',
+    padding: '0.3rem 0.8rem',
+    borderRadius: '1rem',
+    fontSize: '0.9rem',
+    margin: '0.3rem',
+    display: 'inline-block',
+    fontFamily: 'Montserrat, sans-serif',
   },
 };
 
