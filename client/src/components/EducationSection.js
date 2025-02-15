@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import MSDegreeOU from '../assets/MS Degree - OU.jpg';
 import BSDegreeOU from '../assets/BS Degree - OU.jpg';
+import CalSeal from '../assets/cal-seal.png';
+import CalLogo from '../assets/cal-logo.png';
+import OUSeal from '../assets/oklahoma-sooners-seal.png';
+import OULogo from '../assets/oklahoma-sooners-logo.png';
 
 function EducationSection() {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -51,7 +55,7 @@ function EducationSection() {
       location: 'Norman, OK',
       period: 'Oct 2020 - Dec 2023',
       gpa: '3.83 / 4.0',
-      description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n⦿ Programming Struc/Abstractions\n⦿ Data Structures\n⦿ Computer Organization\n⦿ Discrete Structures\n⦿ Intro to Operating Systems\n⦿ Software Engineering\n⦿ Princ-Programming Languages\n⦿ Artificial Intelligence\n⦿ Distributed Operating Systems\n⦿ Data Networks\n⦿ Capstone Design Project\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security\n⦿ PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Algorithms · Programming'
+      description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n⦿ Programming Struc/Abstractions\n⦿ Data Structures\n⦿ Computer Organization\n⦿ Discrete Structures\n⦿ Intro to Operating Systems\n⦿ Software Engineering\n⦿ Princ-Programming Languages\n⦿ Artificial Intelligence\n⦿ Distributed Operating Systems\n⦿ Data Networks\n⦿ Capstone Design Project\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security\n⦿ PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Programming'
     }
   ];
 
@@ -106,6 +110,20 @@ function EducationSection() {
                               <span key={i} style={styles.tech}>{skill}</span>
                             ))}
                         </div>
+                      </div>
+                      <div style={styles.logoContainer}>
+                        {edu.school === 'University of California, Berkeley' && (
+                          <>
+                            <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
+                            <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
+                          </>
+                        )}
+                        {edu.school === 'University of Oklahoma' && (
+                          <>
+                            <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
+                            <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -238,6 +256,25 @@ const styles = {
     margin: '0.3rem',
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
+  },
+  logoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    flexShrink: 0,
+    width: '150px',
+  },
+  topLogo: {
+    width: '100%',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
+  },
+  bottomLogo: {
+    width: '100%',
+    height: 'auto',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
   },
 };
 
