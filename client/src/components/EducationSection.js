@@ -68,6 +68,18 @@ function EducationSection() {
             {education.map((edu, index) => (
               <div key={index}>
                 <div style={styles.timelineItem}>
+                  {edu.school === 'University of California, Berkeley' && (
+                    <>
+                      <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
+                      <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
+                    </>
+                  )}
+                  {edu.school === 'University of Oklahoma' && (
+                    <>
+                      <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
+                      <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
+                    </>
+                  )}
                   <div style={styles.timelineContent}>
                     <div style={styles.header}>
                       <h3 style={styles.title}>{edu.degree}</h3>
@@ -111,20 +123,6 @@ function EducationSection() {
                             ))}
                         </div>
                       </div>
-                      <div style={styles.logoContainer}>
-                        {edu.school === 'University of California, Berkeley' && (
-                          <>
-                            <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
-                            <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
-                          </>
-                        )}
-                        {edu.school === 'University of Oklahoma' && (
-                          <>
-                            <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
-                            <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
-                          </>
-                        )}
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -167,10 +165,12 @@ const styles = {
     backgroundColor: '#434a54',
     borderRadius: '1rem',
     border: '2px solid #dcccbd',
+    overflow: 'hidden',
   },
   timelineContent: {
     flex: 1,
     padding: '2rem',
+    position: 'relative',
   },
   header: {
     marginBottom: '1rem',
@@ -257,24 +257,21 @@ const styles = {
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
   },
-  logoContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1rem',
-    flexShrink: 0,
-    width: '150px',
-  },
   topLogo: {
-    width: '100%',
+    position: 'absolute',
+    top: '1rem',
+    right: '1rem',
+    width: '100px',
     height: 'auto',
-    borderRadius: '8px',
-    border: '2px solid #dcccbd',
+    zIndex: 1,
   },
   bottomLogo: {
-    width: '100%',
+    position: 'absolute',
+    bottom: '1rem',
+    right: '1rem',
+    width: '100px',
     height: 'auto',
-    borderRadius: '8px',
-    border: '2px solid #dcccbd',
+    zIndex: 1,
   },
 };
 
