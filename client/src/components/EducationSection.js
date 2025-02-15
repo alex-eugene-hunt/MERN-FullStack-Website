@@ -216,7 +216,7 @@ const styles = {
   },
   degreeImageContainer: {
     flexShrink: 0,
-    width: '150px',
+    width: '725px',
   },
   degreeImage: {
     width: '100%',
