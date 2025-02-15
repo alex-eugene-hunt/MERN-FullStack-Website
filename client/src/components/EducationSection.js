@@ -129,7 +129,20 @@ function EducationSection() {
                 </div>
                 {(edu.school === 'University of Oklahoma') && (
                   <div style={styles.imageGallery}>
-                    <div style={styles.degreeImageContainer}>
+                    <div style={styles.degreeImageContainer} ref={el => {
+                      if (el) {
+                        const img = el.querySelector('img');
+                        if (img) {
+                          img.onload = () => {
+                            const height = img.offsetHeight;
+                            const sowerImg = el.parentElement.querySelector('.sower-image');
+                            if (sowerImg) {
+                              sowerImg.style.height = `${height}px`;
+                            }
+                          };
+                        }
+                      }
+                    }}>
                       <img 
                         src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
                         alt={`${edu.degree} from ${edu.school}`}
@@ -141,6 +154,7 @@ function EducationSection() {
                         src={SeedSowerOU}
                         alt="OU Seed Sower"
                         style={styles.sowerImage}
+                        className="sower-image"
                       />
                     </div>
                   </div>
@@ -213,6 +227,7 @@ const styles = {
     gap: '1rem',
     marginTop: '2rem',
     width: '100%',
+    alignItems: 'center',
   },
   degreeImageContainer: {
     flexShrink: 0,
@@ -226,13 +241,14 @@ const styles = {
   },
   sowerImageContainer: {
     flex: 1,
+    display: 'flex',
+    alignItems: 'center',
   },
   sowerImage: {
     width: '100%',
-    height: 'auto',
+    objectFit: 'cover',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
-    objectFit: 'cover',
   },
   contentWrapper: {
     display: 'flex',
