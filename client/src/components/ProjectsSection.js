@@ -108,8 +108,9 @@ function ProjectsSection() {
       minHeight: '100vh', 
       height: '100%',
       backgroundColor: '#021825',
-      opacity: 0.8,
-      background: 'linear-gradient(135deg, #434a5455 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #434a54 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #434a5455 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #434a54 25%, #021825 25%) 0px 0/ 20px 20px'
+      backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
+      backgroundSize: '20px 20px',
+      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
     }} id="projects">
       <div className="section-header">Projects</div>
       <section style={{
