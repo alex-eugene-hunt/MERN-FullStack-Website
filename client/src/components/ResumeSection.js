@@ -28,7 +28,7 @@ function ResumeSection() {
   }, [vantaEffect]);
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="resume">
+    <div ref={vantaRef} style={{ minHeight: '100vh', height: '100%' }} id="resume">
       <div className="section-header">Resume</div>
       <section style={styles.section}>
         <div style={styles.container}>
@@ -58,8 +58,8 @@ function ResumeSection() {
 
 const styles = {
   section: {
-    padding: '2rem 0',
-    minHeight: '100%',
+    padding: 0,
+    minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

@@ -61,7 +61,7 @@ function EducationSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="education">
+    <div ref={vantaRef} style={{ minHeight: '100vh', height: '100%' }} id="education">
       <div className="section-header">Education</div>
       <section style={styles.section}>
         <div style={styles.container}>
@@ -171,7 +171,7 @@ function EducationSection() {
 const styles = {
   section: {
     padding: '2rem 0',
-    minHeight: '100%',
+    minHeight: '100vh',
   },
   container: {
     maxWidth: '1200px',
