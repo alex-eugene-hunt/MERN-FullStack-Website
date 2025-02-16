@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import MSDegreeOU from '../assets/MS Degree - OU.jpg';
 import BSDegreeOU from '../assets/BS Degree - OU.jpg';
@@ -9,30 +9,6 @@ import OULogo from '../assets/oklahoma-sooners-logo.png';
 import SeedSowerOU from '../assets/SeedSower-OU.jpg';
 
 function EducationSection() {
-  const [vantaEffect, setVantaEffect] = useState(null);
-  const vantaRef = useRef(null);
-
-  useEffect(() => {
-    if (!vantaEffect && window.VANTA) {
-      setVantaEffect(
-        window.VANTA.WAVES({
-          el: vantaRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          scaleMobile: 1.00,
-          color: 0x021825
-        })
-      );
-    }
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, [vantaEffect]);
-
   const education = [
     {
       degree: 'Master of Information and Data Science',
@@ -61,7 +37,13 @@ function EducationSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh', height: '100%' }} id="education">
+    <div style={{ 
+      minHeight: '100vh', 
+      height: '100%',
+      backgroundColor: '#021825',
+      opacity: 0.8,
+      background: 'linear-gradient(135deg, #434a5455 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #434a54 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #434a5455 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #434a54 25%, #021825 25%) 0px 0/ 20px 20px'
+    }} id="education">
       <div className="section-header">Education</div>
       <section style={styles.section}>
         <div style={styles.container}>
