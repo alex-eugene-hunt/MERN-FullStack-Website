@@ -48,7 +48,7 @@ function ExperienceSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: 'fit-content' }} id="experience">
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="experience">
       <div className="section-header">Experience</div>
       <section style={styles.section}>
         <div style={styles.container}>
@@ -109,7 +109,7 @@ function ExperienceSection() {
 const styles = {
   section: {
     padding: '2rem 0',
-    minHeight: '100vh',
+    minHeight: '100%',
   },
   container: {
     maxWidth: '1200px',
