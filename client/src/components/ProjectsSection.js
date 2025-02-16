@@ -52,6 +52,78 @@ function ProjectsSection() {
         'Created clustering models leveraging coordinates and built a GUI for easy data exploration.'
       ],
       technologies: ['Python', 'Machine Learning', 'Data Mining', 'GUI Development', 'Data Visualization']
+    },
+    {
+      title: 'ML Drone Flights',
+      period: 'May 2024 - Aug 2024',
+      github: 'https://github.com/alex-eugene-hunt/ML-Drone-Flights',
+      description: [
+        'Developed machine learning models to optimize drone flight paths and improve efficiency.',
+        'Implemented computer vision algorithms for obstacle detection and navigation.',
+        'Created a simulation environment for testing and training drone flight patterns.',
+        'Achieved 30% improvement in flight efficiency through ML-optimized path planning.'
+      ],
+      technologies: ['Python', 'TensorFlow', 'Computer Vision', 'Drone API', 'Simulation']
+    },
+    {
+      title: 'Diabetes Detection',
+      period: 'Mar 2024 - May 2024',
+      github: 'https://github.com/alex-eugene-hunt/Diabetes-Detection',
+      description: [
+        'Built a machine learning model to predict diabetes risk using patient health data.',
+        'Implemented feature selection and preprocessing techniques to improve model accuracy.',
+        'Developed a user-friendly web interface for healthcare professionals.',
+        'Achieved 92% accuracy in early diabetes detection.'
+      ],
+      technologies: ['Python', 'Scikit-learn', 'Flask', 'Healthcare Analytics', 'Data Preprocessing']
+    },
+    {
+      title: 'Stroke Prediction',
+      period: 'Jan 2024 - Mar 2024',
+      github: 'https://github.com/alex-eugene-hunt/Stroke-Prediction',
+      description: [
+        'Created a neural network model for early stroke prediction using patient data.',
+        'Implemented data balancing techniques to handle imbalanced medical datasets.',
+        'Developed visualization tools for model interpretation.',
+        'Achieved 88% sensitivity in identifying high-risk patients.'
+      ],
+      technologies: ['Python', 'TensorFlow', 'Neural Networks', 'Medical Data Analysis', 'Data Visualization']
+    },
+    {
+      title: 'Remote Controlled Timer',
+      period: 'Nov 2023 - Dec 2023',
+      github: 'https://github.com/alex-eugene-hunt/Remote-Timer',
+      description: [
+        'Designed and built a remote-controlled timer system using Arduino.',
+        'Implemented wireless communication protocols for remote operation.',
+        'Created a mobile app interface for timer control.',
+        'Added features for multiple timer presets and scheduling.'
+      ],
+      technologies: ['Arduino', 'C++', 'Mobile App Development', 'Wireless Communication', 'IoT']
+    },
+    {
+      title: 'Score Prediction',
+      period: 'Sep 2023 - Oct 2023',
+      github: 'https://github.com/alex-eugene-hunt/Score-Prediction',
+      description: [
+        'Developed a machine learning model to predict sports game scores.',
+        'Implemented data scraping to collect historical game data.',
+        'Created an automated pipeline for model training and updating.',
+        'Achieved 75% accuracy in predicting game outcomes.'
+      ],
+      technologies: ['Python', 'Machine Learning', 'Web Scraping', 'Data Analysis', 'Automation']
+    },
+    {
+      title: 'TurtleBot',
+      period: 'Jul 2023 - Aug 2023',
+      github: 'https://github.com/alex-eugene-hunt/TurtleBot',
+      description: [
+        'Programmed a TurtleBot for autonomous navigation and mapping.',
+        'Implemented SLAM algorithms for real-time mapping.',
+        'Developed obstacle avoidance and path planning algorithms.',
+        'Created a user interface for robot control and monitoring.'
+      ],
+      technologies: ['ROS', 'Python', 'SLAM', 'Robotics', 'Navigation Algorithms']
     }
   ];
 
