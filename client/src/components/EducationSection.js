@@ -61,7 +61,7 @@ function EducationSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }} id="education">
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="education">
       <div className="section-header">Education</div>
       <section style={styles.section}>
         <div style={styles.container}>
@@ -172,18 +172,11 @@ const styles = {
   section: {
     padding: '2rem 0',
     minHeight: '100%',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
   },
   container: {
-    maxWidth: 'unset',
+    maxWidth: '1200px',
     margin: '0 auto',
     padding: '0 2rem',
-    width: '100%',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
   },
   timeline: {
     display: 'flex',

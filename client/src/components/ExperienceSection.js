@@ -48,7 +48,7 @@ function ExperienceSection() {
   ];
 
   return (
-    <div ref={vantaRef} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }} id="experience">
+    <div ref={vantaRef} style={{ minHeight: '100vh' }} id="experience">
       <div className="section-header">Experience</div>
       <section style={styles.section}>
         <div style={styles.container}>
@@ -110,18 +110,11 @@ const styles = {
   section: {
     padding: '2rem 0',
     minHeight: '100%',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
   },
   container: {
-    maxWidth: 'unset',
+    maxWidth: '1200px',
     margin: '0 auto',
     padding: '0 2rem',
-    width: '100%',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
   },
   timeline: {
     display: 'flex',
