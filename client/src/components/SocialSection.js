@@ -74,12 +74,13 @@ function SocialSection() {
 
   return (
     <div style={{ 
-      minHeight: '100vh', 
+      minHeight: 'auto', 
       height: '100%',
       backgroundColor: '#021825',
       backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
       backgroundSize: '20px 20px',
-      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
+      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0',
+      padding: '4rem 0'
     }} id="social">
       <div className="section-header">Connect</div>
       <div className="nav-wrap">
