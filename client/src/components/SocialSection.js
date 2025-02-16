@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaLinkedin, FaGithub, FaSlack, FaFacebook, FaInstagram } from 'react-icons/fa';
+import './SocialSection.css';
 
 function SocialSection() {
   const socialLinks = [
@@ -30,6 +31,47 @@ function SocialSection() {
     },
   ];
 
+  useEffect(() => {
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    const toggleSiblingClass = (items, index, offset, className, add) => {
+      const sibling = items[index + offset];
+      if (sibling) {
+        if (add) {
+          sibling.classList.add(className);
+        } else {
+          sibling.classList.remove(className);
+        }
+      }
+    };
+
+    navItems.forEach((item, index) => {
+      item.addEventListener('mouseenter', () => {
+        item.classList.add('hover');
+        toggleSiblingClass(navItems, index, -1, 'sibling-close', true);
+        toggleSiblingClass(navItems, index, 1, 'sibling-close', true);
+        toggleSiblingClass(navItems, index, -2, 'sibling-far', true);
+        toggleSiblingClass(navItems, index, 2, 'sibling-far', true);
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('hover');
+        toggleSiblingClass(navItems, index, -1, 'sibling-close', false);
+        toggleSiblingClass(navItems, index, 1, 'sibling-close', false);
+        toggleSiblingClass(navItems, index, -2, 'sibling-far', false);
+        toggleSiblingClass(navItems, index, 2, 'sibling-far', false);
+      });
+    });
+
+    // Cleanup event listeners
+    return () => {
+      navItems.forEach((item, index) => {
+        item.removeEventListener('mouseenter', () => {});
+        item.removeEventListener('mouseleave', () => {});
+      });
+    };
+  }, []);
+
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -40,80 +82,26 @@ function SocialSection() {
       backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
     }} id="social">
       <div className="section-header">Connect</div>
-      <section style={styles.section}>
-        <div style={styles.container}>
-          <div style={styles.socialGrid}>
+      <div className="nav-wrap">
+        <nav className="nav-bar">
+          <ul className="nav-list">
             {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={styles.socialLink}
-              >
-                <div style={styles.iconContainer}>
-                  <social.icon style={styles.icon} />
+              <li key={index} className="nav-item">
+                <a href={social.url} target="_blank" rel="noopener noreferrer" className="nav-item__link">
+                  <div className="icon-container">
+                    <social.icon className="social-icon" />
+                  </div>
+                </a>
+                <div className="nav-item__tooltip">
+                  <div>{social.name}</div>
                 </div>
-                <span style={styles.label}>{social.name}</span>
-              </a>
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  section: {
-    padding: '2rem 0',
-  },
-  container: {
-    maxWidth: '1200px',
-    margin: '0 auto',
-    padding: '0 2rem',
-  },
-  socialGrid: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    gap: '2rem',
-    padding: '2rem 0',
-  },
-  socialLink: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textDecoration: 'none',
-    gap: '1rem',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'translateY(-5px)',
-    },
-  },
-  iconContainer: {
-    width: '80px',
-    height: '80px',
-    backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'scale(1.1)',
-    },
-  },
-  icon: {
-    fontSize: '2rem',
-    color: '#dcccbd',
-  },
-  label: {
-    color: '#dcccbd',
-    fontSize: '1rem',
-    fontFamily: 'Montserrat, sans-serif',
-  },
-};
 
 export default SocialSection;
