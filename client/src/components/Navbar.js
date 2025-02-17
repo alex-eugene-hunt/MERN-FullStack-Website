@@ -5,6 +5,7 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isVisible, setIsVisible] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,7 +82,19 @@ function Navbar() {
       onMouseLeave={() => setIsVisible(false)}
     >
       <nav className={`navbar ${isVisible || isAtTop ? 'visible' : ''}`}>
-        <div className="navbar-links">
+        {/* Hamburger Menu Button */}
+        <button 
+          className={`hamburger-menu ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* Desktop Navigation */}
+        <div className={`navbar-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <button 
             className={`nav-button ${activeSection === 'hero' ? 'active' : ''}`}
             onClick={() => scrollToSection('hero')}
@@ -124,6 +137,76 @@ function Navbar() {
           >
             Contact
           </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`} 
+             onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="mobile-menu-content" onClick={e => e.stopPropagation()}>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'hero' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('hero');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Home
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'about' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('about');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              About Me
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'resume' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('resume');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Resume
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'experience' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('experience');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Experience
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'education' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('education');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Education
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'projects' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('projects');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Projects
+            </button>
+            <button 
+              className={`mobile-nav-button ${activeSection === 'social' ? 'active' : ''}`}
+              onClick={() => {
+                scrollToSection('social');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Contact
+            </button>
+          </div>
         </div>
       </nav>
     </div>
