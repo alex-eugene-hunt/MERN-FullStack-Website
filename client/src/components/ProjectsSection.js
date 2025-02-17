@@ -95,7 +95,7 @@ function ProjectsSection() {
 
   return (
     <div style={{ 
-      minHeight: 'auto',
+      minHeight: '100vh', 
       height: '100%',
       backgroundColor: '#021825',
       backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
@@ -104,8 +104,8 @@ function ProjectsSection() {
     }} id="projects">
       <div className="section-header">Projects</div>
       <section style={{
-        padding: '2rem 0 0 0',
-        minHeight: 'auto',
+        padding: '2rem 0',
+        minHeight: '100vh',
       }}>
         <div style={{
           maxWidth: '1200px',
