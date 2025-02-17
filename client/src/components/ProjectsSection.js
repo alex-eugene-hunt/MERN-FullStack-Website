@@ -153,9 +153,19 @@ function ProjectsSection() {
                         color: '#dcccbd',
                         marginBottom: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
                       }}>{project.title}</h3>
-                      <div style={{ color: '#dcccbd', fontSize: '1.2rem' }}>
-                        {openProject === project.github ? <FaChevronUp /> : <FaChevronDown />}
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '0.5rem',
+                        color: '#dcccbd',
+                        fontSize: '1rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
+                      }}>
+                        <span>Open Project README.md</span>
+                        {openProject === project.github ? <FaChevronUp style={{ fontSize: '1.2rem' }} /> : <FaChevronDown style={{ fontSize: '1.2rem' }} />}
                       </div>
                     </div>
                     <div style={{
@@ -171,9 +181,11 @@ function ProjectsSection() {
                         color: '#b14b32',
                         fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
                       }}>
                         <FaCalendar style={{
                           fontSize: '1.2rem',
+                          color: '#dcccbd',
                         }} />
                         <span>{project.period}</span>
                       </div>
@@ -185,9 +197,11 @@ function ProjectsSection() {
                           color: '#b14b32',
                           fontSize: '1rem',
                           fontFamily: 'Montserrat, sans-serif',
+                          fontWeight: 'bold',
                         }}>
                           <FaLink style={{
                             fontSize: '1.2rem',
+                            color: '#dcccbd',
                           }} />
                           <a 
                             href={`https://${project.website}`} 
@@ -196,6 +210,7 @@ function ProjectsSection() {
                             style={{
                               color: '#b14b32',
                               textDecoration: 'none',
+                              fontWeight: 'bold',
                             }}
                             onClick={(e) => e.stopPropagation()}
                           >
@@ -210,9 +225,11 @@ function ProjectsSection() {
                         color: '#b14b32',
                         fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
                       }}>
                         <FaGithub style={{
                           fontSize: '1.2rem',
+                          color: '#dcccbd',
                         }} />
                         <a 
                           href={project.github} 
@@ -221,10 +238,11 @@ function ProjectsSection() {
                           style={{
                             color: '#b14b32',
                             textDecoration: 'none',
+                            fontWeight: 'bold',
                           }}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          GitHub
+                          GitHub Project Link
                         </a>
                       </div>
                     </div>
@@ -242,6 +260,7 @@ function ProjectsSection() {
                         borderRadius: '1rem',
                         fontSize: '0.9rem',
                         fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
                       }}>
                         {tech}
                       </span>
