@@ -93,6 +93,15 @@ function ProjectsSection() {
     }
   };
 
+  // Function to transform relative image URLs to absolute GitHub URLs
+  const transformImageUri = (github) => (uri) => {
+    if (uri.startsWith('http')) {
+      return uri;
+    }
+    const [, , , owner, repo] = github.split('/');
+    return `https://raw.githubusercontent.com/${owner}/${repo}/main/${uri}`;
+  };
+
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -294,9 +303,19 @@ function ProjectsSection() {
                             .prose a:hover {
                               color: #dcccbd;
                             }
+                            .prose img {
+                              max-width: 100%;
+                              height: auto;
+                              border-radius: 0.5rem;
+                              margin: 1.5rem 0;
+                            }
                           `}
                         </style>
-                        <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
+                        <ReactMarkdown 
+                          transformImageUri={transformImageUri(project.github)}
+                        >
+                          {readmeContents[project.github]}
+                        </ReactMarkdown>
                       </div>
                     ) : (
                       <div style={{

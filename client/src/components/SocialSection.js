@@ -22,12 +22,12 @@ function SocialSection() {
     {
       name: 'Facebook',
       icon: FaFacebook,
-      url: 'https://www.facebook.com/yourusername',
+      url: 'https://www.facebook.com/alex.eugene.hunt/',
     },
     {
       name: 'Instagram',
       icon: FaInstagram,
-      url: 'https://www.instagram.com/yourusername',
+      url: 'https://www.instagram.com/alex.e.hunt/',
     },
   ];
 
