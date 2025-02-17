@@ -14,6 +14,7 @@ function HeroSection() {
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -35,6 +36,15 @@ function HeroSection() {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   async function askLLM(prompt) {
     const response = await fetch("http://localhost:8000/inference", {
@@ -89,9 +99,10 @@ function HeroSection() {
           <div style={styles.typewriterText} className="typewriter-text">
             <Typewriter
               options={{
-                strings: ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
-                     'This website was built using the MERN stack!',
-                  ],
+                strings: isMobile 
+                  ? ['Hi, I\'m Alex Hunt!', 'Visit this site on Desktop!']
+                  : ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
+                     'This website was built using the MERN stack!'],
                 autoStart: true,
                 loop: true,
                 deleteSpeed: 50,
@@ -225,20 +236,21 @@ const styles = {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: '1rem',
+    width: '100%',
   },
   heroImage: {
-    width: '150px', // Adjust the size as needed
+    width: '150px', 
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 0 254px', // Move image farther to the right
-    border: '3px solid #d4996f', // Add colored outline
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
-    boxSizing: 'border-box', // Make border overlap with image
-    padding: '0', // Remove any internal padding
+    margin: '0 0 0 254px', 
+    border: '3px solid #d4996f', 
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', 
+    boxSizing: 'border-box', 
+    padding: '0', 
   },
   typewriterText: {
-    marginTop: '5rem', // Lower the text more
-    marginLeft: '1rem', // Keep text to the right of the photo
+    marginTop: '5rem', 
+    marginLeft: '1rem', 
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
     fontSize: '60px',
@@ -289,25 +301,28 @@ const styles = {
   },
 };
 
-// Update the media queries
 const styleTag = document.createElement('style');
 styleTag.textContent = `
   @media (max-width: 768px) {
     .hero-section {
-      flex-direction: column;
-      align-items: center;
-      padding: 0.5rem;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 2rem 0.5rem !important;
+      text-align: center !important;
     }
 
     .hero-image {
       margin: 0 auto !important;
-      width: 120px !important;
+      width: 180px !important;
     }
 
     .typewriter-text {
       margin: 2rem auto !important;
-      text-align: center;
+      text-align: center !important;
       font-size: 40px !important;
+      width: 100% !important;
+      padding: 0 1rem !important;
     }
 
     .boxes-container {
