@@ -3,8 +3,6 @@ import './Navbar.css';
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isVisible, setIsVisible] = useState(false);
-  const [isAtTop, setIsAtTop] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -19,7 +17,7 @@ function Navbar() {
       const documentHeight = document.documentElement.scrollHeight;
       
       // Check if we're at the top
-      setIsAtTop(scrollPosition < 50);
+      const isAtTop = scrollPosition < 50;
 
       // Check if we're at the bottom of the page
       if ((window.innerHeight + window.scrollY) >= documentHeight - 50) {
