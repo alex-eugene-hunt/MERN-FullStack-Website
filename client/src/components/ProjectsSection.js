@@ -241,12 +241,61 @@ function ProjectsSection() {
                     padding: '2rem',
                     borderTop: '2px solid #dcccbd',
                     backgroundColor: '#343a42',
+                    borderBottomLeftRadius: '1rem',
+                    borderBottomRightRadius: '1rem',
                   }}>
                     {readmeContents[project.github] ? (
                       <div style={{
                         color: '#dcccbd',
                         fontFamily: 'Montserrat, sans-serif',
                       }} className="prose prose-invert max-w-none">
+                        <style>
+                          {`
+                            .prose ul {
+                              list-style-type: disc;
+                              padding-left: 2rem;
+                              margin-top: 1rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose li {
+                              margin-top: 0.5rem;
+                              margin-bottom: 0.5rem;
+                            }
+                            .prose h1, .prose h2, .prose h3, .prose h4 {
+                              color: #dcccbd;
+                              margin-top: 2rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose p {
+                              margin-top: 1rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose code {
+                              background-color: #2a2e35;
+                              padding: 0.2rem 0.4rem;
+                              border-radius: 0.25rem;
+                              font-size: 0.875em;
+                            }
+                            .prose pre {
+                              background-color: #2a2e35;
+                              padding: 1rem;
+                              border-radius: 0.5rem;
+                              overflow-x: auto;
+                              margin: 1.5rem 0;
+                            }
+                            .prose pre code {
+                              background-color: transparent;
+                              padding: 0;
+                            }
+                            .prose a {
+                              color: #b14b32;
+                              text-decoration: underline;
+                            }
+                            .prose a:hover {
+                              color: #dcccbd;
+                            }
+                          `}
+                        </style>
                         <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
                       </div>
                     ) : (
