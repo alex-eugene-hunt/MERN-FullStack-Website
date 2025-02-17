@@ -23,10 +23,10 @@
 .nav-item {
   justify-content: center;
   align-items: center;
-  width: 8em;
-  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   position: relative;
+  width: 120px;
+  height: 120px;
 }
 
 .nav-item.hover {
@@ -48,8 +48,6 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
   display: flex;
   position: relative;
   text-decoration: none;
@@ -59,8 +57,8 @@
   background-color: #434a54;
   border: 3px solid #dcccbd;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,7 +113,8 @@
   }
   
   .nav-item {
-    width: 8em;
+    width: 120px;
+    height: 120px;
   }
   
   .nav-item.hover {
