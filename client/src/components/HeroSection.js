@@ -307,9 +307,10 @@ styleTag.textContent = `
     .hero-section {
       flex-direction: column !important;
       align-items: center !important;
-      justify-content: center !important;
-      padding: 2rem 0.5rem !important;
+      justify-content: flex-start !important;
+      padding: 1rem 0.5rem 2rem !important;
       text-align: center !important;
+      margin-top: -15px !important;
     }
 
     .hero-image {
@@ -318,9 +319,9 @@ styleTag.textContent = `
     }
 
     .typewriter-text {
-      margin: 2rem auto !important;
+      margin: 1rem auto !important;
       text-align: center !important;
-      font-size: 40px !important;
+      font-size: 32px !important;
       width: 100% !important;
       padding: 0 1rem !important;
     }
