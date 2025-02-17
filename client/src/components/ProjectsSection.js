@@ -264,6 +264,14 @@ function ProjectsSection() {
                       }} className="prose prose-invert max-w-none">
                         <style>
                           {`
+                            .prose img {
+                              max-width: 100%;
+                              height: auto;
+                              display: block;
+                              margin: 1.5rem auto;
+                              border-radius: 8px;
+                              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            }
                             .prose ul {
                               list-style-type: disc;
                               padding-left: 2rem;
