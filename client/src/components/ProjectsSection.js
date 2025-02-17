@@ -140,10 +140,14 @@ function ProjectsSection() {
                 backgroundColor: '#434a54',
                 borderRadius: '1rem',
                 border: '2px solid #dcccbd',
+                width: '100%',
+                maxWidth: '100%',
+                overflow: 'hidden',
               }}>
                 <div style={{
                   padding: '2rem',
                   cursor: 'pointer',
+                  width: '100%',
                 }} onClick={() => toggleProject(project.github)}>
                   <div style={{
                     marginBottom: '1.5rem',
@@ -261,14 +265,23 @@ function ProjectsSection() {
                     backgroundColor: '#343a42',
                     borderBottomLeftRadius: '1rem',
                     borderBottomRightRadius: '1rem',
+                    width: '100%',
+                    maxWidth: '100%',
+                    overflow: 'auto',
                   }}>
                     {readmeContents[project.github] ? (
                       <div style={{
                         color: '#dcccbd',
                         fontFamily: 'Montserrat, sans-serif',
+                        width: '100%',
+                        maxWidth: '100%',
                       }} className="prose prose-invert max-w-none">
                         <style>
                           {`
+                            .prose {
+                              width: 100%;
+                              max-width: 100%;
+                            }
                             .prose ul {
                               list-style-type: disc;
                               padding-left: 2rem;
