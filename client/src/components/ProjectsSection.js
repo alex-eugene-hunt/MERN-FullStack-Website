@@ -104,7 +104,7 @@ function ProjectsSection() {
     }} id="projects">
       <div className="section-header">Projects</div>
       <section style={{
-        padding: '2rem 0',
+        padding: '2rem 0 0 0',
         minHeight: '100vh',
       }}>
         <div style={{
