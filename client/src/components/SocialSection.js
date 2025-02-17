@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaLinkedin, FaGithub, FaFacebook, FaInstagram, FaSlack } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaSlack, FaFacebook, FaInstagram } from 'react-icons/fa';
 import './SocialSection.css';
 
 function SocialSection() {
@@ -17,12 +17,12 @@ function SocialSection() {
     {
       name: 'Slack',
       icon: FaSlack,
-      url: 'https://ucbischool.slack.com/team/alex.eugene.hunt',
+      url: 'https://yourslack.slack.com',
     },
     {
       name: 'Facebook',
       icon: FaFacebook,
-      url: 'https://www.facebook.com/alex.eugene.hunt/',
+      url: 'https://www.facebook.com/alex.e.hunt.3',
     },
     {
       name: 'Instagram',

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaGithub, FaCalendar, FaLink, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 function ProjectsSection() {
   const [openProject, setOpenProject] = useState(null);
@@ -94,17 +93,6 @@ function ProjectsSection() {
     }
   };
 
-  // Function to transform relative image URLs to absolute GitHub URLs
-  const transformImageUri = (github) => (uri) => {
-    if (uri.startsWith('http')) {
-      return uri;
-    }
-    // Remove leading slash if present
-    const cleanUri = uri.startsWith('/') ? uri.slice(1) : uri;
-    const [, , , owner, repo] = github.split('/');
-    return `https://raw.githubusercontent.com/${owner}/${repo}/main/${cleanUri}`;
-  };
-
   return (
     <div style={{ 
       minHeight: '100vh', 
@@ -118,36 +106,26 @@ function ProjectsSection() {
       <section style={{
         padding: '2rem 0',
         minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
       }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 2rem',
-          flex: '1',
-          display: 'flex',
-          flexDirection: 'column',
         }}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '2rem',
-            marginBottom: '2rem',
           }}>
             {projects.map((project) => (
               <div key={project.github} style={{
                 backgroundColor: '#434a54',
                 borderRadius: '1rem',
                 border: '2px solid #dcccbd',
-                width: '100%',
-                maxWidth: '100%',
-                overflow: 'hidden',
               }}>
                 <div style={{
                   padding: '2rem',
                   cursor: 'pointer',
-                  width: '100%',
                 }} onClick={() => toggleProject(project.github)}>
                   <div style={{
                     marginBottom: '1.5rem',
@@ -265,23 +243,14 @@ function ProjectsSection() {
                     backgroundColor: '#343a42',
                     borderBottomLeftRadius: '1rem',
                     borderBottomRightRadius: '1rem',
-                    width: '100%',
-                    maxWidth: '100%',
-                    overflow: 'auto',
                   }}>
                     {readmeContents[project.github] ? (
                       <div style={{
                         color: '#dcccbd',
                         fontFamily: 'Montserrat, sans-serif',
-                        width: '100%',
-                        maxWidth: '100%',
                       }} className="prose prose-invert max-w-none">
                         <style>
                           {`
-                            .prose {
-                              width: 100%;
-                              max-width: 100%;
-                            }
                             .prose ul {
                               list-style-type: disc;
                               padding-left: 2rem;
@@ -325,20 +294,9 @@ function ProjectsSection() {
                             .prose a:hover {
                               color: #dcccbd;
                             }
-                            .prose img {
-                              max-width: 100%;
-                              height: auto;
-                              border-radius: 0.5rem;
-                              margin: 1.5rem 0;
-                            }
                           `}
                         </style>
-                        <ReactMarkdown 
-                          remarkPlugins={[remarkGfm]}
-                          transformImageUri={transformImageUri(project.github)}
-                        >
-                          {readmeContents[project.github]}
-                        </ReactMarkdown>
+                        <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
                       </div>
                     ) : (
                       <div style={{
