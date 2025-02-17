@@ -14,6 +14,7 @@ function HeroSection() {
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -35,6 +36,14 @@ function HeroSection() {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   async function askLLM(prompt) {
     const response = await fetch("http://localhost:8000/inference", {
@@ -183,7 +192,7 @@ function HeroSection() {
 
           {/* Box 3: Game Box */}
           <div style={{...styles.box, backgroundColor: '#000000'}}>
-            <AsteroidsGame />
+            {!isMobile && <AsteroidsGame />}
           </div>
         </div>
       </div>
@@ -199,7 +208,10 @@ const styles = {
     height: '100vh',
     position: 'relative',
     backgroundColor: '#021825',
-    overflowX: 'hidden',
+    '@media (max-width: 768px)': { 
+      height: 'auto',
+      paddingBottom: '2rem',
+    },
   },
   vantaContainer: {
     position: 'absolute',
@@ -212,57 +224,53 @@ const styles = {
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     height: '100%',
     width: '100%',
     position: 'relative',
     zIndex: 1,
-    paddingTop: window.innerWidth <= 768 ? '3rem' : '5rem',
+    paddingTop: '5rem',
   },
   heroSection: {
     display: 'flex',
-    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: window.innerWidth <= 768 ? '0.5rem' : '1rem',
-    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    padding: '1rem',
   },
   heroImage: {
-    width: window.innerWidth <= 768 ? '120px' : '150px',
+    width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: window.innerWidth <= 768 ? '1rem auto' : '0 0 0 254px',
-    border: '3px solid #d4996f',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-    boxSizing: 'border-box',
-    padding: '0',
+    margin: '0 0 0 254px', // Move image farther to the right
+    border: '3px solid #d4996f', // Add colored outline
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
+    boxSizing: 'border-box', // Make border overlap with image
+    padding: '0', // Remove any internal padding
   },
   typewriterText: {
-    marginTop: window.innerWidth <= 768 ? '1rem' : '5rem',
-    marginLeft: window.innerWidth <= 768 ? '0' : '1rem',
+    marginTop: '5rem', // Lower the text more
+    marginLeft: '1rem', // Keep text to the right of the photo
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
-    fontSize: window.innerWidth <= 768 ? '40px' : '60px',
+    fontSize: '60px',
     color: '#dcccbd',
-    textAlign: window.innerWidth <= 768 ? 'center' : 'left',
   },
   boxesContainer: {
     display: 'flex',
-    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    gap: window.innerWidth <= 768 ? '1rem' : '2rem',
-    padding: window.innerWidth <= 768 ? '1rem' : '2rem',
-    width: '100%',
-    maxWidth: '1200px',
+    alignItems: 'flex-start',
+    gap: '2rem',
+    padding: '2rem',
+    width: '75%',
     margin: '0 auto',
     boxSizing: 'border-box',
   },
   box: {
-    flex: window.innerWidth <= 768 ? '0 0 auto' : 1,
-    width: window.innerWidth <= 768 ? '90%' : '450px',
-    height: window.innerWidth <= 768 ? '350px' : '450px',
+    flex: 1,
+    width: '450px',
+    height: '450px',
     backgroundColor: '#fff',
     borderRadius: '2.25rem',
     boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',

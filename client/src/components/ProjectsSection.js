@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaGithub, FaCalendar, FaLink, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
 
@@ -106,41 +106,29 @@ function ProjectsSection() {
     }
   };
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   return (
     <div style={{ 
       minHeight: '100vh', 
       height: '100%',
       backgroundColor: '#021825',
       backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
-      backgroundSize: windowWidth <= 768 ? '10px 10px' : '20px 20px',
+      backgroundSize: '20px 20px',
       backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
     }} id="projects">
       <div className="section-header">Projects</div>
       <section style={{
-        padding: windowWidth <= 768 ? '1rem 0' : '2rem 0',
+        padding: '2rem 0',
         minHeight: '100vh',
       }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: windowWidth <= 768 ? '0 1rem' : '0 2rem',
+          padding: '0 2rem',
         }}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: windowWidth <= 768 ? '1rem' : '2rem',
+            gap: '2rem',
           }}>
             {projects.map((project) => (
               <div key={project.github} style={{
@@ -149,23 +137,21 @@ function ProjectsSection() {
                 border: '2px solid #dcccbd',
               }}>
                 <div style={{
-                  padding: windowWidth <= 768 ? '1rem' : '2rem',
+                  padding: '2rem',
                   cursor: 'pointer',
                 }} onClick={() => toggleProject(project.github)}>
                   <div style={{
-                    marginBottom: windowWidth <= 768 ? '1rem' : '1.5rem',
+                    marginBottom: '1.5rem',
                   }}>
                     <div style={{
                       display: 'flex',
-                      flexDirection: windowWidth <= 768 ? 'column' : 'row',
                       justifyContent: 'space-between',
-                      alignItems: windowWidth <= 768 ? 'flex-start' : 'center',
-                      gap: windowWidth <= 768 ? '0.5rem' : '0',
+                      alignItems: 'center',
                     }}>
                       <h3 style={{
-                        fontSize: windowWidth <= 768 ? '1.2rem' : '1.5rem',
+                        fontSize: '1.5rem',
                         color: '#dcccbd',
-                        marginBottom: windowWidth <= 768 ? '0.5rem' : '1rem',
+                        marginBottom: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
                       }}>{project.title}</h3>
@@ -174,7 +160,7 @@ function ProjectsSection() {
                         alignItems: 'center', 
                         gap: '0.5rem',
                         color: '#dcccbd',
-                        fontSize: windowWidth <= 768 ? '0.9rem' : '1rem',
+                        fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
                       }}>
@@ -184,9 +170,8 @@ function ProjectsSection() {
                     </div>
                     <div style={{
                       display: 'flex',
-                      flexDirection: windowWidth <= 768 ? 'column' : 'row',
                       flexWrap: 'wrap',
-                      gap: windowWidth <= 768 ? '0.75rem' : '1.5rem',
+                      gap: '1.5rem',
                       marginBottom: '1rem',
                     }}>
                       <div style={{
@@ -194,7 +179,7 @@ function ProjectsSection() {
                         alignItems: 'center',
                         gap: '0.5rem',
                         color: '#b14b32',
-                        fontSize: windowWidth <= 768 ? '0.9rem' : '1rem',
+                        fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
                       }}>
@@ -210,7 +195,7 @@ function ProjectsSection() {
                           alignItems: 'center',
                           gap: '0.5rem',
                           color: '#b14b32',
-                          fontSize: windowWidth <= 768 ? '0.9rem' : '1rem',
+                          fontSize: '1rem',
                           fontFamily: 'Montserrat, sans-serif',
                           fontWeight: 'bold',
                         }}>
@@ -218,7 +203,19 @@ function ProjectsSection() {
                             fontSize: '1.2rem',
                             color: '#dcccbd',
                           }} />
-                          <span>{project.website}</span>
+                          <a 
+                            href={`https://${project.website}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style={{
+                              color: '#b14b32',
+                              textDecoration: 'none',
+                              fontWeight: 'bold',
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {project.website}
+                          </a>
                         </div>
                       )}
                       <div style={{
@@ -226,7 +223,7 @@ function ProjectsSection() {
                         alignItems: 'center',
                         gap: '0.5rem',
                         color: '#b14b32',
-                        fontSize: windowWidth <= 768 ? '0.9rem' : '1rem',
+                        fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
                       }}>
@@ -234,48 +231,123 @@ function ProjectsSection() {
                           fontSize: '1.2rem',
                           color: '#dcccbd',
                         }} />
-                        <span>{project.github.split('/').slice(-2).join('/')}</span>
+                        <a 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          style={{
+                            color: '#b14b32',
+                            textDecoration: 'none',
+                            fontWeight: 'bold',
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          GitHub Project Link
+                        </a>
                       </div>
                     </div>
-                    <div style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      gap: windowWidth <= 768 ? '0.5rem' : '0.75rem',
-                    }}>
-                      {project.technologies.map((tech) => (
-                        <span key={tech} style={{
-                          backgroundColor: '#dcccbd',
-                          color: '#434a54',
-                          padding: windowWidth <= 768 ? '0.3rem 0.6rem' : '0.4rem 0.8rem',
-                          borderRadius: '1rem',
-                          fontSize: windowWidth <= 768 ? '0.8rem' : '0.9rem',
-                          fontFamily: 'Montserrat, sans-serif',
-                          fontWeight: 'bold',
-                        }}>
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
                   </div>
-                  {openProject === project.github && (
-                    <div style={{
-                      marginTop: '1rem',
-                      padding: windowWidth <= 768 ? '0.75rem' : '1rem',
-                      backgroundColor: '#333840',
-                      borderRadius: '0.5rem',
-                      fontSize: windowWidth <= 768 ? '0.9rem' : '1rem',
-                      color: '#dcccbd',
-                      maxHeight: '400px',
-                      overflowY: 'auto',
-                    }}>
-                      {readmeContents[project.github] ? (
-                        <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
-                      ) : (
-                        <div>Loading README...</div>
-                      )}
-                    </div>
-                  )}
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.75rem',
+                  }}>
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} style={{
+                        padding: '0.4rem 0.8rem',
+                        backgroundColor: '#b14b32',
+                        color: '#dcccbd',
+                        borderRadius: '1rem',
+                        fontSize: '0.9rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                        fontWeight: 'bold',
+                      }}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                
+                {openProject === project.github && (
+                  <div style={{
+                    padding: '2rem',
+                    borderTop: '2px solid #dcccbd',
+                    backgroundColor: '#343a42',
+                    borderBottomLeftRadius: '1rem',
+                    borderBottomRightRadius: '1rem',
+                  }}>
+                    {readmeContents[project.github] ? (
+                      <div style={{
+                        color: '#dcccbd',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }} className="prose prose-invert max-w-none">
+                        <style>
+                          {`
+                            .prose img {
+                              max-width: 100%;
+                              height: auto;
+                              display: block;
+                              margin: 1.5rem auto;
+                              border-radius: 8px;
+                              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            }
+                            .prose ul {
+                              list-style-type: disc;
+                              padding-left: 2rem;
+                              margin-top: 1rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose li {
+                              margin-top: 0.5rem;
+                              margin-bottom: 0.5rem;
+                            }
+                            .prose h1, .prose h2, .prose h3, .prose h4 {
+                              color: #dcccbd;
+                              margin-top: 2rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose p {
+                              margin-top: 1rem;
+                              margin-bottom: 1rem;
+                            }
+                            .prose code {
+                              background-color: #2a2e35;
+                              padding: 0.2rem 0.4rem;
+                              border-radius: 0.25rem;
+                              font-size: 0.875em;
+                            }
+                            .prose pre {
+                              background-color: #2a2e35;
+                              padding: 1rem;
+                              border-radius: 0.5rem;
+                              overflow-x: auto;
+                              margin: 1.5rem 0;
+                            }
+                            .prose pre code {
+                              background-color: transparent;
+                              padding: 0;
+                            }
+                            .prose a {
+                              color: #b14b32;
+                              text-decoration: underline;
+                            }
+                            .prose a:hover {
+                              color: #dcccbd;
+                            }
+                          `}
+                        </style>
+                        <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <div style={{
+                        textAlign: 'center',
+                        padding: '1rem 0',
+                        color: '#dcccbd',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>Loading README...</div>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>
