@@ -164,7 +164,7 @@ function ProjectsSection() {
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
                       }}>
-                        <span>Open Project README.md</span>
+                        <span>README.md</span>
                         {openProject === project.github ? <FaChevronUp style={{ fontSize: '1.2rem' }} /> : <FaChevronDown style={{ fontSize: '1.2rem' }} />}
                       </div>
                     </div>
