@@ -17,28 +17,28 @@
   padding-left: 0;
   display: flex;
   list-style: none;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .nav-item {
   justify-content: center;
   align-items: center;
-  width: 4em;
+  width: 8em;
   transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   position: relative;
 }
 
 .nav-item.hover {
-  width: 6em;
+  width: 10em;
 }
 
 .nav-item.sibling-close {
-  width: 5em;
+  width: 9em;
 }
 
 .nav-item.sibling-far {
-  width: 4.5em;
+  width: 8.5em;
 }
 
 .nav-item__link {
@@ -57,19 +57,20 @@
 
 .icon-container {
   background-color: #434a54;
-  border: 2px solid #dcccbd;
+  border: 3px solid #dcccbd;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .social-icon {
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   color: #dcccbd;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-item__tooltip {
@@ -78,9 +79,9 @@
   color: #dcccbd;
   opacity: 0;
   white-space: nowrap;
-  border-radius: 0.25em;
-  padding: 0.4em 0.5em;
-  font-size: 1em;
+  border-radius: 0.5em;
+  padding: 0.6em 1em;
+  font-size: 1.2em;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: absolute;
@@ -88,6 +89,7 @@
   transform: translate(0, -80%);
   font-family: 'Montserrat', sans-serif;
   pointer-events: none;
+  border: 2px solid #dcccbd;
 }
 
 .nav-item:hover .nav-item__tooltip {
@@ -96,6 +98,12 @@
 }
 
 .nav-item:hover .icon-container {
+  transform: scale(1.15);
+  background-color: #4d5660;
+  box-shadow: 0 0 20px rgba(220, 204, 189, 0.3);
+}
+
+.nav-item:hover .social-icon {
   transform: scale(1.1);
 }
 
@@ -103,31 +111,31 @@
 @media screen and (max-width: 768px) {
   .nav-list {
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
   }
   
   .nav-item {
-    width: 4em;
+    width: 8em;
   }
   
   .nav-item.hover {
-    width: 6em;
+    width: 10em;
   }
   
   .nav-item.sibling-close {
-    width: 5em;
+    width: 9em;
   }
   
   .nav-item.sibling-far {
-    width: 4.5em;
+    width: 8.5em;
   }
   
   .icon-container {
-    width: 50px;
-    height: 50px;
+    width: 120px;
+    height: 120px;
   }
   
   .social-icon {
-    font-size: 1.2rem;
+    font-size: 2.5rem;
   }
 }
