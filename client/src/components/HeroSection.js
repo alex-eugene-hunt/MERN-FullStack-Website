@@ -80,7 +80,7 @@ function HeroSection() {
       <div style={styles.vantaContainer} ref={vantaRef}></div>
       <div style={styles.contentWrapper}>
         <div style={isMobile ? styles.heroSectionMobile : styles.heroSection}>
-          <img src={myPhoto} alt="Alex Hunt" style={isMobile ? { ...styles.heroImage, margin: '0 auto' } : styles.heroImage} />
+          <img src={myPhoto} alt="Alex Hunt" style={styles.heroImage} />
           <div style={isMobile ? styles.mobileText : styles.typewriterText}>
             {isMobile ? (
               <>
@@ -232,18 +232,18 @@ const styles = {
     padding: '1rem',
   },
   heroImage: {
-    width: '150px', // Adjust the size as needed
+    width: '150px',
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 0 254px', // Move image farther to the right
-    border: '3px solid #d4996f', // Add colored outline
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
-    boxSizing: 'border-box', // Make border overlap with image
-    padding: '0', // Remove any internal padding
+    margin: window.innerWidth <= 768 ? '0' : '0 0 0 254px',
+    border: '3px solid #d4996f',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+    boxSizing: 'border-box',
+    padding: '0',
   },
   typewriterText: {
-    marginTop: '5rem', // Lower the text more
-    marginLeft: '1rem', // Keep text to the right of the photo
+    marginTop: '5rem',
+    marginLeft: '1rem',
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
     fontSize: '60px',
