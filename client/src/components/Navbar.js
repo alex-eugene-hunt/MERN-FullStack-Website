@@ -5,6 +5,11 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isVisible, setIsVisible] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,58 +80,72 @@ function Navbar() {
   };
 
   return (
-    <div 
-      className="navbar-container"
-      onMouseEnter={() => setIsVisible(true)}
-      onMouseLeave={() => setIsVisible(false)}
-    >
-      <nav className={`navbar ${isVisible || isAtTop ? 'visible' : ''}`}>
-        <div className="navbar-links">
-          <button 
-            className={`nav-button ${activeSection === 'hero' ? 'active' : ''}`}
-            onClick={() => scrollToSection('hero')}
-          >
-            Home
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'about' ? 'active' : ''}`}
-            onClick={() => scrollToSection('about')}
-          >
-            About Me
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'resume' ? 'active' : ''}`}
-            onClick={() => scrollToSection('resume')}
-          >
-            Resume
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'experience' ? 'active' : ''}`}
-            onClick={() => scrollToSection('experience')}
-          >
-            Experience
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'education' ? 'active' : ''}`}
-            onClick={() => scrollToSection('education')}
-          >
-            Education
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'projects' ? 'active' : ''}`}
-            onClick={() => scrollToSection('projects')}
-          >
-            Projects
-          </button>
-          <button 
-            className={`nav-button ${activeSection === 'social' ? 'active' : ''}`}
-            onClick={() => scrollToSection('social')}
-          >
-            Contact
-          </button>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-logo">My Portfolio</div>
+        <div className="menu-icon" onClick={toggleMobileMenu}>
+          <i className={isMobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
         </div>
-      </nav>
-    </div>
+        <ul className={isMobileMenuOpen ? 'nav-menu active' : 'nav-menu'}>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'hero' ? 'active' : ''}`}
+              onClick={() => scrollToSection('hero')}
+            >
+              Home
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'about' ? 'active' : ''}`}
+              onClick={() => scrollToSection('about')}
+            >
+              About Me
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'resume' ? 'active' : ''}`}
+              onClick={() => scrollToSection('resume')}
+            >
+              Resume
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'experience' ? 'active' : ''}`}
+              onClick={() => scrollToSection('experience')}
+            >
+              Experience
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'education' ? 'active' : ''}`}
+              onClick={() => scrollToSection('education')}
+            >
+              Education
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'projects' ? 'active' : ''}`}
+              onClick={() => scrollToSection('projects')}
+            >
+              Projects
+            </button>
+          </li>
+          <li className="nav-item">
+            <button 
+              className={`nav-button ${activeSection === 'social' ? 'active' : ''}`}
+              onClick={() => scrollToSection('social')}
+            >
+              Contact
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 }
 

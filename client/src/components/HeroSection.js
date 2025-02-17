@@ -80,7 +80,7 @@ function HeroSection() {
       <div style={styles.vantaContainer} ref={vantaRef}></div>
       <div style={styles.contentWrapper}>
         <div style={isMobile ? styles.heroSectionMobile : styles.heroSection}>
-          <img src={myPhoto} alt="Alex Hunt" style={styles.heroImage} />
+          <img src={myPhoto} alt="Alex Hunt" style={isMobile ? { ...styles.heroImage, margin: '0 auto' } : styles.heroImage} />
           <div style={isMobile ? styles.mobileText : styles.typewriterText}>
             {isMobile ? (
               <>
