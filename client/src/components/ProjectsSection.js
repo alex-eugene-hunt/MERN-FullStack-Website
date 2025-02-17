@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaGithub, FaCalendar, FaLink, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 function ProjectsSection() {
   const [openProject, setOpenProject] = useState(null);
@@ -98,8 +99,10 @@ function ProjectsSection() {
     if (uri.startsWith('http')) {
       return uri;
     }
+    // Remove leading slash if present
+    const cleanUri = uri.startsWith('/') ? uri.slice(1) : uri;
     const [, , , owner, repo] = github.split('/');
-    return `https://raw.githubusercontent.com/${owner}/${repo}/main/${uri}`;
+    return `https://raw.githubusercontent.com/${owner}/${repo}/main/${cleanUri}`;
   };
 
   return (
@@ -115,16 +118,22 @@ function ProjectsSection() {
       <section style={{
         padding: '2rem 0',
         minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
       }}>
         <div style={{
           maxWidth: '1200px',
           margin: '0 auto',
           padding: '0 2rem',
+          flex: '1',
+          display: 'flex',
+          flexDirection: 'column',
         }}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: '2rem',
+            marginBottom: '2rem',
           }}>
             {projects.map((project) => (
               <div key={project.github} style={{
@@ -312,6 +321,7 @@ function ProjectsSection() {
                           `}
                         </style>
                         <ReactMarkdown 
+                          remarkPlugins={[remarkGfm]}
                           transformImageUri={transformImageUri(project.github)}
                         >
                           {readmeContents[project.github]}
