@@ -84,9 +84,9 @@ function HeroSection() {
       {/* Content Wrapper */}
       <div style={styles.contentWrapper}>
         {/* Hero Section */}
-        <div style={styles.heroSection}>
-          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
-          <div style={styles.typewriterText}>
+        <div style={styles.heroSection} className="hero-section">
+          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} className="hero-image" />
+          <div style={styles.typewriterText} className="typewriter-text">
             <Typewriter
               options={{
                 strings: ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
@@ -103,7 +103,7 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
-          <div style={{...styles.box, backgroundColor: '#434a54'}}>
+          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
             <h3 style={{
                 color: '#dcccbd', 
                 textAlign: 'center', 
@@ -177,12 +177,12 @@ function HeroSection() {
           </div>
 
           {/* Box 2: Send Email */}
-          <div style={{...styles.box, backgroundColor: '#b14b32'}}>
+          <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
             <SendEmailForm />
           </div>
 
           {/* Box 3: Game Box */}
-          <div style={{...styles.box, backgroundColor: '#000000'}}>
+          <div style={{...styles.box, backgroundColor: '#000000'}} className="hero-box game-box">
             <AsteroidsGame />
           </div>
         </div>
@@ -253,6 +253,11 @@ const styles = {
     width: '75%',
     margin: '0 auto',
     boxSizing: 'border-box',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      width: '90%',
+      padding: '1rem',
+    }
   },
   box: {
     flex: 1,
@@ -288,5 +293,50 @@ const styles = {
     borderRadius: '4px',
   },
 };
+
+// Add a style tag to handle media queries
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  @media (max-width: 768px) {
+    .hero-section {
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+    }
+
+    .hero-image {
+      margin: 0 auto !important;
+      width: 120px !important;
+    }
+
+    .typewriter-text {
+      margin: 2rem auto !important;
+      text-align: center;
+      font-size: 40px !important;
+    }
+
+    .boxesContainer {
+      flex-direction: column;
+      width: 90%;
+      padding: 1rem;
+    }
+
+    .hero-box {
+      width: 100% !important;
+      margin-bottom: 1rem;
+    }
+
+    .game-box {
+      display: none !important;
+    }
+
+    .hero-box.llm-box,
+    .hero-box.contact-box {
+      height: auto !important;
+      min-height: 400px;
+    }
+  }
+`;
+document.head.appendChild(styleTag);
 
 export default HeroSection;
