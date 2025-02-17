@@ -74,7 +74,20 @@ function ProjectsSection() {
       const response = await fetch(apiUrl);
       if (!response.ok) throw new Error('README not found');
       
-      const content = await response.text();
+      let content = await response.text();
+      
+      // Convert relative image paths to absolute GitHub URLs
+      content = content.replace(
+        /!\[(.*?)\]\((.*?)\)/g,
+        (match, alt, path) => {
+          if (path.startsWith('http')) {
+            return match; // Leave absolute URLs unchanged
+          }
+          // Convert relative path to absolute GitHub URL
+          return `![${alt}](https://raw.githubusercontent.com/${owner}/${repo}/main/${path})`;
+        }
+      );
+
       setReadmeContents(prev => ({ ...prev, [github]: content }));
     } catch (error) {
       console.error('Error fetching README:', error);

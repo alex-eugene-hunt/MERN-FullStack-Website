@@ -17,12 +17,12 @@ function SocialSection() {
     {
       name: 'Slack',
       icon: FaSlack,
-      url: 'https://yourslack.slack.com',
+      url: 'https://ucbischool.slack.com/team/alex.eugene.hunt',
     },
     {
       name: 'Facebook',
       icon: FaFacebook,
-      url: 'https://www.facebook.com/alex.e.hunt.3',
+      url: 'https://www.facebook.com/alex.eugene.hunt/',
     },
     {
       name: 'Instagram',
