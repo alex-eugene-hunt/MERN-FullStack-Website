@@ -11,9 +11,16 @@ function Navbar() {
       const sections = ['hero', 'about', 'resume', 'experience', 'education', 'projects', 'social'];
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
       
       // Check if we're at the top
       setIsAtTop(scrollPosition < 50);
+
+      // Check if we're at the bottom of the page
+      if ((window.innerHeight + window.scrollY) >= documentHeight - 50) {
+        setActiveSection('social');
+        return;
+      }
 
       // Special handling for hero section at the top
       if (scrollPosition < windowHeight / 3) {
@@ -30,7 +37,7 @@ function Navbar() {
         if (element) {
           const rect = element.getBoundingClientRect();
           const visibleHeight = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-          const visibilityPercentage = visibleHeight / windowHeight;
+          const visibilityPercentage = visibleHeight / element.offsetHeight;
 
           if (visibilityPercentage > maxVisibility) {
             maxVisibility = visibilityPercentage;
