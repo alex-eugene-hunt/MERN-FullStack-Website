@@ -253,11 +253,6 @@ const styles = {
     width: '75%',
     margin: '0 auto',
     boxSizing: 'border-box',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      width: '90%',
-      padding: '1rem',
-    }
   },
   box: {
     flex: 1,
@@ -294,7 +289,7 @@ const styles = {
   },
 };
 
-// Add a style tag to handle media queries
+// Update the media queries
 const styleTag = document.createElement('style');
 styleTag.textContent = `
   @media (max-width: 768px) {
@@ -316,14 +311,17 @@ styleTag.textContent = `
     }
 
     .boxesContainer {
-      flex-direction: column;
-      width: 90%;
-      padding: 1rem;
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      padding: 1rem !important;
+      gap: 1rem !important;
     }
 
     .hero-box {
       width: 100% !important;
-      margin-bottom: 1rem;
+      max-width: 450px !important;
+      margin: 0 auto 1rem auto !important;
     }
 
     .game-box {
@@ -333,7 +331,7 @@ styleTag.textContent = `
     .hero-box.llm-box,
     .hero-box.contact-box {
       height: auto !important;
-      min-height: 400px;
+      min-height: 400px !important;
     }
   }
 `;
