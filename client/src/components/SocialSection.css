@@ -68,8 +68,21 @@
 }
 
 .social-icon {
-  font-size: 1.2rem;
   color: #dcccbd;
+  font-size: 3.5rem;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.social-icon:hover {
+  color: #b14b32;
+  transform: scale(1.1);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 3.5rem;
+  padding: 3rem;
 }
 
 .nav-item__tooltip {
@@ -128,6 +141,11 @@
   }
   
   .social-icon {
-    font-size: 1.2rem;
+    font-size: 3rem;
+  }
+  
+  .social-links {
+    gap: 2.5rem;
+    padding: 2rem;
   }
 }
