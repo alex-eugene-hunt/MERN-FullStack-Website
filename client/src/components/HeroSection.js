@@ -101,7 +101,7 @@ function HeroSection() {
         </div>
 
         {/* Three Boxes Section */}
-        <div style={styles.boxesContainer}>
+        <div style={styles.boxesContainer} className="boxes-container">
           {/* Box 1: LLM */}
           <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
             <h3 style={{
@@ -310,18 +310,20 @@ styleTag.textContent = `
       font-size: 40px !important;
     }
 
-    .boxesContainer {
+    .boxes-container {
       display: flex !important;
       flex-direction: column !important;
+      align-items: center !important;
       width: 100% !important;
       padding: 1rem !important;
       gap: 1rem !important;
     }
 
     .hero-box {
-      width: 100% !important;
+      width: 90% !important;
       max-width: 450px !important;
       margin: 0 auto 1rem auto !important;
+      flex: none !important;
     }
 
     .game-box {
