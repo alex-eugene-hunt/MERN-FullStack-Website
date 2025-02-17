@@ -14,7 +14,6 @@ function HeroSection() {
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
-  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -76,28 +75,31 @@ function HeroSection() {
 
   return (
     <div style={styles.pageContainer}>
+      <div ref={vantaRef} style={styles.vantaContainer}>
+      </div>
+        
+      {/* Navbar */}
       <Navbar />
-      <div style={styles.vantaContainer} ref={vantaRef}></div>
+        
+      {/* Content Wrapper */}
       <div style={styles.contentWrapper}>
-        <div style={isMobile ? styles.heroSectionMobile : styles.heroSection}>
-          <img src={myPhoto} alt="Alex Hunt" style={styles.heroImage} />
-          <div style={isMobile ? styles.mobileText : styles.typewriterText}>
-            {isMobile ? (
-              <>
-                <p>Hi, I'm Alex Hunt.</p>
-                <p>Visit this website on Desktop!</p>
-              </>
-            ) : (
-              <Typewriter
-                options={{
-                  strings: ['Hi, I am Alex Hunt.', 'Welcome to my portfolio!'],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            )}
+        {/* Hero Section */}
+        <div style={styles.heroSection}>
+          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
+          <div style={styles.typewriterText}>
+            <Typewriter
+              options={{
+                strings: ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
+                     'This website was built using the MERN stack!',
+                  ],
+                autoStart: true,
+                loop: true,
+                deleteSpeed: 50,
+              }}
+            />
           </div>
         </div>
+
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
@@ -224,38 +226,23 @@ const styles = {
     justifyContent: 'flex-start',
     padding: '1rem',
   },
-  heroSectionMobile: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1rem',
-  },
   heroImage: {
-    width: '150px',
+    width: '150px', // Adjust the size as needed
     height: 'auto',
     borderRadius: '50%',
-    margin: window.innerWidth <= 768 ? '0' : '0 0 0 254px',
-    border: '3px solid #d4996f',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
-    boxSizing: 'border-box',
-    padding: '0',
+    margin: '0 0 0 254px', // Move image farther to the right
+    border: '3px solid #d4996f', // Add colored outline
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
+    boxSizing: 'border-box', // Make border overlap with image
+    padding: '0', // Remove any internal padding
   },
   typewriterText: {
-    marginTop: '5rem',
-    marginLeft: '1rem',
+    marginTop: '5rem', // Lower the text more
+    marginLeft: '1rem', // Keep text to the right of the photo
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
     fontSize: '60px',
     color: '#dcccbd',
-  },
-  mobileText: {
-    textAlign: 'center',
-    fontFamily: 'Lobster, cursive',
-    fontWeight: 'normal',
-    fontSize: '24px',
-    color: '#dcccbd',
-    marginTop: '1rem',
   },
   boxesContainer: {
     display: 'flex',

@@ -5,8 +5,6 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isVisible, setIsVisible] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,18 +13,22 @@ function Navbar() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       
+      // Check if we're at the top
       setIsAtTop(scrollPosition < 50);
 
+      // Check if we're at the bottom of the page
       if ((window.innerHeight + window.scrollY) >= documentHeight - 50) {
         setActiveSection('social');
         return;
       }
 
+      // Special handling for hero section at the top
       if (scrollPosition < windowHeight / 3) {
         setActiveSection('hero');
         return;
       }
 
+      // Calculate visibility percentage for each section
       let maxVisibility = 0;
       let mostVisibleSection = 'hero';
 
@@ -48,6 +50,7 @@ function Navbar() {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Initial check
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -58,42 +61,27 @@ function Navbar() {
         top: 0,
         behavior: 'smooth'
       });
-    } else {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        const offsetTop = element.offsetTop - 78;
-        window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-        });
-      }
+      return;
     }
-    if (isMobile) {
-      setIsMobileMenuOpen(false);
-    }
-  };
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop - 78;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <div 
       className="navbar-container"
-      onMouseEnter={() => !isMobile && setIsVisible(true)}
-      onMouseLeave={() => !isMobile && setIsVisible(false)}
+      onMouseEnter={() => setIsVisible(true)}
+      onMouseLeave={() => setIsVisible(false)}
     >
-      <nav className={`navbar ${isVisible || isAtTop || isMobileMenuOpen ? 'visible' : ''}`}>
-        {isMobile && (
-          <button className="hamburger-menu" onClick={toggleMobileMenu}>
-            <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
-        )}
-        <div className={`navbar-links ${isMobileMenuOpen ? 'mobile-open' : ''} ${isMobile ? 'mobile' : ''}`}>
+      <nav className={`navbar ${isVisible || isAtTop ? 'visible' : ''}`}>
+        <div className="navbar-links">
           <button 
             className={`nav-button ${activeSection === 'hero' ? 'active' : ''}`}
             onClick={() => scrollToSection('hero')}
@@ -134,7 +122,7 @@ function Navbar() {
             className={`nav-button ${activeSection === 'social' ? 'active' : ''}`}
             onClick={() => scrollToSection('social')}
           >
-            Social
+            Contact
           </button>
         </div>
       </nav>
