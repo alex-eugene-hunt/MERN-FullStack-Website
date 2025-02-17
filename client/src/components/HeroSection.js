@@ -199,6 +199,7 @@ const styles = {
     height: '100vh',
     position: 'relative',
     backgroundColor: '#021825',
+    overflowX: 'hidden',
   },
   vantaContainer: {
     position: 'absolute',
@@ -211,53 +212,57 @@ const styles = {
   contentWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
     height: '100%',
     width: '100%',
     position: 'relative',
     zIndex: 1,
-    paddingTop: '5rem',
+    paddingTop: window.innerWidth <= 768 ? '3rem' : '5rem',
   },
   heroSection: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: '1rem',
+    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: window.innerWidth <= 768 ? '0.5rem' : '1rem',
+    width: '100%',
   },
   heroImage: {
-    width: '150px', // Adjust the size as needed
+    width: window.innerWidth <= 768 ? '120px' : '150px',
     height: 'auto',
     borderRadius: '50%',
-    margin: '0 0 0 254px', // Move image farther to the right
-    border: '3px solid #d4996f', // Add colored outline
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Add black shadow
-    boxSizing: 'border-box', // Make border overlap with image
-    padding: '0', // Remove any internal padding
+    margin: window.innerWidth <= 768 ? '1rem auto' : '0 0 0 254px',
+    border: '3px solid #d4996f',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+    boxSizing: 'border-box',
+    padding: '0',
   },
   typewriterText: {
-    marginTop: '5rem', // Lower the text more
-    marginLeft: '1rem', // Keep text to the right of the photo
+    marginTop: window.innerWidth <= 768 ? '1rem' : '5rem',
+    marginLeft: window.innerWidth <= 768 ? '0' : '1rem',
     fontFamily: 'Lobster, cursive',
     fontWeight: 'normal',
-    fontSize: '60px',
+    fontSize: window.innerWidth <= 768 ? '40px' : '60px',
     color: '#dcccbd',
+    textAlign: window.innerWidth <= 768 ? 'center' : 'left',
   },
   boxesContainer: {
     display: 'flex',
+    flexDirection: window.innerWidth <= 768 ? 'column' : 'row',
     justifyContent: 'center',
-    alignItems: 'flex-start',
-    gap: '2rem',
-    padding: '2rem',
-    width: '75%',
+    alignItems: 'center',
+    gap: window.innerWidth <= 768 ? '1rem' : '2rem',
+    padding: window.innerWidth <= 768 ? '1rem' : '2rem',
+    width: '100%',
+    maxWidth: '1200px',
     margin: '0 auto',
     boxSizing: 'border-box',
   },
   box: {
-    flex: 1,
-    width: '450px',
-    height: '450px',
+    flex: window.innerWidth <= 768 ? '0 0 auto' : 1,
+    width: window.innerWidth <= 768 ? '90%' : '450px',
+    height: window.innerWidth <= 768 ? '350px' : '450px',
     backgroundColor: '#fff',
     borderRadius: '2.25rem',
     boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
