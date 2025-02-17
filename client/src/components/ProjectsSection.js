@@ -94,80 +94,177 @@ function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">Projects</h2>
-        <div className="space-y-6">
-          {projects.map((project) => (
-            <div key={project.github} className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div 
-                className="p-6 cursor-pointer"
-                onClick={() => toggleProject(project.github)}
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-                    <div className="flex items-center space-x-4 text-gray-600 mb-4">
-                      <span className="flex items-center">
-                        <FaCalendar className="mr-2" />
-                        {project.period}
-                      </span>
+    <div style={{ 
+      minHeight: '100vh', 
+      height: '100%',
+      backgroundColor: '#021825',
+      backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
+      backgroundSize: '20px 20px',
+      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
+    }} id="projects">
+      <div className="section-header">Projects</div>
+      <section style={{
+        padding: '2rem 0',
+        minHeight: '100vh',
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 2rem',
+        }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2rem',
+          }}>
+            {projects.map((project) => (
+              <div key={project.github} style={{
+                backgroundColor: '#434a54',
+                borderRadius: '1rem',
+                border: '2px solid #dcccbd',
+              }}>
+                <div style={{
+                  padding: '2rem',
+                  cursor: 'pointer',
+                }} onClick={() => toggleProject(project.github)}>
+                  <div style={{
+                    marginBottom: '1.5rem',
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}>
+                      <h3 style={{
+                        fontSize: '1.5rem',
+                        color: '#dcccbd',
+                        marginBottom: '1rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>{project.title}</h3>
+                      <div style={{ color: '#dcccbd', fontSize: '1.2rem' }}>
+                        {openProject === project.github ? <FaChevronUp /> : <FaChevronDown />}
+                      </div>
+                    </div>
+                    <div style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '1.5rem',
+                      marginBottom: '1rem',
+                    }}>
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        color: '#b14b32',
+                        fontSize: '1rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>
+                        <FaCalendar style={{
+                          fontSize: '1.2rem',
+                        }} />
+                        <span>{project.period}</span>
+                      </div>
                       {project.website && (
+                        <div style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          color: '#b14b32',
+                          fontSize: '1rem',
+                          fontFamily: 'Montserrat, sans-serif',
+                        }}>
+                          <FaLink style={{
+                            fontSize: '1.2rem',
+                          }} />
+                          <a 
+                            href={`https://${project.website}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            style={{
+                              color: '#b14b32',
+                              textDecoration: 'none',
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {project.website}
+                          </a>
+                        </div>
+                      )}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        color: '#b14b32',
+                        fontSize: '1rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>
+                        <FaGithub style={{
+                          fontSize: '1.2rem',
+                        }} />
                         <a 
-                          href={`https://${project.website}`} 
+                          href={project.github} 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="flex items-center hover:text-blue-600"
+                          style={{
+                            color: '#b14b32',
+                            textDecoration: 'none',
+                          }}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <FaLink className="mr-2" />
-                          Website
+                          GitHub
                         </a>
-                      )}
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="flex items-center hover:text-blue-600"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <FaGithub className="mr-2" />
-                        GitHub
-                      </a>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, index) => (
-                        <span 
-                          key={index} 
-                          className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="ml-4">
-                    {openProject === project.github ? <FaChevronUp /> : <FaChevronDown />}
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '0.75rem',
+                  }}>
+                    {project.technologies.map((tech, i) => (
+                      <span key={i} style={{
+                        padding: '0.4rem 0.8rem',
+                        backgroundColor: '#b14b32',
+                        color: '#dcccbd',
+                        borderRadius: '1rem',
+                        fontSize: '0.9rem',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
+                
+                {openProject === project.github && (
+                  <div style={{
+                    padding: '2rem',
+                    borderTop: '2px solid #dcccbd',
+                    backgroundColor: '#343a42',
+                  }}>
+                    {readmeContents[project.github] ? (
+                      <div style={{
+                        color: '#dcccbd',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }} className="prose prose-invert max-w-none">
+                        <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <div style={{
+                        textAlign: 'center',
+                        padding: '1rem 0',
+                        color: '#dcccbd',
+                        fontFamily: 'Montserrat, sans-serif',
+                      }}>Loading README...</div>
+                    )}
+                  </div>
+                )}
               </div>
-              
-              {openProject === project.github && (
-                <div className="p-6 border-t bg-gray-50">
-                  {readmeContents[project.github] ? (
-                    <div className="prose max-w-none">
-                      <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
-                    </div>
-                  ) : (
-                    <div className="text-center py-4">Loading README...</div>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
