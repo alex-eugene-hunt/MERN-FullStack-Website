@@ -14,7 +14,7 @@ function HeroSection() {
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -36,14 +36,6 @@ function HeroSection() {
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   async function askLLM(prompt) {
     const response = await fetch("http://localhost:8000/inference", {
@@ -84,31 +76,28 @@ function HeroSection() {
 
   return (
     <div style={styles.pageContainer}>
-      <div ref={vantaRef} style={styles.vantaContainer}>
-      </div>
-        
-      {/* Navbar */}
       <Navbar />
-        
-      {/* Content Wrapper */}
+      <div style={styles.vantaContainer} ref={vantaRef}></div>
       <div style={styles.contentWrapper}>
-        {/* Hero Section */}
-        <div style={styles.heroSection}>
-          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} />
-          <div style={styles.typewriterText}>
-            <Typewriter
-              options={{
-                strings: ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
-                     'This website was built using the MERN stack!',
-                  ],
-                autoStart: true,
-                loop: true,
-                deleteSpeed: 50,
-              }}
-            />
+        <div style={isMobile ? styles.heroSectionMobile : styles.heroSection}>
+          <img src={myPhoto} alt="Alex Hunt" style={styles.heroImage} />
+          <div style={isMobile ? styles.mobileText : styles.typewriterText}>
+            {isMobile ? (
+              <>
+                <p>Hi, I'm Alex Hunt.</p>
+                <p>Visit this website on Desktop!</p>
+              </>
+            ) : (
+              <Typewriter
+                options={{
+                  strings: ['Hi, I am Alex Hunt.', 'Welcome to my portfolio!'],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            )}
           </div>
         </div>
-
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer}>
           {/* Box 1: LLM */}
@@ -192,7 +181,7 @@ function HeroSection() {
 
           {/* Box 3: Game Box */}
           <div style={{...styles.box, backgroundColor: '#000000'}}>
-            {!isMobile && <AsteroidsGame />}
+            <AsteroidsGame />
           </div>
         </div>
       </div>
@@ -208,10 +197,6 @@ const styles = {
     height: '100vh',
     position: 'relative',
     backgroundColor: '#021825',
-    '@media (max-width: 768px)': { 
-      height: 'auto',
-      paddingBottom: '2rem',
-    },
   },
   vantaContainer: {
     position: 'absolute',
@@ -239,6 +224,13 @@ const styles = {
     justifyContent: 'flex-start',
     padding: '1rem',
   },
+  heroSectionMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem',
+  },
   heroImage: {
     width: '150px', // Adjust the size as needed
     height: 'auto',
@@ -256,6 +248,14 @@ const styles = {
     fontWeight: 'normal',
     fontSize: '60px',
     color: '#dcccbd',
+  },
+  mobileText: {
+    textAlign: 'center',
+    fontFamily: 'Lobster, cursive',
+    fontWeight: 'normal',
+    fontSize: '24px',
+    color: '#dcccbd',
+    marginTop: '1rem',
   },
   boxesContainer: {
     display: 'flex',
