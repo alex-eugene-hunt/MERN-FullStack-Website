@@ -80,7 +80,6 @@ function SocialSection() {
       backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
       backgroundSize: '20px 20px',
       backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0',
-      padding: '2rem 0'
     }} id="social">
       <div className="section-header">Connect</div>
       <div className="nav-wrap">
