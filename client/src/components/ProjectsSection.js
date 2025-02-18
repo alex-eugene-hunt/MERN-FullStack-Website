@@ -139,7 +139,7 @@ function ProjectsSection() {
                 <div style={{
                   padding: '2rem',
                   cursor: 'pointer',
-                }} onClick={() => toggleProject(project.github)}>
+                }} onClick={() => toggleProject(project.github)} className="project-content">
                   <div style={{
                     marginBottom: '1.5rem',
                   }}>
@@ -154,25 +154,12 @@ function ProjectsSection() {
                         marginBottom: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
-                      }}>{project.title}</h3>
-                      <div style={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        gap: '0.5rem',
-                        color: '#dcccbd',
-                        fontSize: '1rem',
-                        fontFamily: 'Montserrat, sans-serif',
-                        fontWeight: 'bold',
-                      }}>
-                        <span>README.md</span>
-                        {openProject === project.github ? <FaChevronUp style={{ fontSize: '1.2rem' }} /> : <FaChevronDown style={{ fontSize: '1.2rem' }} />}
-                      </div>
+                      }} className="project-title">{project.title}</h3>
                     </div>
                     <div style={{
                       display: 'flex',
                       flexWrap: 'wrap',
                       gap: '1.5rem',
-                      marginBottom: '1rem',
                     }}>
                       <div style={{
                         display: 'flex',
@@ -251,20 +238,32 @@ function ProjectsSection() {
                     display: 'flex',
                     flexWrap: 'wrap',
                     gap: '0.75rem',
+                    marginTop: '1rem',
                   }}>
-                    {project.technologies.map((tech, i) => (
-                      <span key={i} style={{
-                        padding: '0.4rem 0.8rem',
+                    {project.technologies.map((tech, index) => (
+                      <span key={index} style={{
                         backgroundColor: '#b14b32',
                         color: '#dcccbd',
+                        padding: '0.3rem 0.8rem',
                         borderRadius: '1rem',
                         fontSize: '0.9rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
-                      }}>
-                        {tech}
-                      </span>
+                      }}>{tech}</span>
                     ))}
+                  </div>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.5rem',
+                    color: '#dcccbd',
+                    fontSize: '1rem',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: 'bold',
+                    marginTop: '1rem',
+                  }} className="readme-section">
+                    <span>README.md</span>
+                    {openProject === project.github ? <FaChevronUp style={{ fontSize: '1.2rem' }} /> : <FaChevronDown style={{ fontSize: '1.2rem' }} />}
                   </div>
                 </div>
                 
@@ -333,6 +332,21 @@ function ProjectsSection() {
                             }
                             .prose a:hover {
                               color: #dcccbd;
+                            }
+                            @media (max-width: 768px) {
+                              .project-title {
+                                font-size: 1.2rem !important;
+                              }
+                              .readme-section {
+                                order: 3;
+                                margin-top: 1rem !important;
+                                border-top: 1px solid #dcccbd;
+                                padding-top: 1rem;
+                              }
+                              .project-content {
+                                display: flex;
+                                flex-direction: column;
+                              }
                             }
                           `}
                         </style>
