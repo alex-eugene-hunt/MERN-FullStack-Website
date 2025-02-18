@@ -198,25 +198,24 @@ const styles = {
     gap: '2rem',
     marginTop: '2rem',
     width: '100%',
-    height: '525px',
+    alignItems: 'stretch',
   },
   degreeImageContainer: {
     width: 'calc(60% - 1rem)',
-    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   sowerImageContainer: {
     width: 'calc(40% - 1rem)',
-    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   degreeImage: {
     width: '100%',
-    height: '100%',
+    height: 'auto',
     objectFit: 'contain',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
@@ -224,7 +223,7 @@ const styles = {
   sowerImage: {
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: 'cover',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
   },
@@ -344,21 +343,19 @@ styleTag.textContent = `
       margin-top: 0.5rem !important;
       padding: 0 0.5rem !important;
       width: 100% !important;
-      height: 200px !important;
     }
 
     #education .degreeImageContainer,
     #education .sowerImageContainer {
       width: 100% !important;
       aspect-ratio: 16/9 !important;
-      height: 100% !important;
     }
 
     #education .degreeImage,
     #education .sowerImage {
       width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important;
+      height: 80px !important;
+      object-fit: cover !important;
       border-radius: 4px !important;
       border-width: 1px !important;
     }
