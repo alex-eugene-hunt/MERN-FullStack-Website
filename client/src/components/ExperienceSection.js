@@ -37,6 +37,16 @@ function ExperienceSection() {
             .technologies {
               margin: 0 !important;
               width: 100% !important;
+              padding: 0 !important;
+              display: flex !important;
+              flex-wrap: wrap !important;
+              gap: 0.5rem !important;
+              justify-content: flex-start !important;
+            }
+            .tech-item {
+              margin: 0 !important;
+              flex-grow: 0 !important;
+              flex-shrink: 0 !important;
             }
             .timeline-container {
               display: flex;
@@ -44,11 +54,17 @@ function ExperienceSection() {
             }
             .image-gallery {
               order: -1;
-              marginTop: '0rem',
-              marginBottom: '2rem',
+              margin-top: 0 !important;
+              margin-bottom: 2rem !important;
             }
             .description-item {
               padding-left: 0 !important;
+            }
+            .container {
+              padding-top: 1rem !important;
+            }
+            .title {
+              font-size: 1.2rem !important;
             }
           }
         `}
@@ -63,7 +79,7 @@ function ExperienceSection() {
       }} id="experience">
         <div className="section-header">Experience</div>
         <section style={styles.section}>
-          <div style={styles.container}>
+          <div style={styles.container} className="container">
             <div className="timeline-container">
               <div style={styles.imageGallery} className="image-gallery">
                 <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
@@ -74,7 +90,7 @@ function ExperienceSection() {
                   <div key={index} style={styles.timelineItem}>
                     <div style={styles.timelineContent}>
                       <div style={styles.header}>
-                        <h3 style={styles.title}>{exp.title}</h3>
+                        <h3 style={styles.title} className="title">{exp.title}</h3>
                         <div style={styles.companyInfo}>
                           <div style={styles.infoItem}>
                             <FaBriefcase style={styles.icon} />
@@ -101,7 +117,7 @@ function ExperienceSection() {
                           </ul>
                           <div style={styles.technologies} className="technologies">
                             {exp.technologies.map((tech, i) => (
-                              <span key={i} style={styles.tech}>{tech}</span>
+                              <span key={i} style={styles.tech} className="tech-item">{tech}</span>
                             ))}
                           </div>
                         </div>
@@ -210,6 +226,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '0.75rem',
+    margin: '-0.3rem',
   },
   tech: {
     backgroundColor: '#b14b32',
