@@ -24,7 +24,7 @@ function EducationSection() {
       location: 'Norman, OK',
       period: 'Jan 2024 - Dec 2024',
       gpa: '3.9 / 4.0',
-      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n**Summer Project:** Improving Drone Flight Trajectories with Machine Learning.\n\n**Paper Defense:** "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security \n⦿ PDN Programming \n⦿ Computer Architecture \n⦿ Machine Learning\n⦿ Cyber Attacks and Defenses\n⦿ Data Mining\n⦿ Computational Learning Theory\n⦿ Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
+      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n<strong>Summer Project:</strong> Improving Drone Flight Trajectories with Machine Learning.\n\n<strong>Paper Defense:</strong> "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security \n⦿ PDN Programming \n⦿ Computer Architecture \n⦿ Machine Learning\n⦿ Cyber Attacks and Defenses\n⦿ Data Mining\n⦿ Computational Learning Theory\n⦿ Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning'
     },
     {
       degree: 'Bachelor of Computer Science',
@@ -38,24 +38,13 @@ function EducationSection() {
 
   const formatDescription = (description, isMobile = false) => {
     if (isMobile) {
-      // Remove curriculum introductions and last database skill on mobile
-      let formatted = description
+      // Remove curriculum introductions on mobile
+      return description
         .replace('My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n', '')
         .replace('My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n', '')
         .replace('My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n', '');
-      
-      if (description.includes('Master of Computer Science')) {
-        formatted = formatted.replace(' · Databases', '');
-      }
-      
-      return formatted
-        .replace(/Summer Project:/g, '<strong>Summer Project:</strong>')
-        .replace(/Paper Defense:/g, '<strong>Paper Defense:</strong>');
     }
-    // For desktop, just bold the specific phrases
-    return description
-      .replace(/Summer Project:/g, '<strong>Summer Project:</strong>')
-      .replace(/Paper Defense:/g, '<strong>Paper Defense:</strong>');
+    return description;
   };
 
   const renderDescription = (description) => {
