@@ -333,21 +333,6 @@ function ProjectsSection() {
                             .prose a:hover {
                               color: #dcccbd;
                             }
-                            @media (max-width: 768px) {
-                              .project-title {
-                                font-size: 1.2rem !important;
-                              }
-                              .readme-section {
-                                order: 3;
-                                margin-top: 1rem !important;
-                                border-top: 1px solid #dcccbd;
-                                padding-top: 1rem;
-                              }
-                              .project-content {
-                                display: flex;
-                                flex-direction: column;
-                              }
-                            }
                           `}
                         </style>
                         <ReactMarkdown>{readmeContents[project.github]}</ReactMarkdown>
