@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import MSDegreeOU from '../assets/MS Degree - OU.jpg';
 import BSDegreeOU from '../assets/BS Degree - OU.jpg';
@@ -112,31 +112,19 @@ function EducationSection() {
                 </div>
                 {(edu.school === 'University of Oklahoma') && (
                   <div style={styles.imageGallery}>
-                    <div style={styles.degreeImageContainer} ref={el => {
-                      if (el) {
-                        const img = el.querySelector('img');
-                        if (img) {
-                          img.onload = () => {
-                            const height = img.offsetHeight;
-                            const sowerContainer = el.parentElement.querySelector('.sower-container');
-                            if (sowerContainer) {
-                              sowerContainer.style.height = `${height}px`;
-                            }
-                          };
-                        }
-                      }
-                    }}>
+                    <div style={styles.degreeImageContainer}>
                       <img 
                         src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
                         alt={`${edu.degree} from ${edu.school}`}
                         style={styles.degreeImage}
                       />
                     </div>
-                    <div style={styles.sowerImageContainer} className="sower-container">
+                    <div style={styles.sowerImageContainer}>
                       <img 
                         src={SeedSowerOU}
                         alt="OU Seed Sower"
                         style={styles.sowerImage}
+                        className="sower-image"
                       />
                     </div>
                   </div>
