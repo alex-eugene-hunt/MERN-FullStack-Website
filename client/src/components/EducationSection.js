@@ -201,13 +201,13 @@ const styles = {
     alignItems: 'stretch',
   },
   degreeImageContainer: {
-    width: 'calc(60% - 1rem)',
+    width: 'calc(75% - 1rem)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   sowerImageContainer: {
-    width: 'calc(40% - 1rem)',
+    width: 'calc(25% - 1rem)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
