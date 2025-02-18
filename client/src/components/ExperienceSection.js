@@ -61,7 +61,7 @@ function ExperienceSection() {
               padding-left: 0 !important;
             }
             .container {
-              padding-top: 1rem !important;
+              padding-top: 0 !important;
             }
             .title {
               font-size: 1.2rem !important;
@@ -81,10 +81,6 @@ function ExperienceSection() {
         <section style={styles.section}>
           <div style={styles.container} className="container">
             <div className="timeline-container">
-              <div style={styles.imageGallery} className="image-gallery">
-                <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
-                <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
-              </div>
               <div style={styles.timeline}>
                 {experiences.map((exp, index) => (
                   <div key={index} style={styles.timelineItem}>
@@ -128,6 +124,10 @@ function ExperienceSection() {
                     </div>
                   </div>
                 ))}
+              </div>
+              <div style={styles.imageGallery} className="image-gallery">
+                <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
+                <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
               </div>
             </div>
           </div>
