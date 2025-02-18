@@ -44,6 +44,17 @@ function EducationSection() {
             .description-item {
               padding-left: 0 !important;
             }
+            .title {
+              font-size: 1.2rem !important;
+            }
+            .top-logo {
+              width: 50px !important;
+              height: 50px !important;
+            }
+            .bottom-logo {
+              width: 50px !important;
+              height: 50px !important;
+            }
           }
         `}
       </style>
@@ -64,19 +75,19 @@ function EducationSection() {
                   <div style={styles.timelineItem}>
                     {edu.school === 'University of California, Berkeley' && (
                       <>
-                        <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
-                        <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
+                        <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} className="top-logo" />
+                        <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} className="bottom-logo" />
                       </>
                     )}
                     {edu.school === 'University of Oklahoma' && (
                       <>
-                        <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
-                        <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
+                        <img src={OUSeal} alt="OU Seal" style={styles.topLogo} className="top-logo" />
+                        <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} className="bottom-logo" />
                       </>
                     )}
                     <div style={styles.timelineContent}>
                       <div style={styles.header}>
-                        <h3 style={styles.title}>{edu.degree}</h3>
+                        <h3 style={styles.title} className="title">{edu.degree}</h3>
                         <div style={styles.schoolInfo}>
                           <div style={styles.infoItem}>
                             <FaGraduationCap style={styles.icon} />
