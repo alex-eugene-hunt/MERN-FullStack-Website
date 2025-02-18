@@ -34,6 +34,17 @@ function ExperienceSection() {
             .main-content {
               width: 100% !important;
             }
+            .technologies {
+              margin: 0 !important;
+              width: 100% !important;
+            }
+            .timeline-container {
+              display: flex;
+              flex-direction: column;
+            }
+            .image-gallery {
+              order: -1;
+            }
           }
         `}
       </style>
@@ -48,53 +59,55 @@ function ExperienceSection() {
         <div className="section-header">Experience</div>
         <section style={styles.section}>
           <div style={styles.container}>
-            <div style={styles.timeline}>
-              {experiences.map((exp, index) => (
-                <div key={index} style={styles.timelineItem}>
-                  <div style={styles.timelineContent}>
-                    <div style={styles.header}>
-                      <h3 style={styles.title}>{exp.title}</h3>
-                      <div style={styles.companyInfo}>
-                        <div style={styles.infoItem}>
-                          <FaBriefcase style={styles.icon} />
-                          <a href="https://www.cymstar.com/" target="_blank" rel="noopener noreferrer" style={styles.companyLink}>
-                            {exp.company}
-                          </a>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaMapMarkerAlt style={styles.icon} />
-                          <span>{exp.location}</span>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaCalendar style={styles.icon} />
-                          <span>{exp.period}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div style={styles.contentWrapper}>
-                      <div style={styles.mainContent} className="main-content">
-                        <ul style={styles.descriptionList}>
-                          {exp.description.map((item, i) => (
-                            <li key={i} style={styles.descriptionItem}>{item}</li>
-                          ))}
-                        </ul>
-                        <div style={styles.technologies}>
-                          {exp.technologies.map((tech, i) => (
-                            <span key={i} style={styles.tech}>{tech}</span>
-                          ))}
+            <div className="timeline-container">
+              <div style={styles.imageGallery} className="image-gallery">
+                <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
+                <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
+              </div>
+              <div style={styles.timeline}>
+                {experiences.map((exp, index) => (
+                  <div key={index} style={styles.timelineItem}>
+                    <div style={styles.timelineContent}>
+                      <div style={styles.header}>
+                        <h3 style={styles.title}>{exp.title}</h3>
+                        <div style={styles.companyInfo}>
+                          <div style={styles.infoItem}>
+                            <FaBriefcase style={styles.icon} />
+                            <a href="https://www.cymstar.com/" target="_blank" rel="noopener noreferrer" style={styles.companyLink}>
+                              {exp.company}
+                            </a>
+                          </div>
+                          <div style={styles.infoItem}>
+                            <FaMapMarkerAlt style={styles.icon} />
+                            <span>{exp.location}</span>
+                          </div>
+                          <div style={styles.infoItem}>
+                            <FaCalendar style={styles.icon} />
+                            <span>{exp.period}</span>
+                          </div>
                         </div>
                       </div>
-                      <div style={styles.badgeContainer} className="badge-container">
-                        <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
+                      <div style={styles.contentWrapper}>
+                        <div style={styles.mainContent} className="main-content">
+                          <ul style={styles.descriptionList}>
+                            {exp.description.map((item, i) => (
+                              <li key={i} style={styles.descriptionItem}>{item}</li>
+                            ))}
+                          </ul>
+                          <div style={styles.technologies} className="technologies">
+                            {exp.technologies.map((tech, i) => (
+                              <span key={i} style={styles.tech}>{tech}</span>
+                            ))}
+                          </div>
+                        </div>
+                        <div style={styles.badgeContainer} className="badge-container">
+                          <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-            <div style={styles.imageGallery}>
-              <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
-              <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
