@@ -401,4 +401,87 @@ const styles = {
   },
 };
 
+// Add mobile styles
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  @media (max-width: 768px) {
+    .section-header {
+      font-size: 2.5rem !important;
+      margin-bottom: 1rem !important;
+    }
+
+    #about .gridContainer {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+      width: 100% !important;
+      padding: 0.5rem !important;
+    }
+
+    #about .gridItem {
+      height: auto !important;
+      min-height: 300px !important;
+      width: 100% !important;
+    }
+
+    #about .gridBox {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 300px !important;
+      padding: 1rem !important;
+    }
+
+    #about .slideshowContainer {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+    #about .quickFactsContainer {
+      padding: 0.5rem !important;
+      gap: 1rem !important;
+    }
+
+    #about .quickFactItem {
+      gap: 0.75rem !important;
+    }
+
+    #about .quickFactIcon {
+      font-size: 1.5rem !important;
+      width: 2rem !important;
+    }
+
+    #about .quickFactLabel {
+      font-size: 0.85rem !important;
+    }
+
+    #about .quickFactValue {
+      font-size: 0.9rem !important;
+    }
+
+    #about .interestsGrid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.75rem !important;
+      padding: 0.5rem !important;
+    }
+
+    #about .paragraph {
+      font-size: 0.9rem !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    #about .description {
+      font-size: 0.7rem !important;
+    }
+
+    #about .interestIcon {
+      font-size: 1.5rem !important;
+    }
+
+    #about .interestLabel {
+      font-size: 0.8rem !important;
+    }
+  }
+`;
+document.head.appendChild(styleTag);
+
 export default AboutSection;
