@@ -151,6 +151,18 @@ const styles = {
       color: '#dcccbd',
     },
   },
+  contentWrapper: {
+    display: 'flex',
+    gap: '2rem',
+    alignItems: 'flex-start',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      gap: '1rem',
+    },
+  },
+  mainContent: {
+    flex: 1,
+  },
   descriptionList: {
     listStyle: 'none',
     padding: 0,
@@ -163,16 +175,6 @@ const styles = {
     position: 'relative',
     fontFamily: 'Montserrat, sans-serif',
     lineHeight: '1.6',
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      left: 0,
-      top: '0.6em',
-      width: '6px',
-      height: '6px',
-      backgroundColor: '#b14b32',
-      borderRadius: '50%',
-    },
   },
   technologies: {
     display: 'flex',
@@ -189,16 +191,11 @@ const styles = {
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
   },
-  contentWrapper: {
-    display: 'flex',
-    gap: '2rem',
-    alignItems: 'flex-start',
-  },
-  mainContent: {
-    flex: 1,
-  },
   badgeContainer: {
     flexShrink: 0,
+    '@media (max-width: 768px)': {
+      display: 'none',
+    },
   },
   badgeImage: {
     width: '150px',
@@ -221,5 +218,15 @@ const styles = {
     objectFit: 'cover',
   },
 };
+
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  @media (max-width: 768px) {
+    #experience {
+      overflow-x: hidden !important;
+    }
+  }
+`;
+document.head.appendChild(styleTag);
 
 export default ExperienceSection;
