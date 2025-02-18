@@ -211,7 +211,7 @@ const styles = {
   },
   gridContainer: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 450px)',
+    gridTemplateColumns: 'repeat(2, minmax(auto, 450px))',
     gap: '2rem',
     width: '100%',
     justifyContent: 'center',
@@ -221,6 +221,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '450px',
+    width: '100%',
   },
   gridBox: {
     backgroundColor: '#434a54',
@@ -401,21 +402,15 @@ const styles = {
   },
 };
 
-// Add mobile styles
 const styleTag = document.createElement('style');
 styleTag.textContent = `
   @media (max-width: 768px) {
-    .section-header {
-      font-size: 2.5rem !important;
-      margin-bottom: 1rem !important;
-    }
-
     #about {
       overflow-x: hidden !important;
     }
 
     #about .container {
-      padding: 1rem !important;
+      padding: 0.5rem !important;
       max-width: 100% !important;
       width: 100% !important;
       margin: 0 !important;
@@ -425,15 +420,15 @@ styleTag.textContent = `
       display: grid !important;
       grid-template-columns: 1fr !important;
       gap: 1rem !important;
-      width: 100% !important;
+      width: 90% !important;
       padding: 0 !important;
-      margin: 0 !important;
-      max-width: 100% !important;
+      margin: 0 auto !important;
+      max-width: 350px !important;
     }
 
     #about .gridItem {
       height: auto !important;
-      min-height: 250px !important;
+      min-height: 200px !important;
       width: 100% !important;
       max-width: 100% !important;
       padding: 0 !important;
@@ -443,71 +438,78 @@ styleTag.textContent = `
     #about .gridBox {
       width: 100% !important;
       height: auto !important;
-      min-height: 250px !important;
-      padding: 1rem !important;
+      min-height: 200px !important;
+      padding: 0.75rem !important;
       margin: 0 !important;
-      border-radius: 1.5rem !important;
+      border-radius: 1rem !important;
     }
 
     #about .slideshowContainer {
       width: 100% !important;
-      height: 250px !important;
-      border-radius: 1.5rem !important;
+      height: 200px !important;
+      border-radius: 1rem !important;
     }
 
     #about .quickFactsContainer {
       padding: 0.5rem !important;
-      gap: 0.75rem !important;
+      gap: 0.5rem !important;
     }
 
     #about .quickFactItem {
-      gap: 0.75rem !important;
+      gap: 0.5rem !important;
     }
 
     #about .quickFactIcon {
-      font-size: 1.25rem !important;
-      width: 1.5rem !important;
+      font-size: 1rem !important;
+      width: 1.25rem !important;
     }
 
     #about .quickFactLabel {
-      font-size: 0.8rem !important;
+      font-size: 0.7rem !important;
     }
 
     #about .quickFactValue {
-      font-size: 0.85rem !important;
-    }
-
-    #about .interestsGrid {
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 0.5rem !important;
-      padding: 0.5rem !important;
-    }
-
-    #about .paragraph {
-      font-size: 0.85rem !important;
-      margin-bottom: 0.75rem !important;
-      line-height: 1.4 !important;
-    }
-
-    #about .description {
-      font-size: 0.65rem !important;
-    }
-
-    #about .interestIcon {
-      font-size: 1.25rem !important;
-    }
-
-    #about .interestLabel {
       font-size: 0.75rem !important;
     }
 
+    #about .interestsGrid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 0.35rem !important;
+      padding: 0.35rem !important;
+    }
+
+    #about .paragraph {
+      font-size: 0.8rem !important;
+      margin-bottom: 0.5rem !important;
+      line-height: 1.3 !important;
+      padding: 0.5rem !important;
+    }
+
+    #about .description {
+      font-size: 0.6rem !important;
+      padding: 0.25rem !important;
+    }
+
+    #about .interestIcon {
+      font-size: 1rem !important;
+    }
+
+    #about .interestLabel {
+      font-size: 0.65rem !important;
+    }
+
     #about .interestItem {
-      border-radius: 0.75rem !important;
+      border-radius: 0.5rem !important;
       border-width: 1px !important;
     }
 
     #about .cardBack {
-      border-radius: 0.75rem !important;
+      border-radius: 0.5rem !important;
+      padding: 0.25rem !important;
+    }
+
+    #about .contentWrapper {
+      gap: 0.25rem !important;
     }
   }
 `;
