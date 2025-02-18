@@ -38,34 +38,36 @@ function EducationSection() {
 
   const formatDescription = (description, isMobile = false) => {
     if (isMobile) {
-      // Remove curriculum introductions on mobile
-      return description
+      // Remove curriculum introductions and last database skill on mobile
+      let formatted = description
         .replace('My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n', '')
         .replace('My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n', '')
-        .replace('My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n', '')
-        .replace('Summer Project:', '**Summer Project:**')
-        .replace('Paper Defense:', '**Paper Defense:**');
+        .replace('My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n', '');
+      
+      if (description.includes('Master of Computer Science')) {
+        formatted = formatted.replace(' · Databases', '');
+      }
+      
+      return formatted
+        .replace(/Summer Project:/g, '<strong>Summer Project:</strong>')
+        .replace(/Paper Defense:/g, '<strong>Paper Defense:</strong>');
     }
     // For desktop, just bold the specific phrases
     return description
-      .replace('Summer Project:', '**Summer Project:**')
-      .replace('Paper Defense:', '**Paper Defense:**');
+      .replace(/Summer Project:/g, '<strong>Summer Project:</strong>')
+      .replace(/Paper Defense:/g, '<strong>Paper Defense:</strong>');
   };
 
   const renderDescription = (description) => {
     const lines = description.split('\n');
-    return lines.filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => {
-      // Convert markdown-style bold to spans with bold style
-      const boldedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      return (
-        <li 
-          key={i} 
-          style={styles.descriptionItem} 
-          className="description-item"
-          dangerouslySetInnerHTML={{ __html: boldedLine }}
-        />
-      );
-    });
+    return lines.filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => (
+      <li 
+        key={i} 
+        style={styles.descriptionItem} 
+        className="description-item"
+        dangerouslySetInnerHTML={{ __html: line }}
+      />
+    ));
   };
 
   return (
