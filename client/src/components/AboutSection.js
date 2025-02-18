@@ -410,35 +410,54 @@ styleTag.textContent = `
       margin-bottom: 1rem !important;
     }
 
+    #about {
+      overflow-x: hidden !important;
+    }
+
+    #about .container {
+      padding: 1rem !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
     #about .gridContainer {
       display: grid !important;
       grid-template-columns: 1fr !important;
       gap: 1rem !important;
       width: 100% !important;
-      padding: 0.5rem !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: 100% !important;
     }
 
     #about .gridItem {
       height: auto !important;
-      min-height: 300px !important;
+      min-height: 250px !important;
       width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
 
     #about .gridBox {
       width: 100% !important;
       height: auto !important;
-      min-height: 300px !important;
+      min-height: 250px !important;
       padding: 1rem !important;
+      margin: 0 !important;
+      border-radius: 1.5rem !important;
     }
 
     #about .slideshowContainer {
       width: 100% !important;
-      height: 300px !important;
+      height: 250px !important;
+      border-radius: 1.5rem !important;
     }
 
     #about .quickFactsContainer {
       padding: 0.5rem !important;
-      gap: 1rem !important;
+      gap: 0.75rem !important;
     }
 
     #about .quickFactItem {
@@ -446,39 +465,49 @@ styleTag.textContent = `
     }
 
     #about .quickFactIcon {
-      font-size: 1.5rem !important;
-      width: 2rem !important;
+      font-size: 1.25rem !important;
+      width: 1.5rem !important;
     }
 
     #about .quickFactLabel {
-      font-size: 0.85rem !important;
+      font-size: 0.8rem !important;
     }
 
     #about .quickFactValue {
-      font-size: 0.9rem !important;
+      font-size: 0.85rem !important;
     }
 
     #about .interestsGrid {
       grid-template-columns: repeat(2, 1fr) !important;
-      gap: 0.75rem !important;
+      gap: 0.5rem !important;
       padding: 0.5rem !important;
     }
 
     #about .paragraph {
-      font-size: 0.9rem !important;
+      font-size: 0.85rem !important;
       margin-bottom: 0.75rem !important;
+      line-height: 1.4 !important;
     }
 
     #about .description {
-      font-size: 0.7rem !important;
+      font-size: 0.65rem !important;
     }
 
     #about .interestIcon {
-      font-size: 1.5rem !important;
+      font-size: 1.25rem !important;
     }
 
     #about .interestLabel {
-      font-size: 0.8rem !important;
+      font-size: 0.75rem !important;
+    }
+
+    #about .interestItem {
+      border-radius: 0.75rem !important;
+      border-width: 1px !important;
+    }
+
+    #about .cardBack {
+      border-radius: 0.75rem !important;
     }
   }
 `;
