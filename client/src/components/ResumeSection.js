@@ -51,7 +51,6 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '2rem',
-    paddingBottom: '1rem',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
