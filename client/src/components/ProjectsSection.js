@@ -227,7 +227,7 @@ function ProjectsSection() {
                           }}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          GitHub
+                          GitHub Project Link
                         </a>
                       </div>
                     </div>
