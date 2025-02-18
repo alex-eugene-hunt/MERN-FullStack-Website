@@ -24,68 +24,82 @@ function ExperienceSection() {
   ];
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      height: '100%',
-      backgroundColor: '#021825',
-      backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
-      backgroundSize: '20px 20px',
-      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
-    }} id="experience">
-      <div className="section-header">Experience</div>
-      <section style={styles.section}>
-        <div style={styles.container}>
-          <div style={styles.timeline}>
-            {experiences.map((exp, index) => (
-              <div key={index} style={styles.timelineItem}>
-                <div style={styles.timelineContent}>
-                  <div style={styles.header}>
-                    <h3 style={styles.title}>{exp.title}</h3>
-                    <div style={styles.companyInfo}>
-                      <div style={styles.infoItem}>
-                        <FaBriefcase style={styles.icon} />
-                        <a href="https://www.cymstar.com/" target="_blank" rel="noopener noreferrer" style={styles.companyLink}>
-                          {exp.company}
-                        </a>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaMapMarkerAlt style={styles.icon} />
-                        <span>{exp.location}</span>
-                      </div>
-                      <div style={styles.infoItem}>
-                        <FaCalendar style={styles.icon} />
-                        <span>{exp.period}</span>
+    <>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .badge-container {
+              display: none !important;
+            }
+            .main-content {
+              width: 100% !important;
+            }
+          }
+        `}
+      </style>
+      <div style={{ 
+        minHeight: '100vh', 
+        height: '100%',
+        backgroundColor: '#021825',
+        backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
+        backgroundSize: '20px 20px',
+        backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
+      }} id="experience">
+        <div className="section-header">Experience</div>
+        <section style={styles.section}>
+          <div style={styles.container}>
+            <div style={styles.timeline}>
+              {experiences.map((exp, index) => (
+                <div key={index} style={styles.timelineItem}>
+                  <div style={styles.timelineContent}>
+                    <div style={styles.header}>
+                      <h3 style={styles.title}>{exp.title}</h3>
+                      <div style={styles.companyInfo}>
+                        <div style={styles.infoItem}>
+                          <FaBriefcase style={styles.icon} />
+                          <a href="https://www.cymstar.com/" target="_blank" rel="noopener noreferrer" style={styles.companyLink}>
+                            {exp.company}
+                          </a>
+                        </div>
+                        <div style={styles.infoItem}>
+                          <FaMapMarkerAlt style={styles.icon} />
+                          <span>{exp.location}</span>
+                        </div>
+                        <div style={styles.infoItem}>
+                          <FaCalendar style={styles.icon} />
+                          <span>{exp.period}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div style={styles.contentWrapper}>
-                    <div style={styles.mainContent}>
-                      <ul style={styles.descriptionList}>
-                        {exp.description.map((item, i) => (
-                          <li key={i} style={styles.descriptionItem}>{item}</li>
-                        ))}
-                      </ul>
-                      <div style={styles.technologies}>
-                        {exp.technologies.map((tech, i) => (
-                          <span key={i} style={styles.tech}>{tech}</span>
-                        ))}
+                    <div style={styles.contentWrapper}>
+                      <div style={styles.mainContent} className="main-content">
+                        <ul style={styles.descriptionList}>
+                          {exp.description.map((item, i) => (
+                            <li key={i} style={styles.descriptionItem}>{item}</li>
+                          ))}
+                        </ul>
+                        <div style={styles.technologies}>
+                          {exp.technologies.map((tech, i) => (
+                            <span key={i} style={styles.tech}>{tech}</span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    <div style={styles.badgeContainer}>
-                      <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
+                      <div style={styles.badgeContainer} className="badge-container">
+                        <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div style={styles.imageGallery}>
+              <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
+              <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
+            </div>
           </div>
-          <div style={styles.imageGallery}>
-            <img src={CymSTARHQ} alt="CymSTAR HQ" style={styles.galleryImage} />
-            <img src={A10Aircraft} alt="A-10 Aircraft" style={styles.galleryImage} />
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
 
@@ -151,18 +165,6 @@ const styles = {
       color: '#dcccbd',
     },
   },
-  contentWrapper: {
-    display: 'flex',
-    gap: '2rem',
-    alignItems: 'flex-start',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      gap: '1rem',
-    },
-  },
-  mainContent: {
-    flex: 1,
-  },
   descriptionList: {
     listStyle: 'none',
     padding: 0,
@@ -175,6 +177,16 @@ const styles = {
     position: 'relative',
     fontFamily: 'Montserrat, sans-serif',
     lineHeight: '1.6',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: '0.6em',
+      width: '6px',
+      height: '6px',
+      backgroundColor: '#b14b32',
+      borderRadius: '50%',
+    },
   },
   technologies: {
     display: 'flex',
@@ -190,6 +202,17 @@ const styles = {
     margin: '0.3rem',
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
+  },
+  contentWrapper: {
+    display: 'flex',
+    gap: '2rem',
+    alignItems: 'flex-start',
+  },
+  mainContent: {
+    flex: 1,
+    '@media (max-width: 768px)': {
+      width: '100%',
+    },
   },
   badgeContainer: {
     flexShrink: 0,
@@ -218,15 +241,5 @@ const styles = {
     objectFit: 'cover',
   },
 };
-
-const styleTag = document.createElement('style');
-styleTag.textContent = `
-  @media (max-width: 768px) {
-    #experience {
-      overflow-x: hidden !important;
-    }
-  }
-`;
-document.head.appendChild(styleTag);
 
 export default ExperienceSection;
