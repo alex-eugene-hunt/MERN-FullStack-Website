@@ -110,20 +110,23 @@ function EducationSection() {
                     </div>
                   </div>
                 </div>
-                {edu.school === 'University of Oklahoma' && (
+                {(edu.school === 'University of Oklahoma') && (
                   <div style={styles.imageGallery}>
-                    <img 
-                      src={edu.degree.includes('Master') ? MSDegreeOU : BSDegreeOU}
-                      alt={`${edu.degree} from ${edu.school}`}
-                      style={styles.galleryImage}
-                      className="gallery-image"
-                    />
-                    <img 
-                      src={SeedSowerOU}
-                      alt="OU Seed Sower"
-                      style={styles.galleryImage}
-                      className="gallery-image"
-                    />
+                    <div style={styles.degreeImageContainer}>
+                      <img 
+                        src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
+                        alt={`${edu.degree} from ${edu.school}`}
+                        style={styles.degreeImage}
+                      />
+                    </div>
+                    <div style={styles.sowerImageContainer}>
+                      <img 
+                        src={SeedSowerOU}
+                        alt="OU Seed Sower"
+                        style={styles.sowerImage}
+                        className="sower-image"
+                      />
+                    </div>
                   </div>
                 )}
               </div>
@@ -191,17 +194,36 @@ const styles = {
   },
   imageGallery: {
     display: 'flex',
-    gap: '2rem',
     justifyContent: 'space-between',
+    gap: '2rem',
     marginTop: '2rem',
     width: '100%',
   },
-  galleryImage: {
-    width: 'calc(50% - 1rem)',
+  degreeImageContainer: {
+    width: 'calc(60% - 1rem)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sowerImageContainer: {
+    width: 'calc(40% - 1rem)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  degreeImage: {
+    width: '100%',
     height: 'auto',
+    objectFit: 'cover',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
+  },
+  sowerImage: {
+    width: '100%',
+    height: 'auto',
     objectFit: 'cover',
+    borderRadius: '8px',
+    border: '2px solid #dcccbd',
   },
   contentWrapper: {
     display: 'flex',
@@ -313,20 +335,25 @@ styleTag.textContent = `
     }
 
     #education .imageGallery {
-      flex-direction: row !important;
-      flex-wrap: wrap !important;
-      gap: 0.5rem !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.35rem !important;
       margin-top: 0.5rem !important;
       padding: 0 0.5rem !important;
-      justify-content: center !important;
+      width: 100% !important;
     }
 
-    #education .gallery-image {
-      width: calc(50% - 0.5rem) !important;
-      max-width: 200px !important;
-      height: 120px !important;
-      object-fit: contain !important;
-      margin: 0 !important;
+    #education .degreeImageContainer,
+    #education .sowerImageContainer {
+      width: 100% !important;
+      aspect-ratio: 16/9 !important;
+    }
+
+    #education .degreeImage,
+    #education .sowerImage {
+      width: 100% !important;
+      height: 80px !important;
+      object-fit: cover !important;
       border-radius: 4px !important;
       border-width: 1px !important;
     }
