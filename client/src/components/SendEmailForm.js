@@ -41,36 +41,70 @@ function SendEmailForm() {
   return (
     <div style={styles.container}>
       <h3 style={styles.heading}>CONTACT ME</h3>
+      <style>
+        {`
+          input::placeholder, textarea::placeholder {
+            color: #dcccbd !important;
+            font-weight: bold !important;
+          }
+          input, textarea {
+            font-weight: bold !important;
+          }
+        `}
+      </style>
       <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="text"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => {
-            console.log('Name input value:', e.target.value);
-            setName(e.target.value);
-          }}
-          style={styles.input}
-          pattern=".*"
-          title="Any text is allowed, including spaces"
-          required
-        />
-        <div style={styles.messageContainer}>
-          <textarea
-            placeholder="Your message"
-            value={message}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1rem',
+          width: '100%',
+          maxWidth: '500px',
+          margin: '0 auto',
+        }}>
+          <input
+            type="text"
+            value={name}
             onChange={(e) => {
-              console.log('Message input value:', e.target.value);
-              setMessage(e.target.value);
+              console.log('Name input value:', e.target.value);
+              setName(e.target.value);
             }}
-            style={styles.textarea}
-            pattern=".*"
-            title="Any text is allowed, including spaces"
-            required
+            placeholder="Your name"
+            style={{
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '2px solid #dcccbd',
+              backgroundColor: '#434a54',
+              color: '#dcccbd',
+              fontSize: '1rem',
+              fontFamily: 'Montserrat, sans-serif',
+              width: '100%',
+            }}
           />
-          <button type="submit" style={styles.button}>
-            {sent ? '  ✔  ' : 'SEND?'}
-          </button>
+          <div style={styles.messageContainer}>
+            <textarea
+              value={message}
+              onChange={(e) => {
+                console.log('Message input value:', e.target.value);
+                setMessage(e.target.value);
+              }}
+              placeholder="Your message"
+              style={{
+                padding: '0.75rem',
+                borderRadius: '0.5rem',
+                border: '2px solid #dcccbd',
+                backgroundColor: '#434a54',
+                color: '#dcccbd',
+                fontSize: '1rem',
+                fontFamily: 'Montserrat, sans-serif',
+                width: '100%',
+                minHeight: '150px',
+                resize: 'vertical',
+              }}
+            />
+            <button type="submit" style={styles.button}>
+              {sent ? '  ✔  ' : 'SEND?'}
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -103,35 +137,11 @@ const styles = {
     flexDirection: 'column',
     flex: 1,
   },
-  input: {
-    backgroundColor: '#dcccbd',
-    border: 'none',
-    outline: 'none',
-    padding: '0.4rem',
-    marginBottom: '0.5rem',
-    borderRadius: '10px',
-    fontSize: '0.9rem',
-    color: '#434a54',
-    fontFamily: '"Montserrat", sans-serif',
-  },
   messageContainer: {
     position: 'relative',
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-  },
-  textarea: {
-    backgroundColor: '#dcccbd',
-    border: 'none',
-    outline: 'none',
-    padding: '0.4rem',
-    paddingBottom: '2.5rem',
-    fontSize: '0.9rem',
-    color: '#434a54',
-    borderRadius: '10px 10px 30px 30px',
-    flex: 1,
-    resize: 'none',
-    fontFamily: '"Montserrat", sans-serif',
   },
   button: {
     position: 'absolute',
@@ -139,10 +149,6 @@ const styles = {
     right: '0.5rem',
     backgroundColor: '#d4996f',
     border: 'none',
-    /**
-     * The border radius of the button, given as a string representing the desired
-     * radius in pixels (e.g. '20px').
-     */
     borderRadius: '20px',
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',
