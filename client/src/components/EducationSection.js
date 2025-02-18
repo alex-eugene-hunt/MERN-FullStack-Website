@@ -48,8 +48,7 @@ function EducationSection() {
               font-size: 1.2rem !important;
             }
             .top-logo {
-              width: 50px !important;
-              height: 50px !important;
+              display: none !important;
             }
             .bottom-logo {
               width: 50px !important;
@@ -294,6 +293,7 @@ const styles = {
     margin: '0.3rem',
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
   },
   topLogo: {
     position: 'absolute',

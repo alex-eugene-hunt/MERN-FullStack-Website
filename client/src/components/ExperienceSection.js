@@ -237,6 +237,7 @@ const styles = {
     margin: '0.3rem',
     display: 'inline-block',
     fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
   },
   contentWrapper: {
     display: 'flex',
