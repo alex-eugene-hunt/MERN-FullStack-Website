@@ -346,33 +346,43 @@ styleTag.textContent = `
       flex-direction: column !important;
       gap: 0.5rem !important;
       margin-top: 1rem !important;
+      align-items: center !important;
     }
 
     #education .degreeImageContainer {
-      width: 100% !important;
-      max-width: 300px !important;
+      width: 90% !important;
+      max-width: 250px !important;
     }
 
     #education .degreeImage {
       width: 100% !important;
       border-radius: 0.5rem !important;
       border-width: 1px !important;
+      max-height: 160px !important;
+      object-fit: contain !important;
     }
 
     #education .sowerImageContainer {
-      width: 100% !important;
-      max-width: 300px !important;
+      width: 90% !important;
+      max-width: 250px !important;
     }
 
     #education .sowerImage {
       width: 100% !important;
       border-radius: 0.5rem !important;
       border-width: 1px !important;
+      max-height: 160px !important;
+      object-fit: contain !important;
     }
 
     #education .contentWrapper {
       flex-direction: column !important;
       gap: 1rem !important;
+      align-items: center !important;
+    }
+
+    #education .mainContent {
+      width: 100% !important;
     }
 
     #education .descriptionItem {
@@ -389,13 +399,13 @@ styleTag.textContent = `
     }
 
     #education .topLogo {
-      width: 60px !important;
+      width: 50px !important;
       top: 0.5rem !important;
       right: 0.5rem !important;
     }
 
     #education .bottomLogo {
-      width: 60px !important;
+      width: 50px !important;
       bottom: 0.5rem !important;
       right: 0.5rem !important;
     }
