@@ -5,7 +5,7 @@ import Resume from '../assets/AlexHunt_Resume.pdf';
 function ResumeSection() {
   return (
     <div style={{ 
-      minHeight: '100vh', 
+      minHeight: 'auto', 
       height: '100%',
       backgroundColor: '#021825',
       backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
@@ -42,7 +42,7 @@ function ResumeSection() {
 const styles = {
   section: {
     padding: 0,
-    minHeight: '100vh',
+    minHeight: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -51,6 +51,7 @@ const styles = {
     maxWidth: '1200px',
     margin: '0 auto',
     padding: '2rem',
+    paddingBottom: '1rem',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
