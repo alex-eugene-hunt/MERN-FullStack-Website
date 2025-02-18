@@ -342,11 +342,11 @@ styleTag.textContent = `
       flex: none !important;
     }
 
-    .game-box {
+    .game-box,
+    .llm-box {
       display: none !important;
     }
 
-    .hero-box.llm-box,
     .hero-box.contact-box {
       height: auto !important;
       min-height: 400px !important;
