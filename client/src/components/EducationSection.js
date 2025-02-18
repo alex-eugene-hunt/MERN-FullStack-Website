@@ -207,6 +207,7 @@ const styles = {
     alignItems: 'center',
   },
   sowerImageContainer: {
+    height: '515px',
     width: 'calc(40% - 1rem)',
     display: 'flex',
     justifyContent: 'center',
