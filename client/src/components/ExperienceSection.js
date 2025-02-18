@@ -44,6 +44,11 @@ function ExperienceSection() {
             }
             .image-gallery {
               order: -1;
+              marginTop: '0rem',
+              marginBottom: '2rem',
+            }
+            .description-item {
+              padding-left: 0 !important;
             }
           }
         `}
@@ -91,7 +96,7 @@ function ExperienceSection() {
                         <div style={styles.mainContent} className="main-content">
                           <ul style={styles.descriptionList}>
                             {exp.description.map((item, i) => (
-                              <li key={i} style={styles.descriptionItem}>{item}</li>
+                              <li key={i} style={styles.descriptionItem} className="description-item">{item}</li>
                             ))}
                           </ul>
                           <div style={styles.technologies} className="technologies">

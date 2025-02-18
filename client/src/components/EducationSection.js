@@ -37,104 +37,115 @@ function EducationSection() {
   ];
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      height: '100%',
-      backgroundColor: '#021825',
-      backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
-      backgroundSize: '20px 20px',
-      backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
-    }} id="education">
-      <div className="section-header">Education</div>
-      <section style={styles.section}>
-        <div style={styles.container}>
-          <div style={styles.timeline}>
-            {education.map((edu, index) => (
-              <div key={index}>
-                <div style={styles.timelineItem}>
-                  {edu.school === 'University of California, Berkeley' && (
-                    <>
-                      <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
-                      <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
-                    </>
-                  )}
-                  {edu.school === 'University of Oklahoma' && (
-                    <>
-                      <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
-                      <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
-                    </>
-                  )}
-                  <div style={styles.timelineContent}>
-                    <div style={styles.header}>
-                      <h3 style={styles.title}>{edu.degree}</h3>
-                      <div style={styles.schoolInfo}>
-                        <div style={styles.infoItem}>
-                          <FaGraduationCap style={styles.icon} />
-                          <span>{edu.school}</span>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaMapMarkerAlt style={styles.icon} />
-                          <span>{edu.location}</span>
-                        </div>
-                        <div style={styles.infoItem}>
-                          <FaCalendar style={styles.icon} />
-                          <span>{edu.period}</span>
-                        </div>
-                        {edu.gpa && (
+    <>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .description-item {
+              padding-left: 0 !important;
+            }
+          }
+        `}
+      </style>
+      <div style={{ 
+        minHeight: '100vh', 
+        height: '100%',
+        backgroundColor: '#021825',
+        backgroundImage: 'linear-gradient(135deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(225deg, rgba(67, 74, 84, 1) 25%, transparent 25%), linear-gradient(315deg, rgba(67, 74, 84, 0.33) 25%, transparent 25%), linear-gradient(45deg, rgba(67, 74, 84, 1) 25%, #021825 25%)',
+        backgroundSize: '20px 20px',
+        backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
+      }} id="education">
+        <div className="section-header">Education</div>
+        <section style={styles.section}>
+          <div style={styles.container}>
+            <div style={styles.timeline}>
+              {education.map((edu, index) => (
+                <div key={index}>
+                  <div style={styles.timelineItem}>
+                    {edu.school === 'University of California, Berkeley' && (
+                      <>
+                        <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} />
+                        <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} />
+                      </>
+                    )}
+                    {edu.school === 'University of Oklahoma' && (
+                      <>
+                        <img src={OUSeal} alt="OU Seal" style={styles.topLogo} />
+                        <img src={OULogo} alt="OU Logo" style={styles.bottomLogo} />
+                      </>
+                    )}
+                    <div style={styles.timelineContent}>
+                      <div style={styles.header}>
+                        <h3 style={styles.title}>{edu.degree}</h3>
+                        <div style={styles.schoolInfo}>
                           <div style={styles.infoItem}>
-                            <FaStar style={styles.icon} />
-                            <span>GPA: {edu.gpa}</span>
+                            <FaGraduationCap style={styles.icon} />
+                            <span>{edu.school}</span>
                           </div>
-                        )}
+                          <div style={styles.infoItem}>
+                            <FaMapMarkerAlt style={styles.icon} />
+                            <span>{edu.location}</span>
+                          </div>
+                          <div style={styles.infoItem}>
+                            <FaCalendar style={styles.icon} />
+                            <span>{edu.period}</span>
+                          </div>
+                          {edu.gpa && (
+                            <div style={styles.infoItem}>
+                              <FaStar style={styles.icon} />
+                              <span>GPA: {edu.gpa}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div style={styles.contentWrapper}>
-                      <div style={styles.mainContent}>
-                        <ul style={styles.descriptionList}>
-                          {edu.description.split('\n').filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => (
-                            <li key={i} style={styles.descriptionItem}>{line}</li>
-                          ))}
-                        </ul>
-                        <div style={styles.technologies}>
-                          {edu.description.split('\n')
-                            .find(line => line.includes('Skills:'))
-                            ?.split('Skills:')[1]
-                            .split('·')
-                            .map(skill => skill.trim())
-                            .filter(skill => skill)
-                            .map((skill, i) => (
-                              <span key={i} style={styles.tech}>{skill}</span>
+                      <div style={styles.contentWrapper}>
+                        <div style={styles.mainContent}>
+                          <ul style={styles.descriptionList}>
+                            {edu.description.split('\n').filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => (
+                              <li key={i} style={styles.descriptionItem} className="description-item">{line}</li>
                             ))}
+                          </ul>
+                          <div style={styles.technologies}>
+                            {edu.description.split('\n')
+                              .find(line => line.includes('Skills:'))
+                              ?.split('Skills:')[1]
+                              .split('·')
+                              .map(skill => skill.trim())
+                              .filter(skill => skill)
+                              .map((skill, i) => (
+                                <span key={i} style={styles.tech}>{skill}</span>
+                              ))}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                  {(edu.school === 'University of Oklahoma') && (
+                    <div style={styles.imageGallery}>
+                      <div style={styles.degreeImageContainer}>
+                        <img 
+                          src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
+                          alt={`${edu.degree} from ${edu.school}`}
+                          style={styles.degreeImage}
+                        />
+                      </div>
+                      <div style={styles.sowerImageContainer}>
+                        <img 
+                          src={SeedSowerOU}
+                          alt="OU Seed Sower"
+                          style={styles.sowerImage}
+                          className="sower-image"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
-                {(edu.school === 'University of Oklahoma') && (
-                  <div style={styles.imageGallery}>
-                    <div style={styles.degreeImageContainer}>
-                      <img 
-                        src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
-                        alt={`${edu.degree} from ${edu.school}`}
-                        style={styles.degreeImage}
-                      />
-                    </div>
-                    <div style={styles.sowerImageContainer}>
-                      <img 
-                        src={SeedSowerOU}
-                        alt="OU Seed Sower"
-                        style={styles.sowerImage}
-                        className="sower-image"
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
 
