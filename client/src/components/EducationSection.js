@@ -297,4 +297,110 @@ const styles = {
   },
 };
 
+const styleTag = document.createElement('style');
+styleTag.textContent = `
+  @media (max-width: 768px) {
+    #education {
+      overflow-x: hidden !important;
+    }
+
+    #education .container {
+      padding: 0.5rem !important;
+      max-width: 100% !important;
+    }
+
+    #education .timeline {
+      gap: 1rem !important;
+    }
+
+    #education .timelineItem {
+      flex-direction: column !important;
+      border-radius: 0.75rem !important;
+      border-width: 1px !important;
+      margin: 0 0.5rem !important;
+    }
+
+    #education .timelineContent {
+      padding: 1rem !important;
+    }
+
+    #education .title {
+      font-size: 1.2rem !important;
+      margin-bottom: 0.75rem !important;
+    }
+
+    #education .schoolInfo {
+      gap: 0.75rem !important;
+    }
+
+    #education .infoItem {
+      font-size: 0.8rem !important;
+      gap: 0.25rem !important;
+    }
+
+    #education .icon {
+      font-size: 1rem !important;
+    }
+
+    #education .imageGallery {
+      flex-direction: column !important;
+      gap: 0.5rem !important;
+      margin-top: 1rem !important;
+    }
+
+    #education .degreeImageContainer {
+      width: 100% !important;
+      max-width: 300px !important;
+    }
+
+    #education .degreeImage {
+      width: 100% !important;
+      border-radius: 0.5rem !important;
+      border-width: 1px !important;
+    }
+
+    #education .sowerImageContainer {
+      width: 100% !important;
+      max-width: 300px !important;
+    }
+
+    #education .sowerImage {
+      width: 100% !important;
+      border-radius: 0.5rem !important;
+      border-width: 1px !important;
+    }
+
+    #education .contentWrapper {
+      flex-direction: column !important;
+      gap: 1rem !important;
+    }
+
+    #education .descriptionItem {
+      font-size: 0.85rem !important;
+      padding-left: 1rem !important;
+      margin-bottom: 0.5rem !important;
+      line-height: 1.4 !important;
+    }
+
+    #education .tech {
+      font-size: 0.75rem !important;
+      padding: 0.2rem 0.6rem !important;
+      margin: 0.2rem !important;
+    }
+
+    #education .topLogo {
+      width: 60px !important;
+      top: 0.5rem !important;
+      right: 0.5rem !important;
+    }
+
+    #education .bottomLogo {
+      width: 60px !important;
+      bottom: 0.5rem !important;
+      right: 0.5rem !important;
+    }
+  }
+`;
+document.head.appendChild(styleTag);
+
 export default EducationSection;
