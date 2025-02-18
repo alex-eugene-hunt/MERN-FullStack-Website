@@ -304,6 +304,14 @@ const styles = {
 const styleTag = document.createElement('style');
 styleTag.textContent = `
   @media (max-width: 768px) {
+    .navbar-container {
+      height: auto !important;
+    }
+
+    .navbar {
+      position: absolute !important;
+    }
+
     .hero-section {
       flex-direction: column !important;
       align-items: center !important;
@@ -315,6 +323,7 @@ styleTag.textContent = `
 
     .contentWrapper {
       padding-top: 0 !important;
+      margin-top: 2rem !important;
     }
 
     .hero-image {
