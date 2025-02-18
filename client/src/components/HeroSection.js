@@ -308,7 +308,7 @@ styleTag.textContent = `
       flex-direction: column !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      padding: 1rem 0.5rem 2rem !important;
+      padding: 1rem 0.5rem 0.5rem !important;
       text-align: center !important;
       margin-top: -15px !important;
     }
@@ -319,7 +319,7 @@ styleTag.textContent = `
     }
 
     .typewriter-text {
-      margin: 1rem auto !important;
+      margin: 1rem auto 0 !important;
       text-align: center !important;
       font-size: 32px !important;
       width: 100% !important;
@@ -331,14 +331,15 @@ styleTag.textContent = `
       flex-direction: column !important;
       align-items: center !important;
       width: 100% !important;
-      padding: 1rem !important;
-      gap: 1rem !important;
+      padding: 0.5rem !important;
+      gap: 0 !important;
+      margin-top: 0.5rem !important;
     }
 
     .hero-box {
       width: 90% !important;
       max-width: 450px !important;
-      margin: 0 auto 1rem auto !important;
+      margin: 0 auto !important;
       flex: none !important;
     }
 
