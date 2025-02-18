@@ -240,13 +240,14 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
-    color: '#b14b32',
+    color: '#d4996f',
     fontSize: '1rem',
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: "bold",
   },
   icon: {
     fontSize: '1.2rem',
+    color: '#dcccbd',
   },
   imageGallery: {
     display: 'flex',

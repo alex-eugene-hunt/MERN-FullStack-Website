@@ -165,7 +165,7 @@ function ProjectsSection() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        color: '#b14b32',
+                        color: '#d4996f',
                         fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
@@ -181,7 +181,7 @@ function ProjectsSection() {
                           display: 'flex',
                           alignItems: 'center',
                           gap: '0.5rem',
-                          color: '#b14b32',
+                          color: '#d4996f',
                           fontSize: '1rem',
                           fontFamily: 'Montserrat, sans-serif',
                           fontWeight: 'bold',
@@ -195,9 +195,8 @@ function ProjectsSection() {
                             target="_blank" 
                             rel="noopener noreferrer" 
                             style={{
-                              color: '#b14b32',
+                              color: '#d4996f',
                               textDecoration: 'none',
-                              fontWeight: 'bold',
                             }}
                             onClick={(e) => e.stopPropagation()}
                           >
@@ -209,7 +208,7 @@ function ProjectsSection() {
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        color: '#b14b32',
+                        color: '#d4996f',
                         fontSize: '1rem',
                         fontFamily: 'Montserrat, sans-serif',
                         fontWeight: 'bold',
@@ -223,13 +222,12 @@ function ProjectsSection() {
                           target="_blank" 
                           rel="noopener noreferrer" 
                           style={{
-                            color: '#b14b32',
+                            color: '#d4996f',
                             textDecoration: 'none',
-                            fontWeight: 'bold',
                           }}
                           onClick={(e) => e.stopPropagation()}
                         >
-                          GitHub Project Link
+                          GitHub
                         </a>
                       </div>
                     </div>
