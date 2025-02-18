@@ -91,13 +91,68 @@ function AboutSection() {
       backgroundSize: '20px 20px',
       backgroundPosition: '-10px 0, -10px 0, 0 0, 0 0'
     }} id="about">
+      <style>
+        {`
+          @media (max-width: 768px) {
+            #about {
+              overflow-x: hidden !important;
+            }
+            .grid-container {
+              grid-template-columns: 1fr !important;
+              gap: 1rem !important;
+            }
+            .grid-item {
+              height: auto !important;
+              min-height: 300px !important;
+            }
+            .slideshow-container {
+              height: 300px !important;
+            }
+            .bio-content {
+              padding: 1rem !important;
+            }
+            .bio-paragraph {
+              font-size: 0.9rem !important;
+              margin-bottom: 0.75rem !important;
+            }
+            .quick-facts-container {
+              padding: 1rem !important;
+              gap: 1rem !important;
+            }
+            .quick-fact-icon {
+              font-size: 1.25rem !important;
+              width: 2rem !important;
+            }
+            .quick-fact-label {
+              font-size: 0.85rem !important;
+            }
+            .quick-fact-value {
+              font-size: 0.9rem !important;
+            }
+            .interests-grid {
+              grid-template-columns: repeat(3, 1fr) !important;
+              gap: 0.75rem !important;
+              padding: 0.75rem !important;
+            }
+            .interest-icon {
+              font-size: 1.5rem !important;
+            }
+            .interest-label {
+              font-size: 0.75rem !important;
+            }
+            .interest-description {
+              font-size: 0.7rem !important;
+            }
+          }
+        `}
+      </style>
       <div className="section-header">About</div>
       <section style={styles.section}>
         <div style={styles.container}>
-          <div style={styles.gridContainer}>
+          <div style={styles.gridContainer} className="grid-container">
             {/* Top Left - Image Slideshow */}
-            <div style={styles.gridItem}>
-              <div style={{...styles.slideshowContainer, border: '2px solid #dcccbd'}}>
+            <div style={styles.gridItem} className="grid-item">
+              <div style={{...styles.slideshowContainer, border: '2px solid #dcccbd'}} className="slideshow-container">
                 {photos.map((photo, index) => (
                   <img
                     key={index}
@@ -125,15 +180,15 @@ function AboutSection() {
             </div>
 
             {/* Top Right - Bio */}
-            <div style={styles.gridItem}>
+            <div style={styles.gridItem} className="grid-item">
               <div style={{...styles.gridBox, backgroundColor: '#434a54', border: '2px solid #dcccbd'}}>
-                <div style={styles.bioContent}>
-                  <p style={styles.paragraph}>
+                <div style={styles.bioContent} className="bio-content">
+                  <p style={styles.paragraph} className="bio-paragraph">
                     I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
                     through code. My journey in software development has led me to specialize in full-stack 
                     development using the MERN (MongoDB, Express.js, React, Node.js) stack.
                   </p>
-                  <p style={styles.paragraph}>
+                  <p style={styles.paragraph} className="bio-paragraph">
                     What drives me is the opportunity to solve complex problems and create meaningful user 
                     experiences. When I'm not coding, you can find me exploring new technologies, contributing 
                     to open-source projects, or working on personal projects that challenge my skills.
@@ -143,15 +198,15 @@ function AboutSection() {
             </div>
 
             {/* Bottom Left - Quick Facts */}
-            <div style={styles.gridItem}>
+            <div style={styles.gridItem} className="grid-item">
               <div style={{...styles.gridBox, backgroundColor: '#434a54', border: '2px solid #dcccbd'}}>
-                <div style={styles.quickFactsContainer}>
+                <div style={styles.quickFactsContainer} className="quick-facts-container">
                   {quickFacts.map((fact, index) => (
                     <div key={index} style={styles.quickFactItem}>
-                      <div style={styles.quickFactIcon}>{fact.icon}</div>
+                      <div style={styles.quickFactIcon} className="quick-fact-icon">{fact.icon}</div>
                       <div style={styles.quickFactContent}>
-                        <div style={styles.quickFactLabel}>{fact.label}</div>
-                        <div style={styles.quickFactValue}>{fact.value}</div>
+                        <div style={styles.quickFactLabel} className="quick-fact-label">{fact.label}</div>
+                        <div style={styles.quickFactValue} className="quick-fact-value">{fact.value}</div>
                       </div>
                     </div>
                   ))}
@@ -160,9 +215,9 @@ function AboutSection() {
             </div>
 
             {/* Bottom Right - Interest Icons */}
-            <div style={styles.gridItem}>
+            <div style={styles.gridItem} className="grid-item">
               <div style={{...styles.gridBox, backgroundColor: '#b14b32', border: '2px solid #dcccbd'}}>
-                <div style={styles.interestsGrid}>
+                <div style={styles.interestsGrid} className="interests-grid">
                   {interests.map((interest, index) => (
                     <div key={index} style={styles.interestItemContainer}>
                       <div 
@@ -179,12 +234,12 @@ function AboutSection() {
                       >
                         <div style={styles.cardFront}>
                           <div style={styles.contentWrapper}>
-                            <div style={styles.interestIcon}>{interest.icon}</div>
-                            <span style={styles.interestLabel}>{interest.label}</span>
+                            <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
+                            <span style={styles.interestLabel} className="interest-label">{interest.label}</span>
                           </div>
                         </div>
                         <div style={styles.cardBack}>
-                          <p style={styles.description}>{interest.description}</p>
+                          <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
                       </div>
                     </div>
@@ -401,118 +456,5 @@ const styles = {
     lineHeight: '1.2',
   },
 };
-
-const styleTag = document.createElement('style');
-styleTag.textContent = `
-  @media (max-width: 768px) {
-    #about {
-      overflow-x: hidden !important;
-    }
-
-    #about .container {
-      padding: 0.5rem !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      margin: 0 !important;
-    }
-
-    #about .gridContainer {
-      display: grid !important;
-      grid-template-columns: 1fr !important;
-      gap: 1rem !important;
-      width: 90% !important;
-      padding: 0 !important;
-      margin: 0 auto !important;
-      max-width: 350px !important;
-    }
-
-    #about .gridItem {
-      height: auto !important;
-      min-height: 200px !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-
-    #about .gridBox {
-      width: 100% !important;
-      height: auto !important;
-      min-height: 200px !important;
-      padding: 0.75rem !important;
-      margin: 0 !important;
-      border-radius: 1rem !important;
-    }
-
-    #about .slideshowContainer {
-      width: 100% !important;
-      height: 200px !important;
-      border-radius: 1rem !important;
-    }
-
-    #about .quickFactsContainer {
-      padding: 0.5rem !important;
-      gap: 0.5rem !important;
-    }
-
-    #about .quickFactItem {
-      gap: 0.5rem !important;
-    }
-
-    #about .quickFactIcon {
-      font-size: 1rem !important;
-      width: 1.25rem !important;
-    }
-
-    #about .quickFactLabel {
-      font-size: 0.7rem !important;
-    }
-
-    #about .quickFactValue {
-      font-size: 0.75rem !important;
-    }
-
-    #about .interestsGrid {
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 0.35rem !important;
-      padding: 0.35rem !important;
-    }
-
-    #about .paragraph {
-      font-size: 0.8rem !important;
-      margin-bottom: 0.5rem !important;
-      line-height: 1.3 !important;
-      padding: 0.5rem !important;
-    }
-
-    #about .description {
-      font-size: 0.6rem !important;
-      padding: 0.25rem !important;
-    }
-
-    #about .interestIcon {
-      font-size: 1rem !important;
-    }
-
-    #about .interestLabel {
-      font-size: 0.65rem !important;
-    }
-
-    #about .interestItem {
-      border-radius: 0.5rem !important;
-      border-width: 1px !important;
-    }
-
-    #about .cardBack {
-      border-radius: 0.5rem !important;
-      padding: 0.25rem !important;
-    }
-
-    #about .contentWrapper {
-      gap: 0.25rem !important;
-    }
-  }
-`;
-document.head.appendChild(styleTag);
 
 export default AboutSection;
