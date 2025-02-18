@@ -24,7 +24,7 @@ function EducationSection() {
       location: 'Norman, OK',
       period: 'Jan 2024 - Dec 2024',
       gpa: '3.9 / 4.0',
-      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\nSummer Project: Improving Drone Flight Trajectories with Machine Learning.\n\nPaper Defense: "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security \n⦿ PDN Programming \n⦿ Computer Architecture \n⦿ Machine Learning\n⦿ Cyber Attacks and Defenses\n⦿ Data Mining\n⦿ Computational Learning Theory\n⦿ Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
+      description: 'My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n**Summer Project:** Improving Drone Flight Trajectories with Machine Learning.\n\n**Paper Defense:** "PyTond: Efficient Python Data Science on the Shoulders of Databases" - Hesam Shahrokhi, et. al.\n\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security \n⦿ PDN Programming \n⦿ Computer Architecture \n⦿ Machine Learning\n⦿ Cyber Attacks and Defenses\n⦿ Data Mining\n⦿ Computational Learning Theory\n⦿ Intelligent Data Analytics\n\nSkills: Robotics · Data Mining · Computer Security · Machine Learning · Databases'
     },
     {
       degree: 'Bachelor of Computer Science',
@@ -35,6 +35,38 @@ function EducationSection() {
       description: 'My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n⦿ Programming Struc/Abstractions\n⦿ Data Structures\n⦿ Computer Organization\n⦿ Discrete Structures\n⦿ Intro to Operating Systems\n⦿ Software Engineering\n⦿ Princ-Programming Languages\n⦿ Artificial Intelligence\n⦿ Distributed Operating Systems\n⦿ Data Networks\n⦿ Capstone Design Project\n⦿ Algorithm Analysis\n⦿ Database Management Systems\n⦿ Computer Security\n⦿ PDN Programming\n\nSkills: Artificial Intelligence (AI) · Operating Systems · Software Development · Algorithm Analysis · Programming'
     }
   ];
+
+  const formatDescription = (description, isMobile = false) => {
+    if (isMobile) {
+      // Remove curriculum introductions on mobile
+      return description
+        .replace('My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n', '')
+        .replace('My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n', '')
+        .replace('My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n', '')
+        .replace('Summer Project:', '**Summer Project:**')
+        .replace('Paper Defense:', '**Paper Defense:**');
+    }
+    // For desktop, just bold the specific phrases
+    return description
+      .replace('Summer Project:', '**Summer Project:**')
+      .replace('Paper Defense:', '**Paper Defense:**');
+  };
+
+  const renderDescription = (description) => {
+    const lines = description.split('\n');
+    return lines.filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => {
+      // Convert markdown-style bold to spans with bold style
+      const boldedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      return (
+        <li 
+          key={i} 
+          style={styles.descriptionItem} 
+          className="description-item"
+          dangerouslySetInnerHTML={{ __html: boldedLine }}
+        />
+      );
+    });
+  };
 
   return (
     <>
@@ -53,6 +85,20 @@ function EducationSection() {
             .bottom-logo {
               width: 50px !important;
               height: 50px !important;
+            }
+            .technologies {
+              margin: 0 !important;
+              width: 100% !important;
+              padding: 0 !important;
+              display: flex !important;
+              flex-wrap: wrap !important;
+              gap: 0.5rem !important;
+              justify-content: flex-start !important;
+            }
+            .tech-item {
+              margin: 0 !important;
+              flex-grow: 0 !important;
+              flex-shrink: 0 !important;
             }
           }
         `}
@@ -111,11 +157,9 @@ function EducationSection() {
                       <div style={styles.contentWrapper}>
                         <div style={styles.mainContent}>
                           <ul style={styles.descriptionList}>
-                            {edu.description.split('\n').filter(line => line.trim() && !line.includes('Skills:')).map((line, i) => (
-                              <li key={i} style={styles.descriptionItem} className="description-item">{line}</li>
-                            ))}
+                            {renderDescription(formatDescription(edu.description, window.innerWidth <= 768))}
                           </ul>
-                          <div style={styles.technologies}>
+                          <div style={styles.technologies} className="technologies">
                             {edu.description.split('\n')
                               .find(line => line.includes('Skills:'))
                               ?.split('Skills:')[1]
@@ -123,7 +167,7 @@ function EducationSection() {
                               .map(skill => skill.trim())
                               .filter(skill => skill)
                               .map((skill, i) => (
-                                <span key={i} style={styles.tech}>{skill}</span>
+                                <span key={i} style={styles.tech} className="tech-item">{skill}</span>
                               ))}
                           </div>
                         </div>
@@ -283,6 +327,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '0.75rem',
+    margin: '-0.3rem',
   },
   tech: {
     backgroundColor: '#b14b32',
