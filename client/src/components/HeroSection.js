@@ -308,9 +308,13 @@ styleTag.textContent = `
       flex-direction: column !important;
       align-items: center !important;
       justify-content: flex-start !important;
-      padding: 1rem 0.5rem 0.5rem !important;
+      padding: 0 0.5rem 0.5rem !important;
       text-align: center !important;
-      margin-top: -15px !important;
+      margin-top: 0 !important;
+    }
+
+    .contentWrapper {
+      padding-top: 0 !important;
     }
 
     .hero-image {
