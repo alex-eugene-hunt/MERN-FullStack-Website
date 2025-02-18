@@ -198,7 +198,7 @@ const styles = {
     gap: '2rem',
     marginTop: '2rem',
     width: '100%',
-    height: '400px',
+    height: '475px',
   },
   degreeImageContainer: {
     width: 'calc(60% - 1rem)',
