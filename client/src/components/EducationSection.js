@@ -110,36 +110,20 @@ function EducationSection() {
                     </div>
                   </div>
                 </div>
-                {(edu.school === 'University of Oklahoma') && (
+                {edu.school === 'University of Oklahoma' && (
                   <div style={styles.imageGallery}>
-                    <div style={styles.degreeImageContainer} ref={el => {
-                      if (el) {
-                        const img = el.querySelector('img');
-                        if (img) {
-                          img.onload = () => {
-                            const height = img.offsetHeight;
-                            const sowerImg = el.parentElement.querySelector('.sower-image');
-                            if (sowerImg) {
-                              sowerImg.style.height = `${height}px`;
-                            }
-                          };
-                        }
-                      }
-                    }}>
-                      <img 
-                        src={edu.degree.startsWith('Master') ? MSDegreeOU : BSDegreeOU}
-                        alt={`${edu.degree} from ${edu.school}`}
-                        style={styles.degreeImage}
-                      />
-                    </div>
-                    <div style={styles.sowerImageContainer}>
-                      <img 
-                        src={SeedSowerOU}
-                        alt="OU Seed Sower"
-                        style={styles.sowerImage}
-                        className="sower-image"
-                      />
-                    </div>
+                    <img 
+                      src={edu.degree.includes('Master') ? MSDegreeOU : BSDegreeOU}
+                      alt={`${edu.degree} from ${edu.school}`}
+                      style={styles.galleryImage}
+                      className="gallery-image"
+                    />
+                    <img 
+                      src={SeedSowerOU}
+                      alt="OU Seed Sower"
+                      style={styles.galleryImage}
+                      className="gallery-image"
+                    />
                   </div>
                 )}
               </div>
@@ -207,31 +191,17 @@ const styles = {
   },
   imageGallery: {
     display: 'flex',
-    gap: '1rem',
+    gap: '2rem',
+    justifyContent: 'space-between',
     marginTop: '2rem',
     width: '100%',
-    alignItems: 'center',
   },
-  degreeImageContainer: {
-    flexShrink: 0,
-    width: '725px',
-  },
-  degreeImage: {
-    width: '100%',
+  galleryImage: {
+    width: 'calc(50% - 1rem)',
     height: 'auto',
     borderRadius: '8px',
     border: '2px solid #dcccbd',
-  },
-  sowerImageContainer: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  sowerImage: {
-    width: '100%',
     objectFit: 'cover',
-    borderRadius: '8px',
-    border: '2px solid #dcccbd',
   },
   contentWrapper: {
     display: 'flex',
@@ -343,36 +313,22 @@ styleTag.textContent = `
     }
 
     #education .imageGallery {
-      flex-direction: column !important;
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
       gap: 0.5rem !important;
-      margin-top: 1rem !important;
-      align-items: center !important;
+      margin-top: 0.5rem !important;
+      padding: 0 0.5rem !important;
+      justify-content: center !important;
     }
 
-    #education .degreeImageContainer {
-      width: 90% !important;
-      max-width: 250px !important;
-    }
-
-    #education .degreeImage {
-      width: 100% !important;
-      border-radius: 0.5rem !important;
-      border-width: 1px !important;
-      max-height: 160px !important;
+    #education .gallery-image {
+      width: calc(50% - 0.5rem) !important;
+      max-width: 200px !important;
+      height: 120px !important;
       object-fit: contain !important;
-    }
-
-    #education .sowerImageContainer {
-      width: 90% !important;
-      max-width: 250px !important;
-    }
-
-    #education .sowerImage {
-      width: 100% !important;
-      border-radius: 0.5rem !important;
+      margin: 0 !important;
+      border-radius: 4px !important;
       border-width: 1px !important;
-      max-height: 160px !important;
-      object-fit: contain !important;
     }
 
     #education .contentWrapper {
