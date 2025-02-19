@@ -49,7 +49,7 @@ function HeroSection() {
   }, []);
 
   async function askLLM(prompt) {
-    const response = await fetch("https://personal-llm.onrender.com/ask", {
+    const response = await fetch("https://personal-llm-1.onrender.com/ask", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
@@ -62,7 +62,8 @@ function HeroSection() {
     });
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => null);
+      throw new Error(errorData?.detail || `HTTP error! status: ${response.status}`);
     }
     
     const data = await response.json();
