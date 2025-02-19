@@ -45,7 +45,7 @@ function AboutSection() {
         newFlipped[index] = !newFlipped[index];
         return newFlipped;
       });
-    }, 300);
+    }, 500);
 
     // Final stage: Return to normal size
     setTimeout(() => {
@@ -53,7 +53,7 @@ function AboutSection() {
         ...prev,
         [index]: 'normal'
       }));
-    }, 600);
+    }, 1000);
   };
 
   const interests = [
@@ -269,10 +269,10 @@ function AboutSection() {
                               ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1) rotateY(180deg)'
                               : 'translate3d(0, 0, 0)'
                           }`,
-                          transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                          transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                           boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
-                            ? '0 16px 32px rgba(0,0,0,0.3)'
-                            : 'none'
+                            ? '0 16px 32px rgba(0,0,0,0.5), 0 0 0 2px #dcccbd'
+                            : '0 0 0 2px #dcccbd'
                         }}
                         onClick={() => handleCardClick(index)}
                         onMouseEnter={() => !isMobile && setHoveredCard(index)}
@@ -443,15 +443,14 @@ const styles = {
     height: '100%',
     cursor: 'pointer',
     transformStyle: 'preserve-3d',
-    transition: 'transform 0.4s ease-in-out',
+    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   cardFront: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
+    backgroundColor: '#333840',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
@@ -462,8 +461,7 @@ const styles = {
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
+    backgroundColor: '#333840',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
