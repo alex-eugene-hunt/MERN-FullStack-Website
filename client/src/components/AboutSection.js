@@ -261,15 +261,11 @@ function AboutSection() {
                               ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
                               : ''
                           } ${
-                            flippedCards[index] || (!isMobile && hoveredCard === index)
-                              ? 'rotateY(180deg)'
-                              : ''
-                          } ${
                             !isMobile && hoveredCard === index
                               ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
                               : 'translate3d(0, 0, 0)'
                           }`,
-                          transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                          transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                           boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
                             ? '0 16px 32px rgba(0,0,0,0.3)'
                             : 'none'
@@ -282,7 +278,8 @@ function AboutSection() {
                           ...styles.cardFront,
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
                             ? 'rotateY(180deg)'
-                            : 'rotateY(0deg)'
+                            : 'rotateY(0deg)',
+                          opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 0 : 1,
                         }}>
                           <div style={styles.contentWrapper}>
                             <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
@@ -292,8 +289,9 @@ function AboutSection() {
                         <div style={{
                           ...styles.cardBack,
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
-                            ? 'rotateY(360deg)'
-                            : 'rotateY(180deg)'
+                            ? 'rotateY(0deg)'
+                            : 'rotateY(-180deg)',
+                          opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 1 : 0,
                         }}>
                           <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
@@ -453,7 +451,7 @@ const styles = {
     height: '100%',
     cursor: 'pointer',
     transformStyle: 'preserve-3d',
-    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     borderRadius: '1rem',
     backgroundColor: '#434a54',
     perspective: 1000,
@@ -470,7 +468,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   cardBack: {
     position: 'absolute',
@@ -485,7 +483,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1rem',
-    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   contentWrapper: {
     display: 'flex',
