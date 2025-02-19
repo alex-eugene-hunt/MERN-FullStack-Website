@@ -52,7 +52,7 @@ function SendEmailForm() {
           }}
           style={styles.input}
           pattern=".*"
-          title="Any text is allowed, including spaces"
+          title="Ask me anything!"
           required
         />
         <div style={styles.messageContainer}>
@@ -68,8 +68,14 @@ function SendEmailForm() {
             title="Any text is allowed, including spaces"
             required
           />
-          <button type="submit" style={styles.button}>
-            {sent ? '  ✔  ' : 'SEND?'}
+          <button 
+            type="submit" 
+            style={{
+              ...styles.button,
+              backgroundColor: sent ? '#6aa84f' : '#b14b32'
+            }}
+          >
+            {sent ? '  ✔  ' : 'SEND'}
           </button>
         </div>
       </form>
@@ -113,6 +119,7 @@ const styles = {
     fontSize: '0.9rem',
     color: '#434a54',
     fontFamily: '"Montserrat", sans-serif',
+    fontWeight: '600',
   },
   messageContainer: {
     position: 'relative',
@@ -132,12 +139,13 @@ const styles = {
     flex: 1,
     resize: 'none',
     fontFamily: '"Montserrat", sans-serif',
+    fontWeight: '600',
   },
   button: {
     position: 'absolute',
     bottom: '0.5rem',
     right: '0.5rem',
-    backgroundColor: '#d4996f',
+    backgroundColor: '#b14b32',
     border: 'none',
     /**
      * The border radius of the button, given as a string representing the desired
@@ -147,8 +155,9 @@ const styles = {
     padding: '0.4rem 0.8rem',
     cursor: 'pointer',
     fontSize: '0.9rem',
-    color: '#434a54',
-    fontFamily: '"Montserrat", sans-serif',
+    color: '#dcccbd',
+    fontFamily: '"Faster One", cursive',
+    fontWeight: '600',
   },
 };
 

@@ -109,33 +109,44 @@
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
+  .nav-wrap {
+    min-height: 20vh;
+    padding: 1rem 0;
+  }
+
   .nav-list {
-    flex-wrap: wrap;
-    gap: 2rem;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
   }
   
   .nav-item {
-    width: 8em;
+    width: 4em;
   }
   
   .nav-item.hover {
-    width: 10em;
+    width: 4.5em;
   }
   
   .nav-item.sibling-close {
-    width: 9em;
+    width: 4em;
   }
   
   .nav-item.sibling-far {
-    width: 8.5em;
+    width: 4em;
   }
   
   .icon-container {
-    width: 120px;
-    height: 120px;
+    width: 50px;
+    height: 50px;
+    border-width: 2px;
   }
   
   .social-icon {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .nav-item__tooltip {
+    font-size: 0.9em;
+    padding: 0.4em 0.8em;
   }
 }
