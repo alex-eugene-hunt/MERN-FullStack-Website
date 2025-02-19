@@ -271,8 +271,8 @@ function AboutSection() {
                           }`,
                           transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                           boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
-                            ? '0 16px 32px rgba(0,0,0,0.5), 0 0 0 2px #dcccbd'
-                            : '0 0 0 2px #dcccbd'
+                            ? '0 16px 32px rgba(0,0,0,0.3)'
+                            : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
                         onMouseEnter={() => !isMobile && setHoveredCard(index)}
@@ -444,13 +444,17 @@ const styles = {
     cursor: 'pointer',
     transformStyle: 'preserve-3d',
     transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    borderRadius: '1rem',
+    backgroundColor: '#434a54',
+    overflow: 'hidden',
   },
   cardFront: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#333840',
+    backgroundColor: '#434a54',
+    border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
@@ -461,7 +465,8 @@ const styles = {
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
-    backgroundColor: '#333840',
+    backgroundColor: '#434a54',
+    border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
