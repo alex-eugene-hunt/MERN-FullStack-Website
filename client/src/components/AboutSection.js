@@ -10,6 +10,8 @@ function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [flippedCards, setFlippedCards] = useState([]);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [cardAnimationStates, setCardAnimationStates] = useState({});
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
   useEffect(() => {
@@ -18,6 +20,41 @@ function AboutSection() {
     }, 5000);
     return () => clearInterval(timer);
   }, [photos.length]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleCardClick = (index) => {
+    if (!isMobile) return; // Only handle clicks on mobile
+
+    // First stage: Lift and scale up
+    setCardAnimationStates(prev => ({
+      ...prev,
+      [index]: 'lifting'
+    }));
+
+    // Second stage: Flip
+    setTimeout(() => {
+      setFlippedCards(prev => {
+        const newFlipped = [...prev];
+        newFlipped[index] = !newFlipped[index];
+        return newFlipped;
+      });
+    }, 300);
+
+    // Final stage: Return to normal size
+    setTimeout(() => {
+      setCardAnimationStates(prev => ({
+        ...prev,
+        [index]: 'normal'
+      }));
+    }, 600);
+  };
 
   const interests = [
     { 
@@ -66,14 +103,6 @@ function AboutSection() {
       description: 'I enjoy both freshwater and saltwater fishing.'
     },
   ];
-
-  const handleCardClick = (index) => {
-    setFlippedCards(prev => {
-      const newFlipped = [...prev];
-      newFlipped[index] = !newFlipped[index];
-      return newFlipped;
-    });
-  };
 
   const quickFacts = [
     { icon: <FaUser />, label: 'Full Name', value: 'Alex Eugene Hunt' },
@@ -227,19 +256,27 @@ function AboutSection() {
                       <div 
                         style={{
                           ...styles.interestItem,
-                          transform: flippedCards[index] 
-                            ? 'translate3d(0, -8px, 0) rotateY(180deg)' 
-                            : hoveredCard === index 
-                              ? 'translate3d(0, -8px, 0)' 
-                              : 'translate3d(0, 0, 0)',
-                              transition: 'transform 0.4s ease-in-out',
-                              boxShadow: (hoveredCard === index || flippedCards[index]) 
-                                ? '0 12px 24px rgba(0,0,0,0.3)' 
-                                : 'none'
+                          transform: `${
+                            cardAnimationStates[index] === 'lifting'
+                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
+                              : ''
+                          } ${
+                            flippedCards[index]
+                              ? 'rotateY(180deg)'
+                              : ''
+                          } ${
+                            !isMobile && hoveredCard === index
+                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1) rotateY(180deg)'
+                              : 'translate3d(0, 0, 0)'
+                          }`,
+                          transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                          boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
+                            ? '0 16px 32px rgba(0,0,0,0.3)'
+                            : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
-                        onMouseEnter={() => !flippedCards[index] && setHoveredCard(index)}
-                        onMouseLeave={() => setHoveredCard(null)}
+                        onMouseEnter={() => !isMobile && setHoveredCard(index)}
+                        onMouseLeave={() => !isMobile && setHoveredCard(null)}
                       >
                         <div style={styles.cardFront}>
                           <div style={styles.contentWrapper}>
@@ -415,7 +452,7 @@ const styles = {
     backfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
     border: '2px solid #dcccbd',
-    borderRadius: '0.5rem',
+    borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -427,11 +464,12 @@ const styles = {
     backfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
     border: '2px solid #dcccbd',
-    borderRadius: '0.5rem',
+    borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transform: 'rotateY(180deg)',
+    padding: '1rem',
   },
   contentWrapper: {
     display: 'flex',
