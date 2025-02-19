@@ -279,8 +279,7 @@ function AboutSection() {
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
                             ? 'rotateY(180deg)'
                             : 'rotateY(0)',
-                          opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 0 : 1,
-                          visibility: flippedCards[index] || (!isMobile && hoveredCard === index) ? 'hidden' : 'visible',
+                          zIndex: flippedCards[index] || (!isMobile && hoveredCard === index) ? 1 : 2,
                         }}>
                           <div style={styles.contentWrapper}>
                             <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
@@ -292,8 +291,7 @@ function AboutSection() {
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
                             ? 'rotateY(0)'
                             : 'rotateY(180deg)',
-                          opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 1 : 0,
-                          visibility: flippedCards[index] || (!isMobile && hoveredCard === index) ? 'visible' : 'hidden',
+                          zIndex: flippedCards[index] || (!isMobile && hoveredCard === index) ? 2 : 1,
                         }}>
                           <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
@@ -460,6 +458,8 @@ const styles = {
   },
   cardFront: {
     position: 'absolute',
+    top: 0,
+    left: 0,
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
@@ -470,12 +470,15 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     transformOrigin: 'center',
     transform: 'rotateY(0)',
+    zIndex: 2,
   },
   cardBack: {
     position: 'absolute',
+    top: 0,
+    left: 0,
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
@@ -487,9 +490,10 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1rem',
-    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     transformOrigin: 'center',
     transform: 'rotateY(180deg)',
+    zIndex: 1,
   },
   contentWrapper: {
     display: 'flex',
