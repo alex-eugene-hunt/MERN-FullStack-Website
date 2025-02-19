@@ -253,47 +253,52 @@ function AboutSection() {
                 <div style={styles.interestsGrid} className="interests-grid">
                   {interests.map((interest, index) => (
                     <div key={index} style={styles.interestItemContainer}>
-                      <div 
-                        style={{
-                          ...styles.interestItem,
-                          transform: `${
-                            cardAnimationStates[index] === 'lifting'
-                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
-                              : ''
-                          } ${
-                            !isMobile && hoveredCard === index
-                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
-                              : 'translate3d(0, 0, 0)'
-                          }`,
-                          transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                          boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
-                            ? '0 16px 32px rgba(0,0,0,0.3)'
-                            : 'none'
-                        }}
-                        onClick={() => handleCardClick(index)}
-                        onMouseEnter={() => !isMobile && setHoveredCard(index)}
-                        onMouseLeave={() => !isMobile && setHoveredCard(null)}
-                      >
-                        <div style={{
-                          ...styles.cardFront,
-                          transform: flippedCards[index] || (!isMobile && hoveredCard === index)
-                            ? 'rotateY(180deg)'
-                            : 'rotateY(0)',
-                          zIndex: flippedCards[index] || (!isMobile && hoveredCard === index) ? 1 : 2,
-                        }}>
-                          <div style={styles.contentWrapper}>
-                            <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
-                            <span style={styles.interestLabel} className="interest-label">{interest.label}</span>
+                      <div style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '100%',
+                        perspective: 1500,
+                      }}>
+                        <div 
+                          style={{
+                            ...styles.interestItem,
+                            transform: `${
+                              cardAnimationStates[index] === 'lifting'
+                                ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
+                                : ''
+                            } ${
+                              !isMobile && hoveredCard === index
+                                ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
+                                : 'translate3d(0, 0, 0)'
+                            }`,
+                            boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting')
+                              ? '0 16px 32px rgba(0,0,0,0.3)'
+                              : 'none'
+                          }}
+                          onClick={() => handleCardClick(index)}
+                          onMouseEnter={() => !isMobile && setHoveredCard(index)}
+                          onMouseLeave={() => !isMobile && setHoveredCard(null)}
+                        >
+                          <div style={{
+                            position: 'relative',
+                            width: '100%',
+                            height: '100%',
+                            transformStyle: 'preserve-3d',
+                            transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            transform: flippedCards[index] || (!isMobile && hoveredCard === index)
+                              ? 'rotateY(180deg)'
+                              : 'rotateY(0)',
+                          }}>
+                            <div style={styles.cardFront}>
+                              <div style={styles.contentWrapper}>
+                                <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
+                                <span style={styles.interestLabel} className="interest-label">{interest.label}</span>
+                              </div>
+                            </div>
+                            <div style={styles.cardBack}>
+                              <p style={styles.description} className="interest-description">{interest.description}</p>
+                            </div>
                           </div>
-                        </div>
-                        <div style={{
-                          ...styles.cardBack,
-                          transform: flippedCards[index] || (!isMobile && hoveredCard === index)
-                            ? 'rotateY(0)'
-                            : 'rotateY(180deg)',
-                          zIndex: flippedCards[index] || (!isMobile && hoveredCard === index) ? 2 : 1,
-                        }}>
-                          <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
                       </div>
                     </div>
@@ -450,11 +455,9 @@ const styles = {
     width: '100%',
     height: '100%',
     cursor: 'pointer',
-    transformStyle: 'preserve-3d',
     transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     borderRadius: '1rem',
     backgroundColor: '#434a54',
-    perspective: 1500,
   },
   cardFront: {
     position: 'absolute',
@@ -470,10 +473,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    transformOrigin: 'center',
-    transform: 'rotateY(0)',
-    zIndex: 2,
   },
   cardBack: {
     position: 'absolute',
@@ -489,11 +488,8 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '1rem',
-    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    transformOrigin: 'center',
     transform: 'rotateY(180deg)',
-    zIndex: 1,
+    padding: '1rem',
   },
   contentWrapper: {
     display: 'flex',
