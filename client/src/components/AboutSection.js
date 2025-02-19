@@ -261,12 +261,12 @@ function AboutSection() {
                               ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
                               : ''
                           } ${
-                            flippedCards[index]
+                            flippedCards[index] || (!isMobile && hoveredCard === index)
                               ? 'rotateY(180deg)'
                               : ''
                           } ${
                             !isMobile && hoveredCard === index
-                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1) rotateY(180deg)'
+                              ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
                               : 'translate3d(0, 0, 0)'
                           }`,
                           transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
@@ -278,7 +278,12 @@ function AboutSection() {
                         onMouseEnter={() => !isMobile && setHoveredCard(index)}
                         onMouseLeave={() => !isMobile && setHoveredCard(null)}
                       >
-                        <div style={styles.cardFront}>
+                        <div style={{
+                          ...styles.cardFront,
+                          transform: flippedCards[index] || (!isMobile && hoveredCard === index)
+                            ? 'rotateY(180deg)'
+                            : 'rotateY(0deg)'
+                        }}>
                           <div style={styles.contentWrapper}>
                             <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
                             <span style={styles.interestLabel} className="interest-label">{interest.label}</span>
@@ -286,7 +291,9 @@ function AboutSection() {
                         </div>
                         <div style={{
                           ...styles.cardBack,
-                          transform: 'rotateY(180deg)',
+                          transform: flippedCards[index] || (!isMobile && hoveredCard === index)
+                            ? 'rotateY(360deg)'
+                            : 'rotateY(180deg)'
                         }}>
                           <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
@@ -449,7 +456,6 @@ const styles = {
     transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     borderRadius: '1rem',
     backgroundColor: '#434a54',
-    overflow: 'hidden',
     perspective: 1000,
   },
   cardFront: {
@@ -457,13 +463,14 @@ const styles = {
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
+    WebkitBackfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
     border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    WebkitBackfaceVisibility: 'hidden',
+    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   cardBack: {
     position: 'absolute',
@@ -478,6 +485,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1rem',
+    transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   contentWrapper: {
     display: 'flex',
