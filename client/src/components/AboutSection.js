@@ -261,7 +261,14 @@ function AboutSection() {
                       }}>
                         <div 
                           style={{
-                            ...styles.interestItem,
+                            position: 'relative',
+                            width: '100%',
+                            height: '100%',
+                            cursor: 'pointer',
+                            transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            WebkitTransition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            borderRadius: '1rem',
+                            backgroundColor: '#434a54',
                             transform: `${
                               cardAnimationStates[index] === 'lifting'
                                 ? 'translate3d(0, -16px, 0) scale3d(1.2, 1.2, 1)'
@@ -284,8 +291,13 @@ function AboutSection() {
                             width: '100%',
                             height: '100%',
                             transformStyle: 'preserve-3d',
+                            WebkitTransformStyle: 'preserve-3d',
                             transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                            WebkitTransition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                             transform: flippedCards[index] || (!isMobile && hoveredCard === index)
+                              ? 'rotateY(180deg)'
+                              : 'rotateY(0)',
+                            WebkitTransform: flippedCards[index] || (!isMobile && hoveredCard === index)
                               ? 'rotateY(180deg)'
                               : 'rotateY(0)',
                           }}>
@@ -456,6 +468,7 @@ const styles = {
     height: '100%',
     cursor: 'pointer',
     transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    WebkitTransition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     borderRadius: '1rem',
     backgroundColor: '#434a54',
   },
@@ -467,12 +480,16 @@ const styles = {
     height: '100%',
     backfaceVisibility: 'hidden',
     WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    WebkitTransform: 'rotateY(0)',
+    transform: 'rotateY(0)',
+    WebkitTransformStyle: 'preserve-3d',
+    transformStyle: 'preserve-3d',
   },
   cardBack: {
     position: 'absolute',
@@ -482,14 +499,17 @@ const styles = {
     height: '100%',
     backfaceVisibility: 'hidden',
     WebkitBackfaceVisibility: 'hidden',
+    MozBackfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
-    border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     transform: 'rotateY(180deg)',
+    WebkitTransform: 'rotateY(180deg)',
     padding: '1rem',
+    WebkitTransformStyle: 'preserve-3d',
+    transformStyle: 'preserve-3d',
   },
   contentWrapper: {
     display: 'flex',
