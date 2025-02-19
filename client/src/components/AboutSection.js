@@ -188,14 +188,14 @@ function AboutSection() {
               <div style={{...styles.gridBox, backgroundColor: '#434a54', border: '2px solid #dcccbd'}}>
                 <div style={styles.bioContent} className="bio-content">
                   <p style={styles.paragraph} className="bio-paragraph">
-                    I'm Alex, a passionate software engineer with a deep love for creating innovative solutions 
-                    through code. My journey in software development has led me to specialize in full-stack 
-                    development using the MERN (MongoDB, Express.js, React, Node.js) stack.
+                    Hello! 👋🏻 My name is Alex Hunt. This is my personal portfolio website built from scratch. 
+                    Please visit on desktop for more content and please try to get a highscore on Asteroids!
+                    Right now I am searching for a job in the tech industry, looking for a position as a Software Engineer or Data Scientist.
                   </p>
                   <p style={styles.paragraph} className="bio-paragraph">
-                    What drives me is the opportunity to solve complex problems and create meaningful user 
-                    experiences. When I'm not coding, you can find me exploring new technologies, contributing 
-                    to open-source projects, or working on personal projects that challenge my skills.
+                    What drives me is the opportunity to solve complex problems and help solve real-world problems.
+                    I am always looking for new challenges and new things to learn and can easily adapt to any environment.
+                    I enjoy working on projects where I can contribute to the team and learn from my colleagues.
                   </p>
                 </div>
               </div>
