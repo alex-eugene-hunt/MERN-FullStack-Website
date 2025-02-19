@@ -223,9 +223,11 @@ function AboutSection() {
                       <div 
                         style={{
                           ...styles.interestItem,
-                          transform: hoveredCard === index 
-                            ? `translate3d(0, -8px, 0) scale3d(1.15, 1.15, 1) ${flippedCards[index] ? 'rotateY(180deg)' : ''}`
-                            : flippedCards[index] ? 'rotateY(180deg)' : 'translate3d(0, 0, 0)',
+                          transform: flippedCards[index] 
+                            ? 'rotateY(180deg)' 
+                            : hoveredCard === index 
+                              ? 'translate3d(0, -8px, 0) scale3d(1.15, 1.15, 1)'
+                              : 'translate3d(0, 0, 0)',
                           boxShadow: hoveredCard === index ? '0 12px 24px rgba(0,0,0,0.3)' : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
@@ -353,9 +355,10 @@ const styles = {
   },
   quickFactIcon: {
     fontSize: '1.75rem',
-    color: '#b14b32',
     width: '2.5rem',
+    color: '#dcccbd',
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   quickFactContent: {
@@ -366,7 +369,7 @@ const styles = {
   quickFactLabel: {
     fontSize: '0.95rem',
     fontWeight: 'bold',
-    color: '#b14b32',
+    color: '#d4996f',
     fontFamily: 'Montserrat, sans-serif',
     letterSpacing: '0.5px',
   },

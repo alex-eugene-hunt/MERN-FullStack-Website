@@ -157,7 +157,6 @@ const styles = {
     fontSize: '0.9rem',
     color: '#dcccbd',
     fontFamily: '"Faster One", cursive',
-    fontWeight: '600',
   },
 };
 
