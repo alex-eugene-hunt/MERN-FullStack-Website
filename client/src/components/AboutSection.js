@@ -284,7 +284,10 @@ function AboutSection() {
                             <span style={styles.interestLabel} className="interest-label">{interest.label}</span>
                           </div>
                         </div>
-                        <div style={styles.cardBack}>
+                        <div style={{
+                          ...styles.cardBack,
+                          transform: 'rotateY(180deg)',
+                        }}>
                           <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
                       </div>
@@ -447,6 +450,7 @@ const styles = {
     borderRadius: '1rem',
     backgroundColor: '#434a54',
     overflow: 'hidden',
+    perspective: 1000,
   },
   cardFront: {
     position: 'absolute',
@@ -459,19 +463,20 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    WebkitBackfaceVisibility: 'hidden',
   },
   cardBack: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
+    WebkitBackfaceVisibility: 'hidden',
     backgroundColor: '#434a54',
     border: '2px solid #dcccbd',
     borderRadius: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transform: 'rotateY(180deg)',
     padding: '1rem',
   },
   contentWrapper: {
