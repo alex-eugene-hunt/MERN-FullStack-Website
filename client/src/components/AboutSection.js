@@ -232,10 +232,6 @@ function AboutSection() {
                             : hoveredCard === index 
                               ? 'translate3d(0, -8px, 0)' 
                               : 'translate3d(0, 0, 0)',
-                          transition: 'transform 0.4s ease-in-out',
-                          boxShadow: (hoveredCard === index || flippedCards[index]) 
-                            ? '0 12px 24px rgba(0,0,0,0.3)' 
-                            : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
                         onMouseEnter={() => !flippedCards[index] && setHoveredCard(index)}
@@ -401,26 +397,37 @@ const styles = {
     alignItems: 'center',
   },
   interestItem: {
-    position: 'absolute',
+    position: 'relative',
     width: '100%',
     height: '100%',
     cursor: 'pointer',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     transformStyle: 'preserve-3d',
-    perspective: '1000px',
-    backgroundColor: '#434a54',
-    borderRadius: '1rem',
-    border: '2px solid #dcccbd',
+    transition: 'transform 0.4s ease-in-out',
   },
   cardFront: {
     position: 'absolute',
     width: '100%',
     height: '100%',
     backfaceVisibility: 'hidden',
+    backgroundColor: '#434a54',
+    border: '2px solid #dcccbd',
+    borderRadius: '0.5rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '1rem',
+  },
+  cardBack: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    backfaceVisibility: 'hidden',
+    backgroundColor: '#434a54',
+    border: '2px solid #dcccbd',
+    borderRadius: '0.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transform: 'rotateY(180deg)',
   },
   contentWrapper: {
     display: 'flex',
@@ -429,19 +436,6 @@ const styles = {
     justifyContent: 'center',
     gap: '0.5rem',
     transform: 'translateZ(1px)',
-  },
-  cardBack: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    backfaceVisibility: 'hidden',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '1rem',
-    transform: 'rotateY(180deg)',
-    backgroundColor: '#434a54',
-    borderRadius: '1rem',
   },
   interestIcon: {
     fontSize: '2rem',

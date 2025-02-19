@@ -147,17 +147,23 @@ const styles = {
     right: '0.5rem',
     backgroundColor: '#b14b32',
     border: 'none',
-    /**
-     * The border radius of the button, given as a string representing the desired
-     * radius in pixels (e.g. '20px').
-     */
-    borderRadius: '20px',
-    padding: '0.4rem 0.8rem',
+    borderRadius: '0.5rem',
+    padding: '0.6rem 1.2rem',
     cursor: 'pointer',
-    fontSize: '0.9rem',
+    fontSize: '1.1rem',
     color: '#dcccbd',
     fontFamily: '"Faster One", cursive',
     fontWeight: 'normal',
+    transition: 'transform 0.2s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.05)',
+    },
+  },
+  '@media (max-width: 768px)': {
+    button: {
+      padding: '0.4rem 0.8rem',
+      fontSize: '0.9rem',
+    },
   },
 };
 
