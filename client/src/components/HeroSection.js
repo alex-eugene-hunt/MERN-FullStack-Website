@@ -14,6 +14,8 @@ function HeroSection() {
   const vantaRef = useRef(null);
   const [question, setQuestion] = useState('');
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
@@ -47,24 +49,37 @@ function HeroSection() {
   }, []);
 
   async function askLLM(prompt) {
-    const response = await fetch("http://localhost:8000/inference", {
+    const response = await fetch("https://alexai-api.onrender.com/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: prompt })
+      body: JSON.stringify({ 
+        text: prompt,
+        conversation_id: Date.now().toString() // Generate a unique conversation ID
+      })
     });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     const data = await response.json();
-    return data.response;
+    return data.answer;
   }
 
-  async function handleAskQuestion() {
+  async function handleAskQuestion(e) {
+    e?.preventDefault(); // Prevent form submission if called from form
+    if (!question.trim()) return;
+    
     try {
+      setIsLoading(true);
+      setError(null);
       setDisplayedAnswer('AlexAI is thinking...');
       
       const answer = await askLLM(question);
       
       // Start typing effect
       let currentIndex = 0;
-      const typingSpeed = 50; // milliseconds per character
+      const typingSpeed = 30; // milliseconds per character
       const prefix = 'AlexAI says: ';
       setDisplayedAnswer(prefix); // Start with just the prefix
 
@@ -74,14 +89,24 @@ function HeroSection() {
           currentIndex++;
         } else {
           clearInterval(intervalId);
+          setIsLoading(false);
         }
       }, typingSpeed);
 
     } catch (error) {
       console.error('Error fetching the model response:', error);
-      setDisplayedAnswer('Error: ' + (error.message || 'Unable to get a response from the model.'));
+      setError(error.message || 'Unable to get a response. Please try again.');
+      setDisplayedAnswer('Error: ' + (error.message || 'Unable to get a response. Please try again.'));
+      setIsLoading(false);
     }
   }
+
+  // Handle Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !isLoading) {
+      handleAskQuestion();
+    }
+  };
 
   return (
     <div style={styles.pageContainer}>
@@ -140,6 +165,8 @@ function HeroSection() {
                 placeholder="What do you want to know?"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
+                onKeyPress={handleKeyPress}
+                disabled={isLoading}
                 style={{
                   ...styles.input,
                   width: '100%',
@@ -152,36 +179,47 @@ function HeroSection() {
                   fontWeight: '600',
                   boxSizing: 'border-box',
                   outline: 'none',
-                  border: 'none'
+                  border: 'none',
+                  opacity: isLoading ? 0.7 : 1,
                 }}
               />
-              <button onClick={handleAskQuestion} style={{
-                position: 'absolute',
-                right: '5px',
-                backgroundColor: '#b14b32',
-                color: '#dcccbd',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '4px 12px',
-                height: '25px',
-                cursor: 'pointer',
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: '600'
-              }}>
-                ASK
+              <button 
+                onClick={handleAskQuestion} 
+                disabled={isLoading || !question.trim()}
+                style={{
+                  position: 'absolute',
+                  right: '5px',
+                  backgroundColor: isLoading ? '#666' : '#b14b32',
+                  color: '#dcccbd',
+                  border: 'none',
+                  borderRadius: '10px',
+                  padding: '4px 12px',
+                  height: '25px',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: '600',
+                  opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {isLoading ? '...' : 'ASK'}
               </button>
             </div>
             <div style={{
               width: '80%',
               margin: '10px auto',
               backgroundColor: '#dcccbd',
-              padding: '0.5rem',
+              padding: '1rem',
               borderRadius: '10px',
               minHeight: '240px',
+              maxHeight: '240px',
+              overflowY: 'auto',
               fontFamily: 'Montserrat, sans-serif',
-              fontWeight: '600',
-              color: '#434a54',
-              boxSizing: 'border-box'
+              fontSize: '14px',
+              lineHeight: '1.5',
+              color: error ? '#b14b32' : '#434a54',
+              whiteSpace: 'pre-wrap',
+              scrollBehavior: 'smooth'
             }}>
               {displayedAnswer}
             </div>
