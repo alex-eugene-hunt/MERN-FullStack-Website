@@ -49,12 +49,15 @@ function HeroSection() {
   }, []);
 
   async function askLLM(prompt) {
-    const response = await fetch("https://alexai-api.onrender.com/ask", {
+    const response = await fetch("https://personal-llm.onrender.com/ask", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
       body: JSON.stringify({ 
         text: prompt,
-        conversation_id: Date.now().toString() // Generate a unique conversation ID
+        conversation_id: Date.now().toString()
       })
     });
     
