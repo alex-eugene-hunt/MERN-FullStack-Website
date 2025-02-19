@@ -65,7 +65,7 @@ function SendEmailForm() {
             }}
             style={styles.textarea}
             pattern=".*"
-            title="Any text is allowed, including spaces"
+            title="Messages sent to alex.eugene.hunt@gmail.com"
             required
           />
           <button 

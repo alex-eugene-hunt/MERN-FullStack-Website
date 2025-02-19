@@ -232,6 +232,10 @@ function AboutSection() {
                             : hoveredCard === index 
                               ? 'translate3d(0, -8px, 0)' 
                               : 'translate3d(0, 0, 0)',
+                              transition: 'transform 0.4s ease-in-out',
+                              boxShadow: (hoveredCard === index || flippedCards[index]) 
+                                ? '0 12px 24px rgba(0,0,0,0.3)' 
+                                : 'none'
                         }}
                         onClick={() => handleCardClick(index)}
                         onMouseEnter={() => !flippedCards[index] && setHoveredCard(index)}
