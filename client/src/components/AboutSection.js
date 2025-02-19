@@ -278,8 +278,9 @@ function AboutSection() {
                           ...styles.cardFront,
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
                             ? 'rotateY(180deg)'
-                            : 'rotateY(0deg)',
+                            : 'rotateY(0)',
                           opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 0 : 1,
+                          visibility: flippedCards[index] || (!isMobile && hoveredCard === index) ? 'hidden' : 'visible',
                         }}>
                           <div style={styles.contentWrapper}>
                             <div style={styles.interestIcon} className="interest-icon">{interest.icon}</div>
@@ -289,9 +290,10 @@ function AboutSection() {
                         <div style={{
                           ...styles.cardBack,
                           transform: flippedCards[index] || (!isMobile && hoveredCard === index)
-                            ? 'rotateY(0deg)'
-                            : 'rotateY(-180deg)',
+                            ? 'rotateY(0)'
+                            : 'rotateY(180deg)',
                           opacity: flippedCards[index] || (!isMobile && hoveredCard === index) ? 1 : 0,
+                          visibility: flippedCards[index] || (!isMobile && hoveredCard === index) ? 'visible' : 'hidden',
                         }}>
                           <p style={styles.description} className="interest-description">{interest.description}</p>
                         </div>
@@ -454,7 +456,7 @@ const styles = {
     transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     borderRadius: '1rem',
     backgroundColor: '#434a54',
-    perspective: 1000,
+    perspective: 1500,
   },
   cardFront: {
     position: 'absolute',
@@ -469,6 +471,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transformOrigin: 'center',
+    transform: 'rotateY(0)',
   },
   cardBack: {
     position: 'absolute',
@@ -484,6 +488,8 @@ const styles = {
     justifyContent: 'center',
     padding: '1rem',
     transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    transformOrigin: 'center',
+    transform: 'rotateY(180deg)',
   },
   contentWrapper: {
     display: 'flex',
