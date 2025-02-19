@@ -8,9 +8,8 @@ import AboutMe5 from '../assets/AboutMe_5.jpg';
 
 function AboutSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [flippedCards, setFlippedCards] = useState({});
+  const [flippedCards, setFlippedCards] = useState([]);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [cardAnimationStates, setCardAnimationStates] = useState({});
   const photos = [AboutMe1, AboutMe2, AboutMe3, AboutMe4, AboutMe5];
 
   useEffect(() => {
@@ -69,28 +68,11 @@ function AboutSection() {
   ];
 
   const handleCardClick = (index) => {
-    // First stage: Lift up
-    setCardAnimationStates(prev => ({
-      ...prev,
-      [index]: 'lifting'
-    }));
-
-    // Second stage: Flip (after lifting)
-    setTimeout(() => {
-      setFlippedCards(prev => {
-        const newFlipped = [...prev];
-        newFlipped[index] = !newFlipped[index];
-        return newFlipped;
-      });
-    }, 150);
-
-    // Final stage: Lower back down
-    setTimeout(() => {
-      setCardAnimationStates(prev => ({
-        ...prev,
-        [index]: 'normal'
-      }));
-    }, 600);
+    setFlippedCards(prev => {
+      const newFlipped = [...prev];
+      newFlipped[index] = !newFlipped[index];
+      return newFlipped;
+    });
   };
 
   const quickFacts = [
@@ -245,21 +227,13 @@ function AboutSection() {
                       <div 
                         style={{
                           ...styles.interestItem,
-                          transform: `${
-                            cardAnimationStates[index] === 'lifting' 
-                              ? 'translate3d(0, -8px, 0) scale3d(1.15, 1.15, 1)' 
-                              : ''
-                          } ${
-                            flippedCards[index] 
-                              ? 'rotateY(180deg)' 
-                              : ''
-                          } ${
-                            hoveredCard === index && !flippedCards[index]
-                              ? 'translate3d(0, -8px, 0) scale3d(1.15, 1.15, 1)'
-                              : 'translate3d(0, 0, 0)'
-                          }`,
-                          transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                          boxShadow: (hoveredCard === index || cardAnimationStates[index] === 'lifting') 
+                          transform: flippedCards[index] 
+                            ? 'translate3d(0, -8px, 0) rotateY(180deg)' 
+                            : hoveredCard === index 
+                              ? 'translate3d(0, -8px, 0)' 
+                              : 'translate3d(0, 0, 0)',
+                          transition: 'transform 0.4s ease-in-out',
+                          boxShadow: (hoveredCard === index || flippedCards[index]) 
                             ? '0 12px 24px rgba(0,0,0,0.3)' 
                             : 'none'
                         }}
@@ -389,7 +363,7 @@ const styles = {
   quickFactIcon: {
     fontSize: '1.75rem',
     width: '2.5rem',
-    color: '#dcccbd',
+    color: '#d4996f',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
