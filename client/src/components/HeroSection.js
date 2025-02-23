@@ -279,12 +279,27 @@ function HeroSection() {
         min-height: 400px !important;
       }
 
+      .hero-box.contact-box input[type="email"] {
+        width: 100% !important;
+        height: 40px !important;
+        margin-bottom: 1rem !important;
+        padding: 0.5rem !important;
+        font-size: 16px !important;
+      }
+
       .llm-box {
         width: 90% !important;
         max-width: 450px !important;
         margin: 0.5rem auto !important;
         height: auto !important;
-        min-height: 400px !important;
+        min-height: 300px !important;
+      }
+
+      .llm-box .answer-container {
+        max-height: 100px !important;
+        overflow-y: auto !important;
+        margin-top: 1rem !important;
+        padding: 0.5rem !important;
       }
     }
   `;
@@ -531,7 +546,7 @@ function HeroSection() {
           )}
 
           {/* Box 3: Game */}
-          <div style={{...styles.box, backgroundColor: '#dcccbd'}} className="hero-box game-box">
+          <div style={{...styles.box, backgroundColor: '#ffffff'}} className="hero-box game-box">
             <AsteroidsGame />
           </div>
         </div>
