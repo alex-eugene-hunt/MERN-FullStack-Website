@@ -277,20 +277,6 @@ function HeroSection() {
       .hero-box.contact-box {
         height: auto !important;
         min-height: 400px !important;
-        display: flex !important;
-        flex-direction: column !important;
-      }
-
-      .hero-box.contact-box form {
-        display: flex !important;
-        flex-direction: column !important;
-        height: 100% !important;
-      }
-
-      .hero-box.contact-box textarea {
-        flex-grow: 1 !important;
-        margin-top: 1rem !important;
-        min-height: 150px !important;
       }
 
       .hero-box.contact-box input[type="email"] {
@@ -307,21 +293,25 @@ function HeroSection() {
         margin: 0.5rem auto !important;
         height: auto !important;
         min-height: 300px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: space-between !important;
-        padding: 1rem !important;
       }
 
-      .llm-box .question-container {
-        margin-bottom: 2rem !important;
-      }
-
-      .llm-box .answer-container {
+      .llm-box .answer-box {
         max-height: 100px !important;
         overflow-y: auto !important;
-        margin-top: auto !important;
+        margin: 1rem 0 2rem 0 !important;
         padding: 0.5rem !important;
+      }
+
+      .hero-box.contact-box form {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        justify-content: space-between !important;
+      }
+
+      .hero-box.contact-box textarea {
+        min-height: 150px !important;
+        margin-bottom: 0.5rem !important;
       }
     }
   `;
