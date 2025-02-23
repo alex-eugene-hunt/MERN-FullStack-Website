@@ -218,14 +218,6 @@ function HeroSection() {
   const styleTag = document.createElement('style');
   styleTag.textContent = `
     @media (max-width: 768px) {
-      .page-container {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        min-height: 100vh;
-        position: relative;
-      }
-
       .navbar-container {
         height: auto !important;
       }
@@ -241,7 +233,6 @@ function HeroSection() {
         padding: 0 0.5rem 0.5rem !important;
         text-align: center !important;
         margin-top: 0 !important;
-        margin-bottom: 2rem !important;
       }
 
       .contentWrapper {
@@ -268,47 +259,32 @@ function HeroSection() {
         align-items: center !important;
         width: 100% !important;
         padding: 0.5rem !important;
-        gap: 1rem !important;
+        gap: 0 !important;
         margin-top: 0.5rem !important;
       }
 
-      .mobile-gallery {
-        width: 100% !important;
-        max-width: 450px !important;
-        margin: 0 auto !important;
-        position: relative;
-        touch-action: pan-y pinch-zoom;
-        height: 500px !important;
-        overflow: hidden !important;
-      }
-
-      .gallery-track {
-        display: flex !important;
-        height: 100% !important;
-        width: 200% !important;
-      }
-
-      .gallery-slide {
-        flex: 0 0 50% !important;
-        width: 50% !important;
-        height: 100% !important;
-      }
-
       .hero-box {
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
-        border-radius: 10px !important;
-      }
-
-      .llm-box, .contact-box {
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
+        width: 90% !important;
+        max-width: 450px !important;
+        margin: 0.5rem auto !important;
+        flex: none !important;
       }
 
       .game-box {
         display: none !important;
+      }
+
+      .hero-box.contact-box {
+        height: auto !important;
+        min-height: 400px !important;
+      }
+
+      .llm-box {
+        width: 90% !important;
+        max-width: 450px !important;
+        margin: 0.5rem auto !important;
+        height: auto !important;
+        min-height: 400px !important;
       }
     }
   `;
