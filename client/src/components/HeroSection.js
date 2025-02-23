@@ -279,27 +279,9 @@ function HeroSection() {
         min-height: 400px !important;
       }
 
-      .hero-box.contact-box input[type="email"] {
-        width: 100% !important;
-        height: 100% !important;
-        margin-bottom: 1rem !important;
-        padding: 0.5rem !important;
-        font-size: 16px !important;
-      }
-
       .llm-box {
-        width: 90% !important;
-        max-width: 450px !important;
-        margin: 0.5rem auto !important;
         height: auto !important;
         min-height: 400px !important;
-      }
-
-      .llm-box .answer-box {
-        max-height: 100px !important;
-        overflow-y: auto !important;
-        margin-top: 1rem !important;
-        padding: 0.5rem !important;
       }
     }
   `;
