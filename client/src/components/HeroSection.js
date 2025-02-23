@@ -17,6 +17,10 @@ function HeroSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
@@ -140,6 +144,70 @@ function HeroSection() {
     }
   };
 
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isTransitioning) {
+      const swipeThreshold = 50; // minimum distance for a swipe
+      const swipeDistance = touchStart - touchEnd;
+
+      if (Math.abs(swipeDistance) > swipeThreshold) {
+        setIsTransitioning(true);
+        if (swipeDistance > 0) {
+          // Swipe left
+          setCurrentSlide(prev => (prev === 0 ? 1 : 0));
+        } else {
+          // Swipe right
+          setCurrentSlide(prev => (prev === 1 ? 0 : 1));
+        }
+        setTimeout(() => setIsTransitioning(false), 300); // Match transition duration
+      }
+    }
+  };
+
+  const slideStyle = {
+    transform: `translateX(-${currentSlide * 100}%)`,
+    transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
+  };
+
+  const galleryStyles = {
+    mobileGallery: {
+      width: '100%',
+      overflow: 'hidden',
+      position: 'relative'
+    },
+    galleryTrack: {
+      display: 'flex',
+      width: '200%'
+    },
+    gallerySlide: {
+      flex: '0 0 50%',
+      padding: '10px'
+    },
+    indicator: {
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '8px',
+      marginTop: '10px'
+    },
+    dot: {
+      width: '8px',
+      height: '8px',
+      borderRadius: '50%',
+      backgroundColor: '#ccc',
+      transition: 'background-color 0.3s ease'
+    },
+    activeDot: {
+      backgroundColor: '#007bff'
+    }
+  };
+
   return (
     <div style={styles.pageContainer}>
       <div ref={vantaRef} style={styles.vantaContainer}>
@@ -171,92 +239,207 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer} className="boxes-container">
           {/* Box 1: LLM */}
-          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
-            <h3 style={{
-                color: '#dcccbd', 
-                textAlign: 'center', 
-                fontFamily: 'Monoton', 
-                fontSize: '35px',
-                fontWeight: 'normal',
-                marginTop: '2rem',
-                marginBottom: '2rem'
+          {isMobile ? (
+            <div 
+              className="mobile-gallery"
+              style={galleryStyles.mobileGallery}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="gallery-track" style={{...galleryStyles.galleryTrack, ...slideStyle}}>
+                <div className="gallery-slide" style={galleryStyles.gallerySlide}>
+                  <div className="llm-box" style={styles.mobileGalleryContainer}>
+                    <h3 style={{
+                        color: '#dcccbd', 
+                        textAlign: 'center', 
+                        fontFamily: 'Monoton', 
+                        fontSize: '35px',
+                        fontWeight: 'normal',
+                        marginTop: '2rem',
+                        marginBottom: '2rem'
+                      }}>
+                      Ask AlexAI
+                    </h3>
+                    <div style={{ 
+                      width: '80%', 
+                      margin: '0 auto', 
+                      display: 'flex', 
+                      gap: '0.5rem', 
+                      alignItems: 'center',
+                      position: 'relative',
+                      boxSizing: 'border-box'
+                    }}>
+                      <input
+                        type="text"
+                        placeholder="What do you want to know?"
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        disabled={isLoading}
+                        style={{
+                          ...styles.input,
+                          width: '100%',
+                          backgroundColor: '#dcccbd',
+                          color: '#434a54',
+                          margin: 0,
+                          borderRadius: '10px',
+                          paddingRight: '60px',
+                          fontFamily: 'Montserrat, sans-serif',
+                          fontWeight: '600',
+                          boxSizing: 'border-box',
+                          outline: 'none',
+                          border: 'none',
+                          opacity: isLoading ? 0.7 : 1,
+                        }}
+                      />
+                      <button 
+                        onClick={handleAskQuestion} 
+                        disabled={isLoading || !question.trim()}
+                        style={{
+                          position: 'absolute',
+                          right: '5px',
+                          backgroundColor: isLoading ? '#666' : '#b14b32',
+                          color: '#dcccbd',
+                          border: 'none',
+                          borderRadius: '10px',
+                          padding: '4px 12px',
+                          height: '25px',
+                          cursor: isLoading ? 'not-allowed' : 'pointer',
+                          fontFamily: 'Montserrat, sans-serif',
+                          fontWeight: '600',
+                          opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                          transition: 'all 0.2s ease'
+                        }}
+                      >
+                        {isLoading ? '...' : 'ASK'}
+                      </button>
+                    </div>
+                    <div style={{
+                      width: '80%',
+                      margin: '10px auto',
+                      backgroundColor: '#dcccbd',
+                      padding: '1rem',
+                      borderRadius: '10px',
+                      minHeight: '240px',
+                      maxHeight: '240px',
+                      overflowY: 'auto',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontSize: '14px',
+                      lineHeight: '1.5',
+                      color: error ? '#b14b32' : '#434a54',
+                      whiteSpace: 'pre-wrap',
+                      scrollBehavior: 'smooth'
+                    }}>
+                      <strong>{displayedAnswer}</strong>
+                    </div>
+                  </div>
+                </div>
+                <div className="gallery-slide" style={galleryStyles.gallerySlide}>
+                  <div className="contact-box">
+                    <SendEmailForm />
+                  </div>
+                </div>
+              </div>
+              {/* Slide indicators */}
+              <div style={galleryStyles.indicator}>
+                <div style={{
+                  ...galleryStyles.dot,
+                  ...(currentSlide === 0 ? galleryStyles.activeDot : {})
+                }}></div>
+                <div style={{
+                  ...galleryStyles.dot,
+                  ...(currentSlide === 1 ? galleryStyles.activeDot : {})
+                }}></div>
+              </div>
+            </div>
+          ) : (
+            <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
+              <h3 style={{
+                  color: '#dcccbd', 
+                  textAlign: 'center', 
+                  fontFamily: 'Monoton', 
+                  fontSize: '35px',
+                  fontWeight: 'normal',
+                  marginTop: '2rem',
+                  marginBottom: '2rem'
+                }}>
+                Ask AlexAI
+              </h3>
+              <div style={{ 
+                width: '80%', 
+                margin: '0 auto', 
+                display: 'flex', 
+                gap: '0.5rem', 
+                alignItems: 'center',
+                position: 'relative',
+                boxSizing: 'border-box'
               }}>
-              Ask AlexAI
-            </h3>
-            <div style={{ 
-              width: '80%', 
-              margin: '0 auto', 
-              display: 'flex', 
-              gap: '0.5rem', 
-              alignItems: 'center',
-              position: 'relative',
-              boxSizing: 'border-box'
-            }}>
-              <input
-                type="text"
-                placeholder="What do you want to know?"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                onKeyPress={handleKeyPress}
-                disabled={isLoading}
-                style={{
-                  ...styles.input,
-                  width: '100%',
-                  backgroundColor: '#dcccbd',
-                  color: '#434a54',
-                  margin: 0,
-                  borderRadius: '10px',
-                  paddingRight: '60px',
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: '600',
-                  boxSizing: 'border-box',
-                  outline: 'none',
-                  border: 'none',
-                  opacity: isLoading ? 0.7 : 1,
-                }}
-              />
-              <button 
-                onClick={handleAskQuestion} 
-                disabled={isLoading || !question.trim()}
-                style={{
-                  position: 'absolute',
-                  right: '5px',
-                  backgroundColor: isLoading ? '#666' : '#b14b32',
-                  color: '#dcccbd',
-                  border: 'none',
-                  borderRadius: '10px',
-                  padding: '4px 12px',
-                  height: '25px',
-                  cursor: isLoading ? 'not-allowed' : 'pointer',
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: '600',
-                  opacity: (!question.trim() || isLoading) ? 0.7 : 1,
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                {isLoading ? '...' : 'ASK'}
-              </button>
+                <input
+                  type="text"
+                  placeholder="What do you want to know?"
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  disabled={isLoading}
+                  style={{
+                    ...styles.input,
+                    width: '100%',
+                    backgroundColor: '#dcccbd',
+                    color: '#434a54',
+                    margin: 0,
+                    borderRadius: '10px',
+                    paddingRight: '60px',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: '600',
+                    boxSizing: 'border-box',
+                    outline: 'none',
+                    border: 'none',
+                    opacity: isLoading ? 0.7 : 1,
+                  }}
+                />
+                <button 
+                  onClick={handleAskQuestion} 
+                  disabled={isLoading || !question.trim()}
+                  style={{
+                    position: 'absolute',
+                    right: '5px',
+                    backgroundColor: isLoading ? '#666' : '#b14b32',
+                    color: '#dcccbd',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '4px 12px',
+                    height: '25px',
+                    cursor: isLoading ? 'not-allowed' : 'pointer',
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: '600',
+                    opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {isLoading ? '...' : 'ASK'}
+                </button>
+              </div>
+              <div style={{
+                width: '80%',
+                margin: '10px auto',
+                backgroundColor: '#dcccbd',
+                padding: '1rem',
+                borderRadius: '10px',
+                minHeight: '240px',
+                maxHeight: '240px',
+                overflowY: 'auto',
+                fontFamily: 'Montserrat, sans-serif',
+                fontSize: '14px',
+                lineHeight: '1.5',
+                color: error ? '#b14b32' : '#434a54',
+                whiteSpace: 'pre-wrap',
+                scrollBehavior: 'smooth'
+              }}>
+                <strong>{displayedAnswer}</strong>
+              </div>
             </div>
-            <div style={{
-              width: '80%',
-              margin: '10px auto',
-              backgroundColor: '#dcccbd',
-              padding: '1rem',
-              borderRadius: '10px',
-              minHeight: '240px',
-              maxHeight: '240px',
-              overflowY: 'auto',
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: '14px',
-              lineHeight: '1.5',
-              color: error ? '#b14b32' : '#434a54',
-              whiteSpace: 'pre-wrap',
-              scrollBehavior: 'smooth'
-            }}>
-              <strong>{displayedAnswer}</strong>
-            </div>
-          </div>
-
+          )}
           {/* Box 2: Send Email */}
           <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
             <SendEmailForm />
@@ -369,6 +552,13 @@ const styles = {
     padding: '0.5rem',
     borderRadius: '4px',
   },
+  mobileGalleryContainer: {
+    width: '100%',
+    backgroundColor: '#434a54',
+    borderRadius: '10px',
+    padding: '10px',
+    marginBottom: '20px'
+  }
 };
 
 const styleTag = document.createElement('style');
@@ -453,6 +643,45 @@ styleTag.textContent = `
   /* Hide the game box on mobile */
   .game-box {
     display: none !important;
+  }
+
+  .mobile-gallery {
+    width: 100%;
+    position: relative;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .gallery-track {
+    display: flex;
+    transition: transform 0.3s ease-out;
+  }
+
+  .gallery-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .llm-box, .contact-box {
+    height: auto !important;
+    min-height: 400px !important;
+    margin: 0 !important;
+    border-radius: 10px;
+  }
+
+  .llm-box {
+    background-color: #434a54;
+  }
+
+  .contact-box {
+    background-color: #b14b32;
+  }
+
+  .boxes-container {
+    padding: 10px !important;
+  }
+
+  .hero-section {
+    padding: 10px !important;
   }
 }
 `;
