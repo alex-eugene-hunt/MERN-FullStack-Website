@@ -281,7 +281,7 @@ function HeroSection() {
 
       .hero-box.contact-box input[type="email"] {
         width: 100% !important;
-        height: 40px !important;
+        height: 100% !important;
         margin-bottom: 1rem !important;
         padding: 0.5rem !important;
         font-size: 16px !important;
@@ -292,7 +292,7 @@ function HeroSection() {
         max-width: 450px !important;
         margin: 0.5rem auto !important;
         height: auto !important;
-        min-height: 300px !important;
+        min-height: 400px !important;
       }
 
       .llm-box .answer-box {
