@@ -174,20 +174,22 @@ function HeroSection() {
   const galleryStyles = {
     mobileGallery: {
       width: '100%',
+      maxWidth: '450px',
       overflow: 'hidden',
       position: 'relative',
       marginBottom: '20px',
-      maxWidth: '450px'
+      height: '500px'
     },
     galleryTrack: {
       display: 'flex',
       width: '200%',
-      height: '100%'
+      height: '100%',
+      transform: `translateX(-${currentSlide * 50}%)`,
+      transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
     },
     gallerySlide: {
       flex: '0 0 50%',
       height: '100%',
-      padding: '0 10px',
       boxSizing: 'border-box'
     },
     indicator: {
@@ -195,6 +197,10 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       marginTop: '10px',
+      position: 'absolute',
+      bottom: '10px',
+      left: '0',
+      right: '0',
       zIndex: 10
     },
     dot: {
@@ -207,11 +213,6 @@ function HeroSection() {
     activeDot: {
       backgroundColor: '#b14b32'
     }
-  };
-
-  const slideStyle = {
-    transform: `translateX(-${currentSlide * 100}%)`,
-    transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
   };
 
   const styleTag = document.createElement('style');
@@ -277,32 +278,31 @@ function HeroSection() {
         margin: 0 auto !important;
         position: relative;
         touch-action: pan-y pinch-zoom;
+        height: 500px !important;
       }
 
       .gallery-track {
         display: flex;
-        transition: transform 0.3s ease-out;
+        height: 100% !important;
       }
 
       .gallery-slide {
         flex: 0 0 100% !important;
         width: 100% !important;
+        height: 100% !important;
         padding: 0 !important;
       }
 
       .hero-box {
         width: 100% !important;
-        max-width: 450px !important;
-        margin: 0 auto !important;
-        flex: none !important;
-        min-height: 500px !important;
+        height: 100% !important;
+        margin: 0 !important;
         border-radius: 10px !important;
-        overflow: hidden !important;
       }
 
       .llm-box, .contact-box {
+        width: 100% !important;
         height: 100% !important;
-        min-height: 500px !important;
         margin: 0 !important;
       }
 
@@ -351,7 +351,7 @@ function HeroSection() {
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-              <div className="gallery-track" style={{...galleryStyles.galleryTrack, ...slideStyle}}>
+              <div className="gallery-track" style={galleryStyles.galleryTrack}>
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
                   <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
                     <h3 style={{
