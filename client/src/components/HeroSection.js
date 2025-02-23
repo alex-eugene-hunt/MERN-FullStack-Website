@@ -171,17 +171,13 @@ function HeroSection() {
     }
   };
 
-  const slideStyle = {
-    transform: `translateX(-${currentSlide * 100}%)`,
-    transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
-  };
-
   const galleryStyles = {
     mobileGallery: {
       width: '100%',
       overflow: 'hidden',
       position: 'relative',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      maxWidth: '450px'
     },
     galleryTrack: {
       display: 'flex',
@@ -213,6 +209,110 @@ function HeroSection() {
     }
   };
 
+  const slideStyle = {
+    transform: `translateX(-${currentSlide * 100}%)`,
+    transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
+  };
+
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    @media (max-width: 768px) {
+      .page-container {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .navbar-container {
+        height: auto !important;
+      }
+
+      .navbar {
+        position: absolute !important;
+      }
+
+      .hero-section {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 0 0.5rem 0.5rem !important;
+        text-align: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 2rem !important;
+      }
+
+      .contentWrapper {
+        padding-top: 0 !important;
+        margin-top: 2rem !important;
+      }
+
+      .hero-image {
+        margin: 0 auto !important;
+        width: 180px !important;
+      }
+
+      .typewriter-text {
+        margin: 1rem auto 0 !important;
+        text-align: center !important;
+        font-size: 32px !important;
+        width: 100% !important;
+        padding: 0 1rem !important;
+      }
+
+      .boxes-container {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 0.5rem !important;
+        gap: 1rem !important;
+        margin-top: 0.5rem !important;
+      }
+
+      .mobile-gallery {
+        width: 100% !important;
+        max-width: 450px !important;
+        margin: 0 auto !important;
+        position: relative;
+        touch-action: pan-y pinch-zoom;
+      }
+
+      .gallery-track {
+        display: flex;
+        transition: transform 0.3s ease-out;
+      }
+
+      .gallery-slide {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        padding: 0 !important;
+      }
+
+      .hero-box {
+        width: 100% !important;
+        max-width: 450px !important;
+        margin: 0 auto !important;
+        flex: none !important;
+        min-height: 500px !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+      }
+
+      .llm-box, .contact-box {
+        height: 100% !important;
+        min-height: 500px !important;
+        margin: 0 !important;
+      }
+
+      .game-box {
+        display: none !important;
+      }
+    }
+  `;
+  document.head.appendChild(styleTag);
+
   return (
     <div style={styles.pageContainer}>
       <div ref={vantaRef} style={styles.vantaContainer}>
@@ -243,7 +343,6 @@ function HeroSection() {
 
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer} className="boxes-container">
-          {/* Box 1: LLM */}
           {isMobile ? (
             <div 
               className="mobile-gallery"
@@ -365,99 +464,100 @@ function HeroSection() {
               </div>
             </div>
           ) : (
-            <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
-              <h3 style={{
-                  color: '#dcccbd', 
-                  textAlign: 'center', 
-                  fontFamily: 'Monoton', 
-                  fontSize: '35px',
-                  fontWeight: 'normal',
-                  marginTop: '2rem',
-                  marginBottom: '2rem'
+            <>
+              <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
+                <h3 style={{
+                    color: '#dcccbd', 
+                    textAlign: 'center', 
+                    fontFamily: 'Monoton', 
+                    fontSize: '35px',
+                    fontWeight: 'normal',
+                    marginTop: '2rem',
+                    marginBottom: '2rem'
+                  }}>
+                  Ask AlexAI
+                </h3>
+                <div style={{ 
+                  width: '80%', 
+                  margin: '0 auto', 
+                  display: 'flex', 
+                  gap: '0.5rem', 
+                  alignItems: 'center',
+                  position: 'relative',
+                  boxSizing: 'border-box'
                 }}>
-                Ask AlexAI
-              </h3>
-              <div style={{ 
-                width: '80%', 
-                margin: '0 auto', 
-                display: 'flex', 
-                gap: '0.5rem', 
-                alignItems: 'center',
-                position: 'relative',
-                boxSizing: 'border-box'
-              }}>
-                <input
-                  type="text"
-                  placeholder="What do you want to know?"
-                  value={question}
-                  onChange={(e) => setQuestion(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  disabled={isLoading}
-                  style={{
-                    ...styles.input,
-                    width: '100%',
-                    backgroundColor: '#dcccbd',
-                    color: '#434a54',
-                    margin: 0,
-                    borderRadius: '10px',
-                    paddingRight: '60px',
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: '600',
-                    boxSizing: 'border-box',
-                    outline: 'none',
-                    border: 'none',
-                    opacity: isLoading ? 0.7 : 1,
-                  }}
-                />
-                <button 
-                  onClick={handleAskQuestion} 
-                  disabled={isLoading || !question.trim()}
-                  style={{
-                    position: 'absolute',
-                    right: '5px',
-                    backgroundColor: isLoading ? '#666' : '#b14b32',
-                    color: '#dcccbd',
-                    border: 'none',
-                    borderRadius: '10px',
-                    padding: '4px 12px',
-                    height: '25px',
-                    cursor: isLoading ? 'not-allowed' : 'pointer',
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: '600',
-                    opacity: (!question.trim() || isLoading) ? 0.7 : 1,
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  {isLoading ? '...' : 'ASK'}
-                </button>
+                  <input
+                    type="text"
+                    placeholder="What do you want to know?"
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    disabled={isLoading}
+                    style={{
+                      ...styles.input,
+                      width: '100%',
+                      backgroundColor: '#dcccbd',
+                      color: '#434a54',
+                      margin: 0,
+                      borderRadius: '10px',
+                      paddingRight: '60px',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontWeight: '600',
+                      boxSizing: 'border-box',
+                      outline: 'none',
+                      border: 'none',
+                      opacity: isLoading ? 0.7 : 1,
+                    }}
+                  />
+                  <button 
+                    onClick={handleAskQuestion} 
+                    disabled={isLoading || !question.trim()}
+                    style={{
+                      position: 'absolute',
+                      right: '5px',
+                      backgroundColor: isLoading ? '#666' : '#b14b32',
+                      color: '#dcccbd',
+                      border: 'none',
+                      borderRadius: '10px',
+                      padding: '4px 12px',
+                      height: '25px',
+                      cursor: isLoading ? 'not-allowed' : 'pointer',
+                      fontFamily: 'Montserrat, sans-serif',
+                      fontWeight: '600',
+                      opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                      transition: 'all 0.2s ease'
+                    }}
+                  >
+                    {isLoading ? '...' : 'ASK'}
+                  </button>
+                </div>
+                <div style={{
+                  width: '80%',
+                  margin: '10px auto',
+                  backgroundColor: '#dcccbd',
+                  padding: '1rem',
+                  borderRadius: '10px',
+                  minHeight: '240px',
+                  maxHeight: '240px',
+                  overflowY: 'auto',
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontSize: '14px',
+                  lineHeight: '1.5',
+                  color: error ? '#b14b32' : '#434a54',
+                  whiteSpace: 'pre-wrap',
+                  scrollBehavior: 'smooth'
+                }}>
+                  <strong>{displayedAnswer}</strong>
+                </div>
               </div>
-              <div style={{
-                width: '80%',
-                margin: '10px auto',
-                backgroundColor: '#dcccbd',
-                padding: '1rem',
-                borderRadius: '10px',
-                minHeight: '240px',
-                maxHeight: '240px',
-                overflowY: 'auto',
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '14px',
-                lineHeight: '1.5',
-                color: error ? '#b14b32' : '#434a54',
-                whiteSpace: 'pre-wrap',
-                scrollBehavior: 'smooth'
-              }}>
-                <strong>{displayedAnswer}</strong>
+              <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
+                <SendEmailForm />
               </div>
-            </div>
+            </>
           )}
-          {/* Box 2: Send Email */}
-          <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
-            <SendEmailForm />
-          </div>
 
-          {/* Box 3: Game Box */}
-          <div style={{...styles.box, backgroundColor: '#000000'}} className="hero-box game-box">
+          {/* Box 3: Game */}
+          <div style={{...styles.box, backgroundColor: '#dcccbd'}} className="hero-box game-box">
             <AsteroidsGame />
           </div>
         </div>
@@ -571,105 +671,5 @@ const styles = {
     marginBottom: '20px'
   }
 };
-
-const styleTag = document.createElement('style');
-styleTag.textContent = `
-  @media (max-width: 768px) {
-    .page-container {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    .navbar-container {
-      height: auto !important;
-    }
-
-    .navbar {
-      position: absolute !important;
-    }
-
-    .hero-section {
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      padding: 0 0.5rem 0.5rem !important;
-      text-align: center !important;
-      margin-top: 0 !important;
-      margin-bottom: 2rem !important;
-    }
-
-    .contentWrapper {
-      padding-top: 0 !important;
-      margin-top: 2rem !important;
-    }
-
-    .hero-image {
-      margin: 0 auto !important;
-      width: 180px !important;
-    }
-
-    .typewriter-text {
-      margin: 1rem auto 0 !important;
-      text-align: center !important;
-      font-size: 32px !important;
-      width: 100% !important;
-      padding: 0 1rem !important;
-    }
-
-    .boxes-container {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      width: 100% !important;
-      padding: 0.5rem !important;
-      gap: 1rem !important;
-      margin-top: 0.5rem !important;
-    }
-
-    .hero-box {
-      width: 100% !important;
-      max-width: 450px !important;
-      aspect-ratio: 1 / 1;
-      height: auto !important;
-      margin: 0 auto !important;
-      flex: none !important;
-    }
-
-    .game-box {
-      display: none !important;
-    }
-
-    .mobile-gallery {
-      width: 100% !important;
-      position: relative;
-      touch-action: pan-y pinch-zoom;
-      max-width: 450px !important;
-      margin: 0 auto !important;
-    }
-
-    .gallery-track {
-      display: flex;
-      transition: transform 0.3s ease-out;
-      width: 200% !important;
-    }
-
-    .gallery-slide {
-      flex: 0 0 100% !important;
-      width: 100% !important;
-      padding: 0 !important;
-    }
-
-    .llm-box, .contact-box {
-      width: 100% !important;
-      aspect-ratio: 1 / 1;
-      margin: 0 !important;
-      border-radius: 10px !important;
-    }
-  }
-`;
-document.head.appendChild(styleTag);
 
 export default HeroSection;
