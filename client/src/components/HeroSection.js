@@ -49,35 +49,50 @@ function HeroSection() {
   }, []);
 
   async function askLLM(prompt) {
-    const response = await fetch("https://proxy.okareo.com/v1/chat/completions", {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-        "api-key": process.env.REACT_APP_OKAREO_API_KEY
-      },
-      body: JSON.stringify({ 
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer and Data Scientist based in San Francisco. Answer questions about Alex's background, skills, and experiences."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ]
-      })
-    });
-    
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      throw new Error(errorData?.detail || `HTTP error! status: ${response.status}`);
+    try {
+      console.log('Making request with keys:', {
+        openaiKey: process.env.REACT_APP_OPENAI_API_KEY?.substring(0, 7) + '...',
+        okareoKey: process.env.REACT_APP_OKAREO_API_KEY?.substring(0, 20) + '...'
+      });
+
+      const response = await fetch("https://proxy.okareo.com/v1/chat/completions", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+          "api-key": process.env.REACT_APP_OKAREO_API_KEY
+        },
+        body: JSON.stringify({ 
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer and Data Scientist based in San Francisco. Answer questions about Alex's background, skills, and experiences."
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ]
+        })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        console.error('Response error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        });
+        throw new Error(errorData?.detail || `HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      return data.choices[0].message.content;
+    } catch (error) {
+      console.error('Error in askLLM:', error);
+      throw error;
     }
-    
-    const data = await response.json();
-    return data.choices[0].message.content;
   }
 
   async function handleAskQuestion(e) {
