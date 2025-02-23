@@ -374,6 +374,15 @@ const styles = {
 const styleTag = document.createElement('style');
 styleTag.textContent = `
 @media (max-width: 768px) {
+
+  .page-container {
+    margin: 0;
+    padding: 0;
+    width: '100%';
+    minHeight: '100vh';
+    position: 'relative';
+  }
+
   .navbar-container {
     height: auto !important;
   }
@@ -389,6 +398,7 @@ styleTag.textContent = `
     padding: 0 0.5rem 0.5rem !important;
     text-align: center !important;
     margin-top: 0 !important;
+    margin-bottom: 2rem !important;
   }
 
   .contentWrapper {
@@ -420,12 +430,11 @@ styleTag.textContent = `
   }
 
   .hero-box {
-    /* Let the box auto-size instead of a fixed height */
-    width: 90% !important;
-    max-width: 450px !important;
-    height: auto !important;
-    margin: 0 auto !important;
-    margin-bottom: 1rem !important; /* spacing below each box */
+    width: 90% !important;          /* Let the box shrink on small screens */
+    max-width: 450px !important;    /* Don’t exceed 450px in width */
+    aspect-ratio: 1 / 1;           /* Enforce square shape based on width */
+    height: auto !important;        /* Let aspect-ratio set the height */
+    margin: 0 auto 1rem !important;
     flex: none !important;
   }
 
