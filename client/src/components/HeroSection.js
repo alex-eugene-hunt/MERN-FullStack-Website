@@ -171,7 +171,7 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer} className="boxes-container">
           {/* Box 1: LLM */}
-          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box ask-ai-box">
+          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
             <h3 style={{
                 color: '#dcccbd', 
                 textAlign: 'center', 
@@ -426,30 +426,22 @@ styleTag.textContent = `
       flex: none !important;
     }
 
-    .game-box,
+    /* SHOW LLM box, in position #1 */
     .llm-box {
-      display: none !important;
-    }
-
-    .hero-box.contact-box {
-      height: auto !important;
-      min-height: 400px !important;
-    }
-
-    .boxesContainer {
-      flex-direction: column;
-      align-items: center;
-    }
-    .hero-box.ask-ai-box {
-      order: -1;
-      margin-bottom: 2rem;
-    }
-    .hero-box.contact-box {
+      display: block !important;
       order: 1;
-      margin-top: 2rem;
+      margin-bottom: 1rem; /* a bit of spacing below */
     }
-    .hero-box.game-box {
+
+    /* SHOW Contact me box, in position #2 */
+    .contact-box {
+      display: block !important;
       order: 2;
+    }
+
+    /* HIDE the game box */
+    .game-box {
+      display: none !important;
     }
   }
 `;
