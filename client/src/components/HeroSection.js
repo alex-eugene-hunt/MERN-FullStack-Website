@@ -373,77 +373,79 @@ const styles = {
 
 const styleTag = document.createElement('style');
 styleTag.textContent = `
-  @media (max-width: 768px) {
-    .navbar-container {
-      height: auto !important;
-    }
-
-    .navbar {
-      position: absolute !important;
-    }
-
-    .hero-section {
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-      padding: 0 0.5rem 0.5rem !important;
-      text-align: center !important;
-      margin-top: 0 !important;
-    }
-
-    .contentWrapper {
-      padding-top: 0 !important;
-      margin-top: 2rem !important;
-    }
-
-    .hero-image {
-      margin: 0 auto !important;
-      width: 180px !important;
-    }
-
-    .typewriter-text {
-      margin: 1rem auto 0 !important;
-      text-align: center !important;
-      font-size: 32px !important;
-      width: 100% !important;
-      padding: 0 1rem !important;
-    }
-
-    .boxes-container {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      width: 100% !important;
-      padding: 0.5rem !important;
-      gap: 0 !important;
-      margin-top: 0.5rem !important;
-    }
-
-    .hero-box {
-      width: 90% !important;
-      max-width: 450px !important;
-      margin: 0 auto !important;
-      flex: none !important;
-    }
-
-    /* SHOW LLM box, in position #1 */
-    .llm-box {
-      display: block !important;
-      order: 1;
-      margin-bottom: 1rem; /* a bit of spacing below */
-    }
-
-    /* SHOW Contact me box, in position #2 */
-    .contact-box {
-      display: block !important;
-      order: 2;
-    }
-
-    /* HIDE the game box */
-    .game-box {
-      display: none !important;
-    }
+@media (max-width: 768px) {
+  .navbar-container {
+    height: auto !important;
   }
+
+  .navbar {
+    position: absolute !important;
+  }
+
+  .hero-section {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 0 0.5rem 0.5rem !important;
+    text-align: center !important;
+    margin-top: 0 !important;
+  }
+
+  .contentWrapper {
+    padding-top: 0 !important;
+    margin-top: 2rem !important;
+  }
+
+  .hero-image {
+    margin: 0 auto !important;
+    width: 180px !important;
+  }
+
+  .typewriter-text {
+    margin: 1rem auto 0 !important;
+    text-align: center !important;
+    font-size: 32px !important;
+    width: 100% !important;
+    padding: 0 1rem !important;
+  }
+
+  .boxes-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0.5rem !important;
+    gap: 0; /* we’ll control spacing on the boxes themselves */
+    margin-top: 0.5rem !important;
+  }
+
+  .hero-box {
+    /* Let the box auto-size instead of a fixed height */
+    width: 90% !important;
+    max-width: 450px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    margin-bottom: 1rem !important; /* spacing below each box */
+    flex: none !important;
+  }
+
+  /* Show the LLM box on mobile (AlexAI) */
+  .llm-box {
+    display: block !important;
+    order: 1;
+  }
+
+  /* Show Contact Me box below the LLM box */
+  .contact-box {
+    display: block !important;
+    order: 2;
+  }
+
+  /* Hide the game box on mobile */
+  .game-box {
+    display: none !important;
+  }
+}
 `;
 document.head.appendChild(styleTag);
 
