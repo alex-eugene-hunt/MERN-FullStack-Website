@@ -298,20 +298,8 @@ function HeroSection() {
       .llm-box .answer-box {
         max-height: 100px !important;
         overflow-y: auto !important;
-        margin: 1rem 0 2rem 0 !important;
+        margin-top: 1rem !important;
         padding: 0.5rem !important;
-      }
-
-      .hero-box.contact-box form {
-        display: flex !important;
-        flex-direction: column !important;
-        height: 100% !important;
-        justify-content: space-between !important;
-      }
-
-      .hero-box.contact-box textarea {
-        min-height: 150px !important;
-        margin-bottom: 0.5rem !important;
       }
     }
   `;
