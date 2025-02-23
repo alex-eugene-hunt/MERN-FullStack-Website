@@ -184,11 +184,11 @@ function HeroSection() {
       display: 'flex',
       width: '200%',
       height: '100%',
-      transform: `translateX(-${currentSlide * 50}%)`,
+      transform: `translateX(-${currentSlide * 100}%)`,
       transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
     },
     gallerySlide: {
-      flex: '0 0 50%',
+      flex: '0 0 100%',
       height: '100%',
       boxSizing: 'border-box'
     },
@@ -279,18 +279,19 @@ function HeroSection() {
         position: relative;
         touch-action: pan-y pinch-zoom;
         height: 500px !important;
+        overflow: hidden !important;
       }
 
       .gallery-track {
-        display: flex;
+        display: flex !important;
         height: 100% !important;
+        width: 200% !important;
       }
 
       .gallery-slide {
-        flex: 0 0 100% !important;
-        width: 100% !important;
+        flex: 0 0 50% !important;
+        width: 50% !important;
         height: 100% !important;
-        padding: 0 !important;
       }
 
       .hero-box {
@@ -352,8 +353,9 @@ function HeroSection() {
               onTouchEnd={handleTouchEnd}
             >
               <div className="gallery-track" style={galleryStyles.galleryTrack}>
+                {/* First Slide: AlexAI */}
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
+                  <div style={{...styles.box, backgroundColor: '#434a54', height: '100%'}} className="hero-box llm-box">
                     <h3 style={{
                         color: '#dcccbd', 
                         textAlign: 'center', 
@@ -439,20 +441,15 @@ function HeroSection() {
                     </div>
                   </div>
                 </div>
+                {/* Second Slide: Contact Form */}
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
+                  <div style={{...styles.box, backgroundColor: '#b14b32', height: '100%'}} className="hero-box contact-box">
                     <SendEmailForm />
                   </div>
                 </div>
               </div>
               {/* Slide indicators */}
-              <div style={{
-                ...galleryStyles.indicator,
-                position: 'absolute',
-                bottom: '10px',
-                left: '0',
-                right: '0'
-              }}>
+              <div style={galleryStyles.indicator}>
                 <div style={{
                   ...galleryStyles.dot,
                   ...(currentSlide === 0 ? galleryStyles.activeDot : {})
@@ -464,6 +461,7 @@ function HeroSection() {
               </div>
             </div>
           ) : (
+            // Desktop version
             <>
               <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
                 <h3 style={{
