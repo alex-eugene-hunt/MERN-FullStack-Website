@@ -180,31 +180,36 @@ function HeroSection() {
     mobileGallery: {
       width: '100%',
       overflow: 'hidden',
-      position: 'relative'
+      position: 'relative',
+      marginBottom: '20px'
     },
     galleryTrack: {
       display: 'flex',
-      width: '200%'
+      width: '200%',
+      height: '100%'
     },
     gallerySlide: {
       flex: '0 0 50%',
-      padding: '10px'
+      height: '100%',
+      padding: '0 10px',
+      boxSizing: 'border-box'
     },
     indicator: {
       display: 'flex',
       justifyContent: 'center',
       gap: '8px',
-      marginTop: '10px'
+      marginTop: '10px',
+      zIndex: 10
     },
     dot: {
       width: '8px',
       height: '8px',
       borderRadius: '50%',
-      backgroundColor: '#ccc',
+      backgroundColor: '#dcccbd',
       transition: 'background-color 0.3s ease'
     },
     activeDot: {
-      backgroundColor: '#007bff'
+      backgroundColor: '#b14b32'
     }
   };
 
@@ -249,7 +254,7 @@ function HeroSection() {
             >
               <div className="gallery-track" style={{...galleryStyles.galleryTrack, ...slideStyle}}>
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div className="llm-box" style={styles.mobileGalleryContainer}>
+                  <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
                     <h3 style={{
                         color: '#dcccbd', 
                         textAlign: 'center', 
@@ -336,13 +341,19 @@ function HeroSection() {
                   </div>
                 </div>
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div className="contact-box">
+                  <div style={{...styles.box, backgroundColor: '#b14b32'}} className="hero-box contact-box">
                     <SendEmailForm />
                   </div>
                 </div>
               </div>
               {/* Slide indicators */}
-              <div style={galleryStyles.indicator}>
+              <div style={{
+                ...galleryStyles.indicator,
+                position: 'absolute',
+                bottom: '10px',
+                left: '0',
+                right: '0'
+              }}>
                 <div style={{
                   ...galleryStyles.dot,
                   ...(currentSlide === 0 ? galleryStyles.activeDot : {})
@@ -563,127 +574,47 @@ const styles = {
 
 const styleTag = document.createElement('style');
 styleTag.textContent = `
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
+    .mobile-gallery {
+      width: 100%;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+    }
 
-  .page-container {
-    margin: 0;
-    padding: 0;
-    width: '100%';
-    minHeight: '100vh';
-    position: 'relative';
-  }
+    .gallery-track {
+      display: flex;
+      transition: transform 0.3s ease-out;
+    }
 
-  .navbar-container {
-    height: auto !important;
-  }
+    .gallery-slide {
+      flex: 0 0 100%;
+      min-width: 100%;
+    }
 
-  .navbar {
-    position: absolute !important;
-  }
+    .hero-box {
+      margin: 0 !important;
+      height: auto !important;
+      min-height: 500px !important;
+    }
 
-  .hero-section {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    padding: 0 0.5rem 0.5rem !important;
-    text-align: center !important;
-    margin-top: 0 !important;
-    margin-bottom: 2rem !important;
-  }
+    .boxes-container {
+      padding: 10px !important;
+      gap: 0 !important;
+    }
 
-  .contentWrapper {
-    padding-top: 0 !important;
-    margin-top: 2rem !important;
-  }
+    .hero-section {
+      padding: 10px !important;
+    }
 
-  .hero-image {
-    margin: 0 auto !important;
-    width: 180px !important;
-  }
+    .game-box {
+      display: none !important;
+    }
 
-  .typewriter-text {
-    margin: 1rem auto 0 !important;
-    text-align: center !important;
-    font-size: 32px !important;
-    width: 100% !important;
-    padding: 0 1rem !important;
+    .llm-box {
+      height: auto !important;
+      min-height: 400px !important;
+    }
   }
-
-  .boxes-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    padding: 0.5rem !important;
-    gap: 0; /* we’ll control spacing on the boxes themselves */
-    margin-top: 0.5rem !important;
-  }
-
-  .hero-box {
-    width: 90% !important;          /* Let the box shrink on small screens */
-    max-width: 450px !important;    /* Don’t exceed 450px in width */
-    aspect-ratio: 1 / 1;           /* Enforce square shape based on width */
-    height: auto !important;        /* Let aspect-ratio set the height */
-    margin: 0 auto 1rem !important;
-    flex: none !important;
-  }
-
-  /* Show the LLM box on mobile (AlexAI) */
-  .llm-box {
-    display: block !important;
-    order: 1;
-  }
-
-  /* Show Contact Me box below the LLM box */
-  .contact-box {
-    display: block !important;
-    order: 2;
-  }
-
-  /* Hide the game box on mobile */
-  .game-box {
-    display: none !important;
-  }
-
-  .mobile-gallery {
-    width: 100%;
-    position: relative;
-    touch-action: pan-y pinch-zoom;
-  }
-
-  .gallery-track {
-    display: flex;
-    transition: transform 0.3s ease-out;
-  }
-
-  .gallery-slide {
-    flex: 0 0 100%;
-    min-width: 100%;
-  }
-
-  .llm-box, .contact-box {
-    height: auto !important;
-    min-height: 400px !important;
-    margin: 0 !important;
-    border-radius: 10px;
-  }
-
-  .llm-box {
-    background-color: #434a54;
-  }
-
-  .contact-box {
-    background-color: #b14b32;
-  }
-
-  .boxes-container {
-    padding: 10px !important;
-  }
-
-  .hero-section {
-    padding: 10px !important;
-  }
-}
 `;
 document.head.appendChild(styleTag);
 
