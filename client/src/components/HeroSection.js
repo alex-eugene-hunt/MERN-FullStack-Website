@@ -50,20 +50,21 @@ function HeroSection() {
 
   async function askLLM(prompt) {
     try {
-      console.log('Making request with keys:', {
-        openaiKey: process.env.REACT_APP_OPENAI_API_KEY?.substring(0, 7) + '...',
-        okareoKey: process.env.REACT_APP_OKAREO_API_KEY?.substring(0, 20) + '...'
-      });
+      // Get API key from environment variable (works both for local dev and GitHub Actions)
+      const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error('OpenAI API key not found. Please check your environment variables or GitHub secrets.');
+      }
 
-      const response = await fetch("https://proxy.okareo.com/v1/chat/completions", {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-          "api-key": process.env.REACT_APP_OKAREO_API_KEY
+          "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({ 
-          model: "gpt-3.5-turbo",
+          model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B3uSVuN6",
           messages: [
             {
               role: "system",
@@ -73,7 +74,9 @@ function HeroSection() {
               role: "user",
               content: prompt
             }
-          ]
+          ],
+          temperature: 0.7,
+          max_tokens: 500
         })
       });
       
@@ -84,7 +87,7 @@ function HeroSection() {
           statusText: response.statusText,
           error: errorData
         });
-        throw new Error(errorData?.detail || `HTTP error! status: ${response.status}`);
+        throw new Error(errorData?.error?.message || `HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
