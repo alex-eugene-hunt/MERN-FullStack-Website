@@ -111,7 +111,7 @@ function HeroSection() {
       // Start typing effect
       let currentIndex = 0;
       const typingSpeed = 30; // milliseconds per character
-      const prefix = 'AlexAI says: ';
+      const prefix = 'AlexAI: ';
       setDisplayedAnswer(prefix); // Start with just the prefix
 
       const intervalId = setInterval(() => {
@@ -121,6 +121,7 @@ function HeroSection() {
         } else {
           clearInterval(intervalId);
           setIsLoading(false);
+          setDisplayedAnswer(prefix + answer);
         }
       }, typingSpeed);
 
@@ -170,7 +171,7 @@ function HeroSection() {
         {/* Three Boxes Section */}
         <div style={styles.boxesContainer} className="boxes-container">
           {/* Box 1: LLM */}
-          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box">
+          <div style={{...styles.box, backgroundColor: '#434a54'}} className="hero-box llm-box ask-ai-box">
             <h3 style={{
                 color: '#dcccbd', 
                 textAlign: 'center', 
@@ -252,7 +253,7 @@ function HeroSection() {
               whiteSpace: 'pre-wrap',
               scrollBehavior: 'smooth'
             }}>
-              {displayedAnswer}
+              <strong>{displayedAnswer}</strong>
             </div>
           </div>
 
@@ -433,6 +434,22 @@ styleTag.textContent = `
     .hero-box.contact-box {
       height: auto !important;
       min-height: 400px !important;
+    }
+
+    .boxesContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-box.ask-ai-box {
+      order: -1;
+      margin-bottom: 2rem;
+    }
+    .hero-box.contact-box {
+      order: 1;
+      margin-top: 2rem;
+    }
+    .hero-box.game-box {
+      order: 2;
     }
   }
 `;
