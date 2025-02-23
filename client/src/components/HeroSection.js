@@ -49,15 +49,25 @@ function HeroSection() {
   }, []);
 
   async function askLLM(prompt) {
-    const response = await fetch("https://personal-llm-1.onrender.com/ask", {
+    const response = await fetch("https://proxy.okareo.com/v1/chat/completions", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+        "api-key": process.env.REACT_APP_OKAREO_API_KEY
       },
       body: JSON.stringify({ 
-        text: prompt,
-        conversation_id: Date.now().toString()
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer and Data Scientist based in San Francisco. Answer questions about Alex's background, skills, and experiences."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ]
       })
     });
     
@@ -67,7 +77,7 @@ function HeroSection() {
     }
     
     const data = await response.json();
-    return data.answer;
+    return data.choices[0].message.content;
   }
 
   async function handleAskQuestion(e) {
