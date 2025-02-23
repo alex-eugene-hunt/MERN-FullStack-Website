@@ -184,11 +184,11 @@ function HeroSection() {
       display: 'flex',
       width: '200%',
       height: '100%',
-      transform: `translateX(-${currentSlide * 100}%)`,
+      transform: `translateX(-${currentSlide * 50}%)`,
       transition: isTransitioning ? 'transform 0.3s ease-out' : 'none'
     },
     gallerySlide: {
-      flex: '0 0 100%',
+      flex: '0 0 50%',
       height: '100%',
       boxSizing: 'border-box'
     },
