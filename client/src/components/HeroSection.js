@@ -266,7 +266,7 @@ function HeroSection() {
       .hero-box {
         width: 90% !important;
         max-width: 450px !important;
-        margin: 0.5rem auto !important;
+        margin: 0 auto !important;
         flex: none !important;
       }
 
