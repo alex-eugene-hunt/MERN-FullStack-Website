@@ -50,25 +50,17 @@ function HeroSection() {
 
   async function askLLM(prompt) {
     try {
-<<<<<<< HEAD
-      // Get API key from environment variable (works both for local dev and GitHub Actions)
       const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
       
       if (!apiKey) {
         throw new Error('OpenAI API key not found. Please check your environment variables or GitHub secrets.');
       }
 
-=======
->>>>>>> 2be03cf1c158c19b41607a3d65fee908dec99012
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
-<<<<<<< HEAD
           "Authorization": `Bearer ${apiKey}`
-=======
-          "Authorization": `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`
->>>>>>> 2be03cf1c158c19b41607a3d65fee908dec99012
         },
         body: JSON.stringify({ 
           model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B3uSVuN6",
@@ -82,12 +74,8 @@ function HeroSection() {
               content: prompt
             }
           ],
-<<<<<<< HEAD
           temperature: 0.7,
           max_tokens: 500
-=======
-          temperature: 0.7
->>>>>>> 2be03cf1c158c19b41607a3d65fee908dec99012
         })
       });
       
