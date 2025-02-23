@@ -575,44 +575,98 @@ const styles = {
 const styleTag = document.createElement('style');
 styleTag.textContent = `
   @media (max-width: 768px) {
-    .mobile-gallery {
+    .page-container {
+      margin: 0;
+      padding: 0;
       width: 100%;
+      min-height: 100vh;
       position: relative;
-      touch-action: pan-y pinch-zoom;
     }
 
-    .gallery-track {
-      display: flex;
-      transition: transform 0.3s ease-out;
-    }
-
-    .gallery-slide {
-      flex: 0 0 100%;
-      min-width: 100%;
-    }
-
-    .hero-box {
-      margin: 0 !important;
+    .navbar-container {
       height: auto !important;
-      min-height: 500px !important;
     }
 
-    .boxes-container {
-      padding: 10px !important;
-      gap: 0 !important;
+    .navbar {
+      position: absolute !important;
     }
 
     .hero-section {
-      padding: 10px !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding: 0 0.5rem 0.5rem !important;
+      text-align: center !important;
+      margin-top: 0 !important;
+      margin-bottom: 2rem !important;
+    }
+
+    .contentWrapper {
+      padding-top: 0 !important;
+      margin-top: 2rem !important;
+    }
+
+    .hero-image {
+      margin: 0 auto !important;
+      width: 180px !important;
+    }
+
+    .typewriter-text {
+      margin: 1rem auto 0 !important;
+      text-align: center !important;
+      font-size: 32px !important;
+      width: 100% !important;
+      padding: 0 1rem !important;
+    }
+
+    .boxes-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 100% !important;
+      padding: 0.5rem !important;
+      gap: 1rem !important;
+      margin-top: 0.5rem !important;
+    }
+
+    .hero-box {
+      width: 100% !important;
+      max-width: 450px !important;
+      aspect-ratio: 1 / 1;
+      height: auto !important;
+      margin: 0 auto !important;
+      flex: none !important;
     }
 
     .game-box {
       display: none !important;
     }
 
-    .llm-box {
-      height: auto !important;
-      min-height: 400px !important;
+    .mobile-gallery {
+      width: 100% !important;
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+      max-width: 450px !important;
+      margin: 0 auto !important;
+    }
+
+    .gallery-track {
+      display: flex;
+      transition: transform 0.3s ease-out;
+      width: 200% !important;
+    }
+
+    .gallery-slide {
+      flex: 0 0 100% !important;
+      width: 100% !important;
+      padding: 0 !important;
+    }
+
+    .llm-box, .contact-box {
+      width: 100% !important;
+      aspect-ratio: 1 / 1;
+      margin: 0 !important;
+      border-radius: 10px !important;
     }
   }
 `;
