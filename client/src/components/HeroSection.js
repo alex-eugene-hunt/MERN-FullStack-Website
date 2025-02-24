@@ -188,7 +188,6 @@ function HeroSection() {
       maxWidth: '450px',
       overflow: 'hidden',
       position: 'relative',
-      marginBottom: '20px',
       height: '400px', // Set a fixed height for consistency
     },
     galleryTrack: {
@@ -202,7 +201,6 @@ function HeroSection() {
       flex: '0 0 50%',
       height: '100%',
       boxSizing: 'border-box',
-      padding: '0.5rem',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -212,7 +210,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      top: '10px',
+      top: '15px',
       left: '0',
       right: '0',
       zIndex: 10
