@@ -387,6 +387,7 @@ function HeroSection() {
                           outline: 'none',
                           border: 'none',
                           opacity: isLoading ? 0.7 : 1,
+                          fontSize: '16px', // Prevent zoom on mobile
                         }}
                       />
                       <button 
@@ -495,6 +496,7 @@ function HeroSection() {
                       outline: 'none',
                       border: 'none',
                       opacity: isLoading ? 0.7 : 1,
+                      fontSize: '16px', // Prevent zoom on mobile
                     }}
                   />
                   <button 
