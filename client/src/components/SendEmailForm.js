@@ -5,6 +5,7 @@ function SendEmailForm() {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [sent, setSent] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ function SendEmailForm() {
       setSent(false);
       return;
     }
+    setIsSending(true);
     try {
       const response = await fetch('https://mern-fullstack-website.onrender.com/api/send-email', {
         method: 'POST',
@@ -35,6 +37,8 @@ function SendEmailForm() {
     } catch (error) {
       console.error('Error sending message:', error);
       setSent(false);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -72,10 +76,13 @@ function SendEmailForm() {
             type="submit" 
             style={{
               ...styles.button,
-              backgroundColor: sent ? '#6aa84f' : '#b14b32'
+              backgroundColor: sent ? '#6aa84f' : '#b14b32',
+              opacity: isSending ? 0.7 : 1,
+              cursor: isSending ? 'not-allowed' : 'pointer'
             }}
+            disabled={isSending}
           >
-            {sent ? '  ✔  ' : 'SEND'}
+            {isSending ? '...' : sent ? '  ✔  ' : 'SEND'}
           </button>
         </div>
       </form>
