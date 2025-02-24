@@ -145,14 +145,26 @@ function HeroSection() {
   };
 
   const handleTouchStart = (e) => {
+    // Don't initiate swipe if touching an input element
+    if (e.target.tagName.toLowerCase() === 'input') {
+      return;
+    }
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
+    // Don't track movement if touching an input element
+    if (e.target.tagName.toLowerCase() === 'input') {
+      return;
+    }
     setTouchEnd(e.touches[0].clientX);
   };
 
   const handleTouchEnd = () => {
+    // Don't process swipe if we don't have both touch points (which would be the case for input interaction)
+    if (touchStart === null || touchEnd === null) {
+      return;
+    }
     if (!isTransitioning) {
       const swipeThreshold = 50; // minimum distance for a swipe
       const swipeDistance = touchStart - touchEnd;
@@ -190,14 +202,15 @@ function HeroSection() {
     gallerySlide: {
       flex: '0 0 50%',
       height: '100%',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      padding: '0.5rem'
     },
     indicator: {
       display: 'flex',
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      bottom: '20px',
+      bottom: '30px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -327,7 +340,7 @@ function HeroSection() {
               <div className="gallery-track" style={galleryStyles.galleryTrack}>
                 {/* First Slide: AlexAI */}
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div style={{...styles.box, backgroundColor: '#434a54', height: '100%'}} className="hero-box llm-box">
+                  <div style={{...styles.box, backgroundColor: '#434a54', height: '100%', display: 'flex', flexDirection: 'column'}} className="hero-box llm-box">
                     <h3 style={{
                         color: '#dcccbd', 
                         textAlign: 'center', 
@@ -415,7 +428,7 @@ function HeroSection() {
                 </div>
                 {/* Second Slide: Contact Form */}
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
-                  <div style={{...styles.box, backgroundColor: '#b14b32', height: '100%'}} className="hero-box contact-box">
+                  <div style={{...styles.box, backgroundColor: '#b14b32', height: '100%', display: 'flex', flexDirection: 'column'}} className="hero-box contact-box">
                     <SendEmailForm />
                   </div>
                 </div>
