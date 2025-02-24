@@ -145,23 +145,22 @@ function HeroSection() {
   };
 
   const handleTouchStart = (e) => {
-    // Don't initiate swipe if touching an input element
-    if (e.target.tagName.toLowerCase() === 'input') {
+    // Prevent swipe if interacting with input or button elements
+    if (['input', 'button'].includes(e.target.tagName.toLowerCase())) {
+      setTouchStart(null);
       return;
     }
     setTouchStart(e.touches[0].clientX);
   };
 
   const handleTouchMove = (e) => {
-    // Don't track movement if touching an input element
-    if (e.target.tagName.toLowerCase() === 'input') {
+    if (touchStart === null) {
       return;
     }
     setTouchEnd(e.touches[0].clientX);
   };
 
   const handleTouchEnd = () => {
-    // Don't process swipe if we don't have both touch points (which would be the case for input interaction)
     if (touchStart === null || touchEnd === null) {
       return;
     }
@@ -190,7 +189,7 @@ function HeroSection() {
       overflow: 'hidden',
       position: 'relative',
       marginBottom: '20px',
-      height: '500px'
+      height: '300px', // Set a fixed height for consistency
     },
     galleryTrack: {
       display: 'flex',
@@ -203,7 +202,10 @@ function HeroSection() {
       flex: '0 0 50%',
       height: '100%',
       boxSizing: 'border-box',
-      padding: '0.5rem'
+      padding: '0.5rem',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
     },
     indicator: {
       display: 'flex',
