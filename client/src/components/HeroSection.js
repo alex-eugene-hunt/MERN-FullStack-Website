@@ -210,7 +210,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      top: '10px',
+      top: '7px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -372,7 +372,7 @@ function HeroSection() {
                     }}>
                       <input
                         type="text"
-                        placeholder="What do you want to know?"
+                        placeholder={isMobile ? "Ask me anything!" : "What do you want to know?"}
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
                         onKeyPress={handleKeyPress}
@@ -481,7 +481,7 @@ function HeroSection() {
                 }}>
                   <input
                     type="text"
-                    placeholder="What do you want to know?"
+                    placeholder={isMobile ? "Ask me anything!" : "What do you want to know?"}
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
                     onKeyPress={handleKeyPress}
