@@ -189,7 +189,7 @@ function HeroSection() {
       overflow: 'hidden',
       position: 'relative',
       marginBottom: '20px',
-      height: '400px', // Set a fixed height for consistency
+      height: '450px', // Set a fixed height for consistency
     },
     galleryTrack: {
       display: 'flex',
@@ -212,7 +212,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      bottom: '30px',
+      top: '5px',
       left: '0',
       right: '0',
       zIndex: 10
