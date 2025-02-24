@@ -189,7 +189,7 @@ function HeroSection() {
       overflow: 'hidden',
       position: 'relative',
       marginBottom: '20px',
-      height: '450px', // Set a fixed height for consistency
+      height: '400px', // Set a fixed height for consistency
     },
     galleryTrack: {
       display: 'flex',
@@ -212,7 +212,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      top: '5px',
+      top: '10px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -225,7 +225,7 @@ function HeroSection() {
       transition: 'background-color 0.3s ease'
     },
     activeDot: {
-      backgroundColor: '#b14b32'
+      backgroundColor: '#d4996f'
     }
   };
 
@@ -289,12 +289,12 @@ function HeroSection() {
       }
 
       .hero-box.contact-box {
-        height: auto !important;
+        height: 400px !important;
         min-height: 400px !important;
       }
 
       .llm-box {
-        height: auto !important;
+        height: 400px !important;
         min-height: 400px !important;
       }
     }
