@@ -206,6 +206,8 @@ function HeroSection() {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
+      borderRadius: '10px', // Restore border radius
+      overflow: 'hidden', // Ensure content stays within bounds
     },
     indicator: {
       display: 'flex',
@@ -412,14 +414,15 @@ function HeroSection() {
                       width: '80%',
                       margin: '10px auto',
                       backgroundColor: '#dcccbd',
-                      padding: '1rem',
-                      borderRadius: '10px',
-                      minHeight: '240px',
-                      maxHeight: '240px',
-                      overflowY: 'auto',
+                      padding: '0.5rem',
+                      borderRadius: '10px', // Restore border radius
+                      overflow: 'hidden', // Ensure content stays within bounds
+                      flex: '1', // Allow content to grow
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
+                      fontSize: '12px', // Adjust font size for better fit
                       fontFamily: 'Montserrat, sans-serif',
-                      fontSize: '14px',
-                      lineHeight: '1.5',
                       color: error ? '#b14b32' : '#434a54',
                       whiteSpace: 'pre-wrap',
                       scrollBehavior: 'smooth'
@@ -520,14 +523,15 @@ function HeroSection() {
                   width: '80%',
                   margin: '10px auto',
                   backgroundColor: '#dcccbd',
-                  padding: '1rem',
-                  borderRadius: '10px',
-                  minHeight: '240px',
-                  maxHeight: '240px',
-                  overflowY: 'auto',
+                  padding: '0.5rem',
+                  borderRadius: '10px', // Restore border radius
+                  overflow: 'hidden', // Ensure content stays within bounds
+                  flex: '1', // Allow content to grow
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  fontSize: '12px', // Adjust font size for better fit
                   fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '14px',
-                  lineHeight: '1.5',
                   color: error ? '#b14b32' : '#434a54',
                   whiteSpace: 'pre-wrap',
                   scrollBehavior: 'smooth'
