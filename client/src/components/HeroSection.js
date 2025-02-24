@@ -210,7 +210,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      top: '12px',
+      top: '10px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -300,6 +300,10 @@ function HeroSection() {
       .llm-box h3 {
         margin-bottom: 0.5rem !important;
       }
+
+      input, textarea {
+        font-size: 16px !important; /* Prevent zoom on mobile */
+      }
     }
   `;
   document.head.appendChild(styleTag);
@@ -387,7 +391,8 @@ function HeroSection() {
                           outline: 'none',
                           border: 'none',
                           opacity: isLoading ? 0.7 : 1,
-                          fontSize: '16px', // Prevent zoom on mobile
+                          opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                          transition: 'all 0.2s ease'
                         }}
                       />
                       <button 
@@ -496,7 +501,8 @@ function HeroSection() {
                       outline: 'none',
                       border: 'none',
                       opacity: isLoading ? 0.7 : 1,
-                      fontSize: '16px', // Prevent zoom on mobile
+                      opacity: (!question.trim() || isLoading) ? 0.7 : 1,
+                      transition: 'all 0.2s ease'
                     }}
                   />
                   <button 
