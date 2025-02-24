@@ -390,7 +390,6 @@ function HeroSection() {
                           boxSizing: 'border-box',
                           outline: 'none',
                           border: 'none',
-                          opacity: isLoading ? 0.7 : 1,
                           opacity: (!question.trim() || isLoading) ? 0.7 : 1,
                           transition: 'all 0.2s ease'
                         }}
@@ -500,7 +499,6 @@ function HeroSection() {
                       boxSizing: 'border-box',
                       outline: 'none',
                       border: 'none',
-                      opacity: isLoading ? 0.7 : 1,
                       opacity: (!question.trim() || isLoading) ? 0.7 : 1,
                       transition: 'all 0.2s ease'
                     }}
