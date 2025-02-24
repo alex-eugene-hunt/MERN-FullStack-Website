@@ -196,9 +196,8 @@ function HeroSection() {
       display: 'flex',
       justifyContent: 'center',
       gap: '8px',
-      marginTop: '10px',
       position: 'absolute',
-      top: '10px',
+      bottom: '20px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -326,17 +325,6 @@ function HeroSection() {
               onTouchEnd={handleTouchEnd}
             >
               <div className="gallery-track" style={galleryStyles.galleryTrack}>
-                {/* Slide indicators */}
-                <div style={galleryStyles.indicator}>
-                  <div style={{
-                    ...galleryStyles.dot,
-                    ...(currentSlide === 0 ? galleryStyles.activeDot : {})
-                  }}></div>
-                  <div style={{
-                    ...galleryStyles.dot,
-                    ...(currentSlide === 1 ? galleryStyles.activeDot : {})
-                  }}></div>
-                </div>
                 {/* First Slide: AlexAI */}
                 <div className="gallery-slide" style={galleryStyles.gallerySlide}>
                   <div style={{...styles.box, backgroundColor: '#434a54', height: '100%'}} className="hero-box llm-box">
@@ -346,8 +334,8 @@ function HeroSection() {
                         fontFamily: 'Monoton', 
                         fontSize: '35px',
                         fontWeight: 'normal',
-                        marginTop: '1rem',
-                        marginBottom: '1rem'
+                        marginTop: '2rem',
+                        marginBottom: '2rem'
                       }}>
                       Ask AlexAI
                     </h3>
@@ -432,6 +420,17 @@ function HeroSection() {
                   </div>
                 </div>
               </div>
+              {/* Slide indicators */}
+              <div style={galleryStyles.indicator}>
+                <div style={{
+                  ...galleryStyles.dot,
+                  ...(currentSlide === 0 ? galleryStyles.activeDot : {})
+                }}></div>
+                <div style={{
+                  ...galleryStyles.dot,
+                  ...(currentSlide === 1 ? galleryStyles.activeDot : {})
+                }}></div>
+              </div>
             </div>
           ) : (
             // Desktop version
@@ -443,8 +442,8 @@ function HeroSection() {
                     fontFamily: 'Monoton', 
                     fontSize: '35px',
                     fontWeight: 'normal',
-                    marginTop: '1rem',
-                    marginBottom: '1rem'
+                    marginTop: '2rem',
+                    marginBottom: '2rem'
                   }}>
                   Ask AlexAI
                 </h3>
