@@ -146,7 +146,7 @@ function HeroSection() {
 
   const handleTouchStart = (e) => {
     // Prevent swipe if interacting with input or button elements
-    if (['input', 'button'].includes(e.target.tagName.toLowerCase())) {
+    if (['input', 'button', 'textarea'].includes(e.target.tagName.toLowerCase())) {
       setTouchStart(null);
       return;
     }
@@ -210,7 +210,7 @@ function HeroSection() {
       justifyContent: 'center',
       gap: '8px',
       position: 'absolute',
-      top: '15px',
+      top: '12px',
       left: '0',
       right: '0',
       zIndex: 10
@@ -294,6 +294,11 @@ function HeroSection() {
       .llm-box {
         height: 400px !important;
         min-height: 400px !important;
+        padding-bottom: 1rem !important;
+      }
+
+      .llm-box h3 {
+        margin-bottom: 0.5rem !important;
       }
     }
   `;
