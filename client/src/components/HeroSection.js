@@ -339,7 +339,7 @@ function HeroSection() {
             alt="Alex Hunt" 
             style={{
               ...styles.heroImage,
-              margin: isTablet ? '2rem auto 1rem' : '0 0 0 254px',
+              margin: isTablet ? '0 auto 1rem' : '0 0 0 254px',
             }}
           />
           <div style={{
