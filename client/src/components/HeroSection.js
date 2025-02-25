@@ -233,7 +233,7 @@ function HeroSection() {
 
   const styleTag = document.createElement('style');
   styleTag.textContent = `
-    @media (max-width: 768px) {
+    @media (max-width: 1050px) {
       .navbar-container {
         height: auto !important;
       }
