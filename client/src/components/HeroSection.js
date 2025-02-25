@@ -293,6 +293,7 @@ function HeroSection() {
       .hero-box.contact-box {
         height: 400px !important;
         min-height: 400px !important;
+        box-shadow: none !important;
       }
 
       .llm-box {
