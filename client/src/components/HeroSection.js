@@ -17,6 +17,7 @@ function HeroSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1800);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -46,6 +47,7 @@ function HeroSection() {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
+      setIsWideScreen(window.innerWidth >= 1800);
     };
 
     window.addEventListener('resize', handleResize);
@@ -551,9 +553,11 @@ function HeroSection() {
           )}
 
           {/* Box 3: Game */}
-          <div style={{...styles.box, backgroundColor: '#000000'}} className="hero-box game-box">
-            <AsteroidsGame />
-          </div>
+          {isWideScreen && (
+            <div style={{...styles.box, backgroundColor: '#000000'}} className="hero-box game-box">
+              <AsteroidsGame />
+            </div>
+          )}
         </div>
       </div>
     </div>
