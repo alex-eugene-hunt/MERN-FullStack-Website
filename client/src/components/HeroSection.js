@@ -299,7 +299,7 @@ function HeroSection() {
       .llm-box {
         height: 400px !important;
         min-height: 400px !important;
-        padding-bottom: 2rem !important;
+        padding-bottom: 15rem !important;
         box-shadow: none !important;
       }
 
