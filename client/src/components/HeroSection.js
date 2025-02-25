@@ -326,13 +326,23 @@ function HeroSection() {
           <div style={styles.typewriterText} className="typewriter-text">
             <Typewriter
               options={{
-                strings: isMobile 
-                  ? ['Hi, I\'m Alex Hunt!', 'Visit this site on Desktop!']
-                  : ['Hi, I\'m Alex Hunt!', 'UC Berkeley Grad, Software Engineer, Data Scientist.',
-                     'This website was built using the MERN stack!'],
+                strings: isWideScreen ? [
+                  "Hi, I'm Alex Hunt!",
+                  "UC Berkeley Grad Student!",
+                  "Software Engineer!",
+                  "Data Scientist!",
+                  "AI Engineer!",
+                  "Full-Stack Developer!",
+                  "Problem Solver!",
+                  "Tech Enthusiast!"
+                ] : [
+                  "Hi, I'm Alex Hunt!",
+                  "UC Berkeley Grad Student!"
+                ],
                 autoStart: true,
                 loop: true,
                 deleteSpeed: 50,
+                delay: 80,
               }}
             />
           </div>

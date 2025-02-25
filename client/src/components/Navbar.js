@@ -56,6 +56,23 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileMenuOpen(false); // Close mobile menu on resize
+      // Update mobile state based on screen width
+      if (window.innerWidth <= 1300) {
+        document.body.style.overflow = 'auto'; // Ensure scrolling is enabled
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    // Initial check
+    handleResize();
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const scrollToSection = (sectionId) => {
     if (sectionId === 'hero') {
       window.scrollTo({

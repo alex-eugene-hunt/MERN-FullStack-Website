@@ -167,7 +167,7 @@
     color: #dcccbd;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
     .navbar {
         justify-content: flex-end;
         padding: 0.5rem;
