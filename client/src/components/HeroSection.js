@@ -299,7 +299,7 @@ function HeroSection() {
       .llm-box {
         height: 400px !important;
         min-height: 400px !important;
-        padding-bottom: 15rem !important;
+        padding-bottom: 1rem !important;
         box-shadow: none !important;
       }
 
@@ -309,6 +309,10 @@ function HeroSection() {
 
       input, textarea {
         font-size: 16px !important; /* Prevent zoom on mobile */
+      }
+
+      .llm-box-answer {
+        min-height: 220px !important;
       }
     }
   `;
@@ -449,7 +453,7 @@ function HeroSection() {
                         {isLoading ? '...' : 'ASK'}
                       </button>
                     </div>
-                    <div style={{
+                    <div className="llm-box-answer" style={{
                       width: '80%',
                       margin: '10px auto',
                       backgroundColor: '#dcccbd',
