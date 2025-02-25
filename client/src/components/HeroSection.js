@@ -16,7 +16,7 @@ function HeroSection() {
   const [displayedAnswer, setDisplayedAnswer] = useState('AlexAI says: Hello! What do you want to know about me?');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1050);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1800);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 1300);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -47,7 +47,7 @@ function HeroSection() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1050);
       setIsWideScreen(window.innerWidth >= 1800);
       setIsTablet(window.innerWidth <= 1300);
     };
