@@ -18,6 +18,7 @@ function HeroSection() {
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1800);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1300);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -48,6 +49,7 @@ function HeroSection() {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
       setIsWideScreen(window.innerWidth >= 1800);
+      setIsTablet(window.innerWidth <= 1300);
     };
 
     window.addEventListener('resize', handleResize);
@@ -321,9 +323,26 @@ function HeroSection() {
       {/* Content Wrapper */}
       <div style={styles.contentWrapper}>
         {/* Hero Section */}
-        <div style={styles.heroSection} className="hero-section">
-          <img src={myPhoto} alt="Alex Eugene Hunt" style={styles.heroImage} className="hero-image" />
-          <div style={styles.typewriterText} className="typewriter-text">
+        <div style={{
+          ...styles.heroSection,
+          flexDirection: isTablet ? 'column' : 'row',
+          alignItems: isTablet ? 'center' : 'flex-start',
+        }}>
+          <img 
+            src={myPhoto} 
+            alt="Alex Hunt" 
+            style={{
+              ...styles.heroImage,
+              margin: isTablet ? '2rem auto 1rem' : '0 0 0 254px',
+            }}
+          />
+          <div style={{
+            ...styles.typewriterText,
+            marginTop: isTablet ? '1rem' : '5rem',
+            marginLeft: isTablet ? '0' : '1rem',
+            textAlign: isTablet ? 'center' : 'left',
+            fontSize: isTablet ? '48px' : '60px',
+          }}>
             <Typewriter
               options={{
                 strings: isWideScreen ? [
