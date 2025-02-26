@@ -20,7 +20,7 @@ app.set('views', './views'); // Make sure your admin.ejs will be in the ./views 
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://alex-eugene-hunt.rocks'] // Replace with your Netlify domain
+    ? ['https://alex-eugene-hunt.rocks', 'https://alexhunt.netlify.app'] // Both Netlify domains
     : 'http://localhost:3000',
   optionsSuccessStatus: 200
 };

@@ -58,7 +58,11 @@ function HeroSection() {
 
   async function askLLM(prompt) {
     try {
-      const response = await fetch("/api/model/ask", {
+      const baseUrl = process.env.NODE_ENV === 'production' 
+        ? 'https://mern-fullstack-website.onrender.com'
+        : '';
+        
+      const response = await fetch(`${baseUrl}/api/model/ask`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json"
