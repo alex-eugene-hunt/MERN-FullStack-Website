@@ -1,6 +1,7 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import { Question, Score } from '../models/schema.js';
 
 dotenv.config();
 
@@ -104,12 +105,58 @@ router.post('/ask', async (req, res) => {
       finalResponse = sentences.join(' ').trim();
     }
 
+    // Save the question and answer to the database
+    const questionRecord = new Question({
+      question: question,
+      answer: finalResponse
+    });
+    await questionRecord.save();
+
     console.log('Final response:', finalResponse);
     return res.json({ response: finalResponse });
 
   } catch (error) {
     console.error('Error in /ask endpoint:', error);
     return res.status(500).json({ error: error.message || 'Failed to generate response' });
+  }
+});
+
+// Route to get all questions
+router.get('/questions', async (req, res) => {
+  try {
+    const questions = await Question.find().sort({ date: -1 });
+    res.json(questions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to save game score
+router.post('/score', async (req, res) => {
+  try {
+    const { name, score } = req.body;
+    if (!name || score === undefined) {
+      return res.status(400).json({ error: 'Name and score are required' });
+    }
+
+    const scoreRecord = new Score({
+      name,
+      score
+    });
+    await scoreRecord.save();
+    res.json(scoreRecord);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to get all scores
+router.get('/scores', async (req, res) => {
+  try {
+    const scores = await Score.find().sort({ score: -1 });
+    res.json(scores);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

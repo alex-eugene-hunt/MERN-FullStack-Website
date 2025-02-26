@@ -272,54 +272,41 @@ const AsteroidsGame = () => {
   // Fetch high scores
   const fetchHighScores = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/highscores/Asteroids`);
-      const data = await response.json();
-      setHighScores(data);
+      const response = await fetch('/api/scores');
+      if (!response.ok) {
+        throw new Error('Failed to fetch high scores');
+      }
+      const scores = await response.json();
+      setHighScores(scores);
     } catch (error) {
       console.error('Error fetching high scores:', error);
     }
   }, []);
 
   // Submit high score
-  const submitHighScore = async () => {
-    if (!playerName.trim()) {
-      // You could show an alert or handle it however you prefer
-      alert('Please enter your name');
-      return;
-    }
-  
+  const submitScore = async () => {
+    if (!playerName || submitted) return;
+    
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/highscores`, {
+      const response = await fetch('/api/score', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          playerName: playerName.trim(),
-          score: score,
-          game: 'Asteroids'
-        }),
+          name: playerName,
+          score: score
+        })
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit score');
+        throw new Error('Failed to submit score');
       }
 
-      await fetchHighScores(); // Refresh the high scores
-      // Instead of showing output text, change the button's content to a checkmark.
       setSubmitted(true);
-      setPlayerName('');
-      
-      // Reset the game after a short delay to show the checkmark
-      setTimeout(() => {
-        resetGame();
-        setSubmitted(false);
-      }, 1500);
-
+      fetchHighScores();
     } catch (error) {
       console.error('Error submitting score:', error);
-      alert('Failed to submit score. Please try again.');
     }
   };
 
@@ -642,7 +629,7 @@ const AsteroidsGame = () => {
               marginTop: '10px',
             }}>
               <button 
-                onClick={submitHighScore} 
+                onClick={submitScore} 
                 style={{
                   padding: '8px 16px',
                   cursor: 'pointer',
