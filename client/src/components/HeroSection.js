@@ -60,7 +60,7 @@ function HeroSection() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/ask', {
+      const response = await fetch('/api/model/ask', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
