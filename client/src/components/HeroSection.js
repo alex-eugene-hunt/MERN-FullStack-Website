@@ -602,6 +602,7 @@ const styles = {
     padding: 0,
     width: '100%',
     height: '100vh',
+    minHeight: '840px',
     position: 'relative',
     backgroundColor: '#021825',
   },
