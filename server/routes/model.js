@@ -27,7 +27,7 @@ router.post('/ask', async (req, res) => {
         "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({ 
-        model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B3uSVuN6",
+        model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B54wBAIP",
         messages: [
           {
             role: "system",
