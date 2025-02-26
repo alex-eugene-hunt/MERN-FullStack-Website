@@ -5,16 +5,11 @@ import modelRouter from './routes/model.js';
 import highScoresRouter from './routes/highScores.js';
 import sendEmailRouter from './routes/sendEmail.js';
 import dotenv from 'dotenv';
-import HighScore from './models/HighScore.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// Set EJS as the view engine and specify the views folder
-app.set('view engine', 'ejs');
-app.set('views', './views'); // Make sure your admin.ejs will be in the ./views folder
 
 // Middleware
 app.use(cors());
@@ -35,26 +30,9 @@ app.use('/api/model', modelRouter);
 app.use('/api/highscores', highScoresRouter);
 app.use('/api/send-email', sendEmailRouter);
 
-// Basic route to test
+// Basic health check route
 app.get('/', (req, res) => {
-  try {
-    res.render('index');
-  } catch (error) {
-    console.error('Error rendering index:', error);
-    res.status(500).send('Error rendering index page');
-  }
-});
-
-// Admin route to view database stats / table of all inputted scores
-app.get('/admin', async (req, res) => {
-  try {
-    // Find all high scores and sort descending by score
-    const scores = await HighScore.find().sort({ score: -1 }).lean();
-    // Render the admin.ejs template and pass in the scores
-    res.render('admin', { scores });
-  } catch (error) {
-    res.status(500).send("Error retrieving scores: " + error.message);
-  }
+  res.json({ status: 'Server is running' });
 });
 
 app.listen(PORT, () => {
