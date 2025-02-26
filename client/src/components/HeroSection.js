@@ -58,17 +58,32 @@ function HeroSection() {
 
   async function askLLM(prompt) {
     try {
-      const baseUrl = process.env.NODE_ENV === 'production' 
-        ? 'https://mern-fullstack-website.onrender.com'
-        : '';
-        
-      const response = await fetch(`${baseUrl}/api/model/ask`, {
+      const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error('OpenAI API key not found. Please check your environment variables or GitHub secrets.');
+      }
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: { 
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({ 
-          question: prompt
+          model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B54wBAIP",
+          messages: [
+            {
+              role: "system",
+              content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer and Data Scientist based in San Francisco. Answer questions about Alex's background, skills, and experiences."
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 500
         })
       });
       
@@ -83,7 +98,7 @@ function HeroSection() {
       }
       
       const data = await response.json();
-      return data.response;
+      return data.choices[0].message.content;
     } catch (error) {
       console.error('Error in askLLM:', error);
       throw error;

@@ -5,9 +5,7 @@ import dotenv from 'dotenv';
 import highScoresRouter from './routes/highScores.js';
 import sendEmailRouter from './routes/sendEmail.js';
 import modelRouter from './routes/model.js';
-import questionsRouter from './routes/questions.js';
 import HighScore from './models/HighScore.js';
-import Question from './models/Question.js'; // Import the Question model
 
 dotenv.config();
 
@@ -20,7 +18,7 @@ app.set('views', './views'); // Make sure your admin.ejs will be in the ./views 
 // CORS configuration
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://alex-eugene-hunt.rocks', 'https://alexhunt.netlify.app'] // Both Netlify domains
+    ? ['https://alex-eugene-hunt.rocks'] // Replace with your Netlify domain
     : 'http://localhost:3000',
   optionsSuccessStatus: 200
 };
@@ -32,21 +30,21 @@ app.use(express.json()); // For parsing JSON request bodies
 app.use('/api/highscores', highScoresRouter);
 app.use('/api/send-email', sendEmailRouter);
 app.use('/api/model', modelRouter);
-app.use('/api/questions', questionsRouter);
 
 // Basic route to test
 app.get('/', (req, res) => {
   res.send('Hello from the server!');
 });
 
-// Admin route to view all scores and questions
+// Admin route to view database stats / table of all inputted scores
 app.get('/admin', async (req, res) => {
   try {
-    const scores = await HighScore.find().sort({ date: -1 });
-    const questions = await Question.find().sort({ date: -1 });
-    res.render('admin', { scores, questions });
+    // Find all high scores and sort descending by score
+    const scores = await HighScore.find().sort({ score: -1 }).lean();
+    // Render the admin.ejs template and pass in the scores
+    res.render('admin', { scores });
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).send("Error retrieving scores: " + error.message);
   }
 });
 
