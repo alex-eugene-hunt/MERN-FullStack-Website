@@ -7,6 +7,7 @@ import sendEmailRouter from './routes/sendEmail.js';
 import modelRouter from './routes/model.js';
 import questionsRouter from './routes/questions.js';
 import HighScore from './models/HighScore.js';
+import Question from './models/Question.js'; // Import the Question model
 
 dotenv.config();
 
@@ -38,15 +39,14 @@ app.get('/', (req, res) => {
   res.send('Hello from the server!');
 });
 
-// Admin route to view database stats / table of all inputted scores
+// Admin route to view all scores and questions
 app.get('/admin', async (req, res) => {
   try {
-    // Find all high scores and sort descending by score
-    const scores = await HighScore.find().sort({ score: -1 }).lean();
-    // Render the admin.ejs template and pass in the scores
-    res.render('admin', { scores });
+    const scores = await HighScore.find().sort({ date: -1 });
+    const questions = await Question.find().sort({ date: -1 });
+    res.render('admin', { scores, questions });
   } catch (error) {
-    res.status(500).send("Error retrieving scores: " + error.message);
+    res.status(500).send(error.message);
   }
 });
 
