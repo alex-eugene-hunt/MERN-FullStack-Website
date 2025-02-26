@@ -31,9 +31,9 @@ mongoose.connect(process.env.DB_URI, {
 });
 
 // Routes
+app.use('/api', modelRouter);
 app.use('/api/highscores', highScoresRouter);
 app.use('/api/send-email', sendEmailRouter);
-app.use('/api/model', modelRouter);
 
 // Basic route to test
 app.get('/', (req, res) => {
