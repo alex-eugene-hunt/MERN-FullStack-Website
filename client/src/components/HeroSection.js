@@ -19,6 +19,7 @@ function HeroSection() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1050);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 1800);
   const [isTablet, setIsTablet] = useState(window.innerWidth <= 1300);
+  const [isShortScreen, setIsShortScreen] = useState(window.innerHeight <= 832);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -50,6 +51,7 @@ function HeroSection() {
       setIsMobile(window.innerWidth <= 1050);
       setIsWideScreen(window.innerWidth >= 1800);
       setIsTablet(window.innerWidth <= 1300);
+      setIsShortScreen(window.innerHeight <= 832);
     };
 
     window.addEventListener('resize', handleResize);
@@ -665,18 +667,14 @@ const styles = {
   },
   box: {
     flex: 1,
-    width: '450px',
-    height: '450px',
+    width: isShortScreen ? '400px' : '450px',
+    height: isShortScreen ? '400px' : '450px',
     backgroundColor: '#fff',
     borderRadius: '2.25rem',
     boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
-    '@media (max-height: 832px)': {
-      width: '400px',
-      height: '400px',
-    },
   },
   input: {
     width: '90%',
