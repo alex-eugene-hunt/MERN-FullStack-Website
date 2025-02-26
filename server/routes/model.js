@@ -1,7 +1,7 @@
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
-import { Question, Score } from '../models/schema.js';
+import Question from '../models/Question.js';
 
 dotenv.config();
 
@@ -105,13 +105,6 @@ router.post('/ask', async (req, res) => {
       finalResponse = sentences.join(' ').trim();
     }
 
-    // Save the question and answer to the database
-    const questionRecord = new Question({
-      question: question,
-      answer: finalResponse
-    });
-    await questionRecord.save();
-
     console.log('Final response:', finalResponse);
     return res.json({ response: finalResponse });
 
@@ -121,43 +114,46 @@ router.post('/ask', async (req, res) => {
   }
 });
 
-// Route to get all questions
-router.get('/questions', async (req, res) => {
-  try {
-    const questions = await Question.find().sort({ date: -1 });
-    res.json(questions);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// Handle chat completion
+router.post('/chat', async (req, res) => {
+    try {
+        const response = await fetch(
+            'https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta',
+            {
+                headers: {
+                    'Authorization': `Bearer ${process.env.HF_ACCESS_TOKEN}`,
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    inputs: req.body.message,
+                    parameters: {
+                        max_new_tokens: 250,
+                        return_full_text: false,
+                        do_sample: true,
+                        temperature: 0.7,
+                        top_k: 50,
+                        top_p: 0.95
+                    }
+                })
+            }
+        );
 
-// Route to save game score
-router.post('/score', async (req, res) => {
-  try {
-    const { name, score } = req.body;
-    if (!name || score === undefined) {
-      return res.status(400).json({ error: 'Name and score are required' });
+        const result = await response.json();
+        const answer = result[0].generated_text;
+
+        // Save the question and answer
+        const question = new Question({
+            question: req.body.message,
+            answer: answer
+        });
+        await question.save();
+
+        res.json({ response: answer });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'An error occurred while processing your request.' });
     }
-
-    const scoreRecord = new Score({
-      name,
-      score
-    });
-    await scoreRecord.save();
-    res.json(scoreRecord);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Route to get all scores
-router.get('/scores', async (req, res) => {
-  try {
-    const scores = await Score.find().sort({ score: -1 });
-    res.json(scores);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 });
 
 export default router;
