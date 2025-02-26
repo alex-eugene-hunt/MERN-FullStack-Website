@@ -25,6 +25,112 @@ function HeroSection() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const styles = {
+    pageContainer: {
+      margin: 0,
+      padding: 0,
+      width: '100%',
+      height: '100vh',
+      position: 'relative',
+      backgroundColor: '#021825',
+    },
+    vantaContainer: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: 0,
+    },
+    contentWrapper: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      height: '100%',
+      width: '100%',
+      position: 'relative',
+      zIndex: 1,
+      paddingTop: '5rem',
+    },
+    heroSection: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      padding: '1rem',
+      width: '100%',
+    },
+    heroImage: {
+      width: '150px',
+      height: 'auto',
+      borderRadius: '50%',
+      margin: '0 0 0 254px',
+      border: '3px solid #d4996f',
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+      boxSizing: 'border-box',
+      padding: '0',
+    },
+    typewriterText: {
+      marginTop: '5rem',
+      marginLeft: '1rem',
+      fontFamily: 'Lobster, cursive',
+      fontWeight: 'normal',
+      fontSize: '60px',
+      color: '#dcccbd',
+    },
+    boxesContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      gap: '2rem',
+      padding: '2rem',
+      width: '75%',
+      margin: '0 auto',
+      boxSizing: 'border-box',
+    },
+    box: {
+      flex: 1,
+      width: isShortScreen ? '400px' : '450px',
+      height: isShortScreen ? '400px' : '450px',
+      backgroundColor: '#fff',
+      borderRadius: '2.25rem',
+      boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    input: {
+      width: '90%',
+      padding: '0.5rem',
+      marginBottom: '0.5rem',
+      borderRadius: '4px',
+      border: '1px solid #ccc',
+    },
+    askButton: {
+      padding: '0.5rem 1rem',
+      backgroundColor: '#007BFF',
+      color: '#fff',
+      borderRadius: '4px',
+      border: 'none',
+      cursor: 'pointer',
+      transition: 'background-color 0.3s',
+    },
+    answerBox: {
+      marginTop: '0.5rem',
+      backgroundColor: '#f9f9f9',
+      padding: '0.5rem',
+      borderRadius: '4px',
+    },
+    mobileGalleryContainer: {
+      width: '100%',
+      backgroundColor: '#434a54',
+      borderRadius: '10px',
+      padding: '10px',
+      marginBottom: '20px'
+    }
+  };
+
   useEffect(() => {
     if (!vantaEffect && window.VANTA) {
       setVantaEffect(
@@ -600,111 +706,5 @@ function HeroSection() {
     </div>
   );
 }
-
-const styles = {
-  pageContainer: {
-    margin: 0,
-    padding: 0,
-    width: '100%',
-    height: '100vh',
-    position: 'relative',
-    backgroundColor: '#021825',
-  },
-  vantaContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    zIndex: 0,
-  },
-  contentWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    height: '100%',
-    width: '100%',
-    position: 'relative',
-    zIndex: 1,
-    paddingTop: '5rem',
-  },
-  heroSection: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: '1rem',
-    width: '100%',
-  },
-  heroImage: {
-    width: '150px', 
-    height: 'auto',
-    borderRadius: '50%',
-    margin: '0 0 0 254px', 
-    border: '3px solid #d4996f', 
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', 
-    boxSizing: 'border-box', 
-    padding: '0', 
-  },
-  typewriterText: {
-    marginTop: '5rem', 
-    marginLeft: '1rem', 
-    fontFamily: 'Lobster, cursive',
-    fontWeight: 'normal',
-    fontSize: '60px',
-    color: '#dcccbd',
-  },
-  boxesContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    gap: '2rem',
-    padding: '2rem',
-    width: '75%',
-    margin: '0 auto',
-    boxSizing: 'border-box',
-  },
-  box: {
-    flex: 1,
-    width: isShortScreen ? '400px' : '450px',
-    height: isShortScreen ? '400px' : '450px',
-    backgroundColor: '#fff',
-    borderRadius: '2.25rem',
-    boxShadow: '1px 12px 25px rgb(0 0 0 / 78%)',
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    width: '90%',
-    padding: '0.5rem',
-    marginBottom: '0.5rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  },
-  askButton: {
-    padding: '0.5rem 1rem',
-    backgroundColor: '#007BFF',
-    color: '#fff',
-    borderRadius: '4px',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s',
-  },
-  answerBox: {
-    marginTop: '0.5rem',
-    backgroundColor: '#f9f9f9',
-    padding: '0.5rem',
-    borderRadius: '4px',
-  },
-  mobileGalleryContainer: {
-    width: '100%',
-    backgroundColor: '#434a54',
-    borderRadius: '10px',
-    padding: '10px',
-    marginBottom: '20px'
-  }
-};
 
 export default HeroSection;
