@@ -1,10 +1,10 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import modelRouter from './routes/model.js';
 import highScoresRouter from './routes/highScores.js';
 import sendEmailRouter from './routes/sendEmail.js';
-import modelRouter from './routes/model.js';
+import dotenv from 'dotenv';
 import HighScore from './models/HighScore.js';
 
 dotenv.config();
@@ -31,13 +31,18 @@ mongoose.connect(process.env.DB_URI, {
 });
 
 // Routes
-app.use('/api', modelRouter);
+app.use('/api/model', modelRouter);
 app.use('/api/highscores', highScoresRouter);
 app.use('/api/send-email', sendEmailRouter);
 
 // Basic route to test
 app.get('/', (req, res) => {
-  res.send('Hello from the server!');
+  try {
+    res.render('index');
+  } catch (error) {
+    console.error('Error rendering index:', error);
+    res.status(500).send('Error rendering index page');
+  }
 });
 
 // Admin route to view database stats / table of all inputted scores
