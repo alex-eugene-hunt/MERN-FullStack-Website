@@ -353,13 +353,10 @@ function HeroSection() {
               options={{
                 strings: isWideScreen ? [
                   "Hi, I'm Alex Hunt!",
-                  "UC Berkeley Grad Student!",
-                  "Software Engineer!",
-                  "Data Scientist!",
-                  "AI Engineer!",
-                  "Full-Stack Developer!",
-                  "Problem Solver!",
-                  "Tech Enthusiast!"
+                  "UC Berkeley Grad Student majoring in Data Science!",
+                  "Experienced Software Engineer!",
+                  "AI Engineer!, Full-Stack Developer!, Problem Solver!",
+                  "Ask my AI assistant any question about me bellow!"
                 ] : [
                   "Hi, I'm Alex Hunt!",
                   "UC Berkeley Grad Student!"
