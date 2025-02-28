@@ -363,8 +363,12 @@ function HeroSection() {
                 ],
                 autoStart: true,
                 loop: true,
-                deleteSpeed: 50,
+                deleteSpeed: 30,
                 delay: 80,
+                pauseFor: 2000,
+                cursor: "|",
+                wrapperClassName: "typewriter-wrapper",
+                cursorClassName: "typewriter-cursor"
               }}
             />
           </div>
