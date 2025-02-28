@@ -347,7 +347,7 @@ function HeroSection() {
             marginTop: isTablet ? '1rem' : '5rem',
             marginLeft: isTablet ? '0' : '1rem',
             textAlign: isTablet ? 'center' : 'left',
-            fontSize: isTablet ? '32px' : '60px',
+            fontSize: isTablet ? '30px' : '60px',
             fontWeight: 'normal',
             textRendering: 'geometricPrecision',
             WebkitFontSmoothing: 'antialiased',
