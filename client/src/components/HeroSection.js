@@ -646,8 +646,8 @@ const styles = {
   typewriterText: {
     marginTop: '5rem', 
     marginLeft: '1rem', 
-    fontFamily: 'Lobster, cursive',
-    fontWeight: 'bold',
+    fontFamily: 'Lobster',
+    fontWeight: 'normal',
     fontSize: '60px',
     color: '#dcccbd',
   },
