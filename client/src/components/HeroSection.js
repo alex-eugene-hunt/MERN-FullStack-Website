@@ -348,6 +348,10 @@ function HeroSection() {
             marginLeft: isTablet ? '0' : '1rem',
             textAlign: isTablet ? 'center' : 'left',
             fontSize: isTablet ? '32px' : '60px',
+            fontWeight: 'normal',
+            textRendering: 'geometricPrecision',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale'
           }}>
             <Typewriter
               options={{
@@ -363,7 +367,7 @@ function HeroSection() {
                 ],
                 autoStart: true,
                 loop: true,
-                deleteSpeed: 30,
+                deleteSpeed: 25,
                 delay: 80,
                 pauseFor: 2000,
                 cursor: "|",
