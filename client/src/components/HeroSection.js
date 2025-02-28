@@ -647,7 +647,7 @@ const styles = {
     marginTop: '5rem', 
     marginLeft: '1rem', 
     fontFamily: 'Lobster, cursive',
-    fontWeight: 'normal',
+    fontWeight: 'bold',
     fontSize: '60px',
     color: '#dcccbd',
   },
