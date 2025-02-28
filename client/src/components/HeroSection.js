@@ -358,7 +358,7 @@ function HeroSection() {
                   "AI Engineer, Full-Stack Developer!",
                   "Ask AlexAI any question!"
                 ] : [
-                  "Hi, I'm Alex Hunt!",
+                  "I'm Alex Hunt!",
                   "Grad Student at UC Berkeley!"
                 ],
                 autoStart: true,
