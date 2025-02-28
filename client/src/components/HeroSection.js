@@ -347,11 +347,7 @@ function HeroSection() {
             marginTop: isTablet ? '1rem' : '5rem',
             marginLeft: isTablet ? '0' : '1rem',
             textAlign: isTablet ? 'center' : 'left',
-            fontSize: isTablet ? '30px' : '60px',
-            fontWeight: 'normal',
-            textRendering: 'geometricPrecision',
-            WebkitFontSmoothing: 'antialiased',
-            MozOsxFontSmoothing: 'grayscale'
+            fontSize: isTablet ? '32px' : '60px',
           }}>
             <Typewriter
               options={{
@@ -363,16 +359,12 @@ function HeroSection() {
                   "Ask AlexAI any question!"
                 ] : [
                   "Hi, I'm Alex Hunt!",
-                  "UC Berkeley Grad Student!"
+                  "Grad Student at UC Berkeley!"
                 ],
                 autoStart: true,
                 loop: true,
-                deleteSpeed: 25,
+                deleteSpeed: 50,
                 delay: 80,
-                pauseFor: 2000,
-                cursor: "|",
-                wrapperClassName: "typewriter-wrapper",
-                cursorClassName: "typewriter-cursor"
               }}
             />
           </div>
