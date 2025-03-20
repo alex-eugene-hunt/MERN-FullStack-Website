@@ -1,10 +1,16 @@
+# www.alex-eugene-hunt.rocks
+
 # Personal Portfolio Website - MERN Stack
 
-A modern, interactive personal portfolio website built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This portfolio showcases my projects, skills, and experience in a dynamic and engaging way.
+This is an idividual project I did recently. The site is live at www.alex-eugene-hunt.rocks and is a portfolio website I made from scratch.
 
-## 🚀 Tech Stack
+It is a personal portfolio website built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This portfolio showcases my projects, skills, and experience in a dynamic and engaging way.
 
-### Frontend
+There are 3 main features I added to the homepage, that being a Fine-Tuned LLM that was trained on my personal information, a email sending box, and a asteroids game with a global leaderboard.
+
+## Tech Stack
+
+### Frontend - Live on Netlify
 - **React.js** - Frontend framework
 - **React Router DOM** - Client-side routing
 - **Three.js** & **Vanta.js** - 3D graphics and animations
@@ -13,7 +19,7 @@ A modern, interactive personal portfolio website built using the MERN (MongoDB, 
 - **Typewriter Effect** - Text animation effects
 - **Custom Fonts** - Using @fontsource packages for Faster One, Press Start 2P, Lobster, Monoton, and Montserrat
 
-### Backend
+### Backend - Live on Render
 - **Node.js** - Runtime environment
 - **Express.js** - Web application framework
 - **MongoDB** with **Mongoose** - Database and ODM
@@ -27,7 +33,7 @@ A modern, interactive personal portfolio website built using the MERN (MongoDB, 
 - **React Scripts** - Create React App configuration and build tools
 - **ESLint** - Code linting and style enforcement
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 ├── client/                 # Frontend React application
@@ -42,16 +48,7 @@ A modern, interactive personal portfolio website built using the MERN (MongoDB, 
 └── package.json          # Root project configuration
 ```
 
-## ⚙️ Key Features
-
-- **Modern UI/UX** - Responsive design with smooth animations and transitions
-- **Interactive Components** - Dynamic sections for projects, experience, and skills
-- **Contact Form** - Email functionality using Nodemailer
-- **PDF Resume View** - Integrated PDF viewer for resume display
-- **3D Graphics** - Enhanced visual experience using Three.js and Vanta.js
-- **Custom Styling** - Carefully crafted CSS with custom fonts and animations
-
-## 🛠️ Implementation Details
+## Implementation Details
 
 ### Frontend Architecture
 - Implemented using React.js with functional components and hooks
@@ -67,28 +64,7 @@ A modern, interactive personal portfolio website built using the MERN (MongoDB, 
 - Environment variable management for secure configuration
 - CORS configuration for secure client-server communication
 
-### Performance Optimizations
-- Lazy loading of components
-- Optimized asset loading
-- Efficient state management
-- Responsive image handling
-
-## 🚀 Getting Started
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   cd client && npm install
-   cd ../server && npm install
-   ```
-3. Create a `.env` file in the server directory with necessary environment variables
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-## 📝 Environment Variables
+## Environment Variables
 
 The following environment variables are required in the server's `.env` file:
 - `MONGODB_URI` - MongoDB connection string
@@ -96,7 +72,7 @@ The following environment variables are required in the server's `.env` file:
 - `EMAIL_PASS` - Email service password
 - `PORT` - Server port (default: 3000)
 
-## 🌟 Future Enhancements
+## Future Enhancements
 
 - Add authentication system
 - Implement blog section
@@ -105,6 +81,6 @@ The following environment variables are required in the server's `.env` file:
 - Add more animation effects
 - Implement dark/light theme toggle
 
-## 📄 License
+## License
 
 This project is licensed under the ISC License.
