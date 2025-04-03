@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaBriefcase, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 import CymSTARHQ from '../assets/CymSTAR_Employees_HQ.jpg';
-import CymSTARBadge from '../assets/CymSTAR_Badge.jpg';
 import A10Aircraft from '../assets/Fairchild_Republic_A-10.jpg';
 
 function ExperienceSection() {
@@ -116,9 +115,6 @@ function ExperienceSection() {
                               <span key={i} style={styles.tech} className="tech-item">{tech}</span>
                             ))}
                           </div>
-                        </div>
-                        <div style={styles.badgeContainer} className="badge-container">
-                          <img src={CymSTARBadge} alt="CymSTAR Badge" style={styles.badgeImage} />
                         </div>
                       </div>
                     </div>
@@ -250,18 +246,6 @@ const styles = {
     '@media (max-width: 768px)': {
       width: '100%',
     },
-  },
-  badgeContainer: {
-    flexShrink: 0,
-    '@media (max-width: 768px)': {
-      display: 'none',
-    },
-  },
-  badgeImage: {
-    width: '150px',
-    height: 'auto',
-    borderRadius: '8px',
-    border: '2px solid #dcccbd',
   },
   imageGallery: {
     display: 'flex',
