@@ -2,8 +2,6 @@ import React from 'react';
 import { FaGraduationCap, FaCalendar, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import MSDegreeOU from '../assets/MS Degree - OU.jpg';
 import BSDegreeOU from '../assets/BS Degree - OU.jpg';
-import CalSeal from '../assets/cal-seal.png';
-import CalLogo from '../assets/cal-logo.png';
 import OUSeal from '../assets/oklahoma-sooners-seal.png';
 import OULogo from '../assets/oklahoma-sooners-logo.png';
 import SeedSowerOU from '../assets/SeedSower-OU.jpg';
