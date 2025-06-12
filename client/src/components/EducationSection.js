@@ -11,14 +11,6 @@ import SeedSowerOU from '../assets/SeedSower-OU.jpg';
 function EducationSection() {
   const education = [
     {
-      degree: 'Master of Information and Data Science',
-      school: 'University of California, Berkeley',
-      location: 'Berkeley, CA',
-      period: 'Jan 2025 - (Dec 2025)',
-      gpa: null,
-      description: 'My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n⦿ Introduction to Data Science Programming\n⦿ Research Design and Applications for Data and Analysis\n⦿ Statistics for Data Science\n\nI am still studying here and will update as needed. Skills: Data Science · Data Analysis · Statistical Data Analysis'
-    },
-    {
       degree: 'Master of Computer Science',
       school: 'University of Oklahoma',
       location: 'Norman, OK',
@@ -40,7 +32,6 @@ function EducationSection() {
     if (isMobile) {
       // Remove curriculum introductions on mobile
       return description
-        .replace('My Accelerated Master of Information and Data Science program covers the following curriculum: \n\n', '')
         .replace('My Accelerated OU Master of Computer Science program covered the following curriculum: \n\n', '')
         .replace('My OU BS in Computer Science covered the following curriculum (general studies not listed):\n\nCS Courses:\n', '');
     }
@@ -109,12 +100,6 @@ function EducationSection() {
               {education.map((edu, index) => (
                 <div key={index}>
                   <div style={styles.timelineItem}>
-                    {edu.school === 'University of California, Berkeley' && (
-                      <>
-                        <img src={CalSeal} alt="UC Berkeley Seal" style={styles.topLogo} className="top-logo" />
-                        <img src={CalLogo} alt="UC Berkeley Logo" style={styles.bottomLogo} className="bottom-logo" />
-                      </>
-                    )}
                     {edu.school === 'University of Oklahoma' && (
                       <>
                         <img src={OUSeal} alt="OU Seal" style={styles.topLogo} className="top-logo" />
