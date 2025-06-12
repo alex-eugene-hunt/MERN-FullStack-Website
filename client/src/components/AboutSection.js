@@ -70,7 +70,7 @@ function AboutSection() {
     { 
       icon: <FaHiking />, 
       label: 'Hiking',
-      description: 'Frequently go hiking in California.'
+      description: 'Frequently go hiking in Oklahoma.'
     },
     { 
       icon: <FaGamepad />, 
@@ -95,7 +95,7 @@ function AboutSection() {
     { 
       icon: <FaSkiing />, 
       label: 'Skiing',
-      description: 'I\'m an avid California skier.'
+      description: 'I\'m an avid skier.'
     },
     { 
       icon: <FaFish />, 
@@ -106,8 +106,8 @@ function AboutSection() {
 
   const quickFacts = [
     { icon: <FaUser />, label: 'Full Name', value: 'Alex Eugene Hunt' },
-    { icon: <FaBirthdayCake />, label: 'Birthday', value: 'September 14th, 2000' },
-    { icon: <FaMapMarkerAlt />, label: 'Location', value: 'San Francisco, CA 94127' },
+    { icon: <FaBirthdayCake />, label: 'Birth Day', value: 'September 14th, 2000' },
+    { icon: <FaMapMarkerAlt />, label: 'Location', value: 'Oklahoma City, OK' },
     { icon: <FaPhone />, label: 'Phone', value: '(405) 885-3808' },
     { icon: <FaEnvelope />, label: 'Email', value: 'alex.eugene.hunt@gmail.com' },
   ];
