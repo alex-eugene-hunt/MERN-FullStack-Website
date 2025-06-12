@@ -354,7 +354,7 @@ function HeroSection() {
                 strings: isWideScreen ? [
                   "Hi, I'm Alex Hunt!",
                   "Seeking a Role in Software or Data Science!",
-                  "UC Berkeley Data Science Grad Student!",
+                  "Software Engineer at CymSTAR LLC!",
                   "Experienced Software Engineer!",
                   "AI Engineer, Full-Stack Developer!",
                   "Ask AlexAI any Question!"
@@ -362,8 +362,6 @@ function HeroSection() {
                   "Hello, I'm Alex Hunt!",
                   "Seeking a Role in Software!",
                   "Seeking a Role in Data!",
-                  "Entry Level Applicant!",
-                  "Grad Student at UC Berkeley!"
                 ],
                 autoStart: true,
                 loop: true,
