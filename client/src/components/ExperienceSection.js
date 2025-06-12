@@ -6,11 +6,16 @@ import A10Aircraft from '../assets/Fairchild_Republic_A-10.jpg';
 function ExperienceSection() {
   const experiences = [
     {
-      title: 'Software Engineer Intern',
+      title: 'Software Engineer I',
       company: 'CymSTAR LLC',
       location: 'Broken Arrow, OK',
       period: 'Feb 2024 - Dec 2024',
       description: [
+        '⦿ Completing on-base installations of USAF aircraft simulations that help train pilots for first flights.'
+        '⦿ Troubleshooting bugs and real time errors present in on-base installations including networking errors, software initialization, and various software applications needed to keep the trainers running for clients.'
+        '⦿ Developed a tool to manage pipeline CI/CD testing, allowing for clients to easily test our installations, reducing the time needed to test simulation installations while on-base.'
+        '⦿ Crafted a bid contracted out by the Department of Defense to create a tool that automatically containerised software projects with the use of artificial intelligence and large language models.'
+        '⦿ Created an automatic Redmine ticket updater using GitLab\'s merge request API using C# and dotnet.'
         '⦿ Designed Docker and Podman containers to streamline the deployment process, reducing 70% of deployment overhead by eliminating configuration conflicts.',
         '⦿ Addressed existing CI/CD bugs and developed GitLab Pipelines to improve automation, decreasing build times by 80% and significantly enhanced code reliability.',
         '⦿ Configured and managed GitLab Runners to enable parallel and efficient builds.',
