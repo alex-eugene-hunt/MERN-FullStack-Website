@@ -71,11 +71,11 @@ function HeroSection() {
           "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({ 
-          model: "ft:gpt-3.5-turbo-0125:personal:alex-ai:B54wBAIP",
+          model: "ft:gpt-3.5-turbo-0125:personal:personal-llm:D0sllDmH",
           messages: [
             {
               role: "system",
-              content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer and Data Scientist based in San Francisco. Answer questions about Alex's background, skills, and experiences."
+              content: "You are AlexAI, a digital assistant representing Alex Hunt, a Software Engineer based in Oklahoma City, Oklahoma. Answer questions about Alex's background, skills, and experiences."
             },
             {
               role: "user",
