@@ -15,11 +15,6 @@ function SocialSection() {
       url: 'https://github.com/alex-eugene-hunt',
     },
     {
-      name: 'Slack',
-      icon: FaSlack,
-      url: 'https://ucbischool.slack.com/team/alex.eugene.hunt',
-    },
-    {
       name: 'Facebook',
       icon: FaFacebook,
       url: 'https://www.facebook.com/alex.eugene.hunt/',
