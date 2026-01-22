@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaLinkedin, FaGithub, FaSlack, FaFacebook, FaInstagram } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from 'react-icons/fa';
 import './SocialSection.css';
 
 function SocialSection() {
